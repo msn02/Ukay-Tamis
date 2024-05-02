@@ -21,7 +21,7 @@
                     <p>Id velit ut tortor pretium viverra suspendisse potenti.</p>
                 </div>
                 <div class="col-sm-12 p-0 pink_btn pb-3">
-                    <button class="btn btn-primary border-0 px-4 shadow rounded-1" type="button">SUBSCRIBE NOW</button>
+                    <button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">SUBSCRIBE NOW</button>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12 p-0 pink_btn pb-3 mb-3 btn_text">
-                    <button class="btn btn-primary border-0 px-4 shadow rounded-1" type="button">CHOOSE YOUR PLAN</button>
+                    <button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">CHOOSE YOUR PLAN</button>
                 </div>
             </div>
         </div>
