@@ -28,7 +28,7 @@
         <!-- how UKAY TAMIS works -->
         <div class="container-fluid mt-3 gray_bg">
             <div class="container py-3 how_app_work">
-                <h4 class="bold_header pink_highlight2 pt-2">How <strong>Ukay Tamis</strong> Works</h4>
+                <h4 class="bold_header pink_highlight2 pt-3">How <strong>Ukay Tamis</strong> Works</h4>
                 <div class="row center_align pt-3 px-5 gx-5 how_app_work">
                     <div class="col-sm-3">
                         <div class="card ratio ratio-1x1 mb-3 overflow-hidden">
@@ -60,35 +60,47 @@
     <div class="container-fluid m-0 p-0 gradient_green">
         <div class="container">
             <div class="row center_align pt-3">
-                <div class="col-sm-8 px-4 pt-3">
-                    <h3 class="bold_header">Rare haul with our MYSTERY BOX!</h3>
+                <div class="col-sm-8 px-4 pt-4">
+                    <h3 class="bold_header mb-3">Haul RARE items with our MYSTERY BOX!</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
                     <p>Id velit ut tortor pretium viverra suspendisse potenti.</p>
                 </div>
                 <div class="row center_align pt-3 px-5 gx-3">
                     <!-- image -->
                     <div class="col-sm-3 mb-4">
-                        <div class="card border-0 ratio ratio-1x1 overflow-hidden">
-                            <img src="resources/1.jpg" class="img-fluid" alt="Subscribe">
+                        <div class="card border-0 overflow-hidden card_content shadow">
+                            <img src="resources/shirts.jpg" class="card-img-top img-fluid" alt="Subscribe">
+                            <div class="card-body">
+                                <p class="card-text">Shirts</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 mb-4">
-                        <div class="card border-0 ratio ratio-1x1 overflow-hidden">
-                            <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
+                        <div class="card border-0 overflow-hidden card_content shadow">
+                            <img src="resources/dress.jpg" class="card-img-top img-fluid" alt="Subscribe">
+                            <div class="card-body">
+                                <p class="card-text">Dresses</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 mb-4">
-                        <div class="card border-0 ratio ratio-1x1 overflow-hidden">
-                            <img src="resources/3.jpg" class="img-fluid" alt="Subscribe">
+                        <div class="card border-0 overflow-hidden card_content shadow">
+                            <img src="resources/pants.jpg" class="card-img-top img-fluid" alt="Subscribe">
+                            <div class="card-body">
+                                <p class="card-text">Pants</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-3 mb-4">
-                        <div class="card border-0 ratio ratio-1x1 overflow-hidden">
-                            <img src="resources/1.jpg" class="img-fluid" alt="Subscribe">
+                        <div class="card border-0 overflow-hidden card_content shadow">
+                            <img src="resources/more.jpg" class="card-img-top img-fluid" alt="Subscribe">
+                            <div class="card-body">
+                                <p class="card-text">and Many More!</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 p-0 pink_btn pb-3 mb-3">
+                <div class="col-sm-12 p-0 pink_btn pb-3 mb-3 btn_text">
                     <button class="btn btn-primary border-0 px-4 shadow rounded-1" type="button">CHOOSE YOUR PLAN</button>
                 </div>
             </div>
@@ -103,9 +115,9 @@
         </div>
 
         <!-- customer reviews -->
-        <div class="container-fluid gradient_yellow py-4">
+        <div class="container-fluid gradient_yellow pb-4">
             <div class="container p-0 text-right">
-                <div class="container row g-4 m-0 p-0">
+                <div class="container row g-4 m-0 p-5">
                     <!-- card -->
                     <div class="col-sm-4 mb-3 mt-0 mx-0">
                         <div class="card border-0 p-3">
@@ -143,7 +155,7 @@
                                         <i class="bi bi-star-fill"></i>
                                     </div>
                                 </div>
-                                <h6 class="bold_header">True to size</h6>
+                                <h6 class="bold_header">My go-to shop for clothes!</h6>
                                 <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
                                 <span class="bold_header review_name">JUAN DELA CRUZ</span>
                                 <div class="row mt-2 justify-content-start">
@@ -167,7 +179,7 @@
                                         <i class="bi bi-star-fill"></i>
                                     </div>
                                 </div>
-                                <h6 class="bold_header">Delivered on time</h6>
+                                <h6 class="bold_header">LOVE THE TOPS!</h6>
                                 <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
                                 <span class="bold_header review_name">JUAN DELA CRUZ</span>
                                 <div class="row mt-2 justify-content-start">
