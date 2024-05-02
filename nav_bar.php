@@ -30,6 +30,7 @@
                     <!-- profile -->
                     <li class="nav-item cart_icon">
                         <a class="nav-link" href="#"><i class="bi bi-person-circle"></i></a>
+                        <!-- TO DO: Log in/out, Sign up dropdown options -->
                     </li>
                 </ul>
             </div>
