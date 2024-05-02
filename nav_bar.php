@@ -15,21 +15,24 @@
                         <a class="nav-link" href="landing_page.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Catalogue</a>
+                        <a class="nav-link" href="catalogue_page.php">Catalogue</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
+                        <a class="nav-link" href="about_page.php">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact_page.php">Contact Us</a>
                     </li>
                     <!-- shopping cart -->
                     <li class="nav-item cart_icon">
-                        <a class="nav-link position-relative" href="#">
+                        <a class="nav-link position-relative" href="view_cart.php">
                             <i class="bi bi-cart-fill"></i>
                         </a>
                         <!-- TO DO: Add a badge -->
                     </li>
                     <!-- profile -->
                     <li class="nav-item cart_icon">
-                        <a class="nav-link" href="#"><i class="bi bi-person-circle"></i></a>
+                        <a class="nav-link"><i class="bi bi-person-circle"></i></a>
                         <!-- TO DO: Log in/out, Sign up dropdown options -->
                     </li>
                 </ul>

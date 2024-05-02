@@ -24,6 +24,10 @@ body {
     color: white;
 }
 
+.dark_gray_bg {
+    background-color: #1E1E1E;
+}
+
 .gray_bg {
     background: #fbfbfb;
 }
