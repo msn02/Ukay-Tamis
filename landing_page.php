@@ -39,14 +39,14 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="card ratio ratio-1x1 mb-3 overflow-hidden">
-                            <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
+                            <img src="resources/2.jpg" class="img-fluid" alt="Curate">
                         </div>
                         <h5><span class="pink_highlight title1 m-0">We Curate</span></h5>
                         <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     </div>
                     <div class="col-sm-3">
                         <div class="card ratio ratio-1x1 mb-3">
-                            <img src="resources/3.jpg" class="img-fluid" alt="Subscribe">
+                            <img src="resources/3.jpg" class="img-fluid" alt="Try-on">
                         </div>
                         <h5><span class="pink_highlight title1 m-0">Try it on!</span></h5>
                         <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -65,7 +65,30 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
                     <p>Id velit ut tortor pretium viverra suspendisse potenti.</p>
                 </div>
-                <div class="col-sm-12 p-0 pink_btn pb-3">
+                <div class="row center_align pt-3 px-5 gx-3">
+                    <!-- image -->
+                    <div class="col-sm-3 mb-4">
+                        <div class="card border-0 ratio ratio-1x1 overflow-hidden">
+                            <img src="resources/1.jpg" class="img-fluid" alt="Subscribe">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 mb-4">
+                        <div class="card border-0 ratio ratio-1x1 overflow-hidden">
+                            <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 mb-4">
+                        <div class="card border-0 ratio ratio-1x1 overflow-hidden">
+                            <img src="resources/3.jpg" class="img-fluid" alt="Subscribe">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 mb-4">
+                        <div class="card border-0 ratio ratio-1x1 overflow-hidden">
+                            <img src="resources/1.jpg" class="img-fluid" alt="Subscribe">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 p-0 pink_btn pb-3 mb-3">
                     <button class="btn btn-primary border-0 px-4 shadow rounded-1" type="button">CHOOSE YOUR PLAN</button>
                 </div>
             </div>
