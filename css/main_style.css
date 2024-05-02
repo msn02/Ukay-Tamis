@@ -1,0 +1,83 @@
+.black_text {
+    color: black;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.bold_header {
+    font-weight: bold;
+}
+
+.burger_icon {
+    font-size: 2rem; 
+    color: white;
+}
+
+.center_align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.gray_bg {
+    background: #fbfbfb;
+}
+
+.nav-item a {
+    font-size: 12px;
+    color: white;
+    margin: 0;
+}
+
+.nav-item a:hover {
+    color: #FF6A97;
+}
+
+.nav-link[aria-current="page"]{
+	color: #FF6A97;
+}
+
+.page_title {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.pink_btn button, .pink_btn button:hover {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    background: #ff3a75;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.pink_highlight {
+    color: #FF6A97;
+}
+
+.pink_highlight2 {
+    color: #ff3a75;
+}
+
+p {
+    padding: 0;
+    font-size: 12px;
+}
+
+.white_bg {
+    background-color: white;
+}
+
+.white_text {
+    color: white;
+}
+
+.yellow_bg {
+    background-color: #FFC700;
+}
