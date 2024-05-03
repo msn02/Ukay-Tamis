@@ -1,3 +1,5 @@
+/* CSS Selectors arranged alphabetically */
+
 .black_text {
     color: black;
 }
@@ -11,6 +13,11 @@ body {
     font-weight: bold;
 }
 
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 .burger_icon {
     font-size: 2rem; 
     color: white;
@@ -20,8 +27,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.center_text {
     text-align: center;
-    color: white;
 }
 
 .dark_gray_bg {
@@ -30,6 +39,10 @@ body {
 
 .gray_bg {
     background: #fbfbfb;
+}
+
+.gray_bg2 {
+    background: #eeeeee;
 }
 
 .nav-item a {
@@ -84,6 +97,15 @@ p {
 
 .white_bg {
     background-color: white;
+}
+
+.white_btn button, .white_btn button:hover {
+    font-family: 'Inter', sans-serif;
+    background: white;
+    color: #ff3a75;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 18px;
 }
 
 .white_text {

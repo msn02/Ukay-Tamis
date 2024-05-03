@@ -14,7 +14,7 @@
     <div class="container-fluid p-0 gradient_pink">
         <!-- title and intro -->
         <div class="container">
-            <div class="row center_align pt-3">
+            <div class="row center_align pt-3 center_text white_text">
                 <div class="col-sm-8 px-4 pt-3">
                     <h1 class="bold_header">Thrifted Fashion,<br>Curated for You!</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
@@ -59,7 +59,7 @@
     <!-- mystery box -->
     <div class="container-fluid m-0 p-0 gradient_green">
         <div class="container">
-            <div class="row center_align pt-3">
+            <div class="row center_align pt-3 center_text white_text">
                 <div class="col-sm-8 px-4 pt-4">
                     <h3 class="bold_header mb-3">Haul RARE items with our MYSTERY BOX!</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
@@ -108,7 +108,7 @@
     </div>
 
     <div class="container-fluid m-0 p-0">
-        <div class="container-fluid center_align px-4 pt-3 yellow_bg">
+        <div class="container-fluid center_align center_text px-4 pt-3 yellow_bg">
             <div class="container black_text mb-2">
                 <h5>What our <span class="bold_header">Subscribers</span> Say</h5>
             </div>
