@@ -11,9 +11,9 @@
     <!-- navigation bar -->
     <?php include 'nav_bar.php'?>
 
-    <div class="container-fluid">
+    <div class="container-fluid center_align gradient_pink">
         <div class="container">
-
+            
         </div>
     </div>
 </body>

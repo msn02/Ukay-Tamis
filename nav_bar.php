@@ -10,7 +10,7 @@
         <!-- navbar contents -->
         <div class="collapse navbar-collapse justify-content-end dark_gray_bg" id="navbarLink">
             <div class="m-0 p-0">
-                <ul class="navText navbar-nav mr-auto mt-2 mt-lg-0">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="landing_page.php">Home</a>
                     </li>
@@ -22,6 +22,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact_page.php">Contact Us</a>
+                    </li>
+                    <!-- subscribe button -->
+                    <li class="nav-item pink_btn2 px-4 d-none d-sm-block">
+                        <button class="btn btn-dark border-0 px-3 py-1 mt-1 shadow rounded-1 nav-link" type="button" onclick="">SUBSCRIBE NOW</button>
                     </li>
                     <!-- shopping cart -->
                     <li class="nav-item cart_icon">
