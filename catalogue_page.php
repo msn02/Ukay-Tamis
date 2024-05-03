@@ -16,7 +16,7 @@
         <div class="container px-5 pt-3">
            <div class="row px-3">
                 <!-- logo -->
-                <div class="col-sm-3 brand_logo d-none d-sm-block pt-1 white_text">
+                <div class="col-sm-3 brand_logo d-none d-sm-block pt-1 white_text center_align">
                     <a class="navbar-brand page_title d-flex" href="landing_page.php">UKAY TAMIS</a>
                 </div>
                 <!-- search bar -->
@@ -48,15 +48,53 @@
                 <div class="col-sm-9 p-2">
                     <div class="gray_bg rounded-1 p-3">
                         <!-- choose your style -->
-                        <div class="col-sm-12">
-
+                        <div class="rounded-2 pt-3 px-3 style_con">
+                            <div class="row g-3 mb-3 center_align">
+                                <h5 class="bold_header mb-0 center_text">Choose your <span class="pink_highlight2">STYLE</span></h5>
+                                <!-- style card -->
+                                <div class="col-sm-3">
+                                    <div class="card overflow-hidden item_card mb-0">
+                                        <img src="resources/cottagecore.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
+                                        <div class="card-body p-2 maroon_btn">
+                                            <p class="item_name my-1">Cottagecore</p>
+                                            <p class="">some random words</p>
+                                            <button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="card overflow-hidden item_card mb-0">
+                                        <img src="resources/coquette.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
+                                        <div class="card-body p-2 pink_btn2">
+                                            <p class="item_name my-1">Coquette</p>
+                                            <p class="">some random words</p>
+                                            <button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="card overflow-hidden item_card mb-0">
+                                        <img src="resources/gothic_lolita.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
+                                        <div class="card-body p-2 black_btn">
+                                            <p class="item_name my-1">Gothic Lolita</p>
+                                            <p class="">some random words</p>
+                                            <button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- result header -->
-                        <div class="search_result">
+                        <!-- recom/result header -->
+                        <!-- display upon opening catalogue -->
+                        <div class="recom_header mt-3 mb-0 ms-2">
+                            <p>RECOMMENDED FOR YOU</p>
+                        </div>
+                        <!-- display only upon searching an item -->
+                        <div class="search_result mt-3 md-0 ms-2 d-none">
                             <p>Search results for <span class="pink_highlight">item name</span></p>
                         </div>
                         <!-- items -->
-                        <div class="row g-3">
+                        <div class="row g-3 mb-3 px-2">
                             <!-- card -->
                             <div class="col-sm-3">
                                 <a href="#" class="text-decoration-none">
@@ -135,8 +173,8 @@
                                 </a>
                             </div>
 
+                            <!-- insert pagination -->
                         </div> <!--item close tag-->
-                        
                     </div>
                 </div>
             </div>

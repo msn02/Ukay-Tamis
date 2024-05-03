@@ -4,6 +4,11 @@
     color: black;
 }
 
+.black_btn button, .black_btn button:hover {
+    background: #212121;
+    font-size: 12px;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -45,6 +50,11 @@ body {
     background: #eeeeee;
 }
 
+.maroon_btn button, .maroon_btn button:hover {
+    background: maroon;
+    font-size: 12px;
+}
+
 .nav-item a {
     font-size: 12px;
     color: white;
@@ -68,15 +78,16 @@ body {
 
 .pink_btn button, .pink_btn button:hover {
     font-size: 18px;
-}
-
-.pink_btn2 button, .pink_btn2 button:hover {
-    font-size: 12px;
-}
-
-.pink_btn button, .pink_btn button:hover, .pink_btn2 button, .pink_btn2 button:hover {
-    font-family: 'Inter', sans-serif;
     background: #ff3a75;
+}
+
+.pink_btn2 button, .pink_btn2 button:hover{
+    font-size: 12px;
+    background: #ff3a75;
+}
+
+.pink_btn button, .pink_btn button:hover, .pink_btn2 button, .pink_btn2 button:hover, .black_btn button, .black_btn button:hover, .maroon_btn button, .maroon_btn button:hover {
+    font-family: 'Inter', sans-serif;
     color: white;
     font-weight: bold;
     transition: 0.3s;

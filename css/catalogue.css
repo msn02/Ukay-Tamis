@@ -50,10 +50,14 @@
     color: gray;
 }
 
-.search_result p {
+.search_result p, .recom_header p {
     font-size: 15px;
-    color: #1E1E1E;
+    color: #909090;
     font-weight: bold;
+}
+
+.style_con {
+    border: 2px solid #ff3a75;
 }
 
 .tag_green {
@@ -66,6 +70,6 @@
 
 .tag_green, .tag_pink {
     color: white;
-    font-size: 13px;
+    font-size: 11px;
     line-height: normal;
 }
