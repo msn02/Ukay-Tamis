@@ -42,7 +42,7 @@
                     <div class="gray_bg rounded-1 pt-3 px-4 pb-4">
                         <h6 class="bold_header m-0">SEARCH FILTERS</h6>
                         <!-- Sizes -->
-                        <div class="border-bottom border-1 filter_title filter_content p-2">
+                        <!-- <div class="border-bottom border-1 filter_title filter_content p-2">
                             <p class="mb-1">Sizes</p>
                             <div class="form-check ms-3">
                                 <input class="form-check-input" type="checkbox" value="" id="small">
@@ -60,18 +60,50 @@
                                 <input class="form-check-input" type="checkbox" value="" id="freesize">
                                 <label class="form-check-label ms-1" for="small">Freesize</label>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <!-- alphabetical arrangement -->
+                        <!-- Group by Style -->
                         <div class="border-bottom border-1 filter_title filter_content p-2">
-                            <p class="my-1">Sort by</p>
+                            <p class="my-1">Group by Style</p>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="sort" type="radio" value="" id="asc_alp">
-                                <label class="form-check-label ms-1" for="asc_alp">A to Z</label>
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_cottagecore">
+                                <label class="form-check-label ms-1" for="style_cottagecore">Cottagecore</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="sort" type="radio" value="" id="desc_alp">
-                                <label class="form-check-label ms-1" for="desc_alp">Z to A</label>
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_coquette">
+                                <label class="form-check-label ms-1" for="style_coquette">Coquette</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_gothic_lolita">
+                                <label class="form-check-label ms-1" for="style_gothic_lolita">Gothic Lolita</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_streetwear">
+                                <label class="form-check-label ms-1" for="style_streetwear">Streetwear</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_y2k">
+                                <label class="form-check-label ms-1" for="style_y2k">Y2K</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_dark_academia">
+                                <label class="form-check-label ms-1" for="style_dark_academia">Dark Academia</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_old_money">
+                                <label class="form-check-label ms-1" for="style_old_money">Old Money</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_alt">
+                                <label class="form-check-label ms-1" for="style_alt">Alt</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_indie">
+                                <label class="form-check-label ms-1" for="style_indie">Indie</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_star_girl">
+                                <label class="form-check-label ms-1" for="style_star_girl">Star Girl</label>
                             </div>
                         </div>
 
@@ -155,7 +187,7 @@
                         <!-- recom/result header -->
                         <!-- display upon opening catalogue -->
                         <div class="recom_header mt-3 mb-0 ms-2">
-                            <p>RECOMMENDED FOR YOU</p>
+                            <h5>SINGLE LISTINGS</h5>
                         </div>
                         <!-- display only upon searching an item -->
                         <!-- remove "d-none" in class -->
