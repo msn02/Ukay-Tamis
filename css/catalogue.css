@@ -1,3 +1,71 @@
+/* CSS Selectors arranged alphabetically */
+
+.brand_logo {
+    font-size: 30px;
+}
+
+.card_content {
+    background-color: white;
+    color: black;
+}
+
+.card-text {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FF6A97;
+}
+
 .gradient_pink {
-    background-image: linear-gradient(180deg, #760024, #FF6A97, #EEEEEE);
+    background-image: linear-gradient(180deg, #760024, #FF6A97, #eeeeee);
+    position:static;
+    width: auto;
+    height: 500px;
+}
+
+.item_card {
+    border: 1px solid #ccc;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.item_card:hover {
+    border: 1px solid #ff3a75;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item_name {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    line-height: normal;
+}
+
+.item_price {
+    font-size: 15px;
+    font-weight: 900;
+    color: #ff3a75;
+}
+
+.search_label input {
+    font-size: 13px;
+    color: gray;
+}
+
+.search_result p {
+    font-size: 15px;
+    color: #1E1E1E;
+    font-weight: bold;
+}
+
+.tag_green {
+    background-color: #96DA39;
+}
+
+.tag_pink {
+    background-color: #ff3a75;
+}
+
+.tag_green, .tag_pink {
+    color: white;
+    font-size: 13px;
+    line-height: normal;
 }
