@@ -16,8 +16,8 @@
         <div class="container px-5 pt-3">
            <div class="row px-3">
                 <!-- logo -->
-                <div class="col-sm-3 brand_logo d-none d-sm-block pt-1 white_text center_align">
-                    <a class="navbar-brand page_title d-flex" href="landing_page.php">UKAY TAMIS</a>
+                <div class="col-sm-3 brand_logo d-none d-sm-block pt-1 white_text m-auto">
+                    <a class="navbar-brand page_title text-center d-flex justify-content-center" href="landing_page.php"><span class="pink_highlight me-1">UKAY</span>TAMIS</a>
                 </div>
                 <!-- search bar -->
                 <div class="col-sm-9 p-2">
@@ -39,7 +39,7 @@
             <div class="row px-3">
                 <!-- filters: hidden on smaller screens -->
                 <div class="col-sm-3 d-none d-sm-block p-2">
-                    <div class="gray_bg rounded-1 py-3 px-4">
+                    <div class="gray_bg rounded-1 pt-3 px-4 pb-4">
                         <h6 class="bold_header m-0">SEARCH FILTERS</h6>
                         <!-- Sizes -->
                         <div class="border-bottom border-1 filter_title filter_content p-2">
