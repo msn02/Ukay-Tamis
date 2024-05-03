@@ -28,7 +28,7 @@
                         </div>
                         <!-- only visible to smaller screens -->
                         <div class="white_btn d-sm-none d-block">
-                            <button class="btn btn-dark ms-2 border-0 px-3 shadow rounded-1" type="submit"><i class="bi bi-filter"></i></button>
+                            <button class="btn btn-dark ms-2 border-0 px-3 shadow rounded-1" type="submit"><i class="bi bi-funnel-fill"></i></i></button>
                         </div>
                     </form>
                 </div>
@@ -37,20 +37,74 @@
         <!-- filters and search results -->
         <div class="container px-5">
             <div class="row px-3">
-                <!-- hidden on smaller screens -->
+                <!-- filters: hidden on smaller screens -->
                 <div class="col-sm-3 d-none d-sm-block p-2">
-                    <div class="gray_bg rounded-1 p-3">
-                        <h6 class="bold_header">Filters</h6>
-                        <p></p>
+                    <div class="gray_bg rounded-1 py-3 px-4">
+                        <h6 class="bold_header m-0">SEARCH FILTERS</h6>
+                        <!-- Sizes -->
+                        <div class="border-bottom border-1 filter_title filter_content p-2">
+                            <p class="mb-1">Sizes</p>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" type="checkbox" value="" id="small">
+                                <label class="form-check-label ms-1" for="small">Small</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" type="checkbox" value="" id="medium">
+                                <label class="form-check-label ms-1" for="small">Medium</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" type="checkbox" value="" id="large">
+                                <label class="form-check-label ms-1" for="small">Large</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" type="checkbox" value="" id="freesize">
+                                <label class="form-check-label ms-1" for="small">Freesize</label>
+                            </div>
+                        </div>
+
+                        <!-- alphabetical arrangement -->
+                        <div class="border-bottom border-1 filter_title filter_content p-2">
+                            <p class="my-1">Sort by</p>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="asc_alp">
+                                <label class="form-check-label ms-1" for="asc_alp">A to Z</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="desc_alp">
+                                <label class="form-check-label ms-1" for="desc_alp">Z to A</label>
+                            </div>
+                        </div>
+
+                        <!-- price -->
+                        <div class="border-bottom border-1 filter_title filter_content p-2">
+                            <p class="my-1">Pricing</p>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="price" type="radio" value="" id="low_high">
+                                <label class="form-check-label ms-1" for="low_high">From Low to High</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="price" type="radio" value="" id="high_low">
+                                <label class="form-check-label ms-1" for="high_low">From High to Low</label>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 mx-2 mb-0 px-2 pink_btn2">
+                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#">CLEAR SELECTION</i></button>
+                        </div>
                     </div>
                 </div>
                 <!-- items and search results -->
+                <!-- TO DO: enable toggling for this section -->
                 <div class="col-sm-9 p-2">
                     <div class="gray_bg rounded-1 p-3">
                         <!-- choose your style -->
                         <div class="rounded-2 pt-3 px-3 style_con">
                             <div class="row g-3 mb-3 center_align">
-                                <h5 class="bold_header mb-0 center_text">Choose your <span class="pink_highlight2">STYLE</span></h5>
+                                <!-- title and link to view more styles -->
+                                <div class="pink_btn2 row mt-2 p-2 view_more_link">
+                                    <h5 class="col bold_header mb-0 p-0 mx-0">Choose your <span class="pink_highlight2">STYLE</span></h5>
+                                    <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="#">View more styles <i class="bi bi-chevron-right"></i></a>
+                                </div>
                                 <!-- style card -->
                                 <div class="col-sm-3">
                                     <div class="card overflow-hidden item_card mb-0">
@@ -82,6 +136,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-3">
+                                    <div class="card overflow-hidden item_card mb-0">
+                                        <img src="resources/streetwear.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
+                                        <div class="card-body p-2 blue_btn">
+                                            <p class="item_name my-1">Streetwear</p>
+                                            <p class="">some random words</p>
+                                            <button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- view more: visible only to small screens -->
+                                <div class="mt-3 mx-2 mb-0 px-2 pink_btn2 d-sm-none d-block">
+                                    <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#">View more styles <i class="bi bi-chevron-right"></i></button>
+                                </div>
                             </div>
                         </div>
                         <!-- recom/result header -->
@@ -90,6 +158,7 @@
                             <p>RECOMMENDED FOR YOU</p>
                         </div>
                         <!-- display only upon searching an item -->
+                        <!-- remove "d-none" in class -->
                         <div class="search_result mt-3 md-0 ms-2 d-none">
                             <p>Search results for <span class="pink_highlight">item name</span></p>
                         </div>

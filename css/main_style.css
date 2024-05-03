@@ -9,6 +9,19 @@
     font-size: 12px;
 }
 
+.blue_btn button, .blue_btn button:hover {
+    background: #005bd3;
+    font-size: 12px;
+}
+
+/* diff colored buttons */
+.blue_btn button, .blue_btn button:hover, .pink_btn button, .pink_btn button:hover, .pink_btn2 button, .pink_btn2 button:hover, .black_btn button, .black_btn button:hover, .maroon_btn button, .maroon_btn button:hover {
+    font-family: 'Inter', sans-serif;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -16,11 +29,6 @@ body {
 
 .bold_header {
     font-weight: bold;
-}
-
-.btn:focus {
-    outline: none;
-    box-shadow: none;
 }
 
 .burger_icon {
@@ -84,13 +92,6 @@ body {
 .pink_btn2 button, .pink_btn2 button:hover{
     font-size: 12px;
     background: #ff3a75;
-}
-
-.pink_btn button, .pink_btn button:hover, .pink_btn2 button, .pink_btn2 button:hover, .black_btn button, .black_btn button:hover, .maroon_btn button, .maroon_btn button:hover {
-    font-family: 'Inter', sans-serif;
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
 }
 
 .pink_highlight {
