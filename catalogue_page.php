@@ -1,7 +1,3 @@
-<!-- Include the connection.php file -->
-<?php include('server/connection.php'); ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -159,7 +155,7 @@
                                             <div class="card-body p-2 maroon_btn">
                                                 <p class="item_name style_name my-1"><?php echo $row['style']; ?></p>
                                                 <p class="style_info"><?php echo $row['style_description']; ?></p>
-                                                <a href="style_1.php"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
+                                                <a href="<?php echo "style_box.php?style_id=" . $row['style_id'] ?>"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                                             </div>
                                         </div>
                                     </div>
