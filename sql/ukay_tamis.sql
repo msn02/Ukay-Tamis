@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2024 at 11:43 AM
+-- Generation Time: May 04, 2024 at 12:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -110,6 +110,22 @@ INSERT INTO `style_box` (`style_box_id`, `style_id`, `style_box_description`, `p
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `style_box_details`
+-- (See below for the actual view)
+--
+CREATE TABLE `style_box_details` (
+`style_id` int(11)
+,`style_box_id` int(11)
+,`style` varchar(50)
+,`style_description` varchar(255)
+,`style_box_description` varchar(255)
+,`price` decimal(10,2)
+,`style_img_url` varchar(45)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `style_box_transaction`
 --
 
@@ -212,6 +228,15 @@ CREATE TABLE `user_preference` (
   `shoe_size` varchar(5) DEFAULT NULL,
   `clothing_size` enum('XS','S','M','L','XL','XXL') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `style_box_details`
+--
+DROP TABLE IF EXISTS `style_box_details`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `style_box_details`  AS SELECT `s`.`style_id` AS `style_id`, `sb`.`style_box_id` AS `style_box_id`, `s`.`style` AS `style`, `s`.`style_description` AS `style_description`, `sb`.`style_box_description` AS `style_box_description`, `sb`.`price` AS `price`, `s`.`style_img_url` AS `style_img_url` FROM (`style` `s` join `style_box` `sb` on(`s`.`style_id` = `sb`.`style_id`)) ;
 
 --
 -- Indexes for dumped tables
