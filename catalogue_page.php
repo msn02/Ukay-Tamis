@@ -152,9 +152,9 @@
                                     <div class="col-sm-3">
                                         <div class="card overflow-hidden item_card style_card_info mb-0">
                                             <img src="resources/<?php echo $row['style_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                            <div class="card-body p-2 maroon_btn">
-                                                <p class="item_name style_name my-1"><?php echo $row['style']; ?></p>
-                                                <p class="style_info"><?php echo $row['style_description']; ?></p>
+                                            <div class="card-body p-2 pink_btn2">
+                                                <p class="item_name my-1 mx-1"><?php echo $row['style']; ?></p>
+                                                <p class="style_info mx-1"><?php echo $row['style_description']; ?></p>
                                                 <a href="<?php echo "style_box.php?style_id=" . $row['style_id'] ?>"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                                             </div>
                                         </div>
@@ -173,12 +173,12 @@
                             <!-- Featured Items -->
                             <div class="row g-3 mb-3 px-2">
 
-                                <div class="recom_header mt-3 mb-0 ms-2">
-                                    <h5>SINGLE LISTINGS</h5>
+                                <div class="recom_header mt-3 pt-4 mb-0">
+                                    <h5 class="bold_header p-0 m-0">SINGLE LISTINGS</h5>
                                 </div>
-                                <div class="search_result mt-3 md-0 ms-2 d-none">
+                                <!-- <div class="search_result mt-3 md-0 ms-2 d-none">
                                     <p>Search results for <span class="pink_highlight">item name</span></p>
-                                </div>
+                                </div> -->
                                 
                                 <!-- Include the get_featured_style.php file -->
                                 <?php include('server/get_featured_item.php'); ?>

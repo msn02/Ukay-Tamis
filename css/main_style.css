@@ -4,18 +4,8 @@
     color: black;
 }
 
-.black_btn button, .black_btn button:hover {
-    background: #212121;
-    font-size: 12px;
-}
-
-.blue_btn button, .blue_btn button:hover {
-    background: #005bd3;
-    font-size: 12px;
-}
-
 /* diff colored buttons */
-.blue_btn button, .blue_btn button:hover, .pink_btn button, .pink_btn button:hover, .pink_btn2 button, .pink_btn2 button:hover, .black_btn button, .black_btn button:hover, .maroon_btn button, .maroon_btn button:hover, .white_btn button, .white_btn button:hover {
+.pink_btn button, .pink_btn button:hover, .pink_btn2 button, .pink_btn2 button:hover, .white_btn button, .white_btn button:hover {
     font-family: 'Inter', sans-serif;
     color: white;
     font-weight: bold;
@@ -57,11 +47,6 @@ body {
 
 .gray_bg2 {
     background: #eeeeee;
-}
-
-.maroon_btn button, .maroon_btn button:hover {
-    background: maroon;
-    font-size: 12px;
 }
 
 .nav-item a {
