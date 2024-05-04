@@ -112,7 +112,7 @@
                                         <div class="card-body p-2 maroon_btn">
                                             <p class="item_name my-1">Cottagecore</p>
                                             <p class="">some random words</p>
-                                            <button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button>
+                                            <a href="style_1.php"><button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
                                         <div class="card-body p-2 pink_btn2">
                                             <p class="item_name my-1">Coquette</p>
                                             <p class="">some random words</p>
-                                            <button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button>
+                                            <a href="style_2.php"><button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@
                                         <div class="card-body p-2 black_btn">
                                             <p class="item_name my-1">Gothic Lolita</p>
                                             <p class="">some random words</p>
-                                            <button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button>
+                                            <a href="style_3.php"><button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                         <div class="card-body p-2 blue_btn">
                                             <p class="item_name my-1">Streetwear</p>
                                             <p class="">some random words</p>
-                                            <button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button>
+                                            <a href="style_4.php"><button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                                         </div>
                                     </div>
                                 </div>
