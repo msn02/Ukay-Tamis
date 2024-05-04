@@ -7,18 +7,18 @@
     <?php include 'head_resource.php';?>
     <link rel="stylesheet" href="css/item.css">
 </head>
-<body class="gray_bg">
+<body class="gray_bg2">
     <!-- navigation bar -->
     <?php include 'nav_bar.php'?>
 
-    <div class="container-fluid p-3 center-align">
+    <div class="container-fluid p-3 gradient_pink center-align">
         <div class="container px-5 py-3">
             <!-- back button -->
             <div class="back_link p-2">
                 <a class="border-0 p-2 rounded-1 justify-content-start text-decoration-none w-25" href="catalogue_page.php"><i class="bi bi-chevron-left me-2"></i>Back</a>
             </div>
 
-            <div class="row shadow rounded-2 m-3">
+            <div class="row shadow rounded-2 m-3 gray_bg">
                 <!-- product image -->
                 <div class="col-sm-5 m-0 p-4">
                     <div class="card overflow-hidden border-0">
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="row shadow rounded-2 m-3 p-2">
+            <div class="row shadow rounded-2 m-3 p-2 gray_bg">
                 <div class="mt-3 mb-0 ms-2 single_items">
                     <h6 class="mb-0">FEATURED SINGLE ITEMS</h6>
                 </div>
