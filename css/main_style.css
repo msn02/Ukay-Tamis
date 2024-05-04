@@ -15,7 +15,7 @@
 }
 
 /* diff colored buttons */
-.blue_btn button, .blue_btn button:hover, .pink_btn button, .pink_btn button:hover, .pink_btn2 button, .pink_btn2 button:hover, .black_btn button, .black_btn button:hover, .maroon_btn button, .maroon_btn button:hover {
+.blue_btn button, .blue_btn button:hover, .pink_btn button, .pink_btn button:hover, .pink_btn2 button, .pink_btn2 button:hover, .black_btn button, .black_btn button:hover, .maroon_btn button, .maroon_btn button:hover, .white_btn button, .white_btn button:hover {
     font-family: 'Inter', sans-serif;
     color: white;
     font-weight: bold;
@@ -29,6 +29,7 @@ body {
 
 .bold_header {
     font-weight: bold;
+    line-height: normal;
 }
 
 .burger_icon {
@@ -112,11 +113,8 @@ p {
 }
 
 .white_btn button, .white_btn button:hover {
-    font-family: 'Inter', sans-serif;
     background: white;
     color: #ff3a75;
-    font-weight: bold;
-    transition: 0.3s;
     font-size: 18px;
 }
 

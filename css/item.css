@@ -1,12 +1,77 @@
-.back_link {
+.add_cart button, .add_cart button:hover {
+    font-size: 14px;
+    color: white;
+    background-color: #ff3a75;
+}
+
+.buy_now button, .buy_now button:hover {
+    font-size: 14px;
+    color: white;
+    background-color: #88c731;
+}
+
+.back_link a {
     font-size: 12px;
+    color: #ffffff;
+}
+
+.card_content {
+    background-color: white;
+    color: black;
+}
+
+.card-text {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FF6A97;
+}
+
+.gradient_pink {
+    background-image: linear-gradient(180deg, #760024, #FF6A97, #eeeeee);
+    position:static;
+    width: auto;
+    height: 500px;
+}
+
+.item_card {
+    border: 1px solid #ccc;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.item_card:hover {
+    border: 1px solid #ff3a75;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item_name {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    line-height: normal;
+}
+
+.item_price {
+    font-size: 15px;
+    font-weight: 900;
     color: #ff3a75;
 }
 
-.item_title {
-    font-size: 35px;
+.single_items h6 {
+    color: black;
+    font-weight: bold;
+    font-weight: bold;
 }
 
 .tag_pink {
+    background-color: #ff3a75;
+    color: white;
+    font-size: 15px;
+    line-height: normal;
+}
 
+.tag_green {
+    background-color: #96DA39;
+    color: white;
+    font-size: 11px;
+    line-height: normal;
 }
