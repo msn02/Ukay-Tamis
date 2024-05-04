@@ -49,14 +49,14 @@ body {
     background: #eeeeee;
 }
 
-.nav-item a {
+.nav-item a, .nav-item button {
     font-size: 12px;
     color: white;
     margin: 0;
     line-height: normal;
 }
 
-.nav-item a:hover {
+.nav-item a:hover, .nav-item button:hover, .nav-item button:focus {
     color: #FF6A97;
 }
 

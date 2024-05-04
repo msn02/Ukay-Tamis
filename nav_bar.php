@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg dark_gray_bg sticky-top px-3">
-    <div class="container">
+<nav class="navbar navbar-expand-lg dark_gray_bg sticky-top">
+    <div class="container px-5">
         <a class="navbar-brand page_title" href="landing_page.php"><span class="pink_highlight">UKAY</span> <span class="white_text">TAMIS</span></a>
         <!-- toggler -->
         <button class="navbar-toggler btn shadow-none border-0 justify-content-end m-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLink" aria-controls="navbarLink" aria-expanded="false" aria-label="Toggler">
@@ -28,15 +28,23 @@
                         <button class="btn btn-dark border-0 px-3 py-1 mt-1 shadow rounded-1 nav-link" type="button" onclick="">SUBSCRIBE NOW</button>
                     </li>
                     <!-- shopping cart -->
-                    <li class="nav-item cart_icon">
+                    <li class="nav-item cart_icon me-2">
                         <a class="nav-link position-relative" href="view_cart.php">
                             <i class="bi bi-cart-fill"></i>
                         </a>
                         <!-- TO DO: Add a badge -->
                     </li>
                     <!-- profile -->
-                    <li class="nav-item cart_icon">
-                        <a class="nav-link"><i class="bi bi-person-circle"></i></a>
+                    <li class="nav-item align-content-center cart_icon dropdown">
+                        <button class="nav-link dropdown-toggle p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="log_in.php">Log In</a></li>
+                            <li><a class="dropdown-item" href="sign_up.php">Sign Up</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item disabled" href="#">Log out</a></li>
+                        </ul>
                         <!-- TO DO: Log in/out, Sign up dropdown options -->
                     </li>
                 </ul>
