@@ -1,6 +1,5 @@
 <?php include('server/get_style_page.php'); ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,7 @@
     <!-- navigation bar -->
     <?php include 'nav_bar.php'?>
 
-    <div class="container-fluid p-3 gradient_pink center-align">
+    <div class="container-fluid px-3 pt-1 gradient_pink center-align">
         <div class="container px-5 py-3">
             <!-- back button -->
             <div class="back_link p-2">
@@ -52,14 +51,14 @@
                     <div class="pt-3 px-3 mb-0">
                         <div class="border-top pt-3 pb-0 m-0">
                             <h6 class="bold_header">Style Description</h6>
-                            <p class="m-0 p-0"><?php echo $row['style_box_description']; ?></p>
+                            <p class="box_desc m-0 p-0"><?php echo $row['style_box_description']; ?></p>
                         </div>
                     </div>
                     <!-- box description -->
-                    <div class="pt-3 px-3 pb-4 mb-0">
+                    <div class="pt-3 px-3 pb-5 mb-0">
                         <div class="border-top pt-3 pb-0 m-0">
                             <h6 class="bold_header">What's in the box?</h6>
-                            <p class="m-0 p-0"><?php echo $row['style_box_description']; ?></p>
+                            <p class="box_desc m-0 p-0"><?php echo $row['style_box_description']; ?></p>
                         </div>
                     </div>
                     <!-- add to card and buy now button -->
@@ -76,7 +75,7 @@
             <?php } ?>
 
             <!-- Related  Single Items -->
-            <div class="row shadow rounded-2 m-3 p-2 gray_bg">
+            <div class="row rounded-2 m-3 p-2 gray_bg">
                 <div class="mt-3 mb-0 ms-2 single_items">
                     <h6 class="mb-0">FEATURED SINGLE ITEMS</h6>
                 </div>
@@ -89,7 +88,7 @@
 
                     <!-- card -->
                     <div class="col-sm-3 p-2">
-                        <a href="#" class="text-decoration-none">
+                        <a href="item_page.php" class="text-decoration-none">
                             <div class="card overflow-hidden rounded-1 card_content item_card">
                                 <img src="resources/<?php echo $row['item_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="<?php echo $row['item_name']; ?>">
                                 <div class="card-body p-3">

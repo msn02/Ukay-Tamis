@@ -130,94 +130,88 @@
                 </div>
 
                 <!-- Featured -->
-                    <div class="col-sm-9 p-2">
-                        <div class="gray_bg rounded-1 p-3">
-                            
-                            <!-- Featured Styles -->
-                            <div class="rounded-2 pt-3 px-3 style_con">
-                                <div class="row g-3 mb-3 center_align">
-                                    <!-- title and link to view more styles -->
-                                    <div class="pink_btn2 row mt-2 p-2 view_more_link">
-                                        <h5 class="col bold_header mb-0 p-0 mx-0">Choose your <span class="pink_highlight2">STYLE</span></h5>
-                                        <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="#">View more styles <i class="bi bi-chevron-right"></i></a>
-                                    </div>
-                                    
-                                    <!-- Include the get_featured_style.php file -->
-                                    <?php include('server/get_featured_style.php'); ?>
-
-                                    <!-- Loop through the featured styles -->
-                                    <?php while ($row = $featured_styles->fetch_assoc()) { ?>
-                                    
-                                    <!-- Style card -->
-                                    <div class="col-sm-3">
-                                        <div class="card overflow-hidden item_card style_card_info mb-0">
-                                            <img src="resources/<?php echo $row['style_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                            <div class="card-body p-2 pink_btn2">
-                                                <p class="item_name my-1 mx-1"><?php echo $row['style']; ?></p>
-                                                <p class="style_info mx-1"><?php echo $row['style_description']; ?></p>
-                                                <a href="<?php echo "style_box.php?style_id=" . $row['style_id'] ?>"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <?php } ?>
-
-                                    <!-- view more: visible only to small screens -->
-                                    <div class="mt-3 mx-2 mb-0 px-2 pink_btn2 d-sm-none d-block">
-                                        <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#">View more styles <i class="bi bi-chevron-right"></i></button>
-                                    </div>
+                <div class="col-sm-9 p-2">
+                    <div class="gray_bg rounded-1 p-3">
+                        
+                        <!-- Featured Styles -->
+                        <div class="rounded-2 pt-3 px-3 style_con">
+                            <div class="row g-3 mb-3 center_align">
+                                <!-- title and link to view more styles -->
+                                <div class="pink_btn2 row mt-2 p-2 view_more_link">
+                                    <h5 class="col bold_header mb-0 p-0 mx-0">Choose your <span class="pink_highlight2">STYLE</span></h5>
+                                    <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="#">View more styles <i class="bi bi-chevron-right"></i></a>
                                 </div>
-                            </div>
-
-
-                            <!-- Featured Items -->
-                            <div class="row g-3 mb-3 px-2">
-
-                                <div class="recom_header mt-3 pt-4 mb-0">
-                                    <h5 class="bold_header p-0 m-0">SINGLE LISTINGS</h5>
-                                </div>
-                                <!-- <div class="search_result mt-3 md-0 ms-2 d-none">
-                                    <p>Search results for <span class="pink_highlight">item name</span></p>
-                                </div> -->
                                 
                                 <!-- Include the get_featured_style.php file -->
-                                <?php include('server/get_featured_item.php'); ?>
+                                <?php include('server/get_featured_style.php'); ?>
 
-                                <!-- Loop through the featured items -->
+                                <!-- Loop through the featured styles -->
                                 <?php while ($row = $featured_styles->fetch_assoc()) { ?>
-
-                                <!-- Item card -->
+                                
+                                <!-- Style card -->
                                 <div class="col-sm-3">
-                                    <a href="#" class="text-decoration-none">
-                                        <div class="card overflow-hidden rounded-1 card_content item_card">
-                                            <img src="resources/<?php echo $row['item_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                            <div class="card-body p-2">
-                                                <p class="item_name"><?php echo $row['item_name']; ?></p>
-                                                <!-- price and category -->
-                                                <div class="row p-0 d-flex justify-content-between">
-                                                    <div class="col-5 m-0 text-align-left">
-                                                        <p class="card-text item_price m-0"><?php echo $row['price']; ?></p>
-                                                    </div>
-                                                    <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
-                                                        <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
-                                                    </div>
+                                    <div class="card overflow-hidden item_card style_card_info mb-0">
+                                        <img src="resources/<?php echo $row['style_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="item">
+                                        <div class="card-body p-2 pink_btn2">
+                                            <p class="item_name my-1 mx-1"><?php echo $row['style']; ?></p>
+                                            <p class="style_info mx-1"><?php echo $row['style_description']; ?></p>
+                                            <a href="<?php echo "style_box.php?style_id=" . $row['style_id'] ?>"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <?php } ?>
+
+                                <!-- view more: visible only to small screens -->
+                                <div class="mt-3 mx-2 mb-0 px-2 pink_btn2 d-sm-none d-block">
+                                    <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#">View more styles <i class="bi bi-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Featured Items -->
+                        <div class="row g-3 mb-3 px-2">
+
+                            <div class="recom_header mt-3 pt-4 mb-0">
+                                <h5 class="bold_header p-0 m-0">SINGLE LISTINGS</h5>
+                            </div>
+                            <!-- <div class="search_result mt-3 md-0 ms-2 d-none">
+                                <p>Search results for <span class="pink_highlight">item name</span></p>
+                            </div> -->
+                            
+                            <!-- Include the get_featured_style.php file -->
+                            <?php include('server/get_featured_item.php'); ?>
+
+                            <!-- Loop through the featured items -->
+                            <?php while ($row = $featured_styles->fetch_assoc()) { ?>
+
+                            <!-- Item card -->
+                            <div class="col-sm-3">
+                                <a href="item_page.php" class="text-decoration-none">
+                                    <div class="card overflow-hidden rounded-1 card_content item_card">
+                                        <img src="resources/<?php echo $row['item_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="item">
+                                        <div class="card-body p-2">
+                                            <p class="item_name"><?php echo $row['item_name']; ?></p>
+                                            <!-- price and category -->
+                                            <div class="row p-0 d-flex justify-content-between">
+                                                <div class="col-5 m-0 text-align-left">
+                                                    <p class="card-text item_price m-0"><?php echo $row['price']; ?></p>
+                                                </div>
+                                                <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
+                                                    <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-                                </div>
-                                <?php } ?>
-
-
-                                <!-- insert pagination -->
-                            </div> <!--item close tag-->
-                        
-                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php } ?>
+                            <!-- insert pagination -->
+                        </div> <!--item close tag-->
+                    
                     </div>
-
-
-
-
+                </div>
             </div>
         </div>
     </div>

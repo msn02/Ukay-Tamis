@@ -13,6 +13,11 @@
     background: #FFEDAC;
 }
 
+.box_desc {
+    line-height: normal;
+    font-size: 13px;
+}
+
 .buy_now button, .buy_now button:hover {
     font-size: 14px;
     color: white;
