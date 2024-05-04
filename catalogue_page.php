@@ -37,10 +37,13 @@
         <!-- filters and search results -->
         <div class="container px-5">
             <div class="row px-3">
-                <!-- filters: hidden on smaller screens -->
+                
+                
+                <!-- Filters: hidden on smaller screens -->
                 <div class="col-sm-3 d-none d-sm-block p-2">
                     <div class="gray_bg rounded-1 pt-3 px-4 pb-4">
                         <h6 class="bold_header m-0">SEARCH FILTERS</h6>
+                        
                         <!-- Sizes -->
                         <div class="border-bottom border-1 filter_title filter_content p-2">
                             <p class="mb-1">Sizes</p>
@@ -62,16 +65,48 @@
                             </div>
                         </div>
 
-                        <!-- alphabetical arrangement -->
+                        <!-- Group by Style -->
                         <div class="border-bottom border-1 filter_title filter_content p-2">
-                            <p class="my-1">Sort by</p>
+                            <p class="my-1">Group by Style</p>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="sort" type="radio" value="" id="asc_alp">
-                                <label class="form-check-label ms-1" for="asc_alp">A to Z</label>
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_cottagecore">
+                                <label class="form-check-label ms-1" for="style_cottagecore">Cottagecore</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="sort" type="radio" value="" id="desc_alp">
-                                <label class="form-check-label ms-1" for="desc_alp">Z to A</label>
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_coquette">
+                                <label class="form-check-label ms-1" for="style_coquette">Coquette</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_gothic_lolita">
+                                <label class="form-check-label ms-1" for="style_gothic_lolita">Gothic Lolita</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_streetwear">
+                                <label class="form-check-label ms-1" for="style_streetwear">Streetwear</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_y2k">
+                                <label class="form-check-label ms-1" for="style_y2k">Y2K</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_dark_academia">
+                                <label class="form-check-label ms-1" for="style_dark_academia">Dark Academia</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_old_money">
+                                <label class="form-check-label ms-1" for="style_old_money">Old Money</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_alt">
+                                <label class="form-check-label ms-1" for="style_alt">Alt</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_indie">
+                                <label class="form-check-label ms-1" for="style_indie">Indie</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="sort" type="radio" value="" id="style_star_girl">
+                                <label class="form-check-label ms-1" for="style_star_girl">Star Girl</label>
                             </div>
                         </div>
 
@@ -93,159 +128,96 @@
                         </div>
                     </div>
                 </div>
-                <!-- items and search results -->
-                <!-- TO DO: enable toggling for this section -->
-                <div class="col-sm-9 p-2">
-                    <div class="gray_bg rounded-1 p-3">
-                        <!-- choose your style -->
-                        <div class="rounded-2 pt-3 px-3 style_con">
-                            <div class="row g-3 mb-3 center_align">
-                                <!-- title and link to view more styles -->
-                                <div class="pink_btn2 row mt-2 p-2 view_more_link">
-                                    <h5 class="col bold_header mb-0 p-0 mx-0">Choose your <span class="pink_highlight2">STYLE</span></h5>
-                                    <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="#">View more styles <i class="bi bi-chevron-right"></i></a>
-                                </div>
-                                <!-- style card -->
-                                <div class="col-sm-3">
-                                    <div class="card overflow-hidden item_card mb-0">
-                                        <img src="resources/cottagecore.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                        <div class="card-body p-2 maroon_btn">
-                                            <p class="item_name my-1">Cottagecore</p>
-                                            <p class="">some random words</p>
-                                            <a href="style_1.php"><button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
-                                        </div>
+
+                <!-- Featured -->
+                    <div class="col-sm-9 p-2">
+                        <div class="gray_bg rounded-1 p-3">
+                            
+                            <!-- Featured Styles -->
+                            <div class="rounded-2 pt-3 px-3 style_con">
+                                <div class="row g-3 mb-3 center_align">
+                                    <!-- title and link to view more styles -->
+                                    <div class="pink_btn2 row mt-2 p-2 view_more_link">
+                                        <h5 class="col bold_header mb-0 p-0 mx-0">Choose your <span class="pink_highlight2">STYLE</span></h5>
+                                        <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="#">View more styles <i class="bi bi-chevron-right"></i></a>
                                     </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="card overflow-hidden item_card mb-0">
-                                        <img src="resources/coquette.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                        <div class="card-body p-2 pink_btn2">
-                                            <p class="item_name my-1">Coquette</p>
-                                            <p class="">some random words</p>
-                                            <a href="style_2.php"><button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="card overflow-hidden item_card mb-0">
-                                        <img src="resources/gothic_lolita.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                        <div class="card-body p-2 black_btn">
-                                            <p class="item_name my-1">Gothic Lolita</p>
-                                            <p class="">some random words</p>
-                                            <a href="style_3.php"><button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="card overflow-hidden item_card mb-0">
-                                        <img src="resources/streetwear.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                        <div class="card-body p-2 blue_btn">
-                                            <p class="item_name my-1">Streetwear</p>
-                                            <p class="">some random words</p>
-                                            <a href="style_4.php"><button class="btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- view more: visible only to small screens -->
-                                <div class="mt-3 mx-2 mb-0 px-2 pink_btn2 d-sm-none d-block">
-                                    <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#">View more styles <i class="bi bi-chevron-right"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- recom/result header -->
-                        <!-- display upon opening catalogue -->
-                        <div class="recom_header mt-3 mb-0 ms-2">
-                            <p>RECOMMENDED FOR YOU</p>
-                        </div>
-                        <!-- display only upon searching an item -->
-                        <!-- remove "d-none" in class -->
-                        <div class="search_result mt-3 md-0 ms-2 d-none">
-                            <p>Search results for <span class="pink_highlight">item name</span></p>
-                        </div>
-                        <!-- items -->
-                        <div class="row g-3 mb-3 px-2">
-                            <!-- card -->
-                            <div class="col-sm-3">
-                                <a href="#" class="text-decoration-none">
-                                    <div class="card overflow-hidden rounded-1 card_content item_card">
-                                        <img src="resources/2.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                        <div class="card-body p-2">
-                                            <p class="item_name">Lorem ipsum dolor sit amet, consectetur</p>
-                                            <!-- price and category -->
-                                            <div class="row p-0 d-flex justify-content-between">
-                                                <div class="col-5 m-0 text-align-left">
-                                                    <p class="card-text item_price m-0">PHP 123</p>
-                                                </div>
-                                                <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
-                                                    <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
-                                                </div>
+                                    
+                                    <!-- Include the get_featured_style.php file -->
+                                    <?php include('server/get_featured_style.php'); ?>
+
+                                    <!-- Loop through the featured styles -->
+                                    <?php while ($row = $featured_styles->fetch_assoc()) { ?>
+                                    
+                                    <!-- Style card -->
+                                    <div class="col-sm-3">
+                                        <div class="card overflow-hidden item_card style_card_info mb-0">
+                                            <img src="resources/<?php echo $row['style_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="item">
+                                            <div class="card-body p-2 maroon_btn">
+                                                <p class="item_name style_name my-1"><?php echo $row['style']; ?></p>
+                                                <p class="style_info"><?php echo $row['style_description']; ?></p>
+                                                <a href="<?php echo "style_box.php?style_id=" . $row['style_id'] ?>"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                                             </div>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-sm-3">
-                                <a href="#" class="text-decoration-none">
-                                    <div class="card overflow-hidden rounded-1 card_content item_card">
-                                        <img src="resources/2.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                        <div class="card-body p-2">
-                                            <p class="item_name">Lorem ipsum dolor sit amet, consectetur</p>
-                                            <!-- price and category -->
-                                            <div class="row p-0 d-flex justify-content-between">
-                                                <div class="col-5 m-0 text-align-left">
-                                                    <p class="card-text item_price m-0">PHP 123</p>
-                                                </div>
-                                                <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
-                                                    <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                    <?php } ?>
+
+                                    <!-- view more: visible only to small screens -->
+                                    <div class="mt-3 mx-2 mb-0 px-2 pink_btn2 d-sm-none d-block">
+                                        <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#">View more styles <i class="bi bi-chevron-right"></i></button>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-sm-3">
-                                <a href="#" class="text-decoration-none">
-                                    <div class="card overflow-hidden rounded-1 card_content item_card">
-                                        <img src="resources/2.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                        <div class="card-body p-2">
-                                            <p class="item_name">Lorem ipsum dolor sit amet, consectetur</p>
-                                            <!-- price and category -->
-                                            <div class="row p-0 d-flex justify-content-between">
-                                                <div class="col-5 m-0 text-align-left">
-                                                    <p class="card-text item_price m-0">PHP 123</p>
-                                                </div>
-                                                <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
-                                                    <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-sm-3">
-                                <a href="#" class="text-decoration-none">
-                                    <div class="card overflow-hidden rounded-1 card_content item_card">
-                                        <img src="resources/2.jpg" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                        <div class="card-body p-2">
-                                            <p class="item_name">Lorem ipsum dolor sit amet, consectetur</p>
-                                            <!-- price and category -->
-                                            <div class="row p-0 d-flex justify-content-between">
-                                                <div class="col-5 m-0 text-align-left">
-                                                    <p class="card-text item_price m-0">PHP 123</p>
-                                                </div>
-                                                <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
-                                                    <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
+                                </div>
                             </div>
 
-                            <!-- insert pagination -->
-                        </div> <!--item close tag-->
+
+                            <!-- Featured Items -->
+                            <div class="row g-3 mb-3 px-2">
+
+                                <div class="recom_header mt-3 mb-0 ms-2">
+                                    <h5>SINGLE LISTINGS</h5>
+                                </div>
+                                <div class="search_result mt-3 md-0 ms-2 d-none">
+                                    <p>Search results for <span class="pink_highlight">item name</span></p>
+                                </div>
+                                
+                                <!-- Include the get_featured_style.php file -->
+                                <?php include('server/get_featured_item.php'); ?>
+
+                                <!-- Loop through the featured items -->
+                                <?php while ($row = $featured_styles->fetch_assoc()) { ?>
+
+                                <!-- Item card -->
+                                <div class="col-sm-3">
+                                    <a href="#" class="text-decoration-none">
+                                        <div class="card overflow-hidden rounded-1 card_content item_card">
+                                            <img src="resources/<?php echo $row['item_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="item">
+                                            <div class="card-body p-2">
+                                                <p class="item_name"><?php echo $row['item_name']; ?></p>
+                                                <!-- price and category -->
+                                                <div class="row p-0 d-flex justify-content-between">
+                                                    <div class="col-5 m-0 text-align-left">
+                                                        <p class="card-text item_price m-0"><?php echo $row['price']; ?></p>
+                                                    </div>
+                                                    <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
+                                                        <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <?php } ?>
+
+
+                                <!-- insert pagination -->
+                            </div> <!--item close tag-->
+                        
+                        </div>
                     </div>
-                </div>
+
+
+
+
             </div>
         </div>
     </div>
