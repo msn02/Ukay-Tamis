@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cottagecore</title>
     <?php include 'head_resource.php';?>
-    <link rel="stylesheet" href="css/item.css">
+    <link rel="stylesheet" href="css/style_box.css">
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
@@ -42,26 +42,38 @@
                             <p class="rounded-1 tag_pink px-2 py-1 m-0 center_text">STYLE BOX</p>
                         </div>
                     </div>
+                    <!-- box price -->
+                    <div class="pt-3 px-3 mb-0">
+                        <div class="m-0">
+                            <h4 class="pink_highlight2 rounded-2 p-3 bold_header box_price">PHP 123</h4>
+                        </div>
+                    </div>
                     <!-- style description -->
-                    <div class="p-3 mb-0">
-                        <div class="border-top pt-3 pb-3">
+                    <div class="pt-3 px-3 mb-0">
+                        <div class="border-top pt-3 pb-0 m-0">
                             <h6 class="bold_header">Style Description</h6>
+                            <p class="m-0 p-0"><?php echo $row['style_box_description']; ?></p>
+                        </div>
+                    </div>
+                    <!-- box description -->
+                    <div class="pt-3 px-3 pb-4 mb-0">
+                        <div class="border-top pt-3 pb-0 m-0">
+                            <h6 class="bold_header">What's in the box?</h6>
                             <p class="m-0 p-0"><?php echo $row['style_box_description']; ?></p>
                         </div>
                     </div>
                     <!-- add to card and buy now button -->
                     <div class="px-3 pt-0 m-0">
                         <div class="d-inline add_cart">
-                            <button class="btn btn-dark border-0 px-3 mb-1 rounded-1" type="submit"><i class="bi bi-cart-plus me-1"></i></button>
+                            <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit"><i class="bi bi-cart-plus me-1"></i></button>
                         </div>
                         <div class="d-inline buy_now">
-                            <button class="btn btn-dark border-0 px-3 mb-1 rounded-1" type="submit">Buy Now</button>
+                            <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit">Buy Now</button>
                         </div>
                     </div>
                 </div>
             </div>
             <?php } ?>
-
 
             <!-- Related  Single Items -->
             <div class="row shadow rounded-2 m-3 p-2 gray_bg">
@@ -99,9 +111,6 @@
 
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </body>
