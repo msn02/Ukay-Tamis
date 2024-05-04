@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2024 at 08:30 PM
+-- Generation Time: May 04, 2024 at 11:43 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,18 +35,19 @@ CREATE TABLE `item` (
   `size` enum('XS','S','M','L','XL','XXL') DEFAULT NULL,
   `color` varchar(50) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
-  `transaction_id` int(11) DEFAULT NULL
+  `transaction_id` int(11) DEFAULT NULL,
+  `item_img_url` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`item_id`, `style_id`, `item_name`, `item_description`, `size`, `color`, `price`, `transaction_id`) VALUES
-(2, 1, 'Vintage Floral Blouse', 'Featuring delicate flower patterns and a classic silhouette, this blouse is perfect for adding a touch of nostalgia to your wardrobe. ', 'XS', 'Brown', 399.00, NULL),
-(3, 1, 'Chunky Knit Sweater', ' Stay cozy and stylish in this chunky knit sweater. Made from soft and warm yarn, this sweater features a relaxed fit and a timeless cable knit design', 'L', 'Green', 599.00, NULL),
-(4, 7, 'Faux Leather Crossbody Bag', 'Add a touch of sophistication to any outfit with this faux leather crossbody bag. ', NULL, 'Black', 229.00, NULL),
-(5, 5, 'Tiger Print Shades', 'Featuring a timeless lace-up design and a durable rubber sole, these sneakers are perfect for everyday wear. ', NULL, 'Multicolor', 149.00, NULL);
+INSERT INTO `item` (`item_id`, `style_id`, `item_name`, `item_description`, `size`, `color`, `price`, `transaction_id`, `item_img_url`) VALUES
+(1, 1, 'Vintage Floral Blouse', 'Featuring delicate flower patterns and a classic silhouette, this blouse is perfect for adding a touch of nostalgia to your wardrobe. ', 'XS', 'Brown', 399.00, NULL, 'dress.jpg'),
+(2, 1, 'Chunky Knit Sweater', ' Stay cozy and stylish in this chunky knit sweater. Made from soft and warm yarn, this sweater features a relaxed fit and a timeless cable knit design', 'L', 'Green', 599.00, NULL, 'dress.jpg'),
+(3, 7, 'Faux Leather Crossbody Bag', 'Add a touch of sophistication to any outfit with this faux leather crossbody bag. ', NULL, 'Black', 229.00, NULL, 'dress.jpg'),
+(4, 5, 'Tiger Print Shades', 'Featuring a timeless lace-up design and a durable rubber sole, these sneakers are perfect for everyday wear. ', NULL, 'Multicolor', 149.00, NULL, 'dress.jpg');
 
 -- --------------------------------------------------------
 
@@ -57,24 +58,25 @@ INSERT INTO `item` (`item_id`, `style_id`, `item_name`, `item_description`, `siz
 CREATE TABLE `style` (
   `style_id` int(11) NOT NULL,
   `style` varchar(50) DEFAULT NULL,
-  `style_description` varchar(255) DEFAULT NULL
+  `style_description` varchar(255) DEFAULT NULL,
+  `style_img_url` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `style`
 --
 
-INSERT INTO `style` (`style_id`, `style`, `style_description`) VALUES
-(1, 'Cottagecore', 'Embrace countryside charm with floral prints and rustic details.'),
-(2, 'Coquette', 'Channel elegance and femininity with lace and delicate fabrics.'),
-(3, 'Gothic Lolita', ' Explore dark whimsy with Victorian-inspired dresses.'),
-(4, 'Streetwear', 'Make a statement with bold graphics and urban designs.'),
-(5, 'Y2K', 'Relive early 2000s nostalgia with shimmering metallic accents and playful, retro styles.'),
-(6, 'Dark Academia', 'Dive into scholarly elegance with tweed and vintage pieces.'),
-(7, 'Old Money', 'Elevate your look with timeless sophistication and classic silhouettes.'),
-(8, 'Alt', 'Express your individuality with edgy punk and grunge influences.'),
-(9, 'Indie', 'Embrace bohemian vibes with eclectic prints and laid-back styles.'),
-(10, 'Star Girl', 'Reach for the stars with celestial prints and dreamy designs.');
+INSERT INTO `style` (`style_id`, `style`, `style_description`, `style_img_url`) VALUES
+(1, 'Cottagecore', 'Embrace countryside charm with floral prints and rustic details.', 'cottagecore.jpg'),
+(2, 'Coquette', 'Channel elegance and femininity with lace and delicate fabrics.', 'coquette.jpg'),
+(3, 'Gothic Lolita', ' Explore dark whimsy with Victorian-inspired dresses.', 'gothic_lolita.jpg'),
+(4, 'Streetwear', 'Make a statement with bold graphics and urban designs.', 'streetwear.jpg'),
+(5, 'Y2K', 'Relive early 2000s nostalgia with shimmering metallic accents and playful, retro styles.', NULL),
+(6, 'Dark Academia', 'Dive into scholarly elegance with tweed and vintage pieces.', NULL),
+(7, 'Old Money', 'Elevate your look with timeless sophistication and classic silhouettes.', NULL),
+(8, 'Alt', 'Express your individuality with edgy punk and grunge influences.', NULL),
+(9, 'Indie', 'Embrace bohemian vibes with eclectic prints and laid-back styles.', NULL),
+(10, 'Star Girl', 'Reach for the stars with celestial prints and dreamy designs.', NULL);
 
 -- --------------------------------------------------------
 
