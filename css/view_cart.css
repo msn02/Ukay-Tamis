@@ -1,0 +1,50 @@
+.counter_sec input {
+    font-size: 11px;
+}
+
+.delete_btn button {
+    background: red;
+    color: white;
+    font-size: 16px;
+    border: none;
+}
+
+.form_style input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.gradient_pink {
+    background-image: linear-gradient(180deg, #760024, #FF6A97, #eeeeee);
+    position:static;
+    width: auto;
+    height: 500px;
+}
+
+.gray_btn button {
+    background: gray;
+    color: white;
+    font-size: 16px;
+    border: none;
+}
+
+.input_style input {
+    font-size: 12px;
+    text-align: center;
+}
+
+.item_img img {
+    width: auto;
+    height: 100px;
+}
+
+.item_header {
+    font-weight: bold;
+}
+
+.tag_green {
+    background-color: #96DA39;
+    color: white;
+    font-size: 11px;
+    line-height: normal;
+}
