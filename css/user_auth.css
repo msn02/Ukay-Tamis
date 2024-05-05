@@ -10,6 +10,12 @@
     font-weight: bold;
 }
 
+.form_condi label {
+    font-family:'Inter', sans-serif;
+    font-size: 11px;
+    line-height: normal;
+}
+
 .form_style {
     font-family:'Inter', sans-serif;
     font-size: 14px;
