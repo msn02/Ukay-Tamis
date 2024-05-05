@@ -1,5 +1,10 @@
 /* CSS Selectors arranged alphabetically */
 
+.back_link a {
+    font-size: 12px;
+    color: #ffffff;
+}
+
 .cart_info p {
     font-size: 13px;
 }

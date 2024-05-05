@@ -12,7 +12,11 @@
     <?php include 'nav_bar.php'?>
 
     <div class="container-fluid gradient_pink px-3 pt-1">
-        <div class="container px-5 py-3 mt-3">
+        <div class="container px-5 py-3 mt-0">
+            <!-- back button -->
+            <div class="back_link ps-5 py-2 m-0">
+                <a class="border-0 rounded-1 justify-content-start text-decoration-none w-25" href="catalogue_page.php"><i class="bi bi-chevron-left me-2"></i>Back</a>
+            </div>
             <div class="row m-2 p-0 d-flex justify-content-center">
                 <!-- shopping cart -->
                 <div class="col-sm-8 gray_bg rounded-2 px-4 py-2 m-2">

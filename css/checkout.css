@@ -1,3 +1,10 @@
+/* CSS Selectors arranged alphabetically */
+
+.back_link a {
+    font-size: 12px;
+    color: #ffffff;
+}
+
 .cart_info p {
     font-size: 13px;
 }
@@ -50,11 +57,6 @@
     font-weight: bold;
 }
 
-.thead_style th {
-    font-size: 13px;
-    text-align: center;
-}
-
 .payment_details h6, p{
     font-size: 13px;
     line-height: normal;
@@ -64,4 +66,9 @@
 .product_info td {
     font-size: 13px;
 
+}
+
+.thead_style th {
+    font-size: 13px;
+    text-align: center;
 }
