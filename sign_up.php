@@ -5,12 +5,15 @@
     // start session
     session_start();
 
-     // If the request method is GET, clear the session data
-     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    // if the user is already logged in, redirect to account page
+    if (isset($_SESSION['logged_in'])) {
+        header('location:account.php');
+        exit;
+    // if the request method is GET, clear the session data
+    } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         unset($_SESSION['form_data']);
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // if the request method is POST, continue with sign 
+    } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (isset($_POST['signup_btn'])) {
             // get user input
@@ -86,6 +89,8 @@
                             $_SESSION['logged_in'] = true;
         
                             $error_signup_success = true;
+
+                            header('location:account.php?register=You have successfully registered!');
                         } else {
                             // error if sign up fails
                             $error_signup_fail = true;
@@ -93,12 +98,7 @@
                     }
                 }
             }
-        } else {
-            // header('location:sign_up.php?error=Ples fill out the form');
-            echo ("Please fill out the form");
-
-            $error_form = true;
-        }
+        } 
     }
 ?>
 
@@ -187,15 +187,6 @@
                                 <button class='btn-close' data-bs-dismiss='alert' aria-label='Close' type='button'></button>
                             </div>
                         <?php endif; ?>
-
-                        <?php if (isset($error_form)): ?>
-                            <!-- If the form is not filled out -->
-                            <div class="alert alert-danger py-3 mb-3 d-flex justify-content-between" role="alert">
-                                <div class="alert_mes">Please fill out the form!</div>
-                                <button class='btn-close' data-bs-dismiss='alert' aria-label='Close' type='button'></button>
-                            </div>
-                        <?php endif; ?>
-
 
                         <!-- personal details -->
                         <div class="col-sm-6 rounded-2 p-3">
