@@ -9,6 +9,7 @@
         header('location: account.php');
         exit();
     } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        
         if (isset($_POST['login_btn'])) {
             $username = $_POST['username'];
             $password = md5($_POST['password']);
@@ -30,7 +31,13 @@
                     $_SESSION['first_name'] = $first_name;
                     $_SESSION['last_name'] = $last_name;
                     $_SESSION['logged_in'] = true;
-    
+
+                    // insert record to user_logs
+                    $action = 'login'; 
+                    $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+                    $stmt1 -> bind_param("is", $user_id, $action);
+                    $stmt1 -> execute();
+                    
                     header('location: account.php?message=Login successful. Welcome back, ' . $username . ' !');
                 } else {
                     header('location: log_in.php?error=Could not verify your account. Please try again.');
