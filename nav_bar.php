@@ -35,7 +35,7 @@
                         <!-- TO DO: Add a badge -->
                     </li>
                     <!-- profile -->
-                    <li class="nav-item align-content-center cart_icon dropdown">
+                    <li class="nav-item user_btn align-content-center cart_icon dropdown">
                         <button class="nav-link dropdown-toggle p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle"></i>
                         </button>
