@@ -50,7 +50,7 @@
                     <!-- delivery details -->
                     <div class="row mt-3 mb-2 pb-2 border-bottom">
                         <h6 class="border-bottom pb-2 bold_header">Order Information</h6>
-                        <div class="delivery_info p-3 card m-0">
+                        <div class="delivery_info p-3 card my-2">
                             <h6>DELIVERY ADDRESS</h6>
                             <div class="">
                                 <p class="bold_header mb-1 p-0">Juan Dela Cruz</p>
@@ -68,7 +68,7 @@
                             <p>Order ID</p>
                         </div>
                         <div class="col-6 text-end">
-                            <p class="bold_header">12345</p>
+                            <p>12345</p>
                         </div>
                     </div>
                     <div class="row p-0 mb-0 cart_info">
@@ -76,7 +76,7 @@
                             <p>Total items</p>
                         </div>
                         <div class="col-6 text-end">
-                            <p class="bold_header">4</p>
+                            <p>4</p>
                         </div>
                     </div>
                     <div class="row p-0 mb-2 cart_info border-bottom">
