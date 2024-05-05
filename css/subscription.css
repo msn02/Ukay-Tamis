@@ -1,0 +1,95 @@
+/* CSS Selectors arranged alphabetically */
+
+.back_link a {
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.gradient_pink {
+    background-image: linear-gradient(180deg, #760024, #FF6A97, #eeeeee);
+    position:static;
+    width: auto;
+    height: 500px;
+}
+
+.gray_btn button, .gray_btn button:hover {
+    font-family: 'Inter', sans-serif;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 12px;
+}
+
+.green_highlight {
+    color: #96DA39;
+}
+
+.header_style {
+    background: #ff3a75;
+    color: white;
+}
+
+.header_style2 {
+    background: #3F5520;
+    color: white;
+}
+
+.month_title {
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.package_info h6, p {
+    line-height: normal;
+}
+
+.package_info p {
+    font-size: 12px;
+}
+
+.pink_btn2 label {
+    font-size: 12px;
+    background-color: white;
+    border: 1px solid #ff3a75;
+    font-family: 'Inter', sans-serif;
+    color: #ff3a75;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  
+  /* .pink_btn2 label:hover.radio-btn-text {
+    background-color: #ff3a75;
+    color: white;
+  }
+  
+  .pink_btn2 label:hover {
+    border-color: #ff3a75;
+  } */
+
+.price_badge {
+    background:#FFEDAC;
+}
+
+.price_badge2 {
+    background:#96DA39;
+    color: #3F5520;
+}
+
+.price_card p {
+    line-height: normal;
+    font-size: 12px;
+}
+
+.star_icon {
+    font-size: 1rem; 
+    color: #FFC700;
+}
+
+.tier_card h6, p {
+    line-height: normal;
+}
+
+.tier_card p {
+    font-size: 12px;
+}
