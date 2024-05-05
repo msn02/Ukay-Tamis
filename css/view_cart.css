@@ -1,3 +1,5 @@
+/* CSS Selectors arranged alphabetically */
+
 .cart_info p {
     font-size: 13px;
 }
@@ -60,11 +62,4 @@
 
 .item_header {
     font-weight: bold;
-}
-
-.tag_green {
-    background-color: #96DA39;
-    color: white;
-    font-size: 11px;
-    line-height: normal;
 }

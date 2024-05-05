@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="pink_btn2 pb-3">
-                        <button class="btn btn-dark border-0 rounded-1 w-100">CHECKOUT</button>
+                        <a href="checkout_page.php"><button class="btn btn-dark border-0 rounded-1 w-100">CHECKOUT</button></a>
                     </div>
                 </div>
             </div>
