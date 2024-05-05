@@ -13,48 +13,74 @@
 
     <div class="container-fluid gradient_pink px-3 pt-1">
         <div class="container px-5 py-3 mt-3">
-            <div class="row gray_bg m-2 rounded-2 p-3">
-                <h3 class="bold_header mb-3 pb-3 border-bottom mt-3">My Shopping Cart</h3>
-                <!-- cart items -->
-                <div class="row p-3 mb-3">
-                    <div class="col-sm-2 item_img center_align form_style d-flex justify-content-between">
-                        <input class="form-check-input" type="checkbox" value="" id="item_check">
-                        <img src="resources/coquette.jpg" class="card" alt="item">
-                    </div>
-                    <!-- item details -->
-                    <div class="col-sm-5 d-flex align-items-center">
-                        <h6 class="item_header">Item name</h6>
-                    </div>
-                    <!-- counter -->
-                    <div class="col-sm-2 form_style center_align counter_sec m-0 p-0">
-                        <div class="input-group gray_btn">
-                            <button class="btn btn-dark rounded-start" type="button" id="minus_btn">-</button>
-                            <input type="number" class="form-control text-center" value="1" readonly id="counter_input">
-                            <button class="btn btn-dark rounded-end" type="button" id="add_btn">+</button>
+            <div class="row m-2 p-0 d-flex justify-content-center">
+                <!-- shopping cart -->
+                <div class="col-sm-8 gray_bg rounded-2 px-4 py-3 m-2">
+                    <h3 class="bold_header mb-3 pb-3 border-bottom mt-3">My Shopping Cart</h3>
+                    <!-- cart items -->
+                    <div class="row p-3 mx-2 mb-4 border rounded-2">
+                        <div class="col-sm-3 item_img center_align form_style d-flex justify-content-between">
+                            <input class="form-check-input" type="checkbox" value="" id="item_check">
+                            <img src="resources/coquette.jpg" class="card" alt="item">
+                        </div>
+                        <!-- item details -->
+                        <div class="col-sm-4 d-flex align-items-center">
+                            <h6 class="item_header">Item name</h6>
+                        </div>
+                        <!-- counter -->
+                        <div class="col-sm-2 form_style d-flex justify-content-center align-items-center m-0 p-0">
+                            <div class="input-group gray_btn counter_sec  m-0 p-0">
+                                <button class="btn btn-dark rounded-start" type="button" id="minus_btn">-</button>
+                                <input type="number" class="form-control m-0 ps-4" value="1" readonly id="counter_input">
+                                <button class="btn btn-dark rounded-end" type="button" id="add_btn">+</button>
+                            </div>
+                        </div>
+                        <!-- price -->
+                        <div class="col-sm-2 center_align m-0 p-0">
+                            <h6 class="pink_highlight2 bold_header m-0 p-0 ">PHP 123</h6>
+                        </div>
+                        <!-- delete item -->
+                        <div class="col-sm-1 center_align m-0 p-0 delete_btn">
+                            <button class="btn btn-dark border-0 rounded-1"><i class="bi bi-trash-fill"></i></button>
                         </div>
                     </div>
-                    <!-- price -->
-                    <div class="col-sm-2 center_align m-0 p-0">
-                        <h6 class="pink_highlight2 bold_header m-0 p-0 ">PHP 123</h6>
-                    </div>
-                    <!-- delete item -->
-                    <div class="col-sm-1 center_align m-0 p-0 delete_btn">
-                        <button class="btn btn-dark border-0 rounded-1"><i class="bi bi-trash-fill"></i></button>
-                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- sticky footer -->
-        <div class="container-fluid mb-0 fixed-bottom px-5">
-            <div class="row shadow rounded-top gray_bg mx-5 p-3">
-                <div class="col-sm-4 p-3">
-                    <div class="form_style">
-                        <input class="form-check-input" type="checkbox" value="" id="select_all">
-                        <label for="select_all">Select all items</label>
+
+                <!-- proceed checkout -->
+                <div class="col-sm-3 gray_bg rounded-2 px-4 py-3 m-2">
+                    <!-- cart actions -->
+                    <div class="row mt-3 border-bottom">
+                        <h6 class="border-bottom pb-2 bold_header mb-3">Actions</h6>
+                        <div class="form_style pb-3">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="all_items">
+                            <label class="form-check-label" for="checkbox_agree">
+                                Select all
+                            </label>
+                        </div>
+                        <div class="delete_btn2 pb-3">
+                            <button class="btn btn-dark border-0 rounded-1 w-100">Delete</button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-8 p-3 d-flex justify-content-end">
-                    <p>rururu</p>
+                    <!-- cart info -->
+                    <div class="row mt-3 p-0 mb-0 cart_info">
+                        <div class="col-6">
+                            <p>Total items</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="bold_header">4</p>
+                        </div>
+                    </div>
+                    <div class="row p-0 mb-0 cart_info">
+                        <div class="col-6">
+                            <p class="bold_header">TOTAL</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="pink_highlight bold_header">PHP 156</p>
+                        </div>
+                    </div>
+                    <div class="pink_btn2 pb-3">
+                        <button class="btn btn-dark border-0 rounded-1 w-100">CHECKOUT</button>
+                    </div>
                 </div>
             </div>
         </div>
