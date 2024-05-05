@@ -17,7 +17,7 @@
         <div class="container px-5 py-3">
             <!-- back button -->
             <div class="back_link p-2">
-                <a class="border-0 p-2 rounded-1 justify-content-start text-decoration-none w-25" href="catalogue_page.php"><i class="bi bi-chevron-left me-2"></i>Back</a>
+                <a class="border-0 p-2 rounded-1 justify-content-start text-decoration-none w-25" id="go_back" href="javascript:void(0)"><i class="bi bi-chevron-left me-2"></i>Back</a>
             </div>
 
             <!-- style box details -->
