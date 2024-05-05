@@ -6,7 +6,6 @@
 
 .counter_sec input {
     font-size: 13px;
-    height: auto;
     text-align: center;
 }
 
@@ -50,6 +49,10 @@
     border: none;
 }
 
+.input-group-sm  {
+    max-width: 100px;
+}
+
 .input_style input {
     font-size: 12px;
     text-align: center;
@@ -57,9 +60,18 @@
 
 .item_img img {
     width: auto;
-    height: 100px;
+    height: 80px;
 }
 
 .item_header {
     font-weight: bold;
+}
+
+.product_info td {
+    font-size: 13px;
+}
+
+.thead_style th {
+    font-size: 13px;
+    text-align: center;
 }
