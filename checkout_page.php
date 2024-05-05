@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Shopping Cart</title>
+    <title>Checkout</title>
     <?php include 'head_resource.php';?>
-    <link rel="stylesheet" href="css/view_cart.css">
+    <link rel="stylesheet" href="css/checkout.css">
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
@@ -18,61 +18,60 @@
                 <a class="border-0 rounded-1 justify-content-start text-decoration-none w-25" id="go_back" href="javascript:void(0)"><i class="bi bi-chevron-left me-2"></i>Back</a>
             </div>
             <div class="row m-2 p-0 d-flex justify-content-center">
-                <!-- shopping cart -->
+                <!-- checkout -->
                 <div class="col-sm-8 gray_bg rounded-2 px-4 py-2 m-2">
-                    <h3 class="bold_header mb-3 pb-3 border-bottom mt-3">My Shopping Cart</h3>
+                    <h3 class="bold_header mb-3 pb-3 border-bottom mt-3">Checkout</h3>
                     <table class="table">
                         <thead>
                             <tr class="thead_style">
-                                <th scope="col">Image</th>
+                                <th scope="col-1">Image</th>
                                 <th scope="col-7">Product Name</th>
                                 <th scope="col">Unit Price</th>
-                                <th scope="col-1">Quantity</th>
-                                <th scope="col">Actions</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Item Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- product in cart -->
                             <tr class="product_info align-middle">
+                                <!-- product ordered -->
                                 <th scope="row" class="item_img d-flex justify-content-center">
                                     <img src="resources/coquette.jpg" class="card m-0" alt="item">
                                 </th>
                                 <td>Victorian-inspired dress</td>
                                 <td class="text-center">PHP 123</td>
-                                <td class="text-center">
-                                    <div class="input-group input-group-sm gray_btn m-auto p-0 center_align">
-                                        <button class="btn btn-dark rounded-start" type="button" id="minus_btn">-</button>
-                                        <input type="number" class="form-control m-0 p-auto" value="1" readonly id="counter_input">
-                                        <button class="btn btn-dark rounded-end" type="button" id="add_btn">+</button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="center_align m-0 p-0 delete_btn">
-                                        <button class="btn btn-dark border-0 rounded-1"><i class="bi bi-trash-fill"></i></button>
-                                    </div>
-                                </td>
+                                <td class="text-center">1</td>
+                                <td class="text-center bold_header"><span class="pink_highlight2 ">PHP 123</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
                 <!-- proceed checkout -->
                 <div class="col-sm-3 gray_bg rounded-2 px-4 py-3 m-2">
-                    <!-- cart actions -->
-                    <div class="row mt-3 border-bottom">
-                        <h6 class="border-bottom pb-2 bold_header mb-3">Actions</h6>
-                        <div class="form_style pb-3">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="all_items">
-                            <label class="form-check-label" for="checkbox_agree">
-                                Select all
-                            </label>
+                    <!-- delivery details -->
+                    <div class="row mt-3 mb-2 pb-2 border-bottom">
+                        <h6 class="border-bottom pb-2 bold_header">Order Information</h6>
+                        <div class="delivery_info p-3 card m-0">
+                            <h6>DELIVERY ADDRESS</h6>
+                            <div class="">
+                                <p class="bold_header mb-1 p-0">Juan Dela Cruz</p>
+                                <p class="m-0 p-0">09123456789</p>
+                                <p class="m-0 p-0">69075 Louann Turnpike, West Mariella, KY 01624</p>
+                            </div>
                         </div>
-                        <div class="delete_btn2 pb-3">
-                            <button class="btn btn-dark border-0 rounded-1 w-100">Delete</button>
+                        <div class="gray_btn mt-2">
+                            <a href="#"><button class="btn btn-dark border-0 rounded-1 w-100">Change Delivery Address</button></a>
                         </div>
                     </div>
                     <!-- cart info -->
                     <div class="row mt-3 p-0 mb-0 cart_info">
+                        <div class="col-6">
+                            <p>Order ID</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="bold_header">12345</p>
+                        </div>
+                    </div>
+                    <div class="row p-0 mb-0 cart_info">
                         <div class="col-6">
                             <p>Total items</p>
                         </div>
@@ -80,7 +79,7 @@
                             <p class="bold_header">4</p>
                         </div>
                     </div>
-                    <div class="row p-0 mb-0 cart_info">
+                    <div class="row p-0 mb-2 cart_info border-bottom">
                         <div class="col-6">
                             <p class="bold_header">TOTAL</p>
                         </div>
@@ -88,8 +87,25 @@
                             <p class="pink_highlight bold_header">PHP 156</p>
                         </div>
                     </div>
-                    <div class="pink_btn2 pb-3">
-                        <a href="checkout_page.php"><button class="btn btn-dark border-0 rounded-1 w-100">CHECKOUT</button></a>
+                    <div class="row pt-2 m-0">
+                        <div class="payment_details filter_content px-0">
+                            <h6 class="bold_header">Select your Payment Method</h6>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="payment_method" type="radio" value="" id="Cash">
+                                <label class="form-check-label ms-1" for="small">Cash</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="payment_method" type="radio" value="" id="Credit Card">
+                                <label class="form-check-label ms-1" for="small">Credit Card</label>
+                            </div>
+                            <div class="form-check ms-3">
+                                <input class="form-check-input" name="payment_method" type="radio" value="" id="GCash">
+                                <label class="form-check-label ms-1" for="small">GCash</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pink_btn2 mt-3 pb-2">
+                        <a href="#"><button class="btn btn-dark border-0 rounded-1 w-100">PLACE ORDER</button></a>
                     </div>
                 </div>
             </div>

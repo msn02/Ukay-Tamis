@@ -9,24 +9,20 @@
     font-size: 13px;
 }
 
-.counter_sec input {
+.delivery_info {
+    line-height: normal;
+    padding: 0;
+    background: #FFEDAC;
+}
+
+.delivery_info h6 {
     font-size: 13px;
-    text-align: center;
-}
-
-.delete_btn button, .delete_btn button:hover {
-    background: red;
-    color: white;
-    font-size: 16px;
-    border: none;
-}
-
-.delete_btn2 button, .delete_btn2 button:hover {
-    background: red;
-    color: white;
-    font-size: 12px;
-    border: none;
     font-weight: bold;
+}
+
+.filter_content label {
+    font-size: 13px;
+    color: #484848;
 }
 
 .form_style {
@@ -45,35 +41,31 @@
     height: 500px;
 }
 
-.gray_btn button {
-    background: gray;
-    color: white;
-    font-size: 16px;
-    margin: 0;
-    padding: 10px;
-    border: none;
-}
-
-.input-group-sm  {
-    max-width: 100px;
-}
-
-.input_style input {
+.gray_btn button, .gray_btn button:hover{
     font-size: 12px;
-    text-align: center;
+    background: #7d7d7d;
 }
 
 .item_img img {
     width: auto;
     height: 80px;
+    display: flex;
+    margin: auto;
 }
 
 .item_header {
     font-weight: bold;
 }
 
+.payment_details h6, p{
+    font-size: 13px;
+    line-height: normal;
+    padding: 0;
+}
+
 .product_info td {
     font-size: 13px;
+
 }
 
 .thead_style th {
