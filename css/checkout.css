@@ -1,0 +1,67 @@
+.cart_info p {
+    font-size: 13px;
+}
+
+.delivery_info {
+    line-height: normal;
+    padding: 0;
+    background: #FFEDAC;
+}
+
+.delivery_info h6 {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.filter_content label {
+    font-size: 13px;
+    color: #484848;
+}
+
+.form_style {
+    font-size: 13px;
+}
+
+.form_style input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.gradient_pink {
+    background-image: linear-gradient(180deg, #760024, #FF6A97, #eeeeee);
+    position:static;
+    width: auto;
+    height: 500px;
+}
+
+.gray_btn button, .gray_btn button:hover{
+    font-size: 12px;
+    background: #7d7d7d;
+}
+
+.item_img img {
+    width: auto;
+    height: 80px;
+    display: flex;
+    margin: auto;
+}
+
+.item_header {
+    font-weight: bold;
+}
+
+.thead_style th {
+    font-size: 13px;
+    text-align: center;
+}
+
+.payment_details h6, p{
+    font-size: 13px;
+    line-height: normal;
+    padding: 0;
+}
+
+.product_info td {
+    font-size: 13px;
+
+}
