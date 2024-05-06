@@ -18,10 +18,7 @@
                         <a class="nav-link" href="catalogue_page.php">Catalogue</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about_page.php">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact_page.php">Contact Us</a>
+                        <a class="nav-link" href="about_page.php">About Us</a>
                     </li>
                     <!-- subscribe button -->
                     <li class="nav-item pink_btn2 px-4 d-none d-sm-block">
@@ -43,6 +40,7 @@
                             <li><a class="dropdown-item" href="log_in.php">Log In</a></li>
                             <li><a class="dropdown-item" href="sign_up.php">Sign Up</a></li>
                             <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item disabled" href="account.php">My Account</a></li>
                             <li><a class="dropdown-item disabled" href="#">Log out</a></li>
                         </ul>
                         <!-- TO DO: Log in/out, Sign up dropdown options -->
