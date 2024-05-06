@@ -1,45 +1,3 @@
-<?php
-    include ('server/connection.php');
-    
-    // Start the session
-    session_start();
-    
-    // if no form has been submitted, set the selected tier to the default value
-    if (!isset($_POST["tier"])) {
-        $_POST["tier"] = "Starter Pack";
-    } else {
-        $_SESSION["selected_tier"] = $_POST["tier"];
-    }
-
-    echo '<script>console.log("Selected tier: ' . $_SESSION['selected_tier'] . '");</script>'; // log the selected tier
-
-
-    // include get_sub_price.php
-    include ('server/get_sub_price.php');
-
-    while ($row = $result -> fetch_assoc()) {
-        $key = $_SESSION['selected_tier'] . '_' . $row['plan_duration'];
-        $sub_price[$key] = array(
-            'plan_tier' => $row["plan_tier"], // use the plan_tier from the current row
-            'plan_duration' => $row['plan_duration'],
-            'price' => $row['price'],
-            'monthly_price' => $row['monthly_price']
-        );
-
-    // if the plan_tier of the current row matches the selected tier, add the details to the selected_tier_details array
-    if ($row["plan_tier"] == $_SESSION['selected_tier']) {
-        $selected_tier_details[] = $sub_price[$key];
-    }
-
-    echo '<script>console.log("plan_tier: ' . $row["plan_tier"] . '");</script>'; // log the plan_tier from the current row
-    echo '<script>console.log("plan_duration: ' . $row['plan_duration'] . '");</script>';
-    echo '<script>console.log("price: ' . $row['price'] . '");</script>';
-    echo '<script>console.log("monthly_price: ' . $row['monthly_price'] . '");</script>';
-}
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,82 +17,131 @@
             <div class="back_link ps-5 py-2 m-0">
                 <a class="border-0 rounded-1 justify-content-start text-decoration-none w-25" id="go_back" href="javascript:void(0)"><i class="bi bi-chevron-left me-2"></i>Back</a>
             </div>
-
-            <!-- subscription header -->
             <div class="row m-2 p-0 d-flex justify-content-center">
                 <div class="col-sm-8 gray_bg rounded-3 p-0 m-2 text-center overflow-hidden">
-                    
-                <div class="header_style px-4 pt-3 pb-2 m-0 ">
-                    <h5 class="bold_header">CHOOSE A TIER</h5>
-                </div>
-                
-                <div class="row py-3 px-4 d-flex justify-content-evenly">
-                    <form method="POST" action="subscription_price.php" id="tierForm">
-
-                        <?php include('server/get_sub_tier_details.php'); ?>
-
-                        <?php foreach ($sub_tier_details as $index => $detail) { ?>
-
-                            <!-- tier card -->
-                            <div class="col-sm-4 img_style p-2">
-                                <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
-                                    <div class="card-body tier_card mb-0">
-                                        <div class="star_icon">
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                        <h6 class="card-title bold_header mt-2"> <?php echo $detail['plan_tier'] ?> </h6>
-                                        <p class="card-text mb-0"> <?php echo $detail['plan_tier_description'] ?> </p>
+                    <div class="header_style px-4 pt-3 pb-2 m-0 ">
+                        <h5 class="bold_header">CHOOSE A TIER</h5>
+                    </div>
+                    <div class="row py-3 px-4 d-flex justify-content-evenly">
+                        <!-- tiers -->
+                        <!-- basic -->
+                        <div class="col-sm-4 img_style p-2">
+                            <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
+                                <div class="card-body tier_card mb-0">
+                                    <div class="star_icon">
+                                        <i class="bi bi-star-fill"></i>
                                     </div>
-                                        <div class="card-body pink_btn2 mt-0 p-2">
-                                            <input type="radio" class="btn-check" name="tier" id="tier<?php echo $index ?>" value="<?php echo $detail['plan_tier'] ?>" autocomplete="off" 
-                                            <?php 
-                                                if ((isset($_POST['tier']) && $_POST['tier'] == $detail['plan_tier']) || (!isset($_POST['tier']) && $detail['plan_tier'] == 'Starter Pack')) {
-                                                    echo 'checked';
-                                                } 
-                                            ?>>
-                                            <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="tier<?php echo $index ?>">
-                                                <span class="radio-btn-text">SELECT</span>
-                                            </label>
-                                        </div>
-                                    </div>
+                                    <h6 class="card-title bold_header mt-2">Basic</h6>
+                                    <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                                <div class="card-body pink_btn2 mt-0 p-2">
+                                    <input type="radio" class="btn-check" name="tier" id="basic" autocomplete="off" checked>
+                                    <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="basic">
+                                        <span class="radio-btn-text">SELECT</span>
+                                    </label>
+                                </div>
                             </div>
+                        </div>
+                        <!-- premium -->
+                        <div class="col-sm-4 img_style p-2">
+                            <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
+                                <div class="card-body tier_card mb-0">
+                                    <div class="star_icon">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <h6 class="card-title bold_header mt-2">Premium</h6>
+                                    <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                                <div class="card-body pink_btn2 mt-0 p-2">
+                                    <input type="radio" class="btn-check" name="tier" id="premium" autocomplete="off">
+                                    <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="premium">
+                                        <span class="radio-btn-text">SELECT</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- exclusive -->
+                        <div class="col-sm-4 img_style p-2">
+                            <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
+                                <div class="card-body tier_card mb-0">
+                                    <div class="star_icon">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <h6 class="card-title bold_header mt-2">Exclusive</h6>
+                                    <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                                <div class="card-body pink_btn2 mt-0 p-2">
+                                    <input type="radio" class="btn-check" name="tier" id="exclusive" autocomplete="off">
+                                    <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="exclusive">
+                                        <span class="radio-btn-text">SELECT</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
-                        <?php } ?>
-                    </form>
-                </div>
-
+                    </div>
                     <!-- subscription plan -->
                     <div class="header_style2 px-4 pt-3 pb-2 m-0 ">
                         <h5 class="bold_header">CHOOSE YOUR <span class="green_highlight">SUBSCRIPTION PLAN</span></h5>
 
                     </div>
-                        <div class="row py-3 px-4 d-flex justify-content-evenly">
+                    <div class="row py-3 px-4 d-flex justify-content-evenly">
                         <!-- prices -->
-                        <form method = "POST" action = "subscription_price.php">
-
-                        <?php foreach ($selected_tier_details as $key => $price) { ?>
-                            <!-- plan card -->
-                            <div class="col-sm-4 img_style p-2">
-                                <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
-                                    <div class="card-body price_card mb-0">
-                                        <h2 class="pink_highlight2 bold_header"><?php echo $price['monthly_price'] ?>/<sup>mo</sup></h2>
-                                        <h6 class="card-title month_title mt-2"><?php echo $price['plan_duration'] ?></h6>
-                                    </div>
-                                    <div class="card-body pink_btn2 mt-0 p-2">
-                                        <input type="radio" class="btn-check" name="price" id="3_mon" autocomplete="off" checked>
-                                        <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="3_mon">
-                                            <span class="radio-btn-text">SELECT</span>
-                                        </label>
-                                    </div>
+                        <!-- 3 months -->
+                        <div class="col-sm-4 img_style p-2">
+                            <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
+                                <div class="card-body price_card mb-0">
+                                    <h2 class="pink_highlight2 bold_header">PHP 399/<sup>mo</sup></h2>
+                                    <h6 class="card-title month_title mt-2">3 MONTHS</h6>
+                                </div>
+                                <div class="card-body pink_btn2 mt-0 p-2">
+                                    <input type="radio" class="btn-check" name="price" id="3_mon" autocomplete="off" checked>
+                                    <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="3_mon">
+                                        <span class="radio-btn-text">SELECT</span>
+                                    </label>
                                 </div>
                             </div>
-                        <?php } ?>
-                        </form>
+                        </div>
+                        
+                        <!-- 6 months -->
+                        <div class="col-sm-4 img_style p-2">
+                            <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
+                                <div class="card-body price_card mb-0">
+                                    <h2 class="pink_highlight2 bold_header">PHP 699/<sup>mo</sup></h2>
+                                    <h6 class="card-title month_title mt-2">6 MONTHS</h6>
+                                </div>
+                                <div class="card-body pink_btn2 mt-0 p-2">
+                                    <input type="radio" class="btn-check" name="price" id="6_mon" autocomplete="off">
+                                    <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="6_mon">
+                                        <span class="radio-btn-text">SELECT</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 12 months -->
+                        <div class="col-sm-4 img_style p-2">
+                            <div class="card shadow-sm price_badge rounded-1 border-0 m-0 p-0 overflow-hidden">
+                                <div class="card-body price_card mb-0">
+                                    <h2 class="pink_highlight2 bold_header">PHP 999/<sup>mo</sup></h2>
+                                    <h6 class="card-title month_title mt-2">12 MONTHS</h6>
+                                </div>
+                                <div class="card-body pink_btn2 mt-0 p-2">
+                                    <input type="radio" class="btn-check" name="price" id="12_mon" autocomplete="off">
+                                    <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="12_mon">
+                                        <span class="radio-btn-text">SELECT</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-
-                
                 <div class="col-sm-3 gray_bg rounded-2 px-4 py-3 m-2">
                     <div class="row mt-3 border-bottom">
                         <h6 class="border-bottom pb-2 bold_header mb-3">Package Details</h6>
@@ -166,26 +173,5 @@
             </div>
         </div>
     </div>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('input[name="tier"]').change(function(e) {
-                e.preventDefault(); // prevent the form from being submitted normally
-        
-                var selectedTier = $(this).val();
-                $.ajax({
-                    type: 'POST',
-                    url: 'subscription_price.php',
-                    data: {tier: selectedTier},
-                    async: false,
-                    success: function() {
-                        $('#tierForm').submit(); // submit the form using JavaScript
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
