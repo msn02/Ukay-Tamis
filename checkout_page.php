@@ -1,3 +1,25 @@
+<?php
+
+    include ('server/connection.php');
+
+    session_start();
+
+    if (isset ($_SESSION['logged_in'])) {
+
+        if (isset($_POST['checkout'])) {
+
+        }
+
+    }
+    else {
+        header("Location: log_in.php");
+        exit();
+    }
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +31,13 @@
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
-    <?php include 'nav_bar.php'?>
+    <?php 
+        if (isset($_SESSION['logged_in'])) {
+            include 'auth_nav_bar.php';
+        } else {
+            include 'nav_bar.php';
+        }
+    ?>
 
     <div class="container-fluid gradient_pink px-3 pt-1">
         <div class="container px-5 py-3 mt-0">
@@ -32,16 +60,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach($_SESSION['cart'] as $key => $value) { ?>
                             <tr class="product_info align-middle">
                                 <!-- product ordered -->
                                 <th scope="row" class="item_img d-flex justify-content-center">
-                                    <img src="resources/coquette.jpg" class="card m-0" alt="item">
+                                    <img src="resources/<?php echo $value['style_img_url']; ?>" class="card m-0" alt="item">
                                 </th>
-                                <td>Victorian-inspired dress</td>
-                                <td class="text-center">PHP 123</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center bold_header"><span class="pink_highlight2 ">PHP 123</span></td>
+                                <td><?php echo $value['style']; ?></td>
+                                <td class="text-center"><?php echo $value['style_price']; ?></td>
+                                <td class="text-center"><?php echo $value['style_quantity']?></td>
+                                <td class="text-center bold_header"><span class="pink_highlight2 "><?php echo 'PHP ' . $value['style_price'] * $value['style_quantity']; ?></span></td>
                             </tr>
+                            <?php } ?>
+
                         </tbody>
                     </table>
                 </div>
@@ -53,13 +84,13 @@
                         <div class="delivery_info p-3 card my-2">
                             <h6>DELIVERY ADDRESS</h6>
                             <div class="">
-                                <p class="bold_header mb-1 p-0">Juan Dela Cruz</p>
-                                <p class="m-0 p-0">09123456789</p>
-                                <p class="m-0 p-0">69075 Louann Turnpike, West Mariella, KY 01624</p>
+                                <p class="bold_header mb-1 p-0"><?php echo $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] ?></p>
+                                <p class="m-0 p-0"><?php echo $_SESSION['phone_number']?></p>
+                                <p class="m-0 p-0"><?php echo $_SESSION['address']?></p>
                             </div>
                         </div>
                         <div class="gray_btn mt-2">
-                            <a href="#"><button class="btn btn-dark border-0 rounded-1 w-100">Change Delivery Address</button></a>
+                            <a href="account.php"><button class="btn btn-dark border-0 rounded-1 w-100">Change Delivery Address</button></a>
                         </div>
                     </div>
                     <!-- cart info -->
@@ -76,7 +107,7 @@
                             <p>Total items</p>
                         </div>
                         <div class="col-6 text-end">
-                            <p>4</p>
+                            <p><?php echo $_SESSION['total_items']?></p>
                         </div>
                     </div>
                     <div class="row p-0 mb-2 cart_info border-bottom">
@@ -84,10 +115,10 @@
                             <p class="bold_header">TOTAL</p>
                         </div>
                         <div class="col-6 text-end">
-                            <p class="pink_highlight bold_header">PHP 156</p>
+                            <p class="pink_highlight bold_header"><?php echo 'PHP ' . $_SESSION['total']?></p>
                         </div>
                     </div>
-                    <div class="row pt-2 m-0">
+                    <!-- <div class="row pt-2 m-0">
                         <div class="payment_details filter_content px-0">
                             <h6 class="bold_header">Select your Payment Method</h6>
                             <div class="form-check ms-3">
@@ -103,7 +134,7 @@
                                 <label class="form-check-label ms-1" for="small">GCash</label>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="pink_btn2 mt-3 pb-2">
                         <a href="#"><button class="btn btn-dark border-0 rounded-1 w-100">PLACE ORDER</button></a>
                     </div>

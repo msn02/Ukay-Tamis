@@ -1,3 +1,9 @@
+<?php
+    session_start();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +15,13 @@
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
-    <?php include 'nav_bar.php'?>
+    <?php 
+        if (isset($_SESSION['logged_in'])) {
+            include 'auth_nav_bar.php';
+        } else {
+            include 'nav_bar.php';
+        }
+    ?>
 
     <div class="container-fluid gradient_pink p-0">
         <!-- logo and search bar -->
@@ -188,7 +200,7 @@
 
                             <!-- Item card -->
                             <div class="col-sm-3">
-                                <a href="item_page.php" class="text-decoration-none">
+                                <a href="<?php echo "item.php?item_id=" . $row['item_id'] ?>" class="text-decoration-none">
                                     <div class="card overflow-hidden rounded-1 card_content item_card">
                                         <img src="resources/<?php echo $row['item_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="item">
                                         <div class="card-body p-2">
