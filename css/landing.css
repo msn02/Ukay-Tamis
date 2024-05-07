@@ -4,7 +4,7 @@
 }
 
 .card-text {
-    font-size: 12px;
+    font-size: 14px;
     font-style: italic;
 }
 
@@ -25,7 +25,7 @@
     line-height: normal;
 }
 
-.gradient_pink {
+.gradient_pink2 {
     background-image: linear-gradient(180deg, #760024, #FF6A97, #EEEEEE, #EEEEEE);
 }
 
@@ -33,8 +33,22 @@
     background-image: linear-gradient(180deg, #3F5520, #96DA39, #EEEEEE);
 }
 
-.gradient_yellow {
-    background-image: linear-gradient(180deg, #FFEDAC, #FFDB59);
+.green_border {
+    border: 2px solid #96DA39;
+    background: #e9ffcb;
+}
+
+.green_btn button, .green_btn button:hover {
+    background: #8ac834;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 18px;
+}
+
+.green_highlight {
+    color: #96DA39;
 }
 
 .landing_details h1, p {
@@ -57,7 +71,19 @@
     color: #FFC700;
 }
 
+.subtitle p {
+    font-size: 14px;
+    line-height: normal;
+}
+
 .title1 {
     font-size: 15px;
+    font-weight: bold;
+}
+
+.white_btn2 button, .white_btn2 button:hover {
+    background: white;
+    color: #ff3a75;
+    font-size: 14px;
     font-weight: bold;
 }
