@@ -25,13 +25,6 @@
     font-weight: bold;
 }
 
-.gradient_pink {
-    background-image: linear-gradient(180deg, #760024, #FF6A97, #eeeeee);
-    position:static;
-    width: auto;
-    height: 500px;
-}
-
 .item_card {
     border: 1px solid #ccc;
     transition: border-color 0.3s, box-shadow 0.3s;
