@@ -59,6 +59,25 @@
             </div>
         </div>
     </div>
+    <!-- monthly theme -->
+    <div class="container-fluid m-0 p-0 gradient_blue_orange_red">
+        <div class="container">
+            <div class="row center_align pt-3 center_text white_text">
+                <div class="col-sm-8 px-4 pt-4">
+                    <h3 class="bold_header mb-3">Dont Miss the Chance to Buy <br> Limited MONTHLY THEMED Items!</h3>
+                </div>
+                <div class="row center_align pt-3 px-5 gx-3">
+                    <!-- image -->        
+                    <div class="col-sm-4 mb-3 mt-0 mx-0">               
+                        <img src="resources/theme_logo.png" class="card-img-top img-fluid" alt="theme">                  
+                        </div>
+                    </div>
+                <div class="col-sm-12 p-0 pink_btn pb-3 mb-3 btn_text">
+                    <a href="month_theme_page.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">LEARN MORE</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- mystery box -->
     <div class="container-fluid m-0 p-0 gradient_green">

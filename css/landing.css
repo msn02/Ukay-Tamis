@@ -87,3 +87,7 @@
     font-size: 14px;
     font-weight: bold;
 }
+
+.gradient_blue_orange_red {
+  background: linear-gradient(to bottom, #ff1d0d, #ffaa33, #0099cc);
+}

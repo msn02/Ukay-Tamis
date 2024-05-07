@@ -39,7 +39,7 @@
         </div>
     </div>
     <!-- subscription options -->
-    <div class="container-fluid gradient_pink px-3 pt-1">
+    <div class="container-fluid px-3 pt-1">
         <div class="container px-5 py-3 mt-0">
             <div class="row m-2 p-0 d-flex justify-content-center">
                 <div class="col-sm-8 gray_bg rounded-3 p-0 m-2 text-center overflow-hidden">
