@@ -1,3 +1,8 @@
+<?php
+    session_start();
+?>
+
+
 <?php include('server/get_style_page.php'); ?>
 
 <!DOCTYPE html>
@@ -11,7 +16,13 @@
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
-    <?php include 'nav_bar.php'?>
+    <?php 
+        if (isset($_SESSION['logged_in'])) {
+            include 'auth_nav_bar.php';
+        } else {
+            include 'nav_bar.php';
+        }
+    ?>
 
     <div class="container-fluid px-3 pt-1 gradient_pink center-align">
         <div class="container px-5 py-3">
@@ -22,9 +33,6 @@
 
             <!-- style box details -->
             <?php while ($row = $style->fetch_assoc()) { ?>
-
-            
-
                 <div class="row shadow rounded-2 m-3 gray_bg">
                     <!-- product image -->
                     <div class="col-sm-5 m-0 p-4">
@@ -37,7 +45,7 @@
                         <!-- tag and title -->
                         <div class="row m-0 p-3 pb-0 justify-content-between g-3">
                             <div class="col-sm-10 m-0 p-0">
-                                <h2 class="bold_header align-content-center ps-0 mb-0 pb-0"><?php echo $row['style']; ?></h2>
+                                <h2 class="bold_header align-content-center ps-0 mb-0 pb-0"><?php echo $row['style'] . ' ' . 'Box'; ?></h2>
                             </div>
                             <div class="d-sm-none d-block m-1"></div>
                             <div class="col-sm-2 col-md-2 m-0 p-0 bold_header center-align align-content-center">

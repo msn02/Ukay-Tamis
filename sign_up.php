@@ -86,6 +86,10 @@
 
                             $_SESSION['email'] = $email;
                             $_SESSION['username'] = $username;
+                            $_SESSION['first_name'] = $first_name;
+                            $_SESSION['last_name'] = $last_name;
+                            $_SESSION['phone_number'] = $phone_number;
+                            $_SESSION['address'] = $address;
                             $_SESSION['logged_in'] = true;
         
                             $error_signup_success = true;
@@ -113,7 +117,13 @@
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
-    <?php include 'nav_bar.php'?>
+    <?php 
+        if (isset($_SESSION['logged_in'])) {
+            include 'auth_nav_bar.php';
+        } else {
+            include 'nav_bar.php';
+        }
+    ?>
 
     <div class="container-fluid gradient_pink px-3 pt-1">
         <div class="container px-5 py-3">

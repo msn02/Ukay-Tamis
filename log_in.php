@@ -14,12 +14,12 @@
             $username = $_POST['username'];
             $password = md5($_POST['password']);
     
-            $stmt = $conn -> prepare ("SELECT user_id, username, email, first_name, last_name FROM user WHERE username = ? AND password = ? LIMIT 1");
+            $stmt = $conn -> prepare ("SELECT user_id, username, email, first_name, last_name, phone_number, address FROM user WHERE username = ? AND password = ? LIMIT 1");
     
             $stmt -> bind_param("ss", $username, $password);
     
             if ($stmt -> execute()) {
-                $stmt -> bind_result($user_id, $username, $email, $first_name, $last_name);
+                $stmt -> bind_result($user_id, $username, $email, $first_name, $last_name, $phone_number, $address);
                 $stmt -> store_result();
     
                 if ($stmt -> num_rows == 1) {
@@ -30,12 +30,15 @@
                     $_SESSION['email'] = $email;
                     $_SESSION['first_name'] = $first_name;
                     $_SESSION['last_name'] = $last_name;
+                    $_SESSION['phone_number'] = $phone_number;
+                    $_SESSION['address'] = $address;
+
                     $_SESSION['logged_in'] = true;
 
                     // insert record to user_logs
                     $action = 'login'; 
                     $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
-                    $stmt1 -> bind_param("is", $user_id, $action);
+                    $stmt1 -> bind_param("ss", $user_id, $action);
                     $stmt1 -> execute();
                     
                     header('location: account.php?message=Login successful. Welcome back, ' . $username . ' !');
@@ -63,7 +66,13 @@
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
-    <?php include 'nav_bar.php'?>
+    <?php 
+        if (isset($_SESSION['logged_in'])) {
+            include 'auth_nav_bar.php';
+        } else {
+            include 'nav_bar.php';
+        }
+    ?>
 
     <div class="container-fluid gradient_pink px-3 pt-1 center_align">
         <div class="container px-5 py-3 mt-3">

@@ -5,122 +5,131 @@
     // start session
     session_start();
     
-
-    if (isset($_POST['add_to_cart'])) {
-
-        // if user has existing cart items
-        if (isset($_SESSION['cart'])) {
-            $style_array_ids = array_column($_SESSION['cart'], 'style_id');
-            
-            calculate_total_items();
-
-            if ($_SESSION['total_items'] + $_POST['style_quantity'] > 10) {
-
-                echo '<script>console.log("Quantity: ' . $_POST['style_quantity'] . '")</script>';
-
-                echo "<script>alert('You can only add up to 10 items in the cart!')</script>";
-            } 
-
-            // if product has not been added to cart yet
-            else {
-                if (!in_array($_POST['style_id'], $style_array_ids)) {
-                    
-                    $_style_id = $_POST['style_id'];
-                    
-                    $style_array = array(
-                        'style_id' => $_POST['style_id'],
-                        'style_img_url' => $_POST['style_img_url'],
-                        'style' => $_POST['style'],
-                        'style_price' => $_POST['style_price'],
-                        'style_quantity' => $_POST['style_quantity']
-                    );
-                    $_SESSION['cart'] [$_style_id] = $style_array;
-                }
-                // if product is already in the cart
-                else {
-                    echo "<script>alert('Product is already in the cart!')</script>";
-                }
-            }
-        } 
-        // if this is the first product in the cart    
-        else {
-            $style_id = $_POST['style_id'];
-            $style_img_url = $_POST['style_img_url'];
-            $style = $_POST['style'];
-            $style_price = $_POST['style_price'];
-            $style_quantity = $_POST['style_quantity'];           
-            
-            $style_array = array(
-                'style_id' => $style_id,
-                'style_img_url' => $style_img_url,
-                'style' => $style,
-                'style_price' => $style_price,
-                'style_quantity' => $style_quantity
-            );
-            $_SESSION['cart'][$style_id] = $style_array;
-        }
-
-        // calculate total items in cart
-        calculate_total();
-        calculate_total_items();
-    }
-    
-    else if (isset($_POST['edit_quantity'])) {
-        $style_id = $_POST['style_id'];
-
-        // get the style quantity
-        $style_quantity = $_POST['style_quantity'];
-
-        // get the style array from the session
-        $style_array = $_SESSION['cart'][$style_id];
-
-        // update the style quantity
-        $style_array['style_quantity'] = $style_quantity;
-
-        // update the session cart
-        $_SESSION['cart'][$style_id] = $style_array;
-
-        calculate_total();
-        calculate_total_items();
+    if (!isset($_SESSION['logged_in'])) {
+        header('location: log_in.php');
     }
 
-    else if (isset($_POST['remove_product'])) {
-        $style_id = $_POST['style_id'];
-        unset($_SESSION['cart'][$style_id]);
-
-        calculate_total();
-        calculate_total_items();
-    } 
-    
     else {
-        // header('location: catalogue_page.php');
-    }
-
-    // function to calculate the total price of the cart
-    function calculate_total() {
-        $total = 0;
-
-        foreach($_SESSION['cart'] as $key => $value) {
-            $style = $_SESSION['cart'][$key];
-
-            $price = $style['style_price'];
-            $quantity = $style['style_quantity'];
-
-            $total += $total + ($price * $quantity);
+        // function to calculate the total price of the cart
+        function calculate_total() {
+            $total = 0;
+    
+            foreach($_SESSION['cart'] as $key => $value) {
+                $style = $_SESSION['cart'][$key];
+    
+                $price = $style['style_price'];
+                $quantity = $style['style_quantity'];
+    
+                $total += $total + ($price * $quantity);
+            }
+            $_SESSION['total'] = $total;
         }
-        $_SESSION['total'] = $total;
-    }
+    
+        // function to calculate the total items in the cart
+        function calculate_total_items() {
+            $total_items = 0;
+    
+            foreach($_SESSION['cart'] as $key => $value) {
+                $total_items += $value['style_quantity'];
+            }
+            
+            $_SESSION['total_items'] = $total_items;
+        }
 
-    // function to calculate the total items in the cart
-    function calculate_total_items() {
-        $total_items = 0;
 
-        foreach($_SESSION['cart'] as $key => $value) {
-            $total_items += $value['style_quantity'];
+        if (isset($_POST['add_to_cart'])) {
+
+            // if user has existing cart items
+            if (isset($_SESSION['cart'])) {
+                $style_array_ids = array_column($_SESSION['cart'], 'style_id');
+                
+                calculate_total_items();
+    
+                if ($_SESSION['total_items'] + $_POST['style_quantity'] > 10) {
+    
+                    echo '<script>console.log("Quantity: ' . $_POST['style_quantity'] . '")</script>';
+    
+                    echo "<script>alert('You can only add up to 10 items in the cart!')</script>";
+                } 
+    
+                // if product has not been added to cart yet
+                else {
+                    if (!in_array($_POST['style_id'], $style_array_ids)) {
+                        
+                        $_style_id = $_POST['style_id'];
+                        
+                        $style_array = array(
+                            'style_id' => $_POST['style_id'],
+                            'style_img_url' => $_POST['style_img_url'],
+                            'style' => $_POST['style'],
+                            'style_price' => $_POST['style_price'],
+                            'style_quantity' => $_POST['style_quantity']
+                        );
+                        $_SESSION['cart'] [$_style_id] = $style_array;
+                    }
+                    // if product is already in the cart
+                    else {
+                        echo "<script>alert('Product is already in the cart!')</script>";
+                    }
+                }
+            } 
+            // if this is the first product in the cart    
+            else {
+                $style_id = $_POST['style_id'];
+                $style_img_url = $_POST['style_img_url'];
+                $style = $_POST['style'];
+                $style_price = $_POST['style_price'];
+                $style_quantity = $_POST['style_quantity'];           
+                
+                $style_array = array(
+                    'style_id' => $style_id,
+                    'style_img_url' => $style_img_url,
+                    'style' => $style,
+                    'style_price' => $style_price,
+                    'style_quantity' => $style_quantity
+                );
+                $_SESSION['cart'][$style_id] = $style_array;
+            }
+    
+            // calculate total items in cart
+            calculate_total();
+            calculate_total_items();
         }
         
-        $_SESSION['total_items'] = $total_items;
+        else if (isset($_POST['edit_quantity'])) {
+            $style_id = $_POST['style_id'];
+    
+            // get the style quantity
+            $style_quantity = $_POST['style_quantity'];
+    
+            // get the style array from the session
+            $style_array = $_SESSION['cart'][$style_id];
+    
+            // update the style quantity
+            $style_array['style_quantity'] = $style_quantity;
+    
+            // update the session cart
+            $_SESSION['cart'][$style_id] = $style_array;
+    
+            calculate_total();
+            calculate_total_items();
+        }
+    
+        else if (isset($_POST['remove_product'])) {
+            $style_id = $_POST['style_id'];
+            unset($_SESSION['cart'][$style_id]);
+    
+            calculate_total();
+            calculate_total_items();
+        } 
+        
+        else {
+            // header('location: catalogue_page.php');
+        }
+    
+
     }
+    
 ?>
 
 
@@ -135,7 +144,13 @@
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
-    <?php include 'nav_bar.php'?>
+    <?php 
+        if (isset($_SESSION['logged_in'])) {
+            include 'auth_nav_bar.php';
+        } else {
+            include 'nav_bar.php';
+        }
+    ?>
     <div class="container-fluid gradient_pink px-3 pt-1">
         <div class="container px-5 py-3 mt-0">
             <!-- back button -->
@@ -166,7 +181,7 @@
                                     <th scope="row" class="item_img d-flex justify-content-center">
                                         <img src="resources/<?php echo $value['style_img_url']; ?>" class="card m-0" alt="item">
                                     </th>
-                                    <td><?php echo $value['style'] . ' Box'; ?></td>
+                                    <td><?php echo $value['style']; ?></td>
                                     <td class="text-center"><?php echo $value['style_price']; ?></td>
                                     <td class="text-center">
                                         <form method = "POST" action = "view_cart.php">
@@ -227,8 +242,14 @@
                             <p class="pink_highlight bold_header"><?php echo 'PHP ' . $_SESSION['total']; ?></p>
                         </div>
                     </div>
+                    
                     <div class="pink_btn2 pb-3">
-                        <a href="checkout_page.php"><button class="btn btn-dark border-0 rounded-1 w-100">CHECKOUT</button></a>
+                    <form method = "POST" action = "checkout_page.php">
+                        <input type="hidden" name="total" value="<?php echo $_SESSION['total']; ?>">
+                        <input type="hidden" name="total_items" value="<?php echo $_SESSION['total_items']; ?>">
+                        <input type="hidden" name="cart" value="<?php echo serialize($_SESSION['cart']); ?>">
+                        <a href="checkout_page.php"><button class="btn btn-dark border-0 rounded-1 w-100" type = "submit" name = "checkout">CHECKOUT</button></a>
+                    </form>
                     </div>
                 </div>
             </div>

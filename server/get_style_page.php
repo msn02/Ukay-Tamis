@@ -9,7 +9,7 @@
         $stmt = $conn -> prepare ("SELECT * FROM style_box_details WHERE style_id = ?");
 
         // Bind the parameters
-        $stmt -> bind_param("i", $style_id);
+        $stmt -> bind_param("s", $style_id);
 
         // Execute the query
         $stmt -> execute();

@@ -3,7 +3,6 @@
 
     session_start();
 
-
     if(!isset($_SESSION['logged_in'])){
         header("Location: log_in.php");
         exit();
@@ -17,7 +16,7 @@
 
             // insert record to user_logs
             $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
-            $stmt1 -> bind_param("is", $user_id, $action);
+            $stmt1 -> bind_param("ss", $user_id, $action);
             $stmt1 -> execute();
 
             unset($_SESSION['logged_in']);
@@ -58,7 +57,7 @@
             $action = 'change password'; 
 
             $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
-            $stmt1 -> bind_param("is", $user_id, $action);
+            $stmt1 -> bind_param("ss", $user_id, $action);
             $stmt1 -> execute();
 
             if ($stmt -> execute()) {
@@ -81,7 +80,13 @@
 </head>
 <body class="gray_bg">
     <!-- navigation bar -->
-    <?php include 'nav_bar.php'?>
+    <?php 
+        if (isset($_SESSION['logged_in'])) {
+            include 'auth_nav_bar.php';
+        } else {
+            include 'nav_bar.php';
+        }
+    ?>
 
     <div class="container-fluid">
         <div class="container">
@@ -109,6 +114,8 @@
                         <div class=" pt-3 pb-0 m-0">
                             <h6 class="bold_header"> <?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } ?> </h6>
                             <h6 class="bold_header"> <?php if (isset($_SESSION['email'])) { echo $_SESSION['email']; } ?> </h6>
+                            <h6 class="bold_header"> phone: <?php if (isset($_SESSION['phone_number'])) { echo $_SESSION['phone_number']; } ?> </h6>
+                            <h6 class="bold_header"> address:  <?php if (isset($_SESSION['address'])) { echo $_SESSION['address']; } ?> </h6>
                         </div>
                     </div>
 
