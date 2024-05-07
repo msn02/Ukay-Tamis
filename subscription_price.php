@@ -73,9 +73,9 @@
                 <div class="header_style px-4 pt-3 pb-2 m-0 ">
                     <h5 class="bold_header">CHOOSE A TIER</h5>
                 </div>
+                <form method="POST" action="subscription_price.php" id="tierForm">
                 
                 <div class="row py-3 px-4 d-flex justify-content-evenly">
-                    <form method="POST" action="subscription_price.php" id="tierForm">
 
                         <?php include('server/get_sub_tier_details.php'); ?>
 
@@ -106,17 +106,18 @@
                             </div>
 
                         <?php } ?>
-                    </form>
                 </div>
+                </form>
 
                     <!-- subscription plan -->
                     <div class="header_style2 px-4 pt-3 pb-2 m-0 ">
                         <h5 class="bold_header">CHOOSE YOUR <span class="green_highlight">SUBSCRIPTION PLAN</span></h5>
+                    
+                    <form method = "POST" action = "subscription_price.php">
 
                     </div>
                         <div class="row py-3 px-4 d-flex justify-content-evenly">
                         <!-- prices -->
-                        <form method = "POST" action = "subscription_price.php">
 
                         <?php foreach ($selected_tier_details as $key => $price) { ?>
                             <!-- plan card -->
@@ -135,8 +136,8 @@
                                 </div>
                             </div>
                         <?php } ?>
-                        </form>
                     </div>
+                    </form>
                 </div>
 
 
