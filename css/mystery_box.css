@@ -28,8 +28,17 @@
     font-size: 13px;
 }
 
+.green_border {
+    border: 2px solid #96DA39;
+    background: #e9ffcb;
+}
+
 .green_highlight {
     color: #96DA39;
+}
+
+.green_highlight2 {
+    color: #3F5520;
 }
 
 .header_style {
@@ -49,6 +58,17 @@
 
 .pink_btn2 button, .pink_btn2 button:hover {
     font-size: 13px;
+}
+
+.review_content p {
+    color: black;
+    line-height: normal;
+    font-size: 11px;
+}
+
+.review_name {
+    font-size: 10px;
+    color: rgb(54, 54, 54);
 }
 
 .star_icon {
