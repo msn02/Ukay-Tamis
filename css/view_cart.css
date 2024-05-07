@@ -29,6 +29,14 @@
     font-weight: bold;
 }
 
+.edit_btn button {
+    color: #FF6A97;
+    text-decoration: none;
+    font-size: 10px;
+    background-color: #ffffff;
+    border: none;
+}
+
 .form_style {
     font-size: 13px;
 }
