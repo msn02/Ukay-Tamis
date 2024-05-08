@@ -1,18 +1,17 @@
 <?php
+    // include connection.php
     include ('server/connection.php');
     
-    // Start the session
+    // start the session
     session_start();
     
     // if no form has been submitted, set the selected tier to the default value
     if (!isset($_POST["tier"])) {
         $_POST["tier"] = "Starter Pack";
+        $_SESSION["selected_tier"] = $_POST["tier"];
     } else {
         $_SESSION["selected_tier"] = $_POST["tier"];
     }
-
-    echo '<script>console.log("Selected tier: ' . $_SESSION['selected_tier'] . '");</script>'; // log the selected tier
-
 
     // include get_sub_price.php
     include ('server/get_sub_price.php');
@@ -26,19 +25,12 @@
             'monthly_price' => $row['monthly_price']
         );
 
-    // if the plan_tier of the current row matches the selected tier, add the details to the selected_tier_details array
-    if ($row["plan_tier"] == $_SESSION['selected_tier']) {
-        $selected_tier_details[] = $sub_price[$key];
-    }
-
-    echo '<script>console.log("plan_tier: ' . $row["plan_tier"] . '");</script>'; // log the plan_tier from the current row
-    echo '<script>console.log("plan_duration: ' . $row['plan_duration'] . '");</script>';
-    echo '<script>console.log("price: ' . $row['price'] . '");</script>';
-    echo '<script>console.log("monthly_price: ' . $row['monthly_price'] . '");</script>';
-}
-
+        // if the plan_tier of the current row matches the selected tier, add the details to the selected_tier_details array
+        if ($row["plan_tier"] == $_SESSION['selected_tier']) {
+            $selected_tier_details[] = $sub_price[$key];
+        }
+    }   
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,11 +68,9 @@
                 <form method="POST" action="subscription_price.php" id="tierForm">
                 
                 <div class="row py-3 px-4 d-flex justify-content-evenly">
-
+                        <!-- loop through the tiers -->
                         <?php include('server/get_sub_tier_details.php'); ?>
-
                         <?php foreach ($sub_tier_details as $index => $detail) { ?>
-
                             <!-- tier card -->
                             <div class="col-sm-4 img_style p-2">
                                 <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
@@ -103,45 +93,40 @@
                                             </label>
                                         </div>
                                     </div>
-                            </div>
-
+                             </div>
                         <?php } ?>
                 </div>
                 </form>
-
                     <!-- subscription plan -->
                     <div class="header_style2 px-4 pt-3 pb-2 m-0 ">
                         <h5 class="bold_header">CHOOSE YOUR <span class="green_highlight">SUBSCRIPTION PLAN</span></h5>
-                    
+                    <!-- loop through the prices -->
                     <form method = "POST" action = "subscription_price.php">
-
-                    </div>
-                        <div class="row py-3 px-4 d-flex justify-content-evenly">
-                        <!-- prices -->
-
-                        <?php foreach ($selected_tier_details as $key => $price) { ?>
-                            <!-- plan card -->
-                            <div class="col-sm-4 img_style p-2">
-                                <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
-                                    <div class="card-body price_card mb-0">
-                                        <h2 class="pink_highlight2 bold_header"><?php echo $price['monthly_price'] ?>/<sup>mo</sup></h2>
-                                        <h6 class="card-title month_title mt-2"><?php echo $price['plan_duration'] ?></h6>
-                                    </div>
-                                    <div class="card-body pink_btn2 mt-0 p-2">
-                                        <input type="radio" class="btn-check" name="price" id="3_mon" autocomplete="off" checked>
-                                        <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="3_mon">
-                                            <span class="radio-btn-text">SELECT</span>
-                                        </label>
+                        </div>
+                            <div class="row py-3 px-4 d-flex justify-content-evenly">
+                            <!-- prices -->
+                            <?php foreach ($selected_tier_details as $key => $price) { ?>
+                                <!-- plan card -->
+                                <div class="col-sm-4 img_style p-2">
+                                    <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
+                                        <div class="card-body price_card mb-0">
+                                            <h2 class="pink_highlight2 bold_header"><?php echo $price['monthly_price'] ?>/<sup>mo</sup></h2>
+                                            <h6 class="card-title month_title mt-2"><?php echo $price['plan_duration'] ?></h6>
+                                        </div>
+                                        <div class="card-body pink_btn2 mt-0 p-2">
+                                            <input type="radio" class="btn-check" name="price" id="3_mon" autocomplete="off" checked>
+                                            <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="3_mon">
+                                                <span class="radio-btn-text">SELECT</span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php } ?>
-                    </div>
+                            <?php } ?>
+                        </div>
                     </form>
                 </div>
 
-
-                
+                <!-- package details container -->
                 <div class="col-sm-3 gray_bg rounded-2 px-4 py-3 m-2">
                     <div class="row mt-3 border-bottom">
                         <h6 class="border-bottom pb-2 bold_header mb-3">Package Details</h6>
@@ -173,8 +158,8 @@
             </div>
         </div>
     </div>
-
-
+</body>
+    <!-- include scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -194,5 +179,4 @@
             });
         });
     </script>
-</body>
 </html>
