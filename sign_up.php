@@ -248,7 +248,7 @@
                         <!-- TO DO: Error warning (if password is not more than 8 characters) -->
                         <div class="log_sign_btn mt-4 center_align">
                             
-                            <input class="btn btn-dark border-0 rounded-1 px-4 py-1" onclick="" type = "submit" id="signup_btn" name="signup_btn" value = "Sign Up"></input>
+                            <button class="btn btn-dark border-0 rounded-1 px-4 py-1" onclick="" type = "submit" id="signup_btn" name="signup_btn" value = "Sign Up">Sign up</button>
                         </div>
                         <div class="center_align mt-4 mb-0 p-0">
                             <p>Aready have an account? <span class="sign_up_link"><a href="log_in.php" class="text-decoration-none">Log In</a></span></p>

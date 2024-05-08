@@ -52,7 +52,6 @@
             echo ('Login button not clicked.');
         }
     }
-    
 ?>
 
 <!DOCTYPE html>
@@ -87,9 +86,7 @@
                         <h2 class="bold_header center_text ">LOG IN</h2>
                     </div>
 
-
                     <form class="form_style p-4 m-0" method="POST" action="log_in.php">
-                        
                         <!-- error message -->
                         <p><?php if(isset($_GET['error'])){ echo $_GET['error']; } ?></p>
 
@@ -107,7 +104,7 @@
                         </div>
                         <!-- TO DO: Error warning (if password is incorrect/no account/no username found) -->
                         <div class="log_sign_btn mt-4 center_align">
-                            <input class="btn btn-dark border-0 rounded-1 px-4 py-1" type = "submit" name = "login_btn" value = "Login"></input>
+                            <button class="btn btn-dark border-0 rounded-1 px-4 py-1" type = "submit" name = "login_btn" value = "Login">Log in</button>
                         </div>
                         <div class="center_align mt-4 mb-0 p-0">
                             <p>Don't have an account? <span class="sign_up_link"><a href="sign_up.php" class="text-decoration-none">Create an Account</a></span></p>
