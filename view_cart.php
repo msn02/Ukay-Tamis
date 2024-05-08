@@ -162,7 +162,6 @@
                 <div class="col-sm-8 gray_bg rounded-2 px-4 py-2 m-2">
                     <h3 class="bold_header mb-3 pb-3 border-bottom mt-3">My Shopping Cart</h3>
                     
-                    
                     <table class="table">
                         <thead>
                             <tr class="thead_style">
@@ -175,39 +174,59 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($_SESSION['cart'] as $key => $value) { ?>
-                                <!-- product in cart -->
+                            <?php if(empty($_SESSION['cart'])) { ?>
+                                <!-- No items chosen -->
                                 <tr class="product_info align-middle">
-                                    <th scope="row" class="item_img d-flex justify-content-center">
-                                        <img src="resources/<?php echo $value['style_img_url']; ?>" class="card m-0" alt="item">
-                                    </th>
-                                    <td><?php echo $value['style']; ?></td>
-                                    <td class="text-center"><?php echo $value['style_price']; ?></td>
-                                    <td class="text-center">
-                                        <form method = "POST" action = "view_cart.php">
-                                            <!-- edit quantity -->
-                                            <input type="hidden" name="style_id" value="<?php echo $value['style_id']; ?>">
-                                            <div class="input-group input-group-sm gray_btn m-auto p-0 center_align">
-                                                <input type="number" class="form-control m-0 p-auto" name = "style_quantity" value="<?php echo $value['style_quantity']?>"  id="counter_input" min = "1" max = "3">
-                                                <button style = "background-color: #fff; color: #FF6A97" type="submit" class="edit_btn btn btn-dark border-0 rounded-1" name = "edit_quantity" >Save</button>
-                                            </div>
-                                        </form> 
-                                    </td>
-                                    <td class="text-center"><?php echo 'PHP ' . $value['style_price'] * $value['style_quantity']; ?></td>
-                                    <td>
-                                        <!-- delete button -->
-                                        <form method = "POST" action = "view_cart.php">
-                                            <div class="center_align m-0 p-0 delete_btn">
-                                                <input type="hidden" name="style_id" value="<?php echo $value['style_id']; ?>">
-
-                                                <button class="btn btn-dark border-0 rounded-1" type = "submit" name = "remove_product"><i class="bi bi-trash-fill"></i></button>
-                                            </div>
-                                        </form>
-                                    </td>
+                                    <td colspan="6" class="text-center">No items chosen</td>
                                 </tr>
+                            <?php } else { ?>
+                                <!-- Cart items -->
+                                <?php foreach($_SESSION['cart'] as $key => $value) { ?>
+                                    <tr class="product_info align-middle">
+                                        <th scope="row" class="item_img d-flex justify-content-center">
+                                            <img src="resources/<?php echo $value['style_img_url']; ?>" class="card m-0" alt="item">
+                                        </th>
+                                        <td><?php echo $value['style']; ?></td>
+                                        <td class="text-center"><?php echo $value['style_price']; ?></td>
+                                        <td class="text-center">
+                                            <form method="POST" action="view_cart.php">
+                                                <!-- edit quantity -->
+                                                <input type="hidden" name="style_id" value="<?php echo $value['style_id']; ?>">
+                                                <div class="input-group input-group-sm gray_btn m-auto p-0 center_align">
+                                                    <input type="number" class="form-control m-0 p-auto" name="style_quantity" value="<?php echo $value['style_quantity'] ?>" id="counter_input" min="1" max="3">
+                                                    <button style="background-color: #fff; color: #FF6A97" type="submit" class="edit_btn btn btn-dark border-0 rounded-1" name="edit_quantity">Save</button>
+                                                </div>
+                                            </form> 
+                                        </td>
+                                        <td class="text-center"><?php echo 'PHP ' . $value['style_price'] * $value['style_quantity']; ?></td>
+                                        <td>
+                                            <!-- delete button -->
+                                            <form method="POST" action="view_cart.php">
+                                                <div class="center_align m-0 p-0 delete_btn">
+                                                    <input type="hidden" name="style_id" value="<?php echo $value['style_id']; ?>">
+                                                    <button class="btn btn-dark border-0 rounded-1" type="submit" name="remove_product"><i class="bi bi-trash-fill"></i></button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             <?php } ?>
                         </tbody>
                     </table>
+
+                    <?php 
+                    // Set total items and total to 0 if cart is empty
+                    if(empty($_SESSION['cart'])) {
+                        $_SESSION['total_items'] = 0;
+                        $_SESSION['total'] = 0;
+                        $cart_value = 0;
+                    } else {
+                        // Calculate total items and total
+                        calculate_total_items();
+                        calculate_total();
+                        $cart_value = serialize($_SESSION['cart']);
+                    }
+                    ?>
                 </div>
 
                 <!-- proceed checkout -->
@@ -244,12 +263,12 @@
                     </div>
                     
                     <div class="pink_btn2 pb-3">
-                    <form method = "POST" action = "checkout_page.php">
-                        <input type="hidden" name="total" value="<?php echo $_SESSION['total']; ?>">
-                        <input type="hidden" name="total_items" value="<?php echo $_SESSION['total_items']; ?>">
-                        <input type="hidden" name="cart" value="<?php echo serialize($_SESSION['cart']); ?>">
-                        <a href="checkout_page.php"><button class="btn btn-dark border-0 rounded-1 w-100" type = "submit" name = "checkout">CHECKOUT</button></a>
-                    </form>
+                        <form method = "POST" action = "checkout_page.php">
+                            <input type="hidden" name="total" value="<?php echo $_SESSION['total'];?>">
+                            <input type="hidden" name="total_items" value="<?php echo $_SESSION['total_items'];?>">
+                            <input type="hidden" name="cart" value="<?php echo $cart_value;?>">
+                            <button class="btn btn-dark border-0 rounded-1 w-100" type = "submit" name = "checkout" <?php if(empty($_SESSION['cart'])) { echo "disabled"; }?>>CHECKOUT</button>
+                        </form>
                     </div>
                 </div>
             </div>

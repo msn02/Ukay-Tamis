@@ -49,8 +49,8 @@
                                 <h2 class="bold_header align-content-center ps-0 mb-0 pb-0"><?php echo $row['item_name']; ?></h2>
                             </div>
                             <div class="d-sm-none d-block m-1"></div>
-                            <div class="col-sm-2 col-md-2 m-0 p-0 bold_header center-align align-content-center">
-                                <p class="rounded-1 tag_pink px-2 py-1 m-0 center_text"><?php echo $row['item_id']; ?></p>
+                            <div class="col-sm-3 col-md-2 m-0 p-0 bold_header center-align align-content-center">
+                                <p class="rounded-1 tag_pink px-2 py-1 m-0 center_text"><?php echo $row['style']; ?></p>
                             </div>
                         </div>
                         <!-- item price -->
