@@ -3,7 +3,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Set MySQLi to thro
 
 try {
     // Database configuration
-    $servername = "localhost:3308";
+    $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "ukay_tamis";
