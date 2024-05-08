@@ -1,3 +1,5 @@
+/* CSS Selectors arranged alphabetically */
+
 .card_content {
     background-color: #3F5520;
     color: white;
@@ -23,6 +25,10 @@
     font-size: 12px;
     color: black;
     line-height: normal;
+}
+
+.gradient_blue_orange_red {
+    background: linear-gradient(to bottom, #ff1d0d, #ffaa33, #EEEEEE, #0099cc);
 }
 
 .gradient_pink2 {
@@ -86,8 +92,4 @@
     color: #ff3a75;
     font-size: 14px;
     font-weight: bold;
-}
-
-.gradient_blue_orange_red {
-  background: linear-gradient(to bottom, #ff1d0d, #ffaa33, #0099cc);
 }

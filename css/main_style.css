@@ -4,14 +4,6 @@
     color: black;
 }
 
-/* diff colored buttons */
-.pink_btn button, .pink_btn button:hover, .pink_btn2 button, .pink_btn2 button:hover, .white_btn button, .white_btn button:hover {
-    font-family: 'Inter', sans-serif;
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
 body {
     padding: 0;
     margin: 0;
@@ -37,8 +29,28 @@ body {
     text-align: center;
 }
 
+.copyright_logo a {
+    font-size: 12px;
+    color: white;
+    text-decoration: none;
+}
+
 .dark_gray_bg {
     background-color: #1E1E1E;
+}
+
+.footer_bg {
+    background-color: #3b3b3b;
+}
+
+.footer_link a {
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+}
+
+.footer_nav li {
+    padding: 0;
 }
 
 .gray_bg {
@@ -85,6 +97,14 @@ body {
 .pink_btn2 button, .pink_btn2 button:hover{
     font-size: 12px;
     background: #ff3a75;
+}
+
+/* diff colored buttons */
+.pink_btn button, .pink_btn button:hover, .pink_btn2 button, .pink_btn2 button:hover, .white_btn button, .white_btn button:hover {
+    font-family: 'Inter', sans-serif;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
 .pink_highlight {
