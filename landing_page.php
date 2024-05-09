@@ -1,7 +1,7 @@
 <?php
+    // start session
     session_start();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -234,5 +234,6 @@
 
     <!-- contact us -->
     <?php include 'contact_us.php'?>
+
 </body>
 </html>
