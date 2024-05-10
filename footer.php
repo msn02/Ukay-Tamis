@@ -7,7 +7,7 @@
             <div class="m-0 p-0 col-sm-6 center_align">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="text-decoration-none mx-3" href="about_page.php">About Us</a>
+                        <a class="text-decoration-none mx-3" href="about_us.php">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="text-decoration-none mx-3" href="catalogue_page.php">Catalogue</a>
