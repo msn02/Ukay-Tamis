@@ -57,36 +57,7 @@
                     <div class="gray_bg rounded-1 pt-3 px-4 pb-4">
 
                         <h6 class="bold_header m-0">SEARCH FILTERS</h6>
-                        <form method ="POST" action = "catalogue_page.php">
-                        <!-- Sizes -->
-                        <div class="border-bottom border-1 filter_title filter_content p-2">
-                            <p class="mb-1">Sizes</p>
-                            
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="XS" id="small">
-                                <label class="form-check-label ms-1" for="small">Extra Small</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="S" id="small">
-                                <label class="form-check-label ms-1" for="small">Small</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="M" id="medium">
-                                <label class="form-check-label ms-1" for="small">Medium</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="L" id="large">
-                                <label class="form-check-label ms-1" for="small">Large</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="XL" id="large">
-                                <label class="form-check-label ms-1" for="small">Extra Large</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="Freesize" id="freesize">
-                                <label class="form-check-label ms-1" for="small">Freesize</label>
-                            </div>
-                        </div>
+                        <form method = "POST" action = "style.php">
 
                         <!-- Group by Style -->
                         <div class="border-bottom border-1 filter_title filter_content p-2">
@@ -164,7 +135,6 @@
                                 <!-- title and link to view more styles -->
                                 <div class="pink_btn2 row mt-2 p-2 view_more_link">
                                     <h5 class="col bold_header mb-0 p-0 mx-0">Choose your <span class="pink_highlight2">STYLE</span></h5>
-                                    <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="style.php">View more styles <i class="bi bi-chevron-right"></i></a>
                                 </div>
                                 
                                 <!-- Include the seach_filter_style.php file -->
@@ -183,7 +153,7 @@
                                 </div>
 
                                 <!-- Include the seach_filter_style.php file -->
-                                <?php include('server/search_filter_style.php'); ?>
+                                <?php include('server/search_filter_style_page.php'); ?>
 
                                 <!-- Loop through the featured styles -->
                                 <?php while ($featured_styles && $row = $featured_styles->fetch_assoc()) { ?>
@@ -207,44 +177,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Featured Items -->
-                        <div class="row g-3 mb-3 px-2">
-
-                            <div class="recom_header mt-3 pt-4 mb-0">
-                                <h5 class="bold_header p-0 m-0">SINGLE LISTINGS</h5>
-                            </div>
-                            <!-- <div class="search_result mt-3 md-0 ms-2 d-none">
-                                <p>Search results for <span class="pink_highlight">item name</span></p>
-                            </div> -->
-                            
-                            <?php include('server/search_filter_item.php'); ?>
-
-                            <!-- Loop through the featured items -->
-                            <?php while ($row = $featured_styles->fetch_assoc()) { ?>
-
-                            <!-- Item card -->
-                            <div class="col-sm-3">
-                                <a href="<?php echo "item.php?item_id=" . $row['item_id'] ?>" class="text-decoration-none">
-                                    <div class="card overflow-hidden rounded-1 card_content item_card">
-                                        <img src="resources/<?php echo $row['item_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                        <div class="card-body p-2">
-                                            <p class="item_name"><?php echo $row['item_name']; ?></p>
-                                            <!-- price and category -->
-                                            <div class="row p-0 d-flex justify-content-between">
-                                                <div class="col-5 m-0 text-align-left">
-                                                    <p class="card-text item_price m-0"><?php echo $row['price']; ?></p>
-                                                </div>
-                                                <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
-                                                    <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <?php } ?>
-                            
                             <!-- insert pagination -->
                         </div> <!--item close tag-->
                     
