@@ -12,13 +12,13 @@
             <div class="m-0 p-0">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="landing_page.php">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="catalogue_page.php">Catalogue</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about_page.php">About Us</a>
+                        <a class="nav-link" href="about_us.php">About Us</a>
                     </li>
                     <!-- subscribe button -->
                     <li class="nav-item pink_btn2 px-4 d-none d-sm-block">
