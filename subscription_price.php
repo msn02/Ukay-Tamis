@@ -1,17 +1,22 @@
 <?php
     // include connection.php
     include ('server/connection.php');
-    
+    include ('server/store_sub_details.php');
+
+
     // start the session
     session_start();
-    
+
+
     // if no form has been submitted, set the selected tier to the default value
-    if (!isset($_POST["tier"])) {
-        $_POST["tier"] = "Starter Pack";
-        $_SESSION["selected_tier"] = $_POST["tier"];
+    if (!isset($_POST["tier"]) || (!isset($_POST["montly_pice"])) || (!isset($_POST["plan_duration"]))) {
+        $_SESSION["selected_tier"] = "Starter Pack";
+        $_SESSION["monthly_price"] = "199.83";
+        $_SESSION["plan_duration"] = "6 months";
+        
     } else {
         $_SESSION["selected_tier"] = $_POST["tier"];
-    }
+    } 
 
     // include get_sub_price.php
     include ('server/get_sub_price.php');
@@ -30,6 +35,7 @@
             $selected_tier_details[] = $sub_price[$key];
         }
     }   
+
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +92,10 @@
                                             <?php 
                                                 if ((isset($_POST['tier']) && $_POST['tier'] == $detail['plan_tier']) || (!isset($_POST['tier']) && $detail['plan_tier'] == 'Starter Pack')) {
                                                     echo 'checked';
+                                                    $_SESSION['plan_tier'] = $detail['plan_tier'];
+                                                    $_SESSION['plan_tier_description'] = $detail['plan_tier_description'];
+
+                                                    var_dump($_SESSION);
                                                 } 
                                             ?>>
                                             <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="tier<?php echo $index ?>">
@@ -97,25 +107,25 @@
                         <?php } ?>
                 </div>
                 </form>
-                    <!-- subscription plan -->
-                    <div class="header_style2 px-4 pt-3 pb-2 m-0 ">
-                        <h5 class="bold_header">CHOOSE YOUR <span class="green_highlight">SUBSCRIPTION PLAN</span></h5>
-                    <!-- loop through the prices -->
-                    <form method = "POST" action = "subscription_price.php">
-                        </div>
-                            <div class="row py-3 px-4 d-flex justify-content-evenly">
+                <!-- subscription plan -->
+                <div class="header_style2 px-4 pt-3 pb-2 m-0 ">
+                    <h5 class="bold_header">CHOOSE YOUR <span class="green_highlight">SUBSCRIPTION PLAN</span></h5>
+                <!-- loop through the prices -->
+                <form method = "POST" action = "subscription_price.php">
+                    </div>
+                        <div class="row py-3 px-4 d-flex justify-content-evenly">
                             <!-- prices -->
                             <?php foreach ($selected_tier_details as $key => $price) { ?>
                                 <!-- plan card -->
                                 <div class="col-sm-4 img_style p-2">
                                     <div class="card rounded-1 border-1 m-0 p-0 overflow-hidden">
                                         <div class="card-body price_card mb-0">
-                                            <h2 class="pink_highlight2 bold_header"><?php echo $price['monthly_price'] ?>/<sup>mo</sup></h2>
+                                            <h2 class="pink_highlight2 bold_header" data-price="<?php echo $price['monthly_price'] ?>"><?php echo $price['monthly_price'] ?>/<sup>mo</sup></h2>
                                             <h6 class="card-title month_title mt-2"><?php echo $price['plan_duration'] ?></h6>
                                         </div>
                                         <div class="card-body pink_btn2 mt-0 p-2">
-                                            <input type="radio" class="btn-check" name="price" id="3_mon" autocomplete="off" checked>
-                                            <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="3_mon">
+                                            <input type="radio" class="btn-check" name="price" id="price_<?php echo $key ?>" autocomplete="off" checked>
+                                            <label class="btn btn-secondary w-100 m-0 p-2 rounded-1" for="price_<?php echo $key ?>">
                                                 <span class="radio-btn-text">SELECT</span>
                                             </label>
                                         </div>
@@ -123,19 +133,19 @@
                                 </div>
                             <?php } ?>
                         </div>
-                    </form>
-                </div>
-
+                    </div>
+                </form>
                 <!-- package details container -->
+                <?php include ('server/store_sub_details.php'); ?>
                 <div class="col-sm-3 gray_bg rounded-2 px-4 py-3 m-2">
                     <div class="row mt-3 border-bottom">
                         <h6 class="border-bottom pb-2 bold_header mb-3">Package Details</h6>
                         <!-- package details -->
                         <div class="row mb-3 center_align m-0 p-0">
                             <div class="card price_badge p-3 m-0 package_info">
-                                <h6 class="bold_header mb-1">PREMIUM Tier</h6>
-                                <p class="bold_header mb-2">6 Months</p>
-                                <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <h6 class="bold_header mb-1"><?php echo $_SESSION['plan_tier'] ?></h6>
+                                <p class="bold_header mb-2"><?php echo $_SESSION['plan_duration'] ?></p>
+                                <p class="card-text mb-0"><?php echo $_SESSION['plan_tier_description'] ?></p>
                             </div>
                         </div>
                     </div>
@@ -145,7 +155,7 @@
                             <p class="bold_header">TOTAL</p>
                         </div>
                         <div class="col-6 text-end">
-                            <p class="pink_highlight bold_header">PHP 156</p>
+                            <p class="pink_highlight bold_header"><?php echo $_SESSION['price'] ?></p>
                         </div>
                     </div>
                     <div class="pink_btn2 pb-2">
@@ -176,6 +186,26 @@
                         $('#tierForm').submit(); // submit the form using JavaScript
                     }
                 });
+            });
+        });
+
+        document.querySelectorAll('input[name="price"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    var priceElement = this.parentElement.parentElement.querySelector('.bold_header');
+                    var monthly_price = priceElement.getAttribute('data-price');
+                    var plan_duration = priceElement.nextElementSibling.textContent;
+        
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'server/store_sub_details.php', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onload = function() {
+                        if (this.status == 200) {
+                            console.log(this.responseText);
+                        }
+                    };
+                    xhr.send('monthly_price=' + encodeURIComponent(monthly_price) + '&plan_duration=' + encodeURIComponent(plan_duration));
+                }
             });
         });
     </script>
