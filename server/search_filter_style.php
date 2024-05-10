@@ -18,10 +18,10 @@
         } 
         else {
             
-            include ('get_featured_style.php');
+            include ('get_all_style.php');
         }
     }
     else {
-        include ('get_featured_style.php');
+        include ('get_all_style.php');
     }
 ?>

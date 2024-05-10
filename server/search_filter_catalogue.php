@@ -9,7 +9,7 @@
         if (isset($_POST['category'])) {
             $category = $_POST['category'];
 
-            $stmt = $conn -> prepare ("SELECT * FROM style WHERE style = ?");
+            $stmt = $conn -> prepare ("SELECT * FROM style WHERE style = ? AND style_id <> 'style-0068' LIMIT 3");
             $stmt -> bind_param("s", $category);
             $stmt -> execute();
 
@@ -17,11 +17,10 @@
             $featured_styles = $stmt -> get_result();
         } 
         else {
-            
-            include ('get_all_style.php');
+            include ('get_featured_style.php');
         }
     }
     else {
-        include ('get_all_style.php');
+        include ('get_featured_style.php');
     }
 ?>

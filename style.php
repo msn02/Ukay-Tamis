@@ -34,8 +34,8 @@
                 </div>
                 <!-- search bar -->
                 <div class="col-sm-9 p-2">
-                    <form class="d-flex m-0 border-0 search_label" role="search">
-                        <input class="form-control me-2 rounded-1 border-0 focus-ring focus-ring-light" type="search" placeholder="Browse items" aria-label="Search">
+                    <form class="d-flex m-0 border-0 search_label" role="search" method = "GET" action = style.php>
+                        <input class="form-control me-2 rounded-1 border-0 focus-ring focus-ring-light" type="search" placeholder="Browse items" aria-label="Search" name = "search_input">
                         <div class="pink_btn">
                             <button class="btn btn-dark border-0 px-3 shadow rounded-1" name = "search" type="submit"><i class="bi bi-search"></i></button>
                         </div>
@@ -51,7 +51,6 @@
         <div class="container px-5">
             <div class="row px-3">
                 
-            
                 <!-- Filters: hidden on smaller screens -->
                 <div class="col-sm-3 d-none d-sm-block p-2">
                     <div class="gray_bg rounded-1 pt-3 px-4 pb-4">
@@ -59,47 +58,49 @@
                         <h6 class="bold_header m-0">SEARCH FILTERS</h6>
                         <form method = "POST" action = "style.php">
 
+                        <?php $category = isset($_POST['category']) ? $_POST['category'] : ''; ?>
+
                         <!-- Group by Style -->
                         <div class="border-bottom border-1 filter_title filter_content p-2">
                             <p class="my-1">Group by Style</p>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="category" type="radio" value="Cottagecore" id="style_cottagecore">
+                                <input class="form-check-input" name="category" type="radio" value="Cottagecore" id="style_cottagecore" <?php echo $category == 'Cottagecore' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="style_cottagecore">Cottagecore</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="category" type="radio" value="Coquette" id="style_coquette">
+                                <input class="form-check-input" name="category" type="radio" value="Coquette" id="style_coquette" <?php echo $category == 'Coquette' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="style_coquette">Coquette</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="category" type="radio" value="Gothic Lolita" id="style_gothic_lolita">
+                                <input class="form-check-input" name="category" type="radio" value="Gothic Lolita" id="style_gothic_lolita" <?php echo $category == 'Gothic Lolita' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="style_gothic_lolita">Gothic Lolita</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="category" type="radio" value="Streetwear" id="style_streetwear">
+                                <input class="form-check-input" name="category" type="radio" value="Streetwear" id="style_streetwear" <?php echo $category == 'Streetwear' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="style_streetwear">Streetwear</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="category" type="radio" value="Y2K" id="style_y2k">
+                                <input class="form-check-input" name="category" type="radio" value="Y2K" id="style_y2k" <?php echo $category == 'Y2K' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="style_y2k">Y2K</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="category" type="radio" value="Dark Academia" id="style_dark_academia">
+                                <input class="form-check-input" name="category" type="radio" value="Dark Academia" id="style_dark_academia" <?php echo $category == 'Dark Academia' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="style_dark_academia">Dark Academia</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="category" type="radio" value="Old Money" id="style_old_money">
+                                <input class="form-check-input" name="category" type="radio" value="Old Money" id="style_old_money" <?php echo $category == 'Old Money' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="style_old_money">Old Money</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="category" type="radio" value="Alt" id="style_alt">
+                                <input class="form-check-input" name="category" type="radio" value="Alt" id="style_alt" <?php echo $category == 'Alt' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="style_alt">Alt</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="category" type="radio" value="Indie" id="style_indie">
+                                <input class="form-check-input" name="category" type="radio" value="Indie" id="style_indie" <?php echo $category == 'Indie' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="style_indie">Indie</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="category" type="radio" value="Star Girl" id="style_star_girl">
+                                <input class="form-check-input" name="category" type="radio" value="Star Girl" id="style_star_girl" <?php echo $category == 'Star Girl' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="style_star_girl">Star Girl</label>
                             </div>
                         </div>
@@ -108,18 +109,19 @@
                         <div class="border-bottom border-1 filter_title filter_content p-2">
                             <p class="my-1">Pricing</p>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="price" type="radio" value="low_to_high" id="low_high">
+                        <?php $price = isset($_POST['price']) ? $_POST['price'] : ''; ?>
+                                <input class="form-check-input" name="price" type="radio" value="low_to_high" id="low_high" <?php echo $price == 'low_to_high' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="low_high">From Low to High</label>
                             </div>
                             <div class="form-check ms-3">
-                                <input class="form-check-input" name="price" type="radio" value="high_to_low" id="high_low">
+                                <input class="form-check-input" name="price" type="radio" value="high_to_low" id="high_low" <?php echo $price == 'high_to_low' ? 'checked' : ''; ?>>
                                 <label class="form-check-label ms-1" for="high_low">From High to Low</label>
                             </div>
                         </div>
 
                         <div class="mt-3 mx-2 mb-0 px-2 pink_btn2">
-                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" name = "search_filter" href="#">SEARCH</i></button>
-                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#">CLEAR SELECTION</i></button>
+                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" name = "search_filter" href="#">FILTER</i></button> 
+                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#" id="clear_selection">CLEAR SELECTION</i></button>
                         </div>
                         </form>
                     </div>
@@ -153,7 +155,9 @@
                                 </div>
 
                                 <!-- Include the seach_filter_style.php file -->
-                                <?php include('server/search_filter_style_page.php'); ?>
+                                <?php include('server/search_filter_style.php'); ?>
+                                    
+                                <?php include('server/search_style.php') ?>
 
                                 <!-- Loop through the featured styles -->
                                 <?php while ($featured_styles && $row = $featured_styles->fetch_assoc()) { ?>
@@ -186,4 +190,16 @@
         </div>
     </div>
 </body>
+<script>
+    document.getElementById('clear_selection').addEventListener('click', function() {
+        var radios = document.querySelectorAll('input[type="radio"][name="category"]');
+        var price = document.querySelectorAll('input[type="radio"][name="price"]');
+
+        for (var i = 0; i < price.length; i++)
+            price[i].checked = false;
+
+        for(var i = 0; i < radios.length; i++)
+            radios[i].checked = false;
+    });
+</script>
 </html>
