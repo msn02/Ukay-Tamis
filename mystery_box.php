@@ -11,7 +11,7 @@
     <!-- navigation bar -->
     <?php include 'nav_bar.php'?>
 
-    <div class="container-fluid gradient_green px-3 pt-1">
+    <div class="container-fluid gradient_green p-0 pt-1">
         <div class="container px-5 py-3 mt-0">
             <!-- back button -->
             <div class="back_link ps-3 py-2 m-0">
@@ -182,6 +182,8 @@
                 </div>
             </div>
         </div>
+        <!-- footer -->
+        <?php include 'footer.php'?>
     </div>
 </body>
 </html>
