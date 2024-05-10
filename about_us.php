@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <!-- navigation bar -->
+    <!-- footer -->
     <?php include 'footer.php'?>
 </body>
 </html>
