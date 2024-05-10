@@ -221,7 +221,7 @@
         </div>
     </div>
 
-    <!-- contact us -->
-    <?php include 'contact_us.php'?>
+    <!-- footer -->
+    <?php include 'footer.php'?>
 </body>
 </html>
