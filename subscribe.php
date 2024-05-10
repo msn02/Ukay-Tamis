@@ -51,7 +51,7 @@
         }
     ?>
 
-    <div class="container-fluid gradient_pink px-3 pt-1">
+    <div class="container-fluid gradient_pink px-0 pt-1">
         <div class="container px-5 py-3 mt-0">
             <!-- back button -->
             <div class="back_link ps-5 py-2 m-0">
@@ -148,15 +148,14 @@
                             <p class="pink_highlight bold_header">PHP 156</p>
                         </div>
                     </div>
-                    <div class="pink_btn2 pb-2">
-                        <a href="checkout_page.php"><button class="btn btn-dark border-0 rounded-1 w-100">ADD TO CART</button></a>
-                    </div>
-                    <div class="gray_btn pb-3">
-                        <a href="checkout_page.php"><button class="btn btn-secondary border-0 rounded-1 w-100">CHECKOUT</button></a>
+                    <div class="pink_btn2 pb-3">
+                        <a href="checkout.php"><button class="btn btn-secondary border-0 rounded-1 w-100">CHECKOUT</button></a>
                     </div>
                 </div>
             </div>
         </div>
+    <!-- footer -->
+    <?php include 'footer.php'?>
     </div>
 </body>
     <!-- include scripts -->

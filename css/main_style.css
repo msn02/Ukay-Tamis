@@ -35,6 +35,10 @@ body {
     text-decoration: none;
 }
 
+.copyright_text {
+    color: white;
+}
+
 .dark_gray_bg {
     background-color: #1E1E1E;
 }

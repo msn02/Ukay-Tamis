@@ -11,7 +11,7 @@
     <?php include 'head_resource.php';?>
     <link rel="stylesheet" href="css/about.css">
 </head>
-<body class="gray_bg">
+<body class="gray_bg2">
     <!-- navigation bar -->
     <?php 
         if (isset($_SESSION['logged_in'])) {
@@ -26,5 +26,8 @@
 
         </div>
     </div>
+
+    <!-- footer -->
+    <?php include 'footer.php'?>
 </body>
 </html>
