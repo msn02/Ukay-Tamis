@@ -26,14 +26,14 @@
                     <form class="form_style p-4 m-0">
                         <!-- user email input -->
                         <div class="mx-2 mt-0">
-                            <p>Enter the email associated to your account and we will display your security message.</p>
+                            <p>Enter the email associated to your account and we will display your security question.</p>
                         </div>
                         <div class="mb-3">
                             <label for="input_uname" class="form-label ms-1">Email</label>
                             <input type="text" class="form-control" id="input_email" placeholder="Enter your email">
                         </div>
                         
-                        <!-- TO DO: Error warning (if password is incorrect/no account/no username found) -->
+                        <!-- TO DO: Error warning (if email is incorrect/not found) -->
                         <div class="log_sign_btn mt-4 center_align">
                             <button class="btn btn-dark border-0 rounded-1 px-4 py-1 mb-3" onclick="">Verify</button>
                         </div>
@@ -48,6 +48,7 @@
                             <input type="text" class="form-control" id="input_ans" placeholder="Enter your answer">
                         </div>
                         
+                        <!-- TO DO: Error warning (if answer is incorrect) -->
                         <!-- submit -->
                         <div class="log_sign_btn mt-4 center_align">
                             <a href="change_pass.php" class="text-decoration-none"><button class="btn btn-dark border-0 rounded-1 px-4 py-1" onclick="">Submit</button></a>
