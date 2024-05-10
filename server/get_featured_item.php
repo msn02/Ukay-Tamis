@@ -3,7 +3,7 @@
     include('connection.php');
 
     // Prepare the SQL query
-    $stmt = $conn -> prepare ("SELECT * FROM item LIMIT 4");
+    $stmt = $conn -> prepare ("SELECT * FROM item");
 
     // Execute the query
     $stmt -> execute();
