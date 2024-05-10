@@ -22,7 +22,7 @@
                     </li>
                     <!-- subscribe button -->
                     <li class="nav-item pink_btn2 px-4 d-none d-sm-block">
-                        <a href="subscription_price.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-3 py-1 mt-1 shadow rounded-1 nav-link" type="button" onclick="">SUBSCRIBE NOW</button></a>
+                        <a href="subscribe.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-3 py-1 mt-1 shadow rounded-1 nav-link" type="button" onclick="">SUBSCRIBE NOW</button></a>
                     </li>
                     <!-- shopping cart -->
                     <li class="nav-item cart_icon me-2">
