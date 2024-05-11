@@ -11,9 +11,6 @@
         exit();
     }
 
-   
-
-    
     // check if user is logged in
     if (isset ($_SESSION['logged_in'])) {
 
@@ -23,6 +20,11 @@
         // if user clicks the checkout button
         if (isset($_POST['place_order'])) {
             // get the payment method
+            
+            if(empty($_POST['payment_method'])) {
+                echo '<script>alert("Please select a payment method")</script>';
+            }
+            
             $payment_method = $_POST['payment_method'];
 
             // insert the transaction details to the database
@@ -41,12 +43,13 @@
 
                     if ($value['product_type'] == 'item') {
 
-                        $stmt = $conn -> prepare ("INSERT INTO order_product (transaction_id, item_id, item_name, item_price) VALUES (?, ?, ?, ?)");
-                        $stmt -> bind_param("ssss", $transaction_id, $value['product_id'], $value['product'], $value['product_price']);
+                        $stmt = $conn -> prepare ("UPDATE item SET transaction_id = ? WHERE item_id = ? AND item_name = ?");
+                        $stmt -> bind_param("sss", $transaction_id, $value['product_id'], $value['product']);
+                    
                     } else if ($value['product_type'] == 'style box') {
                         
-                        $stmt = $conn -> prepare ("INSERT INTO order_product (transaction_id, style_box_id, style_box_name, style_box_price, style_box_quantity) VALUES (?, ?, ?, ?, ?)");
-                        $stmt -> bind_param("sssss", $transaction_id, $value['product_id'], $value['product'], $value['product_price'], $value['product_quantity']);
+                        $stmt = $conn -> prepare ("INSERT INTO style_box_transaction (transaction_id, style_box_id, style_box_quantity) VALUES (?, ?, ?)");
+                        $stmt -> bind_param("sss", $transaction_id, $value['product_id'], $value['product_quantity']);
                     }
                 
                     if ($stmt -> execute()) {
@@ -198,7 +201,7 @@
                         </div>
                     </div>
                     <div class="pink_btn2 mt-3 pb-2">
-                        <button class="btn btn-dark border-0 rounded-1 w-100" type="submit" name="place_order">PLACE ORDER</button>
+                        <button class="btn btn-dark border-0 rounded-1 w-100" type="submit" name="place_order" >PLACE ORDER</button>
                     </div>
                     </form>
                 </div>
