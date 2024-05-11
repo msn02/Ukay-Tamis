@@ -5,21 +5,20 @@
     // start session
     session_start();
     
-    // if user is not logged in, redirect to log in page
     if (!isset($_SESSION['logged_in'])) {
         header('location: log_in.php');
     }
-    
+
     else {
         // function to calculate the total price of the cart
         function calculate_total() {
             $total = 0;
     
             foreach($_SESSION['cart'] as $key => $value) {
-                $product = $_SESSION['cart'][$key];
+                $style = $_SESSION['cart'][$key];
     
-                $price = $product['product_price'];
-                $quantity = $product['product_quantity'];
+                $price = $style['style_price'];
+                $quantity = $style['style_quantity'];
     
                 $total += $total + ($price * $quantity);
             }
@@ -31,39 +30,42 @@
             $total_items = 0;
     
             foreach($_SESSION['cart'] as $key => $value) {
-                $total_items += $value['product_quantity'];
+                $total_items += $value['style_quantity'];
             }
             
             $_SESSION['total_items'] = $total_items;
         }
 
-        // if user clicks add to cart
+
         if (isset($_POST['add_to_cart'])) {
 
             // if user has existing cart items
             if (isset($_SESSION['cart'])) {
-                $product_array_ids = array_column($_SESSION['cart'], 'product_id');
+                $style_array_ids = array_column($_SESSION['cart'], 'style_id');
                 
                 calculate_total_items();
     
-                if ($_SESSION['total_items'] + $_POST['product_quantity'] > 10) {
-                    echo '<script>console.log("Quantity: ' . $_POST['product_quantity'] . '")</script>';
+                if ($_SESSION['total_items'] + $_POST['style_quantity'] > 10) {
+    
+                    echo '<script>console.log("Quantity: ' . $_POST['style_quantity'] . '")</script>';
+    
                     echo "<script>alert('You can only add up to 10 items in the cart!')</script>";
                 } 
     
                 // if product has not been added to cart yet
                 else {
-                    if (!in_array($_POST['product_id'], $product_array_ids)) {
-                        $product_id = $_POST['product_id'];
+                    if (!in_array($_POST['style_id'], $style_array_ids)) {
                         
-                        $product_array = array(
-                            'product_id' => $_POST['product_id'],
-                            'product_img_url' => $_POST['product_img_url'],
-                            'product' => $_POST['product'],
-                            'product_price' => $_POST['product_price'],
-                            'product_quantity' => $_POST['product_quantity']
+                        $_style_id = $_POST['style_id'];
+                        
+                        $style_array = array(
+                            'style_id' => $_POST['style_id'],
+                            'style_img_url' => $_POST['style_img_url'],
+                            'style' => $_POST['style'],
+                            'style_price' => $_POST['style_price'],
+                            'style_quantity' => $_POST['style_quantity']
                         );
-                        $_SESSION['cart'] [$product_id] = $product_array;
+                        $_SESSION['cart'] [$_style_id] = $style_array;
                     }
                     // if product is already in the cart
                     else {
@@ -73,66 +75,63 @@
             } 
             // if this is the first product in the cart    
             else {
-                $product_id = $_POST['product_id'];
-                $product_img_url = $_POST['product_img_url'];
-                $product = $_POST['product'];
-                $product_price = $_POST['product_price'];
-                $product_quantity = $_POST['product_quantity'];           
+                $style_id = $_POST['style_id'];
+                $style_img_url = $_POST['style_img_url'];
+                $style = $_POST['style'];
+                $style_price = $_POST['style_price'];
+                $style_quantity = $_POST['style_quantity'];           
                 
-                $product_array = array(
-                    'product_id' => $product_id,
-                    'product_img_url' => $product_img_url,
-                    'product' => $product,
-                    'product_price' => $product_price,
-                    'product_quantity' => $product_quantity
+                $style_array = array(
+                    'style_id' => $style_id,
+                    'style_img_url' => $style_img_url,
+                    'style' => $style,
+                    'style_price' => $style_price,
+                    'style_quantity' => $style_quantity
                 );
-                $_SESSION['cart'][$product_id] = $product_array;
+                $_SESSION['cart'][$style_id] = $style_array;
             }
+    
             // calculate total items in cart
             calculate_total();
             calculate_total_items();
         }
         
-        // edit product quantity
         else if (isset($_POST['edit_quantity'])) {
-            $product_id = $_POST['product_id'];
+            $style_id = $_POST['style_id'];
     
-            // get the product quantity
-            $product_quantity = $_POST['product_quantity'];
+            // get the style quantity
+            $style_quantity = $_POST['style_quantity'];
     
-            // get the product array from the session
-            $product_array = $_SESSION['cart'][$product_id];
+            // get the style array from the session
+            $style_array = $_SESSION['cart'][$style_id];
     
-            // update the product quantity
-            $product_array['product_quantity'] = $product_quantity;
+            // update the style quantity
+            $style_array['style_quantity'] = $style_quantity;
     
             // update the session cart
-            $_SESSION['cart'][$product_id] = $product_array;
+            $_SESSION['cart'][$style_id] = $style_array;
     
             calculate_total();
             calculate_total_items();
         }
-        
-        // remove product from cart
+    
         else if (isset($_POST['remove_product'])) {
-            $product_id = $_POST['product_id'];
-            unset($_SESSION['cart'][$product_id]);
+            $style_id = $_POST['style_id'];
+            unset($_SESSION['cart'][$style_id]);
     
             calculate_total();
             calculate_total_items();
         } 
-
-        // delete all items in the cart
-        else if (isset($_POST['delete_all'])) {
-            if (isset($_POST['select_all'])) {
-                // if select_all checkbox is checked, delete all items in the cart
-                unset($_SESSION['cart']);
-                $_SESSION['total_items'] = 0;
-                $_SESSION['total'] = 0;
-            }
+        
+        else {
+            // header('location: catalogue_page.php');
         }
+    
+
     }
+    
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -185,30 +184,26 @@
                                 <?php foreach($_SESSION['cart'] as $key => $value) { ?>
                                     <tr class="product_info align-middle">
                                         <th scope="row" class="item_img d-flex justify-content-center">
-                                            <img src="resources/<?php echo $value['product_img_url']; ?>" class="card m-0" alt="item">
+                                            <img src="resources/<?php echo $value['style_img_url']; ?>" class="card m-0" alt="item">
                                         </th>
-                                        <td><?php echo $value['product']; ?></td>
-                                        <td class="text-center"><?php echo $value['product_price']; ?></td>
+                                        <td><?php echo $value['style']; ?></td>
+                                        <td class="text-center"><?php echo $value['style_price']; ?></td>
                                         <td class="text-center">
                                             <form method="POST" action="view_cart.php">
                                                 <!-- edit quantity -->
-                                                <input type="hidden" name="product_id" value="<?php echo $value['product_id']; ?>">
-                                                <?php if (isset($_POST['item']) && $_POST['item'] == $value['product_id']) { ?>
-                                                    <td class="text-center"><?php echo $value['product_quantity']; ?></td>
-                                                <?php } else { ?>
-                                                    <div class="input-group input-group-sm gray_btn m-auto p-0 center_align">
-                                                    <input type="number" class="form-control m-0 p-auto" name="product_quantity" value="<?php echo $value['product_quantity'] ?>" id="counter_input" min="1" max="3">
-                                                    <button style="background-color: #fff; color: #FF6A97" type="submit" class="edit_btn btn btn-dark border-0 rounded-1" name="edit_quantity">Edit</button>
-                                                    </div>
-                                                <?php } ?>
+                                                <input type="hidden" name="style_id" value="<?php echo $value['style_id']; ?>">
+                                                <div class="input-group input-group-sm gray_btn m-auto p-0 center_align">
+                                                    <input type="number" class="form-control m-0 p-auto" name="style_quantity" value="<?php echo $value['style_quantity'] ?>" id="counter_input" min="1" max="3">
+                                                    <button style="background-color: #fff; color: #FF6A97" type="submit" class="edit_btn btn btn-dark border-0 rounded-1" name="edit_quantity">Save</button>
+                                                </div>
                                             </form> 
                                         </td>
-                                        <td class="text-center"><?php echo 'PHP ' . $value['product_price'] * $value['product_quantity']; ?></td>
+                                        <td class="text-center"><?php echo 'PHP ' . $value['style_price'] * $value['style_quantity']; ?></td>
                                         <td>
                                             <!-- delete button -->
                                             <form method="POST" action="view_cart.php">
                                                 <div class="center_align m-0 p-0 delete_btn">
-                                                    <input type="hidden" name="product_id" value="<?php echo $value['product_id']; ?>">
+                                                    <input type="hidden" name="style_id" value="<?php echo $value['style_id']; ?>">
                                                     <button class="btn btn-dark border-0 rounded-1" type="submit" name="remove_product"><i class="bi bi-trash-fill"></i></button>
                                                 </div>
                                             </form>
@@ -220,17 +215,17 @@
                     </table>
 
                     <?php 
-                        // set total items and total to 0 if cart is empty
-                        if(empty($_SESSION['cart'])) {
-                            $_SESSION['total_items'] = 0;
-                            $_SESSION['total'] = 0;
-                            $cart_value = 0;
-                        } else {
-                            // calculate total items and total
-                            calculate_total_items();
-                            calculate_total();
-                            $cart_value = serialize($_SESSION['cart']);
-                        }
+                    // Set total items and total to 0 if cart is empty
+                    if(empty($_SESSION['cart'])) {
+                        $_SESSION['total_items'] = 0;
+                        $_SESSION['total'] = 0;
+                        $cart_value = 0;
+                    } else {
+                        // Calculate total items and total
+                        calculate_total_items();
+                        calculate_total();
+                        $cart_value = serialize($_SESSION['cart']);
+                    }
                     ?>
                 </div>
 
@@ -238,18 +233,16 @@
                 <div class="col-sm-3 gray_bg rounded-2 px-4 py-3 m-2">
                     <!-- cart actions -->
                     <div class="row mt-3 border-bottom">
-                        <form method = "POST" action = "view_cart.php">
-                            <h6 class="border-bottom pb-2 bold_header mb-3">Actions</h6>
-                            <div class="form_style pb-3">
-                                <input class="form-check-input me-2" type="checkbox" name = "select_all" value="" id="all_items">
-                                <label class="form-check-label" for="checkbox_agree">
-                                    Select all
-                                </label>
-                            </div>
-                            <div class="delete_btn2 pb-3">
-                                <button class="btn btn-dark border-0 rounded-1 w-100" type = "submit" name = "delete_all">Delete</button>
-                            </div>
-                        </form>
+                        <h6 class="border-bottom pb-2 bold_header mb-3">Actions</h6>
+                        <div class="form_style pb-3">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="all_items">
+                            <label class="form-check-label" for="checkbox_agree">
+                                Select all
+                            </label>
+                        </div>
+                        <div class="delete_btn2 pb-3">
+                            <button class="btn btn-dark border-0 rounded-1 w-100">Delete</button>
+                        </div>
                     </div>
                     <!-- cart info -->
                     <div class="row mt-3 p-0 mb-0 cart_info">
