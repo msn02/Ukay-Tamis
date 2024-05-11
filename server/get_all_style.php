@@ -3,7 +3,7 @@
     include('connection.php');
 
     // Prepare the SQL query
-    $stmt = $conn -> prepare ("SELECT * FROM style WHERE style_id <> 'style-0068'");
+    $stmt = $conn -> prepare ("SELECT * FROM style_box_details WHERE style_id <> 'style-0068'");
 
     // Execute the query
     $stmt -> execute();
