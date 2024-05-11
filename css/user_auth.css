@@ -43,6 +43,13 @@
     font-weight: bold;
 }
 
+.sec_question {
+    line-height: normal;
+    padding: 0;
+    color: black;
+    background: #FFEDAC;
+}
+
 .sign_up_link a {
     color: #ff3a75;
 }

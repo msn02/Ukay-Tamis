@@ -1,0 +1,14 @@
+/* CSS Selectors arranged alphabetically */
+
+.gradient_green {
+    background-image: linear-gradient(180deg, #3F5520, #96DA39, #eeeeee);
+    position:static;
+    width: auto;
+    height: 500px;
+}
+
+.green_border {
+    border: 2px solid #96DA39;
+    background: #e9ffcb;
+    line-height: normal;
+}
