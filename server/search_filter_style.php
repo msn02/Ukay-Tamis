@@ -9,7 +9,7 @@
         if (isset($_POST['category'])) {
             $category = $_POST['category'];
 
-            $stmt = $conn -> prepare ("SELECT * FROM style WHERE style = ?");
+            $stmt = $conn -> prepare ("SELECT * FROM style_box_details WHERE style = ?");
             $stmt -> bind_param("s", $category);
             $stmt -> execute();
 
