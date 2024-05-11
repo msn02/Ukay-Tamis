@@ -15,7 +15,7 @@
     while ($row = $result -> fetch_assoc()) {
         $sub_tier_details[] = array(
             'plan_tier' => $row['plan_tier'],
-            'plan_tier_description' => $row['plan_tier_description']
+            'plan_tier_description' => $row['plan_tier_description'],
         );
     }
 ?>

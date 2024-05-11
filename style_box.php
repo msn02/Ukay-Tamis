@@ -75,11 +75,11 @@
                         <!-- add to card and buy now button -->
 
                         <form method = "POST" action = "view_cart.php">
-                            <input type = "hidden" name = "style_id" value = "<?php echo $row['style_id']; ?>"> </input>
-                            <input type = "hidden" name = "style_img_url" value = "<?php echo $row['style_img_url']; ?>"> </input>
-                            <input type = "hidden" name = "style" value = "<?php echo $row['style']; ?>"> </input>
-                            <input type = "hidden" name = "style_price" value = "<?php echo $row['price']; ?>"> </input>
-                            <input type = "hidden" name = "style_quantity" value = "1"> </input>
+                            <input type = "hidden" name = "product_id" value = "<?php echo $row['style_box_id']; ?>"> </input>
+                            <input type = "hidden" name = "product_img_url" value = "<?php echo $row['style_img_url']; ?>"> </input>
+                            <input type = "hidden" name = "product" value = "<?php echo $row['style']; ?>"> </input>
+                            <input type = "hidden" name = "product_price" value = "<?php echo $row['price']; ?>"> </input>
+                            <input type = "hidden" name = "product_quantity" value = "1"> </input>
                             <div class="px-3 pt-0 m-0">
                                 <div class="d-inline add_cart">
                                     <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit" name ="add_to_cart"><i class="bi bi-cart-plus me-1"></i></button>
@@ -96,11 +96,11 @@
             <!-- Related  Single Items -->
             <div class="row rounded-2 m-3 p-2 gray_bg">
                 <div class="mt-3 mb-0 ms-2 single_items">
-                    <h6 class="mb-0">FEATURED SINGLE ITEMS</h6>
+                    <h6 class="mb-0">RELATED SINGLE ITEMS</h6>
                 </div>
                 <div class="row mt-0 mx-1 p-2 gx-3">
                     
-                    <?php include('server/get_related_item.php'); ?>
+                    <?php include('server/get_related_item_style.php'); ?>
                 
                     <!-- Loop through the related items -->
                     <?php while ($row = $related_items->fetch_assoc()) { ?>
