@@ -5,75 +5,6 @@
     // start the session
     session_start();
 
-    // make a condition to lock the checkout page if the user is not logged in
-    if (!isset ($_SESSION['logged_in'])) {
-        header("Location: log_in.php");
-        exit();
-    }
-
-   
-
-    
-    // check if user is logged in
-    if (isset ($_SESSION['logged_in'])) {
-
-        // set the total items in the cart
-        $_SESSION['grand_total'] = $_SESSION['total'] + 100;
-
-        // if user clicks the checkout button
-        if (isset($_POST['place_order'])) {
-            // get the payment method
-            $payment_method = $_POST['payment_method'];
-
-            // insert the transaction details to the database
-            $stmt = $conn -> prepare ("INSERT INTO transaction (user_id, total_items, total_price, payment_method) VALUES (?, ?, ?, ?)");
-            
-            $stmt -> bind_param("ssss", $_SESSION['user_id'], $_SESSION['total_items'], $_SESSION['grand_total'], $payment_method);
-            
-            // insert the order items to the order_items table
-            if ($stmt -> execute()) {
-
-                $transaction_id = $conn -> insert_id;
-
-                foreach ($_SESSION['cart'] as $key => $value) {
-                    // If the transaction was inserted successfully, insert the order_product
-                    echo 'type: ' . $value['product_type'];
-
-                    if ($value['product_type'] == 'item') {
-
-                        $stmt = $conn -> prepare ("INSERT INTO order_product (transaction_id, item_id, item_name, item_price) VALUES (?, ?, ?, ?)");
-                        $stmt -> bind_param("ssss", $transaction_id, $value['product_id'], $value['product'], $value['product_price']);
-                    } else if ($value['product_type'] == 'style box') {
-                        
-                        $stmt = $conn -> prepare ("INSERT INTO order_product (transaction_id, style_box_id, style_box_name, style_box_price, style_box_quantity) VALUES (?, ?, ?, ?, ?)");
-                        $stmt -> bind_param("sssss", $transaction_id, $value['product_id'], $value['product'], $value['product_price'], $value['product_quantity']);
-                    }
-                
-                    if ($stmt -> execute()) {
-                        echo '<script>console.log("Order item added successfully")</script>';
-                    } else {
-                        echo '<script>console.log("Failed to add order item")</script>';
-                    }
-                }
-            } else {
-                echo '<script>console.log("Failed to add transaction")</script>';
-            }
-    
-            // clear the cart
-            $_SESSION['cart'] = array();
-            $_SESSION['total_items'] = 0;
-            $_SESSION['total'] = 0;
-            $_SESSION['grand_total'] = 0;
-    
-            // redirect to the checkout success page
-            echo '<script>alert("Order successful")</script>';
-            header("Location: catalogue_page.php");
-        } 
-    }
-    else {
-        header("Location: catalogue_page.php");
-        exit();
-    }
 ?>
 
 
@@ -105,7 +36,7 @@
             <div class="row m-2 p-0 d-flex justify-content-center">
                 <!-- checkout -->
                 <div class="col-sm-8 gray_bg rounded-2 px-4 py-2 m-2">
-                    <h3 class="bold_header mb-3 pb-3 border-bottom mt-3">Checkout</h3>
+                    <h3 class="bold_header mb-3 pb-3 border-bottom mt-3">Order Details</h3>
                     <table class="table">
                         <thead>
                             <tr class="thead_style">
@@ -146,9 +77,6 @@
                                 <p class="m-0 p-0"><?php echo $_SESSION['address']?></p>
                             </div>
                         </div>
-                        <div class="gray_btn mt-2">
-                            <a href="account.php"><button class="btn btn-dark border-0 rounded-1 w-100">Change Delivery Address</button></a>
-                        </div>
                     </div>
                     <!-- cart info -->
                     <div class="row mt-3 p-0 mb-0 cart_info">
@@ -158,6 +86,14 @@
                         <div class="col-6 text-end">
                             <p><?php echo date('Y-m-d H:i:s'); ?></p>
                         </div>
+
+                        <div class="col-6">
+                            <p>Order ID</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p><?php echo 'ORD-' . date('Ymd') . '-000017'; ?></p>
+                        </div>
+
                     </div>
                     <div class="row p-0 mb-0 cart_info">
                         <div class="col-6">
@@ -183,45 +119,9 @@
                             <p class="pink_highlight bold_header"><?php echo 'PHP ' . $_SESSION['grand_total']?></p>
                         </div>
                     </div>
-                    <div class="row pt-2 m-0">
-                        <div class="payment_details filter_content px-0">
-                            <form method = "POST" action = "checkout_page.php">
-                            <h6 class="bold_header">Select your Payment Method</h6>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name="payment_method" type="radio" value="Cash on Delivery" id="Cash">
-                                <label class="form-check-label ms-1" for="small">Cash on Delivery</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name="payment_method" type="radio" value="GCash" id="GCash">
-                                <label class="form-check-label ms-1" for="small">GCash</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pink_btn2 mt-3 pb-2">
-                        <button class="btn btn-dark border-0 rounded-1 w-100" type="submit" name="place_order">PLACE ORDER</button>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-
-<!-- counter script -->
-<script>
-    const counterInput = document.getElementById('counter_input');
-    const addButton = document.getElementById('add_btn');
-    const minusButton = document.getElementById('minus_btn');
-
-    addButton.addEventListener('click', function() {
-        counterInput.value = parseInt(counterInput.value) + 1;
-    });
-
-    minusButton.addEventListener('click', function() {
-        const currentValue = parseInt(counterInput.value);
-        if (currentValue > 1) {
-            counterInput.value = currentValue - 1;
-        }
-    });
-</script>

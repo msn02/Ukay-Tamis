@@ -43,7 +43,18 @@
             // if user has existing cart items
             if (isset($_SESSION['cart'])) {
                 $product_array_ids = array_column($_SESSION['cart'], 'product_id');
-                
+
+                // check if the product added to cart is an item
+                $product_type = '';
+                if (isset($_POST['item'])) {
+                    $_SESSION['item'] = $_POST['item'];
+                    $product_type = 'item';
+                }
+                // check if the product added to cart is a style box
+                else if (isset($_POST['style_box'])) {
+                    $_SESSION['style_box'] = $_POST['style_box'];
+                    $product_type = 'style box';
+                }
                 calculate_total_items();
     
                 if ($_SESSION['total_items'] + $_POST['product_quantity'] > 10) {
@@ -61,7 +72,8 @@
                             'product_img_url' => $_POST['product_img_url'],
                             'product' => $_POST['product'],
                             'product_price' => $_POST['product_price'],
-                            'product_quantity' => $_POST['product_quantity']
+                            'product_quantity' => $_POST['product_quantity'],
+                            'product_type' => $product_type
                         );
                         $_SESSION['cart'] [$product_id] = $product_array;
                     }
@@ -84,7 +96,8 @@
                     'product_img_url' => $product_img_url,
                     'product' => $product,
                     'product_price' => $product_price,
-                    'product_quantity' => $product_quantity
+                    'product_quantity' => $product_quantity,
+                    'product_type' => $product_type
                 );
                 $_SESSION['cart'][$product_id] = $product_array;
             }
@@ -193,7 +206,7 @@
                                             <form method="POST" action="view_cart.php">
                                                 <!-- edit quantity -->
                                                 <input type="hidden" name="product_id" value="<?php echo $value['product_id']; ?>">
-                                                <?php if (isset($_POST['item']) && $_POST['item'] == $value['product_id']) { ?>
+                                                <?php if (isset($_SESSION['item']) && $_SESSION['item'] == $value['product_id']) { ?>
                                                     <td class="text-center"><?php echo $value['product_quantity']; ?></td>
                                                 <?php } else { ?>
                                                     <div class="input-group input-group-sm gray_btn m-auto p-0 center_align">
