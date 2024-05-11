@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2024 at 10:01 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 11, 2024 at 12:38 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -69,6 +69,33 @@ CREATE TRIGGER `generate_item_id` BEFORE INSERT ON `item` FOR EACH ROW BEGIN
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `security_questions`
+--
+
+CREATE TABLE `security_questions` (
+  `question_id` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `security_questions`
+--
+
+INSERT INTO `security_questions` (`question_id`, `question`) VALUES
+(1, 'What is your mother\'s maiden name?'),
+(2, 'What is the name of your first pet?'),
+(3, 'In which city were you born?'),
+(4, 'What is the name of your favorite teacher?'),
+(5, 'What is your favorite movie?'),
+(6, 'What is your favorite food?'),
+(7, 'What is the model of your first car?'),
+(8, 'What is the name of your favorite book?'),
+(9, 'What is the name of your childhood best friend?'),
+(10, 'What is the make of your first cellphone?');
 
 -- --------------------------------------------------------
 
@@ -138,7 +165,22 @@ INSERT INTO `sequence` (`sequence_id`) VALUES
 (60),
 (61),
 (62),
-(63);
+(63),
+(64),
+(65),
+(66),
+(67),
+(68),
+(69),
+(70),
+(71),
+(72),
+(73),
+(74),
+(75),
+(76),
+(77),
+(78);
 
 -- --------------------------------------------------------
 
@@ -417,7 +459,8 @@ INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `first_name`, `l
 ('tran-00041', 'dee', 'danielamarzan.cantillo@bicol-u.edu.ph', '25d55ad283aa400af464c76d713c07ad', 'Daniela', 'Cantillo', '09483340088', 'Zone 8 Labnig, Malinao, Albay', '2024-05-08 02:06:18'),
 ('tran-00043', 'yes102', 'jessai@live.nl', 'e807f1fcf82d132f9bb018ca6738a19f', 'Jessai', 'Schonewille', '09483340088', 'BS Rollepaal, Dedemsvaart, Netherlands', '2024-05-08 02:06:18'),
 ('user-00047', 'daniela', 'danielait@gmail.com', 'e807f1fcf82d132f9bb018ca6738a19f', 'Dee', 'Cantillo', '09483340088', 'Daraga, Albay', '2024-05-08 02:08:53'),
-('user-00049', 'MInzy', 'minzy19@gmail.com', 'e807f1fcf82d132f9bb018ca6738a19f', 'Minzy', 'Mendez', '09135902471', 'Zone 4 Bantayan, Tabaco City, Albay', '2024-05-08 02:59:40');
+('user-00049', 'MInzy', 'minzy19@gmail.com', 'e807f1fcf82d132f9bb018ca6738a19f', 'Minzy', 'Mendez', '09135902471', 'Zone 4 Bantayan, Tabaco City, Albay', '2024-05-08 02:59:40'),
+('user-00064', 'Mark', 'gmeescober@gmail.com', 'ed52efced6f7f5438c91fe8293eed992', 'Mark', 'Last', '09295696163', 'Blk 4 Lot 2, Sagpon, Legazpi, Albay', '2024-05-11 14:22:01');
 
 --
 -- Triggers `user`
@@ -479,7 +522,20 @@ INSERT INTO `user_logs` (`log_id`, `user_id`, `timestamp`, `action`) VALUES
 ('tran-00060', 'user-00049', '2024-05-07 19:46:08', 'logout'),
 ('tran-00061', 'user-00049', '2024-05-07 19:50:40', 'login'),
 ('tran-00062', 'user-00049', '2024-05-07 19:50:42', 'logout'),
-('tran-00063', 'user-00049', '2024-05-07 19:52:44', 'login');
+('tran-00063', 'user-00049', '2024-05-07 19:52:44', 'login'),
+('tran-00065', 'user-00064', '2024-05-11 06:22:01', 'signup'),
+('tran-00066', NULL, '2024-05-11 06:22:42', 'change address'),
+('tran-00067', NULL, '2024-05-11 06:23:15', 'change address'),
+('tran-00068', NULL, '2024-05-11 06:25:04', 'change address'),
+('tran-00069', NULL, '2024-05-11 06:25:50', 'logout'),
+('tran-00070', 'user-00064', '2024-05-11 06:25:57', 'login'),
+('tran-00071', 'user-00064', '2024-05-11 06:26:07', 'change address'),
+('tran-00072', 'user-00064', '2024-05-11 06:28:57', 'change address'),
+('tran-00074', 'user-00064', '2024-05-11 06:38:20', 'change password'),
+('tran-00075', 'user-00064', '2024-05-11 07:20:54', 'change password'),
+('tran-00076', 'user-00064', '2024-05-11 07:21:26', 'change password'),
+('tran-00077', 'user-00064', '2024-05-11 07:23:55', 'logout'),
+('tran-00078', 'user-00064', '2024-05-11 07:25:03', 'login');
 
 --
 -- Triggers `user_logs`
@@ -520,6 +576,13 @@ CREATE TABLE `user_preference` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `user_preference`
+--
+
+INSERT INTO `user_preference` (`user_preference_id`, `user_id`, `height`, `weight`, `bust_size`, `hip_size`, `shoe_size`, `clothing_size`) VALUES
+('tran-00073', 'user-00064', 233.00, 90.00, '23', '42', '18', 'XXL');
+
+--
 -- Triggers `user_preference`
 --
 DELIMITER $$
@@ -543,6 +606,19 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_security_questions`
+--
+
+CREATE TABLE `user_security_questions` (
+  `user_question_id` int(11) NOT NULL,
+  `user_id` varchar(10) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `answer` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `style_box_details`
 --
 DROP TABLE IF EXISTS `style_box_details`;
@@ -561,6 +637,12 @@ ALTER TABLE `item`
   ADD KEY `style_id` (`style_id`),
   ADD KEY `transaction_id` (`transaction_id`),
   ADD KEY `style` (`style`);
+
+--
+-- Indexes for table `security_questions`
+--
+ALTER TABLE `security_questions`
+  ADD PRIMARY KEY (`question_id`);
 
 --
 -- Indexes for table `sequence`
@@ -632,14 +714,34 @@ ALTER TABLE `user_preference`
   ADD KEY `user_preference_ibfk_1` (`user_id`);
 
 --
+-- Indexes for table `user_security_questions`
+--
+ALTER TABLE `user_security_questions`
+  ADD PRIMARY KEY (`user_question_id`),
+  ADD UNIQUE KEY `user_question_unique` (`user_id`,`question_id`),
+  ADD KEY `fk_question_id` (`question_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `security_questions`
+--
+ALTER TABLE `security_questions`
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `sequence`
 --
 ALTER TABLE `sequence`
-  MODIFY `sequence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `sequence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+
+--
+-- AUTO_INCREMENT for table `user_security_questions`
+--
+ALTER TABLE `user_security_questions`
+  MODIFY `user_question_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -690,6 +792,13 @@ ALTER TABLE `user_logs`
 --
 ALTER TABLE `user_preference`
   ADD CONSTRAINT `user_preference_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `user_security_questions`
+--
+ALTER TABLE `user_security_questions`
+  ADD CONSTRAINT `fk_question_id` FOREIGN KEY (`question_id`) REFERENCES `security_questions` (`question_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

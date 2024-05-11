@@ -30,41 +30,53 @@
             exit();
         }
     }
-
+    // Handle change password request
     if(isset($_POST['change_pass_btn'])){
+        $old_password = $_POST['old_password'];
         $new_password = $_POST['new_password'];
         $confirm_new_password = $_POST['confirm_new_password'];
         $user_id = $_SESSION['user_id'];
 
-        // if password do not match
-        if ($new_password != $confirm_new_password) {
-            header("Location: account.php?error=Password does not match");
-        }
-    
-        // if password is less than 8 characters
-        else if (strlen($new_password) < 8) {
-            header("Location: account.php?error=Password must be at least 8 characters");
-        }
+        // Retrieve the user's current password from the database
+        $stmt = $conn->prepare("SELECT password FROM user WHERE user_id = ?");
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows == 1) {
+            $stmt->bind_result($db_password);
+            $stmt->fetch();
 
-        // if there are no errors
-        else {
-            $hashed_password = md5($new_password);
-            $stmt = $conn -> prepare ("UPDATE user SET password = ? WHERE user_id = ?");
-            $stmt -> bind_param("ss", $hashed_password, $user_id);
-            $stmt -> execute();
-
-            // insert record to user_logs
-            $action = 'change password'; 
-
-            $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
-            $stmt1 -> bind_param("ss", $user_id, $action);
-            $stmt1 -> execute();
-
-            if ($stmt -> execute()) {
-                header("Location: account.php?success=Password changed successfully");
+            // Verify if the old password matches the password retrieved from the database
+            if (md5($old_password) == $db_password) {
+                // If old password matches, proceed with checking new password and confirm password
+                if ($new_password == $confirm_new_password) {
+                    // If new password and confirm password match, update password in the database
+                    $hashed_password = md5($new_password);
+                    $update_stmt = $conn->prepare("UPDATE user SET password = ? WHERE user_id = ?");
+                    $update_stmt->bind_param("ss", $hashed_password, $user_id);
+                    if ($update_stmt->execute()) {
+                        // Password changed successfully
+                        $action = 'change password'; 
+                        $stmt1 = $conn->prepare("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+                        $stmt1->bind_param("ss", $user_id, $action);
+                        $stmt1->execute();
+                        header("Location: account.php?success=Password changed successfully");
+                        exit();
+                    } else {
+                        header("Location: account.php?error=Something went wrong");
+                        exit();
+                    }
+                } else {
+                    header("Location: account.php?error=New password and confirm password do not match");
+                    exit();
+                }
             } else {
-                header("Location: account.php?error=Something went wrong");
+                header("Location: account.php?error=Incorrect old password");
+                exit();
             }
+        } else {
+            header("Location: account.php?error=User not found");
+            exit();
         }
     }
     // Handle change address request
@@ -201,26 +213,31 @@
                 <!-- CHANGE PASSWORD -->
                 <form class="form_style p-4 m-0" method = "POST" action = "account.php">
 
-                <p style="color: red"> <?php if (isset($_GET['error'])) { echo $_GET['error']; } ?> </p>
-                <p style="color: green"> <?php if (isset($_GET['success'])) { echo $_GET['success']; } ?> </p>
-
-
                         <div class="border-top col m-0 p-3">
-                            <h2 class="bold_header ps-0 mt-5 mb-3 pb-0">CHANGE PASSWORD</h2>
+                            <h2 class="bold_header ps-0 mt-5 mb-3 pb-0">Change Password</h2>
                         </div>
 
                         <div class="ms-3 mb-3">
-                            <label for="input_uname" class="form-label ms-1">Password</label>
-                            <input type="password" class="form-control" id="input_uname" name = "new_password" placeholder="Enter new password" required>
+                            <label for="input_uname" class="form-label">Old Password</label>
+                            <input type="password" class="form-control ms-1" id="input_oldPass" name = "old_password" placeholder="Enter new password" required>
+                        </div>
+
+                        <div class="ms-3 mb-3">
+                            <label for="input_uname" class="form-label">New Password</label>
+                            <input type="password" class="form-control ms-1" id="input_uname" name = "new_password" placeholder="Enter new password" required>
                         </div>
                         <div class="ms-3 mb-3">
-                            <label for="input_pass" class="form-label ms-1">Confirm Password</label>
-                            <input type="password" class="form-control" id="input_pass" name = "confirm_new_password" placeholder="Confirm new password" required>
+                            <label for="input_pass" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control ms-1" id="input_pass" name = "confirm_new_password" placeholder="Confirm new password" required>
                         </div>
                         <!-- TO DO: Error warning (if password is incorrect/no account/no username found) -->
-                        <div class="log_sign_btn mt-4 center_align">
-                            <input class="btn btn-dark border-0 rounded-1 px-4 py-1" onclick="" name = "change_pass_btn" value = "Confirm" type = "submit"></input>
+                        <div class="log_sign_btn mt-4 ms-3  ">
+                            <input class="btn btn-dark border-0 rounded-1 px-4 py-1 ms-1" onclick="" name = "change_pass_btn" value = "Confirm" type = "submit"></input>
+                            <button class="btn btn-dark border-0 rounded-1 px-4 py-1" data-bs-toggle="modal" data-bs-target="#preferencesModal">Set up Security Questions</button>
                         </div>
+
+                        <p style="color: red"> <?php if (isset($_GET['error'])) { echo $_GET['error']; } ?> </p>
+                        <p style="color: green"> <?php if (isset($_GET['success'])) { echo $_GET['success']; } ?> </p>
                 </form>
 
                 <!-- TRANSACTIONS -->
@@ -300,6 +317,7 @@
                                 <label for="height" class="form-label">Height (cm)</label>
                                 <input type="number" class="form-control" id="height" name="height" step="0.01" min="0" required>
                             </div>
+                            <div class="mb-3">
                                 <label for="weight" class="form-label">Weight (kg)</label>
                                 <input type="number" class="form-control" id="weight" name="weight" step="0.01" min="0" required>
                             </div>
@@ -332,10 +350,10 @@
                                 <input type="submit" name="preferences_change" class="btn btn-primary" value="Save changes"></input>
                             </div>
                         </form>
-                </div>
+                    </div>
             </div>
         </div>
-
+        </div>
 
 </body>
 </html>
