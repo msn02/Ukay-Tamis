@@ -1,4 +1,4 @@
-<div class="container-fluid footer_bg p-5 center_align">
+<footer class="container-fluid footer_bg p-5 center_align mt-5">
     <div class="container m-2 p-2">
        <div class="row mb-2 mx-0 p-0 border-bottom border-1 d-flex justify-content-between">
             <div class="m-0 p-0 col-sm-3">
@@ -7,16 +7,16 @@
             <div class="m-0 p-0 col-sm-6 center_align">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="about_page.php">About Us</a>
+                        <a class="text-decoration-none mx-3" href="about_us.php">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="catalogue_page.php">Catalogue</a>
+                        <a class="text-decoration-none mx-3" href="catalogue_page.php">Catalogue</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="mystery_box.php">Mystery Box</a>
+                        <a class="text-decoration-none mx-3" href="mystery_box.php">Mystery Box</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="subscription.php">Pricing</a>
+                        <a class="text-decoration-none mx-3" href="subscription.php">Pricing</a>
                     </li>
                 </ul>
             </div>
@@ -26,8 +26,8 @@
                 <a href="#" class="me-2"><i class="bi bi-twitter-x"></i></a>
             </div>
        </div>
-       <div class="row m-0 p-0 text-center opacity-50">
+       <div class="row m-0 p-0 text-center opacity-50 copyright_text">
             <p><i class="bi bi-c-circle me-2"></i>UKAY TAMIS 2024 All Rights Reserved</p>
        </div>
     </div>
-</div>
+</footer>

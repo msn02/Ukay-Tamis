@@ -1,0 +1,76 @@
+/* CSS Selectors arranged alphabetically */
+
+.back_link a {
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.form_option select:focus {
+    outline: none;
+    box-shadow: none;
+    font-size: 13px;
+}
+
+.form_option option, .form_option select {
+    font-size: 13px;
+}
+
+.form_style {
+    font-family:'Inter', sans-serif;
+    font-size: 14px;
+    color: gray;
+}
+
+.form_style input {
+    font-family:'Inter', sans-serif;
+    font-size: 13px;
+}
+
+.form_style input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.gray_btn button, .gray_btn button:hover {
+    font-size: 12px;
+    background: #7d7d7d;
+}
+
+.item_img img {
+    width: auto;
+    height: 80px;
+    display: flex;
+    margin: auto;
+}
+
+.measurement_info p {
+    font-size: 13px;
+    margin-bottom: 13px;
+}
+
+.package_info h6, p {
+    line-height: normal;
+}
+
+.package_info p {
+    font-size: 12px;
+}
+
+.price_badge {
+    background:#FFEDAC;
+}
+
+.product_info td {
+    font-size: 13px;
+
+}
+
+.user_info p, h3 {
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.user_info p {
+    font-size: 14px;
+}

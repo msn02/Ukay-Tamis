@@ -1,8 +1,3 @@
-<?php
-    // start session
-    session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +9,7 @@
 </head>
 <body class="gray_bg2 m-0 p-0">
     <!-- navigation bar -->
-    <?php 
-        if (isset($_SESSION['logged_in'])) {
-            include 'auth_nav_bar.php';
-        } else {
-            include 'nav_bar.php';
-        }
-    ?>
+    <?php include 'nav_bar.php'?>
 
     <div class="container-fluid m-0 p-0 gradient_pink2">
         <!-- title and intro -->
@@ -33,7 +22,7 @@
                 </div>
                 <!-- subscribe -->
                 <div class="px-0 pink_btn white_border pb-1">
-                    <a href="subscription_price.php" class="text-decoration-none "><button class="btn btn-dark border-0 px-4 shadow-sm rounded-1" type="button">SUBSCRIBE NOW</button></a>
+                    <a href="subscribe.php" class="text-decoration-none "><button class="btn btn-dark border-0 px-4 shadow-sm rounded-1" type="button">SUBSCRIBE NOW</button></a>
                 </div>
                 <!-- view catalogue -->
                 <div class="white_btn2 pb-3 mt-2 ms-2">
@@ -85,7 +74,7 @@
                         </div>
                     </div>
                 <div class="col-sm-12 p-0 pink_btn pb-3 mb-3 btn_text">
-                    <a href="month_theme_page.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">LEARN MORE</button></a>
+                    <a href="monthly_theme.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">LEARN MORE</button></a>
                 </div>
             </div>
         </div>
@@ -224,7 +213,7 @@
 
                         <!-- choose a plan -->
                         <div class="d-flex justify-content-center p-0 pink_btn pt-2 btn_text">
-                            <a href="subscription_price.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">CHOOSE A PLAN</button></a>
+                            <a href="subscribe.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">CHOOSE A PLAN</button></a>
                         </div>
                     </div>
                 </div>
@@ -232,8 +221,7 @@
         </div>
     </div>
 
-    <!-- contact us -->
-    <?php include 'contact_us.php'?>
-
+    <!-- footer -->
+    <?php include 'footer.php'?>
 </body>
 </html>
