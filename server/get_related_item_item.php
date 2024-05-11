@@ -6,7 +6,7 @@
         $item_id = $_GET['item_id'];
 
         // Prepare the SQL query to get the style_id of the current item
-        $stmt = $conn -> prepare ("SELECT style_id FROM item WHERE item_id = ?");
+        $stmt = $conn -> prepare ("SELECT style_id FROM item WHERE item_id = ? AND transaction_id IS NULL");
 
         // Bind the parameters
         $stmt -> bind_param("s", $item_id);

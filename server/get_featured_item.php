@@ -3,7 +3,7 @@
     include('connection.php');
 
     // Prepare the SQL query
-    $stmt = $conn -> prepare ("SELECT * FROM item");
+    $stmt = $conn -> prepare ("SELECT * FROM item WHERE transaction_id IS NULL");
 
     // Execute the query
     $stmt -> execute();
