@@ -163,24 +163,33 @@
         }
     ?>
 
-    <div class="container-fluid">
-        <div class="container">
-
-
-        <div class="row shadow rounded-2 m-3 gray_bg">
-
-                <!-- Details -->
-                <div class="col m-0 py-4 px-3">
-                    <!-- Title -->
-                    <div class="row m-0 p-3 pb-0 justify-content-between g-3">
-                        <div class="col-auto">
-                            <h2 class="bold_header ps-0 mb-0 pb-0">Manage Account</h2>
-                        </div>
-
-                        <div class="col-auto">
-                            <p class="pt-3 mb-0"><a href="account.php?logout" id="logout_btn" class="text-end">Log Out</a></p>
-                        </div>
+    <div class="container-fluid gradient_pink m-0 p-0 pt-1">
+        <div class="container px-5 py-3">
+            <!-- back button -->
+            <div class="back_link p-0 mt-2">
+                <a class="border-0 ps-2 pb-0 rounded-1 justify-content-start text-decoration-none w-25 mb-4" id="go_back" href="javascript:void(0)"><i class="bi bi-chevron-left me-2"></i>Back</a>
+            </div>
+            
+            <div class="row py-2 px-1 m-0 justify-content-between">
+                <!-- alert modal(s) -->
+                <div class="px-2 mt-1 mb-0 alert_btn">
+                    <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
+                        Address succesfully updated!
+                        <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                </div>
+                <div class="px-2 mt-1 mb-0 alert_btn">
+                    <div class="w-100 m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                        Invalid input! Try again.
+                        <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="px-2 mt-1 mb-0 alert_btn">
+                    <div class="w-100 m-0 alert alert-warning alert-dismissible fade show" role="alert">
+                        Please fill out all fields.
+                        <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
 
                     <!-- Full Name -->
                     <div class="pt-3 px-5 mt-2 mb-0">
