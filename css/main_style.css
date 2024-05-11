@@ -1,5 +1,14 @@
 /* CSS Selectors arranged alphabetically */
 
+.alert_btn button:focus, .modal_btn button:focus, .modal-footer button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.alert_btn {
+    font-size: 14px;
+}
+
 .black_text {
     color: black;
 }
@@ -70,7 +79,7 @@ body {
     position:static;
     width: auto;
     height: 500px;
-}
+} 
 
 .nav-item a, .nav-item button, .user_btn button, .user_btn button::after {
     font-size: 12px;
