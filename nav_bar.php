@@ -26,7 +26,7 @@
                     </li>
                     <!-- shopping cart -->
                     <li class="nav-item cart_icon me-2">
-                        <a class="nav-link position-relative" href="view_cart.php">
+                        <a class="nav-link position-relative" href="cart.php">
                             <i class="bi bi-cart-fill"></i>
                         </a>
                         <!-- TO DO: Add a badge -->

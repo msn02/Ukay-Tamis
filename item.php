@@ -56,7 +56,7 @@
                         <!-- item price -->
                         <div class="pt-3 px-3 mb-0">
                             <div class="m-0">
-                                <h4 class="pink_highlight2 rounded-2 p-3 bold_header box_price"><?php echo $row['price']; ?></h4>
+                                <h4 class="pink_highlight2 rounded-2 p-3 bold_header box_price">₱ <?php echo $row['price']; ?></h4>
                             </div>
                         </div>
                         <!-- item description -->

@@ -55,7 +55,7 @@
                         <!-- box price -->
                         <div class="pt-3 px-3 mb-0">
                             <div class="m-0">
-                                <h4 class="pink_highlight2 rounded-2 p-3 bold_header box_price"><?php echo $row['price']; ?></h4>
+                                <h4 class="pink_highlight2 rounded-2 p-3 bold_header box_price">₱ <?php echo $row['price']; ?></h4>
                             </div>
                         </div>
                         <!-- style description -->
@@ -114,8 +114,8 @@
                                         <p class="item_name"><?php echo $row['item_name']; ?></p>
                                         <!-- price and category -->
                                         <div class="row p-0 d-flex justify-content-between">
-                                            <div class="col-5 m-0 text-align-left">
-                                                <p class="card-text item_price m-0"><?php echo $row['price']; ?></p>
+                                            <div class="col-6 m-0 text-align-left">
+                                                <p class="card-text item_price m-0">₱ <?php echo $row['price']; ?></p>
                                             </div>
                                             <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
                                                 <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
