@@ -20,9 +20,21 @@
             
             <div class="row py-2 px-1 m-0 justify-content-between">
                 <!-- alert modal(s) -->
-                <div class="px-2 mt-1 mb-0 alert_btn d-none">
+                <div class="px-2 mt-1 mb-0 alert_btn">
                     <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
                         Address succesfully updated!
+                        <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="px-2 mt-1 mb-0 alert_btn">
+                    <div class="w-100 m-0 alert alert-danger alert-dismissible fade show" role="alert">
+                        Invalid input! Try again.
+                        <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="px-2 mt-1 mb-0 alert_btn">
+                    <div class="w-100 m-0 alert alert-warning alert-dismissible fade show" role="alert">
+                        Please fill out all fields.
                         <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
