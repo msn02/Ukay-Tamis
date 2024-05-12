@@ -7,25 +7,25 @@
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
-  SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-  START TRANSACTION;
-  SET time_zone = "+00:00";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
-  /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-  /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-  /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-  /*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-  --
-  -- Database: `ukay_tamis`
-  --
+--
+-- Database: `ukay_tamis`
+--
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `item`
-  --
+--
+-- Table structure for table `item`
+--
 
 CREATE TABLE `item` (
   `item_id` varchar(10) NOT NULL,
@@ -41,9 +41,9 @@ CREATE TABLE `item` (
   `order_number` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-  --
-  -- Dumping data for table `item`
-  --
+--
+-- Dumping data for table `item`
+--
 
 INSERT INTO `item` (`item_id`, `style_id`, `item_name`, `item_description`, `style`, `price`, `size`, `color`, `item_img_url`, `transaction_id`, `order_number`) VALUES
 ('item-00015', 'style-0001', 'Vintage Floral Blouse', 'Featuring delicate flower patterns and a classic silhouette, this blouse is perfect for adding a touch of nostalgia to your wardrobe.', 'Cottagecore', 229.00, 'XS', 'Brown', 'dress.jpg', 69, 'ORD-20240512-0000202'),
@@ -151,19 +151,19 @@ END
 $$
 DELIMITER ;
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `sequence`
-  --
+--
+-- Table structure for table `sequence`
+--
 
-  CREATE TABLE `sequence` (
-    `sequence_id` int(11) NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `sequence` (
+  `sequence_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-  --
-  -- Dumping data for table `sequence`
-  --
+--
+-- Dumping data for table `sequence`
+--
 
 INSERT INTO `sequence` (`sequence_id`) VALUES
 (1),
@@ -354,22 +354,22 @@ INSERT INTO `sequence` (`sequence_id`) VALUES
 (202),
 (203);
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `style`
-  --
+--
+-- Table structure for table `style`
+--
 
-  CREATE TABLE `style` (
-    `style_id` varchar(10) NOT NULL,
-    `style` varchar(50) DEFAULT NULL,
-    `style_description` text DEFAULT NULL,
-    `style_img_url` varchar(50) DEFAULT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `style` (
+  `style_id` varchar(10) NOT NULL,
+  `style` varchar(50) DEFAULT NULL,
+  `style_description` text DEFAULT NULL,
+  `style_img_url` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-  --
-  -- Dumping data for table `style`
-  --
+--
+-- Dumping data for table `style`
+--
 
 INSERT INTO `style` (`style_id`, `style`, `style_description`, `style_img_url`) VALUES
 ('style-0001', 'Cottagecore', 'Embrace countryside charm with floral prints and rustic details.', 'cottagecore.jpg'),
@@ -384,32 +384,32 @@ INSERT INTO `style` (`style_id`, `style`, `style_description`, `style_img_url`) 
 ('style-0010', 'Star Girl', 'Reach for the stars with celestial prints and dreamy designs.', 'dress.jpg'),
 ('style-0068', 'Mystery', 'Random box', 'mystery_box_logo.png');
 
-  --
-  -- Triggers `style`
-  --
-  DELIMITER $$
-  CREATE TRIGGER `generate_style_id` BEFORE INSERT ON `style` FOR EACH ROW BEGIN
-      DECLARE next_id INT;
-      DECLARE new_style_id VARCHAR(10);
-      
-      -- Get the next sequence value
-      INSERT INTO sequence VALUES (NULL);
-      SET next_id = LAST_INSERT_ID();
-      
-      -- Generate the alphanumeric ID
-      SET new_style_id = CONCAT('style-', LPAD(next_id, 4, '0'));
-      
-      -- Set the new item_id value
-      SET NEW.style_id = new_style_id;
-  END
-  $$
-  DELIMITER ;
+--
+-- Triggers `style`
+--
+DELIMITER $$
+CREATE TRIGGER `generate_style_id` BEFORE INSERT ON `style` FOR EACH ROW BEGIN
+    DECLARE next_id INT;
+    DECLARE new_style_id VARCHAR(10);
+    
+    -- Get the next sequence value
+    INSERT INTO sequence VALUES (NULL);
+    SET next_id = LAST_INSERT_ID();
+    
+    -- Generate the alphanumeric ID
+    SET new_style_id = CONCAT('style-', LPAD(next_id, 4, '0'));
+    
+    -- Set the new item_id value
+    SET NEW.style_id = new_style_id;
+END
+$$
+DELIMITER ;
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `style_box`
-  --
+--
+-- Table structure for table `style_box`
+--
 
 CREATE TABLE `style_box` (
   `style_box_id` varchar(10) NOT NULL,
@@ -419,9 +419,9 @@ CREATE TABLE `style_box` (
   `reviews` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-  --
-  -- Dumping data for table `style_box`
-  --
+--
+-- Dumping data for table `style_box`
+--
 
 INSERT INTO `style_box` (`style_box_id`, `style_id`, `style_box_description`, `price`, `reviews`) VALUES
 ('box-000019', 'style-0001', 'Embrace the charm of countryside living with Cottagecore fashion. Floral prints, flowing dresses, and rustic details create a whimsical and nostalgic look inspired by nature and traditional craftsmanship.', 229.00, NULL),
@@ -436,28 +436,28 @@ INSERT INTO `style_box` (`style_box_id`, `style_id`, `style_box_description`, `p
 ('box-000028', 'style-0010', 'Reach for the stars with Star Girl fashion. Celestial prints, metallic accents, and futuristic designs capture the magic of the cosmos, offering a dreamy and ethereal style for stargazers and dreamers alike.', 229.00, NULL),
 ('box-000073', 'style-0068', 'Random box for mystery stuffs', 229.00, 'Nice box, got good items out of it.');
 
-  --
-  -- Triggers `style_box`
-  --
-  DELIMITER $$
-  CREATE TRIGGER `generate_style_box_id` BEFORE INSERT ON `style_box` FOR EACH ROW BEGIN
-      DECLARE next_id INT;
-      DECLARE new_style_box_id VARCHAR(10);
-      
-      -- Get the next sequence value
-      INSERT INTO sequence VALUES (NULL);
-      SET next_id = LAST_INSERT_ID();
-      
-      -- Generate the alphanumeric ID
-      SET new_style_box_id = CONCAT('box-', LPAD(next_id, 6, '0'));
-      
-      -- Set the new item_id value
-      SET NEW.style_box_id = new_style_box_id;
-  END
-  $$
-  DELIMITER ;
+--
+-- Triggers `style_box`
+--
+DELIMITER $$
+CREATE TRIGGER `generate_style_box_id` BEFORE INSERT ON `style_box` FOR EACH ROW BEGIN
+    DECLARE next_id INT;
+    DECLARE new_style_box_id VARCHAR(10);
+    
+    -- Get the next sequence value
+    INSERT INTO sequence VALUES (NULL);
+    SET next_id = LAST_INSERT_ID();
+    
+    -- Generate the alphanumeric ID
+    SET new_style_box_id = CONCAT('box-', LPAD(next_id, 6, '0'));
+    
+    -- Set the new item_id value
+    SET NEW.style_box_id = new_style_box_id;
+END
+$$
+DELIMITER ;
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `style_box_details`
@@ -474,11 +474,11 @@ CREATE TABLE `style_box_details` (
 ,`reviews` varchar(255)
 );
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `style_box_transaction`
-  --
+--
+-- Table structure for table `style_box_transaction`
+--
 
 CREATE TABLE `style_box_transaction` (
   `style_box_id` varchar(10) NOT NULL,
@@ -521,100 +521,100 @@ END
 $$
 DELIMITER ;
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `subscription`
-  --
+--
+-- Table structure for table `subscription`
+--
 
-  CREATE TABLE `subscription` (
-    `sub_id` varchar(10) NOT NULL,
-    `user_id` varchar(10) DEFAULT NULL,
-    `plan_id` varchar(10) DEFAULT NULL,
-    `sub_start_date` date DEFAULT NULL,
-    `sub_end_date` date DEFAULT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `subscription` (
+  `sub_id` varchar(10) NOT NULL,
+  `user_id` varchar(10) DEFAULT NULL,
+  `plan_id` varchar(10) DEFAULT NULL,
+  `sub_start_date` date DEFAULT NULL,
+  `sub_end_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-  --
-  -- Triggers `subscription`
-  --
-  DELIMITER $$
-  CREATE TRIGGER `generate_sub_id` BEFORE INSERT ON `subscription` FOR EACH ROW BEGIN
-      DECLARE next_id INT;
-      DECLARE new_sub_id VARCHAR(10);
-      
-      -- Get the next sequence value
-      INSERT INTO sequence VALUES (NULL);
-      SET next_id = LAST_INSERT_ID();
-      
-      -- Generate the alphanumeric ID
-      SET new_sub_id = CONCAT('sub-', LPAD(next_id, 6, '0'));
-      
-      -- Set the new item_id value
-      SET NEW.sub_id = new_sub_id;
-  END
-  $$
-  DELIMITER ;
+--
+-- Triggers `subscription`
+--
+DELIMITER $$
+CREATE TRIGGER `generate_sub_id` BEFORE INSERT ON `subscription` FOR EACH ROW BEGIN
+    DECLARE next_id INT;
+    DECLARE new_sub_id VARCHAR(10);
+    
+    -- Get the next sequence value
+    INSERT INTO sequence VALUES (NULL);
+    SET next_id = LAST_INSERT_ID();
+    
+    -- Generate the alphanumeric ID
+    SET new_sub_id = CONCAT('sub-', LPAD(next_id, 6, '0'));
+    
+    -- Set the new item_id value
+    SET NEW.sub_id = new_sub_id;
+END
+$$
+DELIMITER ;
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `subscription_plan`
-  --
+--
+-- Table structure for table `subscription_plan`
+--
 
-  CREATE TABLE `subscription_plan` (
-    `plan_id` varchar(10) NOT NULL,
-    `plan_tier` enum('Starter Pack','Fashionista Bundle','Wardrobe Refresh') DEFAULT NULL,
-    `plan_duration` enum('1 Month','3 Months','6 Months','12 Months') DEFAULT NULL,
-    `plan_tier_description` varchar(255) DEFAULT NULL,
-    `price` decimal(10,2) DEFAULT NULL,
-    `monthly_price` decimal(10,2) DEFAULT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `subscription_plan` (
+  `plan_id` varchar(10) NOT NULL,
+  `plan_tier` enum('Starter Pack','Fashionista Bundle','Wardrobe Refresh') DEFAULT NULL,
+  `plan_duration` enum('1 Month','3 Months','6 Months','12 Months') DEFAULT NULL,
+  `plan_tier_description` varchar(255) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `monthly_price` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-  --
-  -- Dumping data for table `subscription_plan`
-  --
+--
+-- Dumping data for table `subscription_plan`
+--
 
-  INSERT INTO `subscription_plan` (`plan_id`, `plan_tier`, `plan_duration`, `plan_tier_description`, `price`, `monthly_price`) VALUES
-  ('plan-00029', 'Starter Pack', '1 Month', 'Receive 2 curated tops and 1 curated bottom per month.', 249.00, 249.00),
-  ('plan-00030', 'Starter Pack', '3 Months', 'Receive 2 curated tops and 1 curated bottom per month.', 699.00, 216.33),
-  ('plan-00031', 'Starter Pack', '6 Months', 'Receive 2 curated tops and 1 curated bottom per month.', 1299.00, 199.83),
-  ('plan-00032', 'Starter Pack', '12 Months', 'Receive 2 curated tops and 1 curated bottom per month.', NULL, NULL),
-  ('plan-00033', 'Fashionista Bundle', '1 Month', 'Unlock 3 curated tops and 2 curated bottoms per month.', 349.00, 349.00),
-  ('plan-00034', 'Fashionista Bundle', '3 Months', 'Unlock 3 curated tops and 2 curated bottoms per month.', 949.00, 316.33),
-  ('plan-00035', 'Fashionista Bundle', '6 Months', 'Unlock 3 curated tops and 2 curated bottoms per month.', 1699.00, 283.17),
-  ('plan-00036', 'Fashionista Bundle', '12 Months', 'Unlock 3 curated tops and 2 curated bottoms per month.', NULL, NULL),
-  ('plan-00037', 'Wardrobe Refresh', '1 Month', 'Enjoy a generous selection of 4 curated tops and 3 curated bottoms per month.', 449.00, 449.00),
-  ('plan-00038', 'Wardrobe Refresh', '3 Months', 'Enjoy a generous selection of 4 curated tops and 3 curated bottoms per month.', 1199.00, 383.00),
-  ('plan-00039', 'Wardrobe Refresh', '6 Months', 'Enjoy a generous selection of 4 curated tops and 3 curated bottoms per month.', 2199.00, 366.50),
-  ('plan-00040', 'Wardrobe Refresh', '12 Months', 'Enjoy a generous selection of 4 curated tops and 3 curated bottoms per month.', NULL, NULL);
+INSERT INTO `subscription_plan` (`plan_id`, `plan_tier`, `plan_duration`, `plan_tier_description`, `price`, `monthly_price`) VALUES
+('plan-00029', 'Starter Pack', '1 Month', 'Receive 2 curated tops and 1 curated bottom per month.', 249.00, 249.00),
+('plan-00030', 'Starter Pack', '3 Months', 'Receive 2 curated tops and 1 curated bottom per month.', 699.00, 216.33),
+('plan-00031', 'Starter Pack', '6 Months', 'Receive 2 curated tops and 1 curated bottom per month.', 1299.00, 199.83),
+('plan-00032', 'Starter Pack', '12 Months', 'Receive 2 curated tops and 1 curated bottom per month.', NULL, NULL),
+('plan-00033', 'Fashionista Bundle', '1 Month', 'Unlock 3 curated tops and 2 curated bottoms per month.', 349.00, 349.00),
+('plan-00034', 'Fashionista Bundle', '3 Months', 'Unlock 3 curated tops and 2 curated bottoms per month.', 949.00, 316.33),
+('plan-00035', 'Fashionista Bundle', '6 Months', 'Unlock 3 curated tops and 2 curated bottoms per month.', 1699.00, 283.17),
+('plan-00036', 'Fashionista Bundle', '12 Months', 'Unlock 3 curated tops and 2 curated bottoms per month.', NULL, NULL),
+('plan-00037', 'Wardrobe Refresh', '1 Month', 'Enjoy a generous selection of 4 curated tops and 3 curated bottoms per month.', 449.00, 449.00),
+('plan-00038', 'Wardrobe Refresh', '3 Months', 'Enjoy a generous selection of 4 curated tops and 3 curated bottoms per month.', 1199.00, 383.00),
+('plan-00039', 'Wardrobe Refresh', '6 Months', 'Enjoy a generous selection of 4 curated tops and 3 curated bottoms per month.', 2199.00, 366.50),
+('plan-00040', 'Wardrobe Refresh', '12 Months', 'Enjoy a generous selection of 4 curated tops and 3 curated bottoms per month.', NULL, NULL);
 
-  --
-  -- Triggers `subscription_plan`
-  --
-  DELIMITER $$
-  CREATE TRIGGER `generate_plan_id` BEFORE INSERT ON `subscription_plan` FOR EACH ROW BEGIN
-      DECLARE next_id INT;
-      DECLARE new_plan_id VARCHAR(10);
-      
-      -- Get the next sequence value
-      INSERT INTO sequence VALUES (NULL);
-      SET next_id = LAST_INSERT_ID();
-      
-      -- Generate the alphanumeric ID
-      SET new_plan_id = CONCAT('plan-', LPAD(next_id, 5, '0'));
-      
-      -- Set the new item_id value
-      SET NEW.plan_id = new_plan_id;
-  END
-  $$
-  DELIMITER ;
+--
+-- Triggers `subscription_plan`
+--
+DELIMITER $$
+CREATE TRIGGER `generate_plan_id` BEFORE INSERT ON `subscription_plan` FOR EACH ROW BEGIN
+    DECLARE next_id INT;
+    DECLARE new_plan_id VARCHAR(10);
+    
+    -- Get the next sequence value
+    INSERT INTO sequence VALUES (NULL);
+    SET next_id = LAST_INSERT_ID();
+    
+    -- Generate the alphanumeric ID
+    SET new_plan_id = CONCAT('plan-', LPAD(next_id, 5, '0'));
+    
+    -- Set the new item_id value
+    SET NEW.plan_id = new_plan_id;
+END
+$$
+DELIMITER ;
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `transaction`
-  --
+--
+-- Table structure for table `transaction`
+--
 
 CREATE TABLE `transaction` (
   `transaction_id` int(11) NOT NULL,
@@ -722,79 +722,78 @@ END
 $$
 DELIMITER ;
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `user`
-  --
+--
+-- Table structure for table `user`
+--
 
-  CREATE TABLE `user` (
-    `user_id` varchar(10) NOT NULL,
-    `username` varchar(50) NOT NULL,
-    `email` varchar(100) NOT NULL,
-    `password` varchar(500) NOT NULL,
-    `first_name` varchar(50) DEFAULT NULL,
-    `last_name` varchar(50) DEFAULT NULL,
-    `phone_number` varchar(15) DEFAULT NULL,
-    `address` varchar(255) DEFAULT NULL,
-    `registration_date` datetime DEFAULT current_timestamp()
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `user` (
+  `user_id` varchar(10) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(500) NOT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `phone_number` varchar(15) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `registration_date` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-  --
-  -- Dumping data for table `user`
-  --
+--
+-- Dumping data for table `user`
+--
 
-  INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `first_name`, `last_name`, `phone_number`, `address`, `registration_date`) VALUES
-  ('tran-00041', 'dee', 'danielamarzan.cantillo@bicol-u.edu.ph', '25d55ad283aa400af464c76d713c07ad', 'Daniela', 'Cantillo', '09483340088', 'Zone 8 Labnig, Malinao, Albay', '2024-05-08 02:06:18'),
-  ('tran-00043', 'yes102', 'jessai@live.nl', 'e807f1fcf82d132f9bb018ca6738a19f', 'Jessai', 'Schonewille', '09483340088', 'BS Rollepaal, Dedemsvaart, Netherlands', '2024-05-08 02:06:18'),
-  ('user-00047', 'daniela', 'danielait@gmail.com', 'e807f1fcf82d132f9bb018ca6738a19f', 'Dee', 'Cantillo', '09483340088', 'Daraga, Albay', '2024-05-08 02:08:53'),
-  ('user-00049', 'MInzy', 'minzy19@gmail.com', 'e807f1fcf82d132f9bb018ca6738a19f', 'Minzy', 'Mendez', '09135902471', 'Zone 4 Bantayan, Tabaco City, Albay', '2024-05-08 02:59:40'),
-  ('user-00064', 'Mark', 'gmeescober@gmail.com', 'ed52efced6f7f5438c91fe8293eed992', 'Mark', 'Last', '09295696163', 'Blk 4 Lot 2, Sagpon, Legazpi, Albay', '2024-05-11 14:22:01');
+INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `first_name`, `last_name`, `phone_number`, `address`, `registration_date`) VALUES
+('tran-00041', 'dee', 'danielamarzan.cantillo@bicol-u.edu.ph', '25d55ad283aa400af464c76d713c07ad', 'Daniela', 'Cantillo', '09483340088', 'Zone 8 Labnig, Malinao, Albay', '2024-05-08 02:06:18'),
+('tran-00043', 'yes102', 'jessai@live.nl', 'e807f1fcf82d132f9bb018ca6738a19f', 'Jessai', 'Schonewille', '09483340088', 'BS Rollepaal, Dedemsvaart, Netherlands', '2024-05-08 02:06:18'),
+('user-00047', 'daniela', 'danielait@gmail.com', 'e807f1fcf82d132f9bb018ca6738a19f', 'Dee', 'Cantillo', '09483340088', 'Daraga, Albay', '2024-05-08 02:08:53'),
+('user-00049', 'MInzy', 'minzy19@gmail.com', 'e807f1fcf82d132f9bb018ca6738a19f', 'Minzy', 'Mendez', '09135902471', 'Zone 4 Bantayan, Tabaco City, Albay', '2024-05-08 02:59:40');
 
-  --
-  -- Triggers `user`
-  --
-  DELIMITER $$
-  CREATE TRIGGER `generate_user_id` BEFORE INSERT ON `user` FOR EACH ROW BEGIN
-      DECLARE next_id INT;
-      DECLARE new_user_id VARCHAR(10);
-      
-      -- Get the next sequence value
-      INSERT INTO sequence VALUES (NULL);
-      SET next_id = LAST_INSERT_ID();
-      
-      -- Generate the alphanumeric ID
-      SET new_user_id = CONCAT('user-', LPAD(next_id, 5, '0'));
-      
-      -- Set the new item_id value
-      SET NEW.user_id = new_user_id;
-  END
-  $$
-  DELIMITER ;
-  DELIMITER $$
-  CREATE TRIGGER `user_AFTER_INSERT` AFTER INSERT ON `user` FOR EACH ROW BEGIN
-    INSERT INTO user_logs (user_id, timestamp, action)
-      VALUES (NEW.user_id, NOW(), 'signup');
-  END
-  $$
-  DELIMITER ;
+--
+-- Triggers `user`
+--
+DELIMITER $$
+CREATE TRIGGER `generate_user_id` BEFORE INSERT ON `user` FOR EACH ROW BEGIN
+    DECLARE next_id INT;
+    DECLARE new_user_id VARCHAR(10);
+    
+    -- Get the next sequence value
+    INSERT INTO sequence VALUES (NULL);
+    SET next_id = LAST_INSERT_ID();
+    
+    -- Generate the alphanumeric ID
+    SET new_user_id = CONCAT('user-', LPAD(next_id, 5, '0'));
+    
+    -- Set the new item_id value
+    SET NEW.user_id = new_user_id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `user_AFTER_INSERT` AFTER INSERT ON `user` FOR EACH ROW BEGIN
+	INSERT INTO user_logs (user_id, timestamp, action)
+    VALUES (NEW.user_id, NOW(), 'signup');
+END
+$$
+DELIMITER ;
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `user_logs`
-  --
+--
+-- Table structure for table `user_logs`
+--
 
-  CREATE TABLE `user_logs` (
-    `log_id` varchar(10) NOT NULL,
-    `user_id` varchar(10) DEFAULT NULL,
-    `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
-    `action` varchar(50) DEFAULT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `user_logs` (
+  `log_id` varchar(10) NOT NULL,
+  `user_id` varchar(10) DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `action` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-  --
-  -- Dumping data for table `user_logs`
-  --
+--
+-- Dumping data for table `user_logs`
+--
 
 INSERT INTO `user_logs` (`log_id`, `user_id`, `timestamp`, `action`) VALUES
 ('tran-00042', 'tran-00041', '2024-05-07 18:06:18', 'signup'),
@@ -824,97 +823,77 @@ INSERT INTO `user_logs` (`log_id`, `user_id`, `timestamp`, `action`) VALUES
 ('tran-00077', 'user-00049', '2024-05-11 10:01:31', 'logout'),
 ('tran-00078', 'user-00049', '2024-05-11 10:01:41', 'login');
 
-  --
-  -- Triggers `user_logs`
-  --
-  DELIMITER $$
-  CREATE TRIGGER `generate_log_id` BEFORE INSERT ON `user_logs` FOR EACH ROW BEGIN
-      DECLARE next_id INT;
-      DECLARE new_log_id VARCHAR(10);
-      
-      -- Get the next sequence value
-      INSERT INTO sequence VALUES (NULL);
-      SET next_id = LAST_INSERT_ID();
-      
-      -- Generate the alphanumeric ID
-      SET new_log_id = CONCAT('tran-', LPAD(next_id, 5, '0'));
-      
-      -- Set the new item_id value
-      SET NEW.log_id = new_log_id;
-  END
-  $$
-  DELIMITER ;
+--
+-- Triggers `user_logs`
+--
+DELIMITER $$
+CREATE TRIGGER `generate_log_id` BEFORE INSERT ON `user_logs` FOR EACH ROW BEGIN
+    DECLARE next_id INT;
+    DECLARE new_log_id VARCHAR(10);
+    
+    -- Get the next sequence value
+    INSERT INTO sequence VALUES (NULL);
+    SET next_id = LAST_INSERT_ID();
+    
+    -- Generate the alphanumeric ID
+    SET new_log_id = CONCAT('tran-', LPAD(next_id, 5, '0'));
+    
+    -- Set the new item_id value
+    SET NEW.log_id = new_log_id;
+END
+$$
+DELIMITER ;
 
-  -- --------------------------------------------------------
+-- --------------------------------------------------------
 
-  --
-  -- Table structure for table `user_preference`
-  --
+--
+-- Table structure for table `user_preference`
+--
 
-  CREATE TABLE `user_preference` (
-    `user_preference_id` varchar(10) NOT NULL,
-    `user_id` varchar(10) NOT NULL,
-    `height` decimal(5,2) DEFAULT NULL,
-    `weight` decimal(5,2) DEFAULT NULL,
-    `bust_size` varchar(10) DEFAULT NULL,
-    `hip_size` varchar(10) DEFAULT NULL,
-    `shoe_size` varchar(5) DEFAULT NULL,
-    `clothing_size` enum('XS','S','M','L','XL','XXL') DEFAULT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `user_preference` (
+  `user_preference_id` varchar(10) NOT NULL,
+  `user_id` varchar(10) NOT NULL,
+  `height` decimal(5,2) DEFAULT NULL,
+  `weight` decimal(5,2) DEFAULT NULL,
+  `bust_size` varchar(10) DEFAULT NULL,
+  `hip_size` varchar(10) DEFAULT NULL,
+  `shoe_size` varchar(5) DEFAULT NULL,
+  `clothing_size` enum('XS','S','M','L','XL','XXL') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-  --
-  -- Dumping data for table `user_preference`
-  --
+--
+-- Triggers `user_preference`
+--
+DELIMITER $$
+CREATE TRIGGER `generate_user_preference_id` BEFORE INSERT ON `user_preference` FOR EACH ROW BEGIN
+    DECLARE next_id INT;
+    DECLARE new_user_preference_id VARCHAR(10);
+    
+    -- Get the next sequence value
+    INSERT INTO sequence VALUES (NULL);
+    SET next_id = LAST_INSERT_ID();
+    
+    -- Generate the alphanumeric ID
+    SET new_user_preference_id = CONCAT('tran-', LPAD(next_id, 5, '0'));
+    
+    -- Set the new item_id value
+    SET NEW.user_preference_id = new_user_preference_id;
+END
+$$
+DELIMITER ;
 
-  INSERT INTO `user_preference` (`user_preference_id`, `user_id`, `height`, `weight`, `bust_size`, `hip_size`, `shoe_size`, `clothing_size`) VALUES
-  ('tran-00073', 'user-00064', 233.00, 90.00, '23', '42', '18', 'XXL');
+-- --------------------------------------------------------
 
-  --
-  -- Triggers `user_preference`
-  --
-  DELIMITER $$
-  CREATE TRIGGER `generate_user_preference_id` BEFORE INSERT ON `user_preference` FOR EACH ROW BEGIN
-      DECLARE next_id INT;
-      DECLARE new_user_preference_id VARCHAR(10);
-      
-      -- Get the next sequence value
-      INSERT INTO sequence VALUES (NULL);
-      SET next_id = LAST_INSERT_ID();
-      
-      -- Generate the alphanumeric ID
-      SET new_user_preference_id = CONCAT('tran-', LPAD(next_id, 5, '0'));
-      
-      -- Set the new item_id value
-      SET NEW.user_preference_id = new_user_preference_id;
-  END
-  $$
-  DELIMITER ;
-
-  -- --------------------------------------------------------
-
-  --
-  -- Table structure for table `user_security_questions`
-  --
-
-  CREATE TABLE `user_security_questions` (
-    `user_question_id` int(11) NOT NULL,
-    `user_id` varchar(10) NOT NULL,
-    `question_id` int(11) NOT NULL,
-    `answer` varchar(255) NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-  -- --------------------------------------------------------
-
-  --
-  -- Structure for view `style_box_details`
-  --
-  DROP TABLE IF EXISTS `style_box_details`;
+--
+-- Structure for view `style_box_details`
+--
+DROP TABLE IF EXISTS `style_box_details`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `style_box_details`  AS SELECT `s`.`style_id` AS `style_id`, `sb`.`style_box_id` AS `style_box_id`, `s`.`style` AS `style`, `s`.`style_description` AS `style_description`, `sb`.`style_box_description` AS `style_box_description`, `sb`.`price` AS `price`, `s`.`style_img_url` AS `style_img_url`, `sb`.`reviews` AS `reviews` FROM (`style` `s` join `style_box` `sb` on(`s`.`style_id` = `sb`.`style_id`)) ;
 
-  --
-  -- Indexes for dumped tables
-  --
+--
+-- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `item`
@@ -935,31 +914,25 @@ ALTER TABLE `order_product`
   ADD KEY `fk_order_product_style_box` (`style_box_id`),
   ADD KEY `fk_order_product_transaction` (`transaction_id`);
 
-  --
-  -- Indexes for table `security_questions`
-  --
-  ALTER TABLE `security_questions`
-    ADD PRIMARY KEY (`question_id`);
+--
+-- Indexes for table `sequence`
+--
+ALTER TABLE `sequence`
+  ADD PRIMARY KEY (`sequence_id`);
 
-  --
-  -- Indexes for table `sequence`
-  --
-  ALTER TABLE `sequence`
-    ADD PRIMARY KEY (`sequence_id`);
+--
+-- Indexes for table `style`
+--
+ALTER TABLE `style`
+  ADD PRIMARY KEY (`style_id`),
+  ADD UNIQUE KEY `style_UNIQUE` (`style`);
 
-  --
-  -- Indexes for table `style`
-  --
-  ALTER TABLE `style`
-    ADD PRIMARY KEY (`style_id`),
-    ADD UNIQUE KEY `style_UNIQUE` (`style`);
-
-  --
-  -- Indexes for table `style_box`
-  --
-  ALTER TABLE `style_box`
-    ADD PRIMARY KEY (`style_box_id`),
-    ADD KEY `style_id` (`style_id`);
+--
+-- Indexes for table `style_box`
+--
+ALTER TABLE `style_box`
+  ADD PRIMARY KEY (`style_box_id`),
+  ADD KEY `style_id` (`style_id`);
 
 --
 -- Indexes for table `style_box_transaction`
@@ -969,19 +942,19 @@ ALTER TABLE `style_box_transaction`
   ADD KEY `style_box_transaction_ibfk_2_idx` (`transaction_id`),
   ADD KEY `style_box_transaction_ibfk_2_idx1` (`order_number`);
 
-  --
-  -- Indexes for table `subscription`
-  --
-  ALTER TABLE `subscription`
-    ADD PRIMARY KEY (`sub_id`),
-    ADD KEY `user_id` (`user_id`),
-    ADD KEY `plan_id` (`plan_id`);
+--
+-- Indexes for table `subscription`
+--
+ALTER TABLE `subscription`
+  ADD PRIMARY KEY (`sub_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `plan_id` (`plan_id`);
 
-  --
-  -- Indexes for table `subscription_plan`
-  --
-  ALTER TABLE `subscription_plan`
-    ADD PRIMARY KEY (`plan_id`);
+--
+-- Indexes for table `subscription_plan`
+--
+ALTER TABLE `subscription_plan`
+  ADD PRIMARY KEY (`plan_id`);
 
 --
 -- Indexes for table `transaction`
@@ -991,38 +964,30 @@ ALTER TABLE `transaction`
   ADD UNIQUE KEY `order_number_UNIQUE` (`order_number`),
   ADD KEY `user_id` (`user_id`);
 
-  --
-  -- Indexes for table `user`
-  --
-  ALTER TABLE `user`
-    ADD PRIMARY KEY (`user_id`),
-    ADD UNIQUE KEY `email` (`email`);
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
 
-  --
-  -- Indexes for table `user_logs`
-  --
-  ALTER TABLE `user_logs`
-    ADD PRIMARY KEY (`log_id`),
-    ADD KEY `user_id` (`user_id`);
+--
+-- Indexes for table `user_logs`
+--
+ALTER TABLE `user_logs`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `user_id` (`user_id`);
 
-  --
-  -- Indexes for table `user_preference`
-  --
-  ALTER TABLE `user_preference`
-    ADD PRIMARY KEY (`user_preference_id`),
-    ADD KEY `user_preference_ibfk_1` (`user_id`);
+--
+-- Indexes for table `user_preference`
+--
+ALTER TABLE `user_preference`
+  ADD PRIMARY KEY (`user_preference_id`),
+  ADD KEY `user_preference_ibfk_1` (`user_id`);
 
-  --
-  -- Indexes for table `user_security_questions`
-  --
-  ALTER TABLE `user_security_questions`
-    ADD PRIMARY KEY (`user_question_id`),
-    ADD UNIQUE KEY `user_question_unique` (`user_id`,`question_id`),
-    ADD KEY `fk_question_id` (`question_id`);
-
-  --
-  -- AUTO_INCREMENT for dumped tables
-  --
+--
+-- AUTO_INCREMENT for dumped tables
+--
 
 --
 -- AUTO_INCREMENT for table `order_product`
@@ -1042,9 +1007,9 @@ ALTER TABLE `sequence`
 ALTER TABLE `transaction`
   MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
-  --
-  -- Constraints for dumped tables
-  --
+--
+-- Constraints for dumped tables
+--
 
 --
 -- Constraints for table `item`
@@ -1062,11 +1027,11 @@ ALTER TABLE `order_product`
   ADD CONSTRAINT `fk_order_product_style_box` FOREIGN KEY (`style_box_id`) REFERENCES `style_box` (`style_box_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_order_product_transaction` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-  --
-  -- Constraints for table `style_box`
-  --
-  ALTER TABLE `style_box`
-    ADD CONSTRAINT `style_box_ibfk_1` FOREIGN KEY (`style_id`) REFERENCES `style` (`style_id`);
+--
+-- Constraints for table `style_box`
+--
+ALTER TABLE `style_box`
+  ADD CONSTRAINT `style_box_ibfk_1` FOREIGN KEY (`style_id`) REFERENCES `style` (`style_id`);
 
 --
 -- Constraints for table `style_box_transaction`
@@ -1075,12 +1040,12 @@ ALTER TABLE `style_box_transaction`
   ADD CONSTRAINT `style_box_transaction_ibfk_1` FOREIGN KEY (`style_box_id`) REFERENCES `style_box` (`style_box_id`),
   ADD CONSTRAINT `style_box_transaction_ibfk_2` FOREIGN KEY (`order_number`) REFERENCES `transaction` (`order_number`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-  --
-  -- Constraints for table `subscription`
-  --
-  ALTER TABLE `subscription`
-    ADD CONSTRAINT `subscription_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-    ADD CONSTRAINT `subscription_ibfk_2` FOREIGN KEY (`plan_id`) REFERENCES `subscription_plan` (`plan_id`);
+--
+-- Constraints for table `subscription`
+--
+ALTER TABLE `subscription`
+  ADD CONSTRAINT `subscription_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `subscription_ibfk_2` FOREIGN KEY (`plan_id`) REFERENCES `subscription_plan` (`plan_id`);
 
 --
 -- Constraints for table `user_logs`
@@ -1088,20 +1053,13 @@ ALTER TABLE `style_box_transaction`
 ALTER TABLE `user_logs`
   ADD CONSTRAINT `user_logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
-  --
-  -- Constraints for table `user_preference`
-  --
-  ALTER TABLE `user_preference`
-    ADD CONSTRAINT `user_preference_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+--
+-- Constraints for table `user_preference`
+--
+ALTER TABLE `user_preference`
+  ADD CONSTRAINT `user_preference_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+COMMIT;
 
-  --
-  -- Constraints for table `user_security_questions`
-  --
-  ALTER TABLE `user_security_questions`
-    ADD CONSTRAINT `fk_question_id` FOREIGN KEY (`question_id`) REFERENCES `security_questions` (`question_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-  COMMIT;
-
-  /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-  /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-  /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

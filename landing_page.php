@@ -1,8 +1,3 @@
-<?php
-    session_start();
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +9,7 @@
 </head>
 <body class="gray_bg2 m-0 p-0">
     <!-- navigation bar -->
-    <?php 
-        if (isset($_SESSION['logged_in'])) {
-            include 'auth_nav_bar.php';
-        } else {
-            include 'nav_bar.php';
-        }
-    ?>
+    <?php include 'nav_bar.php'?>
 
     <div class="container-fluid m-0 p-0 gradient_pink2">
         <!-- title and intro -->
