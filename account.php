@@ -140,8 +140,60 @@
         }
         $stmt->execute();
     }
+    // Fetch security questions from the database
+        $stmt = $conn->prepare("SELECT question_id, question FROM security_questions");
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-  
+        // Array to store security questions
+        $securityQuestions = array();
+
+        // Fetch questions and store them in the array
+        while ($row = $result->fetch_assoc()) {
+            $securityQuestions[$row['question_id']] = $row['question'];
+        }
+            
+    // Handle security change request
+    if(isset($_POST['security_change'])) {
+        $user_id = $_SESSION['user_id'];
+
+        // Check if the user already has security questions set
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM user_security_questions WHERE user_id = ?");
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+
+        if ($count > 0) {
+            // Delete the old security questions data
+            $delete_stmt = $conn->prepare("DELETE FROM user_security_questions WHERE user_id = ?");
+            $delete_stmt->bind_param("s", $user_id);
+            $delete_stmt->execute();
+        }
+
+        // Insert new security questions data
+        $question1 = $_POST['security_questions1'];
+        $answer1 = $_POST['answer1'];
+        $question2 = $_POST['security_questions2'];
+        $answer2 = $_POST['answer2'];
+        $question3 = $_POST['security_questions3'];
+        $answer3 = $_POST['answer3'];
+
+        $insert_stmt = $conn->prepare("INSERT INTO user_security_questions (user_id, question_id, answer) VALUES (?, ?, ?)");
+
+        // Bind parameters and execute for each question
+        $insert_stmt->bind_param("sss", $user_id, $question1, $answer1);
+        $insert_stmt->execute();
+        $insert_stmt->bind_param("sss", $user_id, $question2, $answer2);
+        $insert_stmt->execute();
+        $insert_stmt->bind_param("sss", $user_id, $question3, $answer3);
+        $insert_stmt->execute();
+
+        // Redirect to account page with success message
+        header("Location: account.php?success=Security questions updated successfully");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -190,7 +242,7 @@
                         <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
-
+               
                     <!-- Full Name -->
                     <div class="pt-3 px-5 mt-2 mb-0">
                         <div class="m-0">
@@ -241,8 +293,8 @@
                         </div>
                         <!-- TO DO: Error warning (if password is incorrect/no account/no username found) -->
                         <div class="log_sign_btn mt-4 ms-3  ">
-                            <input class="btn btn-dark border-0 rounded-1 px-4 py-1 ms-1" onclick="" name = "change_pass_btn" value = "Confirm" type = "submit"></input>
-                            <button class="btn btn-dark border-0 rounded-1 px-4 py-1" data-bs-toggle="modal" data-bs-target="#preferencesModal">Set up Security Questions</button>
+                            <input class="btn btn-dark border-0 rounded-1 px-4 py-1 ms-1" onclick="" name = "change_pass_btn" value = "Change Password" type = "submit"></input>
+                            <button class="btn btn-dark border-0 rounded-1 px-4 py-1" data-bs-toggle="modal" data-bs-target="#securityModal">Set up Security Questions</button>
                         </div>
 
                         <p style="color: red"> <?php if (isset($_GET['error'])) { echo $_GET['error']; } ?> </p>
@@ -272,10 +324,9 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
+
        <!-- Modal for changing address -->
        <div class="modal fade" id="changeAddressModal" tabindex="-1" aria-labelledby="changeAddressModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -360,9 +411,75 @@
                             </div>
                         </form>
                     </div>
+                </div>
             </div>
         </div>
-        </div>
+       <!-- Security Modal -->
+    <div class="modal fade" id="securityModal" tabindex="-1" aria-labelledby="securityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
 
+                <div class="modal-header">
+                    <h5 class="modal-title" id="preferencesModalLabel">Security Questions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form method="POST" action="account.php">
+                        <div class="mb-3">
+                            <label for="question1" class="form-label">Question 1</label>
+                            <select class="form-control" id="security_questions1" name="security_questions1" required>
+                                <option value="">Select Question</option>
+                                <?php foreach ($securityQuestions as $questionId => $question) { ?>
+                                    <option value="<?php echo $questionId; ?>"><?php echo $question; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="answer1" class="form-label">Answer</label>
+                            <input type="text" class="form-control" id="answer1" name="answer1" min="" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="question1" class="form-label">Question 2</label>
+                            <select class="form-control" id="security_questions2" name="security_questions2" required>
+                                <option value="">Select Question</option>
+                                <?php foreach ($securityQuestions as $questionId => $question) { ?>
+                                    <option value="<?php echo $questionId; ?>"><?php echo $question; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="answer2" class="form-label">Answer</label>
+                            <input type="text" class="form-control" id="answer2" name="answer2" min="" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="question3" class="form-label">Question 3</label>
+                            <select class="form-control" id="security_questions3" name="security_questions3" required>
+                                <option value="">Select Question</option>
+                                <?php foreach ($securityQuestions as $questionId => $question) { ?>
+                                    <option value="<?php echo $questionId; ?>"><?php echo $question; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="answer3" class="form-label">Answer</label>
+                            <input type="text" class="form-control" id="answer3" name="answer3" min="" required>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" name="security_change" class="btn btn-primary" value="Save changes"></input>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
