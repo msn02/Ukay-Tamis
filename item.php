@@ -91,25 +91,34 @@
                         </div>
 
                         <!-- add to cart and buy now button -->
-                        <form method = "POST" action = "view_cart.php">
-                            <input type = "hidden" name = "product_id" value = "<?php echo $row['item_id']; ?>"> </input>
-                            <input type = "hidden" name = "product_img_url" value = "<?php echo $row['item_img_url']; ?>"> </input>
-                            <input type = "hidden" name = "product" value = "<?php echo $row['item_name']; ?>"> </input>
-                            <input type = "hidden" name = "product_price" value = "<?php echo $row['price']; ?>"> </input>
-                            <input type = "hidden" name = "product_quantity" value = "1"> </input>
-                            <input type = "hidden" name = "item" value = "<?php echo $row['item_id']; ?>"> </input>
-                            <input type = "hidden" name = "product_type" value = "item"> </input>
-                            
-                            <div class="px-3 pt-0 m-0">
+                        <div class="px-3 pt-0 m-0">
+                            <form method = "POST" action = "view_cart.php">
+                                <input type = "hidden" name = "product_id" value = "<?php echo $row['item_id']; ?>"> </input>
+                                <input type = "hidden" name = "product_img_url" value = "<?php echo $row['item_img_url']; ?>"> </input>
+                                <input type = "hidden" name = "product" value = "<?php echo $row['item_name']; ?>"> </input>
+                                <input type = "hidden" name = "product_price" value = "<?php echo $row['price']; ?>"> </input>
+                                <input type = "hidden" name = "product_quantity" value = "1"> </input>
+                                <input type = "hidden" name = "item" value = "<?php echo $row['item_id']; ?>"> </input>
+                                <input type = "hidden" name = "product_type" value = "item"> </input>
                                 <div class="d-inline add_cart">
                                     <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit" name ="add_to_cart"><i class="bi bi-cart-plus me-1"></i></button>
                                 </div>
+                             </form>
+
+                            <form method = "POST" action = "<?php echo "quick_checkout.php?item_id=" . $row['item_id'] ?>">
+                                <input type = "hidden" name = "product_id" value = "<?php echo $row['item_id']; ?>"> </input>
+                                <input type = "hidden" name = "product_img_url" value = "<?php echo $row['item_img_url']; ?>"> </input>
+                                <input type = "hidden" name = "product" value = "<?php echo $row['item_name']; ?>"> </input>
+                                <input type = "hidden" name = "product_price" value = "<?php echo $row['price']; ?>"> </input>
+                                <input type = "hidden" name = "product_quantity" value = "1"> </input>
+                                <input type = "hidden" name = "item" value = "<?php echo $row['item_id']; ?>"> </input>
+                                <input type = "hidden" name = "product_type" value = "item"> </input>
                                 <div class="d-inline buy_now">
                                     <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit">Buy Now</button>
                                 </div>
+                            </form>
                             </div>
                         </div>
-                    </form>
                 </div>
             <?php } ?>
 
