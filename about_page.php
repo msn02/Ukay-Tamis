@@ -71,7 +71,7 @@
                 </div>
             </div>
             <!-- footer -->
-            <?php include 'footer.php'?>
+            <?php include 'contact_us.php'?>
         </div>
     </div>
 </body>

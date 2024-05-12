@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="gray_btn mt-2">
-                            <a href="#"><button class="btn btn-dark border-0 rounded-1 w-100">Change Delivery Address</button></a>
+                            <button class="btn btn-dark border-0 rounded-1 w-100">Change Delivery Address</button>
                         </div>
                     </div>
                     <!-- cart info -->
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="pink_btn2 mt-3 pb-2">
-                        <a href="#"><button class="btn btn-dark border-0 rounded-1 w-100">PLACE ORDER</button></a>
+                        <button class="btn btn-dark border-0 rounded-1 w-100">PLACE ORDER</button>
                     </div>
                 </div>
             </div>

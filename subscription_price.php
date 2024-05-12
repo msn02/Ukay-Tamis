@@ -164,13 +164,13 @@
                         </div>
                     </div>
                     <div class="pink_btn2 pb-3">
-                        <a href="checkout.php"><button class="btn btn-secondary border-0 rounded-1 w-100">CHECKOUT</button></a>
+                        <a href="checkout_page.php"><button class="btn btn-secondary border-0 rounded-1 w-100">CHECKOUT</button></a>
                     </div>
                 </div>
             </div>
         </div>
     <!-- footer -->
-    <?php include 'footer.php'?>
+    <?php include 'contact_us.php'?>
     </div>
 </body>
 </html>

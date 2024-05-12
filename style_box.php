@@ -61,7 +61,7 @@
                             <p class="box_desc m-0 p-0"><?php echo $row['style_box_description']; ?></p>
                         </div>
                     </div>
-                    <!-- add to card and buy now button -->
+                    <!-- add to cart and buy now button -->
                     <div class="px-3 pt-0 m-0">
                         <div class="d-inline add_cart">
                             <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit"><i class="bi bi-cart-plus me-1"></i></button>
