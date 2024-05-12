@@ -1,3 +1,8 @@
+<?php
+    // start session
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +14,13 @@
 </head>
 <body class="gray_bg2 m-0 p-0">
     <!-- navigation bar -->
-    <?php include 'nav_bar.php'?>
+    <?php 
+        if (isset($_SESSION['logged_in'])) {
+            include 'auth_nav_bar.php';
+        } else {
+            include 'nav_bar.php';
+        }
+    ?>
 
     <div class="container-fluid m-0 p-0 gradient_pink2">
         <!-- title and intro -->
@@ -22,7 +33,6 @@
                 </div>
                 <!-- subscribe -->
                 <div class="px-0 pink_btn white_border pb-1">
-                    <a href="subscription_price.php" class="text-decoration-none "><button class="btn btn-dark border-0 px-4 shadow-sm rounded-1" type="button">SUBSCRIBE NOW</button></a>
                     <a href="subscription_price.php" class="text-decoration-none "><button class="btn btn-dark border-0 px-4 shadow-sm rounded-1" type="button">SUBSCRIBE NOW</button></a>
                 </div>
                 <!-- view catalogue -->
