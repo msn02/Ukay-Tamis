@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2024 at 08:56 PM
+-- Generation Time: May 12, 2024 at 08:00 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -150,6 +150,33 @@ CREATE TRIGGER `insert_and_update_order_info` AFTER INSERT ON `order_product` FO
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `security_questions`
+--
+
+CREATE TABLE `security_questions` (
+  `question_id` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `security_questions`
+--
+
+INSERT INTO `security_questions` (`question_id`, `question`) VALUES
+(1, 'What is your mother\'s maiden name?'),
+(2, 'What is the name of your first pet?'),
+(3, 'In which city were you born?'),
+(4, 'What is the name of your favorite teacher?'),
+(5, 'What is your favorite movie?'),
+(6, 'What is your favorite food?'),
+(7, 'What is the model of your first car?'),
+(8, 'What is the name of your favorite book?'),
+(9, 'What is the name of your childhood best friend?'),
+(10, 'What is the brand of your first cellphone?');
 
 -- --------------------------------------------------------
 
@@ -352,7 +379,15 @@ INSERT INTO `sequence` (`sequence_id`) VALUES
 (200),
 (201),
 (202),
-(203);
+(203),
+(204),
+(205),
+(206),
+(207),
+(212),
+(213),
+(214),
+(215);
 
 -- --------------------------------------------------------
 
@@ -494,6 +529,7 @@ CREATE TABLE `style_box_transaction` (
 INSERT INTO `style_box_transaction` (`style_box_id`, `transaction_id`, `order_number`, `style_box_quantity`) VALUES
 ('box-000019', 0, 'ORD-20240512-0000191', 1),
 ('box-000019', 61, 'ORD-20240512-0000194', 3),
+('box-000019', 73, 'ORD-20240513-0000215', 1),
 ('box-000021', 60, 'ORD-20240512-0000193', 1),
 ('box-000073', 0, 'ORD-20240512-0000192', 3),
 ('box-000073', 3, 'ORD-20240511-0000084', 2),
@@ -699,7 +735,10 @@ INSERT INTO `transaction` (`transaction_id`, `order_number`, `timestamp`, `user_
 (67, 'ORD-20240512-0000200', '2024-05-11 18:23:48', 'user-00049', 100.00, 3, 787.00, 'Cash on Delivery'),
 (68, 'ORD-20240512-0000201', '2024-05-11 18:24:01', 'user-00049', 100.00, 3, 787.00, 'Cash on Delivery'),
 (69, 'ORD-20240512-0000202', '2024-05-11 18:52:13', 'user-00049', 100.00, 1, 329.00, NULL),
-(70, 'ORD-20240512-0000203', '2024-05-11 18:53:29', 'user-00049', 100.00, 2, 897.00, 'Cash on Delivery');
+(70, 'ORD-20240512-0000203', '2024-05-11 18:53:29', 'user-00049', 100.00, 2, 897.00, 'Cash on Delivery'),
+(71, 'ORD-20240513-0000213', '2024-05-12 17:55:48', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
+(72, 'ORD-20240513-0000214', '2024-05-12 17:55:48', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
+(73, 'ORD-20240513-0000215', '2024-05-12 17:56:36', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery');
 
 --
 -- Triggers `transaction`
@@ -821,7 +860,11 @@ INSERT INTO `user_logs` (`log_id`, `user_id`, `timestamp`, `action`) VALUES
 ('tran-00075', 'user-00049', '2024-05-11 08:10:42', 'logout'),
 ('tran-00076', 'user-00049', '2024-05-11 08:10:49', 'login'),
 ('tran-00077', 'user-00049', '2024-05-11 10:01:31', 'logout'),
-('tran-00078', 'user-00049', '2024-05-11 10:01:41', 'login');
+('tran-00078', 'user-00049', '2024-05-11 10:01:41', 'login'),
+('tran-00204', 'user-00049', '2024-05-11 18:59:29', 'logout'),
+('tran-00205', 'user-00049', '2024-05-12 06:03:25', 'login'),
+('tran-00206', 'user-00049', '2024-05-12 06:03:32', 'logout'),
+('tran-00207', 'user-00049', '2024-05-12 06:06:01', 'login');
 
 --
 -- Triggers `user_logs`
@@ -862,6 +905,13 @@ CREATE TABLE `user_preference` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `user_preference`
+--
+
+INSERT INTO `user_preference` (`user_preference_id`, `user_id`, `height`, `weight`, `bust_size`, `hip_size`, `shoe_size`, `clothing_size`) VALUES
+('pref-00212', 'user-00049', 233.00, 90.00, '23', '42', '18', 'XXL');
+
+--
 -- Triggers `user_preference`
 --
 DELIMITER $$
@@ -874,13 +924,26 @@ CREATE TRIGGER `generate_user_preference_id` BEFORE INSERT ON `user_preference` 
     SET next_id = LAST_INSERT_ID();
     
     -- Generate the alphanumeric ID
-    SET new_user_preference_id = CONCAT('tran-', LPAD(next_id, 5, '0'));
+    SET new_user_preference_id = CONCAT('pref-', LPAD(next_id, 5, '0'));
     
     -- Set the new item_id value
     SET NEW.user_preference_id = new_user_preference_id;
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_security_questions`
+--
+
+CREATE TABLE `user_security_questions` (
+  `user_question_id` int(11) NOT NULL,
+  `user_id` varchar(10) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `answer` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -913,6 +976,12 @@ ALTER TABLE `order_product`
   ADD KEY `fk_order_product_item` (`item_id`),
   ADD KEY `fk_order_product_style_box` (`style_box_id`),
   ADD KEY `fk_order_product_transaction` (`transaction_id`);
+
+--
+-- Indexes for table `security_questions`
+--
+ALTER TABLE `security_questions`
+  ADD PRIMARY KEY (`question_id`);
 
 --
 -- Indexes for table `sequence`
@@ -986,6 +1055,14 @@ ALTER TABLE `user_preference`
   ADD KEY `user_preference_ibfk_1` (`user_id`);
 
 --
+-- Indexes for table `user_security_questions`
+--
+ALTER TABLE `user_security_questions`
+  ADD PRIMARY KEY (`user_question_id`),
+  ADD UNIQUE KEY `user_question_unique` (`user_id`,`question_id`),
+  ADD KEY `fk_question_id` (`question_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -996,16 +1073,28 @@ ALTER TABLE `order_product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
+-- AUTO_INCREMENT for table `security_questions`
+--
+ALTER TABLE `security_questions`
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `sequence`
 --
 ALTER TABLE `sequence`
-  MODIFY `sequence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+  MODIFY `sequence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+
+--
+-- AUTO_INCREMENT for table `user_security_questions`
+--
+ALTER TABLE `user_security_questions`
+  MODIFY `user_question_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -1057,7 +1146,14 @@ ALTER TABLE `user_logs`
 -- Constraints for table `user_preference`
 --
 ALTER TABLE `user_preference`
-  ADD CONSTRAINT `user_preference_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `user_preference_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `user_security_questions`
+--
+ALTER TABLE `user_security_questions`
+  ADD CONSTRAINT `fk_question_id` FOREIGN KEY (`question_id`) REFERENCES `security_questions` (`question_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
