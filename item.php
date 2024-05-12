@@ -2,6 +2,7 @@
     session_start();
 ?>
 
+
 <?php include('server/get_item_page.php'); ?>
 
 <!DOCTYPE html>
@@ -55,7 +56,7 @@
                         <!-- item price -->
                         <div class="pt-3 px-3 mb-0">
                             <div class="m-0">
-                                <h4 class="pink_highlight2 rounded-2 p-3 bold_header box_price"><?php echo $row['price']; ?></h4>
+                                <h4 class="pink_highlight2 rounded-2 p-3 bold_header box_price">₱ <?php echo $row['price']; ?></h4>
                             </div>
                         </div>
                         <!-- item description -->
@@ -66,14 +67,15 @@
                             </div>
                         </div>
 
-                        <!-- add to cart and buy now button -->
+
+                        <!-- add to card and buy now button -->
+
                         <form method = "POST" action = "view_cart.php">
-                            <input type = "hidden" name = "product_id" value = "<?php echo $row['item_id']; ?>"> </input>
-                            <input type = "hidden" name = "product_img_url" value = "<?php echo $row['item_img_url']; ?>"> </input>
-                            <input type = "hidden" name = "product" value = "<?php echo $row['item_name']; ?>"> </input>
-                            <input type = "hidden" name = "product_price" value = "<?php echo $row['price']; ?>"> </input>
-                            <input type = "hidden" name = "product_quantity" value = "1"> </input>
-                            <input type = "hidden" name = "item" value = "<?php echo $row['item_id']; ?>"> </input>
+                            <input type = "hidden" name = "style_id" value = "<?php echo $row['item_id']; ?>"> </input>
+                            <input type = "hidden" name = "style_img_url" value = "<?php echo $row['item_img_url']; ?>"> </input>
+                            <input type = "hidden" name = "style" value = "<?php echo $row['item_name']; ?>"> </input>
+                            <input type = "hidden" name = "style_price" value = "<?php echo $row['price']; ?>"> </input>
+                            <input type = "hidden" name = "style_quantity" value = "1"> </input>
                             <div class="px-3 pt-0 m-0">
                                 <div class="d-inline add_cart">
                                     <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit" name ="add_to_cart"><i class="bi bi-cart-plus me-1"></i></button>
@@ -86,44 +88,6 @@
                     </form>
                 </div>
             <?php } ?>
-
-            <!-- Related  Single Items -->
-            <div class="row rounded-2 m-3 p-2 gray_bg">
-                <div class="mt-3 mb-0 ms-2 single_items">
-                    <h6 class="mb-0">RELATED SINGLE ITEMS</h6>
-                </div>
-                <div class="row mt-0 mx-1 p-2 gx-3">
-                    
-                    <?php include('server/get_related_item_item.php'); ?>
-                
-                    <!-- Loop through the related items -->
-                    <?php if ($related_items !== null) { while ($row = $related_items->fetch_assoc()) { ?>
-                    
-                        <!-- card -->
-                        <div class="col-sm-3 p-2">
-                            <a href="item_page.php" class="text-decoration-none">
-                                <div class="card overflow-hidden rounded-1 card_content item_card">
-                                    <img src="resources/<?php echo $row['item_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="<?php echo $row['item_name']; ?>">
-                                    <div class="card-body p-3">
-                                        <p class="item_name"><?php echo $row['item_name']; ?></p>
-                                        <!-- price and category -->
-                                        <div class="row p-0 d-flex justify-content-between">
-                                            <div class="col-5 m-0 text-align-left">
-                                                <p class="card-text item_price m-0"><?php echo $row['price']; ?></p>
-                                            </div>
-                                            <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
-                                                <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    <?php } } ?>
-
-                </div>
-            </div>
-
         </div>
     </div>
 </body>

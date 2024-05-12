@@ -2,6 +2,7 @@
     session_start();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,8 +29,6 @@
                 <a class="border-0 rounded-1 justify-content-start text-decoration-none w-25" id="go_back" href="javascript:void(0)"><i class="bi bi-chevron-left me-2"></i>Back</a>
             </div>
             <div class="row m-2 p-0 d-flex justify-content-center">
-            
-
                 <!-- img logos -->
                 <div class="col-10 center_align">
                     <span class="img_logo"><img src="resources/mystery_box_logo.png" class="d-none d-sm-block" alt="img"></span>
@@ -102,19 +101,9 @@
                                 </div>
                                 <div class="row mt-3 p-0">
                                     <!-- add to cart + checkout btn -->
-
-                                    <?php include('server/get_mystery_box.php'); ?>
-                                    <form method = "POST" action = "view_cart.php">
-                                        <div class="center_align pink_btn2 pb-2">
-                                        <input type = "hidden" name = "product_id" value = "<?php echo $row['style_box_id']; ?>"> </input>
-                                        <input type = "hidden" name = "product_img_url" value = "<?php echo $row['style_img_url']; ?>"> </input>
-                                        <input type = "hidden" name = "product" value = "<?php echo $row['style']; ?>"> </input>
-                                        <input type = "hidden" name = "product_price" value = "<?php echo $row['price']; ?>"> </input>
-                                        <input type = "hidden" name = "product_quantity" value = "1"> </input>
-                                        <input type = "hidden" name = "style_box" value = "<?php echo $row['style_box_id']; ?>"> </input>
-                                        <a href="checkou"><button class="btn btn-dark border-0 rounded-1 px-3 shadow" type = "submit" name ="add_to_cart"><i class="bi bi-cart-plus me-2"></i>ADD TO CART</button></a>
-                                        </div>
-                                    </form>
+                                    <div class="center_align pink_btn2 pb-2">
+                                        <a href="#"><button class="btn btn-dark border-0 rounded-1 px-3 shadow"><i class="bi bi-cart-plus me-2"></i>ADD TO CART</button></a>
+                                    </div>
                                 </div> 
                             </div>
                         </div>
