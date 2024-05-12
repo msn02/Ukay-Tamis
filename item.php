@@ -114,7 +114,7 @@
                                 <input type = "hidden" name = "item" value = "<?php echo $row['item_id']; ?>"> </input>
                                 <input type = "hidden" name = "product_type" value = "item"> </input>
                                 <div class="d-inline buy_now">
-                                    <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit">Buy Now</button>
+                                    <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit" name = "buy_now">Buy Now</button>
                                 </div>
                             </form>
                             </div>
