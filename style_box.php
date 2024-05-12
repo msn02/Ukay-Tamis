@@ -135,5 +135,7 @@
             </div>
         </div>
     </div>
+    <!-- contact_us -->
+    <?php include 'contact_us.php'?>
 </body>
 </html>
