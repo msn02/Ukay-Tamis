@@ -111,6 +111,7 @@
                                         <input type = "hidden" name = "product" value = "<?php echo $row['style']; ?>"> </input>
                                         <input type = "hidden" name = "product_price" value = "<?php echo $row['price']; ?>"> </input>
                                         <input type = "hidden" name = "product_quantity" value = "1"> </input>
+                                        <input type = "hidden" name = "product_type" value = "style box"> </input>
                                         <input type = "hidden" name = "style_box" value = "<?php echo $row['style_box_id']; ?>"> </input>
                                         <a href="checkou"><button class="btn btn-dark border-0 rounded-1 px-3 shadow" type = "submit" name ="add_to_cart"><i class="bi bi-cart-plus me-2"></i>ADD TO CART</button></a>
                                         </div>

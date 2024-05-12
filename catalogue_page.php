@@ -244,7 +244,7 @@
                                                     <p class="card-text item_price m-0"><?php echo $row['price']; ?></p>
                                                 </div>
                                                 <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
-                                                    <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
+                                                    <p class="rounded-1 tag_pink m-0 px-2 py-1"><?php echo $row['style']; ?></p>
                                                 </div>
                                             </div>
                                         </div>
