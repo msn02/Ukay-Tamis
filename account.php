@@ -242,244 +242,356 @@
                         <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
-               
-                    <!-- Full Name -->
-                    <div class="pt-3 px-5 mt-2 mb-0">
-                        <div class="m-0">
-                            <h4 class="pink_highlight2 rounded-2 bold_header box_price"> <?php if (isset($_SESSION['first_name']) && ($_SESSION['last_name'])) {echo $_SESSION['first_name'] . ' ' . $_SESSION['last_name']; } ?> </h4>
+
+                <!-- user profile, address, subscription, transactions -->
+                <div class="col-sm-8 py-3 px-2 m-0">
+                    <div class="row mb-2 mx-0 p-3 d-flex align-items-stretch justify-content-between card rounded-2 border-0 hstack">
+                        <!-- user profile -->
+                        <div class="col-sm-6 p-3 user_info m-0">
+                            <h6 class="border-bottom pb-2 bold_header">My Profile</h6>
+                            <div class="m-0 py-2">
+                                <h4 class="pink_highlight2 bold_header mb-1 p-0"><?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } ?></h4>
+                                <p class="bold_header"><?php if (isset($_SESSION['email'])) { echo $_SESSION['email']; } ?></p>
+                                <div class="mt-2 mb-0 p-0 hstack">
+                                    <!-- change pass -->
+                                    <div class="pink_btn2 mb-0 mt-3 me-2">
+                                        <button class="btn btn-dark border-0 rounded-1" data-bs-toggle="modal" data-bs-target="#change_pass">Change Password</button>
+                                    </div>
+                                    <!-- edit security questions -->
+                                    <div class="gray_btn mb-0 mt-3">
+                                        <button class="btn btn-dark border-0 rounded-1" data-bs-toggle="modal" data-bs-target="#sec_question">Set Security Question</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <!-- User Details -->
-                    <div class="pt-3 px-5 mb-0">
-                        <div class=" pt-2 pb-0 m-0">
-                            <h6 class="bold_header"> Username: <?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } ?> </h6>
-                            <h6 class="bold_header"> Email: <?php if (isset($_SESSION['email'])) { echo $_SESSION['email']; } ?> </h6>
-                            <h6 class="bold_header"> Phone Number: <?php if (isset($_SESSION['phone_number'])) { echo $_SESSION['phone_number']; } ?> </h6>
-                            <h6 class="bold_header" id="addressDisplay"> Delivery Address:  <?php if (isset($_SESSION['address'])) { echo $_SESSION['address']; } ?> </h6>
-                        </div>
-                    </div>
-                    
-                    <!-- Changes -->
-                    
-                    <div class="pt-3 px-2 mt-2 mb-0 row">
-                        <div class="log_sign_btn mt-4 pt-3 px-5 mb-0 col">
-                        <button type="button" class="btn btn-dark border-0 rounded-1 px-4 py-1" data-bs-toggle="modal" data-bs-target="#changeAddressModal">Change Address</button>    
-                        <button class="btn btn-dark border-0 rounded-1 px-4 py-1" data-bs-toggle="modal" data-bs-target="#preferencesModal">Set up Preferences</button>
+                        <!-- delivery address -->
+                        <div class="col-sm-6 p-3 user_info m-0">
+                            <h6 class="border-bottom pb-2 bold_header">Delivery Address</h6>
+                            <div class="m-0 py-2">
+                                <p class="pink_highlight2 bold_header mb-1 p-0"><?php if (isset($_SESSION['first_name']) && ($_SESSION['last_name'])) {echo $_SESSION['first_name'] . ' ' . $_SESSION['last_name']; } ?></p>
+                                <p class="m-0 p-0"><?php if (isset($_SESSION['phone_number'])) { echo $_SESSION['phone_number']; } ?></p>
+                                <p class="m-0 p-0"><?php if (isset($_SESSION['address'])) { echo $_SESSION['address']; } ?></p>
+                                <div class="mt-2 p-0">
+                                    <!-- edit address -->
+                                    <div class="pink_btn2 mt-3 mb-0 me-2">
+                                        <button class="btn btn-dark border-0 rounded-1" data-bs-toggle="modal" data-bs-target="#address">Edit Address</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                   
+                    <div class="row mb-2 mt-3 mx-0 p-3 d-flex align-items-stretch justify-content-between card rounded-2 border-0 hstack">
+                        <!-- recent transactions -->
+                        <div class="col-sm-12 p-3 user_info m-0">
+                            <h6 class="border-bottom pb-2 bold_header">Recent Transactions</h6>
+                            <table class="table">
+                                <thead class="text-center">
+                                    <tr class="thead_style">
+                                        <th scope="col">Order #</th>
+                                        <th scope="col">Placed on</th>
+                                        <th scope="col-1">Product</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="product_info align-middle">
+                                        <!-- product ordered -->
+                                        <td scope="row">12345</td>
+                                        <td class="text-center">05/10/24</td>
+                                        <td class="item_img d-flex justify-content-center">
+                                            <img src="resources/coquette.jpg" class="card m-0" alt="item">
+                                        </td>
+                                        <td class="text-center bold_header"><span class="pink_highlight2 ">PHP 123</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- CHANGE PASSWORD -->
-                <form class="form_style p-4 m-0" method = "POST" action = "account.php">
-
-                        <div class="border-top col m-0 p-3">
-                            <h2 class="bold_header ps-0 mt-5 mb-3 pb-0">Change Password</h2>
+                <!-- right panel -->
+                <div class="col-sm-4 py-3 px-2 m-0">
+                    <div class="row mb-2 mx-0 p-3 d-flex align-items-stretch justify-content-between card rounded-2 border-0 hstack">
+                        <!-- measurements -->
+                        <div class="col-12 p-3 measurement_info m-0">
+                            <h6 class="border-bottom pb-2 bold_header">My Measurements</h6>
+                            <div class="m-0 py-2">
+                                <div class="col d-flex justify-content-between">
+                                    <p>Height</p>
+                                    <p class="bold_header">123</p>
+                                </div>
+                                <div class="col d-flex justify-content-between">
+                                    <p>Weight</p>
+                                    <p class="bold_header">123</p>
+                                </div>
+                                <div class="col d-flex justify-content-between">
+                                    <p>Bust Size</p>
+                                    <p class="bold_header">123</p>
+                                </div>
+                                <div class="col d-flex justify-content-between">
+                                    <p>Hip Size</p>
+                                    <p class="bold_header">123</p>
+                                </div>
+                                <div class="col d-flex justify-content-between">
+                                    <p>Shoe Size (EU)</p>
+                                    <p class="bold_header">123</p>
+                                </div>
+                                <div class="col d-flex justify-content-between">
+                                    <p>Clothing Size</p>
+                                    <p class="bold_header">123</p>
+                                </div>
+                                
+                                <!-- edit button -->
+                                <div class="mt-2 p-0">
+                                    <!-- <div class="pink_btn2 mt-2 me-2">
+                                        <button class="btn btn-dark border-0 rounded-1">Edit Profile</button>
+                                    </div> -->
+                                    <div class="gray_btn mb-0 mt-3">
+                                        <button class="btn btn-dark border-0 rounded-1 w-100" data-bs-toggle="modal" data-bs-target="#measurements">Update Measurements</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="ms-3 mb-3">
-                            <label for="input_uname" class="form-label">Old Password</label>
-                            <input type="password" class="form-control ms-1" id="input_oldPass" name = "old_password" placeholder="Enter new password" required>
+                        <!-- subscriptions -->
+                        <div class="col-12 p-3 subscription_info m-0">
+                            <h6 class="border-bottom pb-2 bold_header">My Subscription</h6>
+                            <!-- subscription details -->
+                            <div class="row my-3 center_align m-0 p-0">
+                                <div class="card border-0 price_badge p-3 m-0 package_info">
+                                    <h6 class="bold_header mb-1">PREMIUM Tier</h6>
+                                    <p class="bold_header mb-2">6 Months</p>
+                                    <p class="card-text mb-0">Ends on <span class="bold_header">November 10, 2024</span></p>
+                                </div>
+                                <div class="gray_btn mt-3 mb-0 p-0">
+                                    <button class="btn btn-dark border-0 rounded-1 w-100" disabled>Cancel Subscription</button>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="ms-3 mb-3">
-                            <label for="input_uname" class="form-label">New Password</label>
-                            <input type="password" class="form-control ms-1" id="input_uname" name = "new_password" placeholder="Enter new password" required>
-                        </div>
-                        <div class="ms-3 mb-3">
-                            <label for="input_pass" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control ms-1" id="input_pass" name = "confirm_new_password" placeholder="Confirm new password" required>
-                        </div>
-                        <!-- TO DO: Error warning (if password is incorrect/no account/no username found) -->
-                        <div class="log_sign_btn mt-4 ms-3  ">
-                            <input class="btn btn-dark border-0 rounded-1 px-4 py-1 ms-1" onclick="" name = "change_pass_btn" value = "Change Password" type = "submit"></input>
-                            <button class="btn btn-dark border-0 rounded-1 px-4 py-1" data-bs-toggle="modal" data-bs-target="#securityModal">Set up Security Questions</button>
-                        </div>
-
-                        <p style="color: red"> <?php if (isset($_GET['error'])) { echo $_GET['error']; } ?> </p>
-                        <p style="color: green"> <?php if (isset($_GET['success'])) { echo $_GET['success']; } ?> </p>
-                </form>
-
-                <!-- TRANSACTIONS -->
-                <div class="col-sm-7 m-0 py-4 px-3">
-                    <!-- tag and title -->
-                    <div class="row m-0 p-3 pb-0 justify-content-between g-3">
-                        <div class="col-sm-10 m-0 p-0">
-                            <h2 class="bold_header align-content-center ps-0 mb-0 pb-0">TRANSACTIONS</h2>
-                        </div>
-                        <div class="d-sm-none d-block m-1"></div>
                     </div>
-                    <!-- box price -->
-                    <div class="pt-3 px-3 mb-0">
-                        <div class="m-0">
-                            <h4 class="pink_highlight2 rounded-2 p-3 bold_header box_price">PHP 123</h4>
-                        </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODALS -->
+
+        <!-- change password -->
+        <div class="modal fade" id="change_pass" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="change_pass_lbl" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header modal_btn">
+                        <h3 class="modal-title fs-5 bold_header" id="change_pass_lbl">Change Password</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <!-- style description -->
-                    <div class="pt-3 px-3 mb-0">
-                        <div class="border-top pt-3 pb-0 m-0">
-                            <h6 class="bold_header">Style Description</h6>
-                            <p class="box_desc m-0 p-0">HEllo</p>
+                    <div class="modal-body">
+                        <form class="form_style p-3 m-0">
+                            <!-- alert success -->
+                            <div class="px-0 mb-3 alert_btn d-none">
+                                <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
+                                    Password updated successfully!
+                                    <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            </div>
+                            <!-- form -->
+                            <div class="mb-3">
+                                <label for="input_uname" class="form-label ms-1">Old Password</label>
+                                <input type="text" class="form-control" id="old_pass" placeholder="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="input_pass" class="form-label ms-1">New Password</label>
+                                <input type="password" class="form-control" id="new_pass" placeholder="Enter your new password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="input_pass" class="form-label ms-1">Confirm New Password</label>
+                                <input type="password" class="form-control" id="new_pass" placeholder="Re-enter your new password">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="gray_btn">
+                            <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                        <div class="pink_btn2">
+                            <button type="button" class="btn btn-dark rounded-1 border-0">Change Password</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-       <!-- Modal for changing address -->
-       <div class="modal fade" id="changeAddressModal" tabindex="-1" aria-labelledby="changeAddressModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+        <!-- security questions -->
+        <div class="modal fade" id="sec_question" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="sec_question_lbl" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="changeAddressModalLabel">Change Address</h5>
+                    <div class="modal-header modal_btn">
+                        <h3 class="modal-title fs-5 bold_header" id="sec_question_lbl">Set your Security Question</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- Form for changing address -->
-                        <form id="changeAddressForm" method="POST" action="account.php">
+                        <form class="form_style p-3 m-0">
+                            <!-- alert success -->
+                            <div class="px-0 mb-3 alert_btn d-none">
+                                <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
+                                    Security Question updated successfully!
+                                    <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            </div>
+                            <!-- form -->
+                            <div class="mb-3">
+                                <label for="old_pass" class="form-label ms-1">Password</label>
+                                <input type="text" class="form-control" id="old_pass" placeholder="Enter your password">
+                            </div>
+                            <div class="pink_btn2 center_align">
+                                <button type="button" class="btn btn-dark rounded-1 border-0">Verify</button>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sec_ques" class="form-label ms-1">Security Question</label>
+                                <input type="text" class="form-control" id="sec_ques" placeholder="Enter your security question">
+                            </div>
+                            <div class="mb-3">
+                                <label for="input_ans" class="form-label ms-1">Answer</label>
+                                <input type="text" class="form-control" id="input_ans" placeholder="Enter your answer">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="gray_btn">
+                            <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                        <div class="pink_btn2">
+                            <button type="button" class="btn btn-dark rounded-1 border-0">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- edit address -->
+        <div class="modal fade" id="address" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="address_lbl" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header modal_btn">
+                        <h3 class="modal-title fs-5 bold_header" id="address_lbl">Edit Delivery Address</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form_style p-3 m-0">
+                            <!-- alert success -->
+                            <div class="px-0 mb-3 alert_btn d-none">
+                                <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
+                                    Delivery Address updated successfully!
+                                    <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            </div>
+                            <!-- form -->
+                            <div class="mb-3">
+                                <label for="input_add1" class="form-label ms-1">House Unit/Floor No./Building Name/Block or Lot</label>
+                                <input type="text" class="form-control" id="input_add1" placeholder="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="input_brgy" class="form-label ms-1">Barangay</label>
+                                <input type="text" class="form-control" id="input_brgy" placeholder="">
+                            </div>
                             <div class="row mb-3">
-                                <div class="col">
-                                    <label for="Unit" class="form-label">House/Unit/Flr #, Bldg Name, Blk or Lot</label>
-                                    <input type="text" class="form-control" id="house_unit" name="house_unit" required>
-
-                                    <label for="Baranggay" class="form-label">Baranggay</label>
-                                    <input type="text" class="form-control" id="baranggay" name="baranggay" required>
+                                <div class="col-sm-6">
+                                    <label for="input_city" class="form-label ms-1">City/Municipality</label>
+                                    <input type="text" class="form-control" id="input_city" placeholder="">
                                 </div>
-
-                                <div class="col">
-                                    <label for="City" class="form-label">City/Municipality</label>
-                                    <input type="text" class="form-control" id="municipality" name="municipality" required>
-
-                                    <label for="Province" class="form-label">Province</label>
-                                    <input type="text" class="form-control" id="province" name="province" required>
+                                <div class="col-sm-6">
+                                    <label for="input_prov" class="form-label ms-1">Province</label>
+                                    <input type="text" class="form-control" id="input_prov" placeholder="">
                                 </div>
                             </div>
-                            <input type="submit" name="address_change" class="btn btn-primary" value="Save changes"></input>
                         </form>
-
+                    </div>
+                    <div class="modal-footer">
+                        <div class="gray_btn">
+                            <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                        <div class="pink_btn2">
+                            <button type="button" class="btn btn-dark rounded-1 border-0">Save Changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-         <!-- Preference Change Modal -->
-        <div class="modal fade" id="preferencesModal" tabindex="-1" aria-labelledby="preferencesModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <!-- edit measurements -->
+        <div class="modal fade" id="measurements" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="measurements_lbl" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="preferencesModalLabel">Change Preferences</h5>
+                    <div class="modal-header modal_btn">
+                        <h3 class="modal-title fs-5 bold_header" id="measurements_lbl">Update Measurements</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="account.php">
-                            <!-- Add form fields for preferences here -->
-                            <div class="mb-3">
-                                <label for="height" class="form-label">Height (cm)</label>
-                                <input type="number" class="form-control" id="height" name="height" step="0.01" min="0" required>
+                        <form class="form_style p-3 m-0">
+                            <!-- alert success -->
+                            <div class="px-0 mb-3 alert_btn d-none">
+                                <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
+                                    Measurements updated successfully!
+                                    <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="weight" class="form-label">Weight (kg)</label>
-                                <input type="number" class="form-control" id="weight" name="weight" step="0.01" min="0" required>
+                            <!-- form -->
+                            <!-- height and weight -->
+                            <div class="row mb-3">
+                                <div class="col-sm-6">
+                                    <label for="input_height" class="form-label ms-1">Height (cm)</label>
+                                    <input type="text" class="form-control" id="input_height" placeholder="">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="input_weight" class="form-label ms-1">Weight (kg)</label>
+                                    <input type="text" class="form-control" id="input_weight" placeholder="">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="bust_size" class="form-label">Bust Size (cm)</label>
-                                <input type="number" class="form-control" id="bust_size" name="bust_size" min="0" required>
+                            <!-- bust and hip size -->
+                            <div class="row mb-3">
+                                <div class="col-sm-6">
+                                    <label for="input_bust" class="form-label ms-1">Bust Size (cm)</label>
+                                    <input type="text" class="form-control" id="input_bust" placeholder="">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="input_hip" class="form-label ms-1">Hip Size (kg)</label>
+                                    <input type="text" class="form-control" id="input_hip" placeholder="">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="hip_size" class="form-label">Hip Size (cm)</label>
-                                <input type="number" class="form-control" id="hip_size" name="hip_size" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="shoe_size" class="form-label">Shoe Size (EU)</label>
-                                <input type="number" class="form-control" id="shoe_size" name="shoe_size" min="0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="clothing_size" class="form-label">Clothing Size</label>
-                                <select class="form-control" id="clothing_size" name="clothing_size" required>
-                                    <option value="">Select Size</option>
-                                    <option value="XS">XS</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <input type="submit" name="preferences_change" class="btn btn-primary" value="Save changes"></input>
+                            <!-- shoe and clothing size -->
+                            <div class="row mb-3">
+                                <div class="col-sm-6">
+                                    <label for="input_shoe" class="form-label ms-1">Shoe Size (EU)</label>
+                                    <input type="text" class="form-control" id="input_shoe" placeholder="">
+                                </div>
+                                <div class="col-sm-6 form_option">
+                                    <label for="input_clothing" class="form-label ms-1">Clothing Size (kg)</label>
+                                    <select id="input_clothing" class="form-select" aria-label="Default select example">
+                                        <option selected>Select your size</option>
+                                        <option value="1">Small</option>
+                                        <option value="2">Medium</option>
+                                        <option value="3">Large</option>
+                                        <option value="4">Extra Large</option>
+                                        <option value="5">XXL</option>
+                                    </select>
+                                </div>
                             </div>
                         </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="gray_btn">
+                            <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                        <div class="pink_btn2">
+                            <button type="button" class="btn btn-dark rounded-1 border-0">Save Changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-       <!-- Security Modal -->
-    <div class="modal fade" id="securityModal" tabindex="-1" aria-labelledby="securityModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h5 class="modal-title" id="preferencesModalLabel">Security Questions</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <form method="POST" action="account.php">
-                        <div class="mb-3">
-                            <label for="question1" class="form-label">Question 1</label>
-                            <select class="form-control" id="security_questions1" name="security_questions1" required>
-                                <option value="">Select Question</option>
-                                <?php foreach ($securityQuestions as $questionId => $question) { ?>
-                                    <option value="<?php echo $questionId; ?>"><?php echo $question; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="answer1" class="form-label">Answer</label>
-                            <input type="text" class="form-control" id="answer1" name="answer1" min="" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="question1" class="form-label">Question 2</label>
-                            <select class="form-control" id="security_questions2" name="security_questions2" required>
-                                <option value="">Select Question</option>
-                                <?php foreach ($securityQuestions as $questionId => $question) { ?>
-                                    <option value="<?php echo $questionId; ?>"><?php echo $question; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="answer2" class="form-label">Answer</label>
-                            <input type="text" class="form-control" id="answer2" name="answer2" min="" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="question3" class="form-label">Question 3</label>
-                            <select class="form-control" id="security_questions3" name="security_questions3" required>
-                                <option value="">Select Question</option>
-                                <?php foreach ($securityQuestions as $questionId => $question) { ?>
-                                    <option value="<?php echo $questionId; ?>"><?php echo $question; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="answer3" class="form-label">Answer</label>
-                            <input type="text" class="form-control" id="answer3" name="answer3" min="" required>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" name="security_change" class="btn btn-primary" value="Save changes"></input>
-                        </div>
-                        
-                    </form>
-                </div>
-            </div>
-        </div>
+        
+        <!-- footer -->
+        <?php include 'contact_us.php'?>
     </div>
 </body>
 </html>
