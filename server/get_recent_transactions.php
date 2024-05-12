@@ -4,7 +4,6 @@
 
     // Prepare the SQL query
     $stmt = $conn -> prepare ("SELECT * FROM transaction 
-                               JOIN order_product ON transaction.transaction_id = order_product.transaction_id 
                                WHERE transaction.user_id = ?
                                ORDER BY transaction.transaction_id DESC LIMIT 3");
 
