@@ -127,7 +127,7 @@
                     
                         <!-- card -->
                         <div class="col-sm-3 p-2">
-                            <a href="item_page.php" class="text-decoration-none">
+                            <a href="<?php echo "item.php?item_id=" . $row['item_id'] ?>" class="text-decoration-none">
                                 <div class="card overflow-hidden rounded-1 card_content item_card">
                                     <img src="resources/<?php echo $row['item_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="<?php echo $row['item_name']; ?>">
                                     <div class="card-body p-3">
