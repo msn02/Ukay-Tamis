@@ -47,11 +47,11 @@
             $stmt->fetch();
 
             // Verify if the old password matches the password retrieved from the database
-            if (md5($old_password) == $db_password) {
+            if (hash('sha256', $old_password) == $db_password) {
                 // If old password matches, proceed with checking new password and confirm password
                 if ($new_password == $confirm_new_password) {
                     // If new password and confirm password match, update password in the database
-                    $hashed_password = md5($new_password);
+                    $hashed_password = hash('sha256', $new_password);
                     $update_stmt = $conn->prepare("UPDATE user SET password = ? WHERE user_id = ?");
                     $update_stmt->bind_param("ss", $hashed_password, $user_id);
                     if ($update_stmt->execute()) {

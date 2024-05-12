@@ -12,7 +12,7 @@
         
         if (isset($_POST['login_btn'])) {
             $username = $_POST['username'];
-            $password = md5($_POST['password']);
+            $password = hash('sha256', $_POST['password']);
     
             $stmt = $conn -> prepare ("SELECT user_id, username, email, first_name, last_name, phone_number, address FROM user WHERE username = ? AND password = ? LIMIT 1");
     
