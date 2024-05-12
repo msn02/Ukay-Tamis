@@ -1,3 +1,201 @@
+<?php
+    include ('server/connection.php');
+
+    session_start();
+
+    if(!isset($_SESSION['logged_in'])){
+        header("Location: log_in.php");
+        exit();
+    }
+
+    if(isset($_GET['logout'])){
+        if (isset($_SESSION['logged_in'])) {
+
+            $user_id = $_SESSION['user_id'];
+            $action = 'logout'; 
+
+            // insert record to user_logs
+            $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+            $stmt1 -> bind_param("ss", $user_id, $action);
+            $stmt1 -> execute();
+
+            unset($_SESSION['logged_in']);
+            unset($_SESSION['user_id']);
+            unset($_SESSION['username']);
+            unset($_SESSION['email']);
+            unset($_SESSION['first_name']);
+            unset($_SESSION['last_name']);
+            session_destroy();
+            header("Location: log_in.php");
+            exit();
+        }
+    }
+    // Handle change password request
+    if(isset($_POST['change_pass_btn'])){
+        $old_password = $_POST['old_password'];
+        $new_password = $_POST['new_password'];
+        $confirm_new_password = $_POST['confirm_new_password'];
+        $user_id = $_SESSION['user_id'];
+
+        // Retrieve the user's current password from the database
+        $stmt = $conn->prepare("SELECT password FROM user WHERE user_id = ?");
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows == 1) {
+            $stmt->bind_result($db_password);
+            $stmt->fetch();
+
+            // Verify if the old password matches the password retrieved from the database
+            if (md5($old_password) == $db_password) {
+                // If old password matches, proceed with checking new password and confirm password
+                if ($new_password == $confirm_new_password) {
+                    // If new password and confirm password match, update password in the database
+                    $hashed_password = md5($new_password);
+                    $update_stmt = $conn->prepare("UPDATE user SET password = ? WHERE user_id = ?");
+                    $update_stmt->bind_param("ss", $hashed_password, $user_id);
+                    if ($update_stmt->execute()) {
+                        // Password changed successfully
+                        $action = 'change password'; 
+                        $stmt1 = $conn->prepare("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+                        $stmt1->bind_param("ss", $user_id, $action);
+                        $stmt1->execute();
+                        header("Location: account.php?success=Password changed successfully");
+                        exit();
+                    } else {
+                        header("Location: account.php?error=Something went wrong");
+                        exit();
+                    }
+                } else {
+                    header("Location: account.php?error=New password and confirm password do not match");
+                    exit();
+                }
+            } else {
+                header("Location: account.php?error=Incorrect old password");
+                exit();
+            }
+        } else {
+            header("Location: account.php?error=User not found");
+            exit();
+        }
+    }
+    // Handle change address request
+    if(isset($_POST['address_change'])) {
+        // Get user ID from session
+        $user_id = $_SESSION['user_id'];
+    
+        // Extract new address information from POST data
+        $house_unit = $_POST['house_unit'];
+        $baranggay = $_POST['baranggay'];
+        $municipality = $_POST['municipality'];
+        $province = $_POST['province'];
+    
+        // Validate address information (optional, add checks for empty fields etc.)
+    
+        // Construct new address string
+        $new_address = "$house_unit, $baranggay, $municipality, $province";
+    
+        // Prepare update query
+        $stmt = $conn->prepare("UPDATE user SET address = ? WHERE user_id = ?");
+        $stmt->bind_param("ss", $new_address, $user_id);
+    
+        // Execute update query
+        if ($stmt->execute()) {
+        // Update session variable with new address
+        $_SESSION['address'] = $new_address;
+    
+        // Insert record into user_logs for address change
+        $action = 'change address';
+        $stmt1 = $conn->prepare("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+        $stmt1->bind_param("ss", $user_id, $action);
+        $stmt1->execute();
+     }}
+
+     // Handle preference change request
+     if(isset($_POST['preferences_change'])) {
+        $user_id = $_SESSION['user_id'];
+        $height = $_POST['height'];
+        $weight = $_POST['weight'];
+        $bust_size = $_POST['bust_size'];
+        $hip_size = $_POST['hip_size'];
+        $shoe_size = $_POST['shoe_size'];
+        $clothing_size = $_POST['clothing_size'];
+
+        // Check if user preference already exists
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM user_preference WHERE user_id = ?");
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+
+        if ($count > 0) {
+            // Update existing user preference
+            $stmt = $conn->prepare("UPDATE user_preference SET height = ?, weight = ?, bust_size = ?, hip_size = ?, shoe_size = ?, clothing_size = ? WHERE user_id = ?");
+            $stmt->bind_param("ddsssss", $height, $weight, $bust_size, $hip_size, $shoe_size, $clothing_size, $user_id);
+        } else {
+            // Insert new user preference
+            $stmt = $conn->prepare("INSERT INTO user_preference (user_id, height, weight, bust_size, hip_size, shoe_size, clothing_size) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sddssss", $user_id, $height, $weight, $bust_size, $hip_size, $shoe_size, $clothing_size);
+        }
+        $stmt->execute();
+    }
+    // Fetch security questions from the database
+        $stmt = $conn->prepare("SELECT question_id, question FROM security_questions");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Array to store security questions
+        $securityQuestions = array();
+
+        // Fetch questions and store them in the array
+        while ($row = $result->fetch_assoc()) {
+            $securityQuestions[$row['question_id']] = $row['question'];
+        }
+            
+    // Handle security change request
+    if(isset($_POST['security_change'])) {
+        $user_id = $_SESSION['user_id'];
+
+        // Check if the user already has security questions set
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM user_security_questions WHERE user_id = ?");
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+
+        if ($count > 0) {
+            // Delete the old security questions data
+            $delete_stmt = $conn->prepare("DELETE FROM user_security_questions WHERE user_id = ?");
+            $delete_stmt->bind_param("s", $user_id);
+            $delete_stmt->execute();
+        }
+
+        // Insert new security questions data
+        $question1 = $_POST['security_questions1'];
+        $answer1 = $_POST['answer1'];
+        $question2 = $_POST['security_questions2'];
+        $answer2 = $_POST['answer2'];
+        $question3 = $_POST['security_questions3'];
+        $answer3 = $_POST['answer3'];
+
+        $insert_stmt = $conn->prepare("INSERT INTO user_security_questions (user_id, question_id, answer) VALUES (?, ?, ?)");
+
+        // Bind parameters and execute for each question
+        $insert_stmt->bind_param("sss", $user_id, $question1, $answer1);
+        $insert_stmt->execute();
+        $insert_stmt->bind_param("sss", $user_id, $question2, $answer2);
+        $insert_stmt->execute();
+        $insert_stmt->bind_param("sss", $user_id, $question3, $answer3);
+        $insert_stmt->execute();
+
+        // Redirect to account page with success message
+        header("Location: account.php?success=Security questions updated successfully");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +207,13 @@
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
-    <?php include 'nav_bar.php'?>
+    <?php 
+        if (isset($_SESSION['logged_in'])) {
+            include 'auth_nav_bar.php';
+        } else {
+            include 'nav_bar.php';
+        }
+    ?>
 
     <div class="container-fluid gradient_pink m-0 p-0 pt-1">
         <div class="container px-5 py-3">
@@ -46,8 +250,8 @@
                         <div class="col-sm-6 p-3 user_info m-0">
                             <h6 class="border-bottom pb-2 bold_header">My Profile</h6>
                             <div class="m-0 py-2">
-                                <h4 class="pink_highlight2 bold_header mb-1 p-0">Juan Dela Cruz</h4>
-                                <p class="bold_header">example@email.com</p>
+                                <h4 class="pink_highlight2 bold_header mb-1 p-0"><?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } ?></h4>
+                                <p class="bold_header"><?php if (isset($_SESSION['email'])) { echo $_SESSION['email']; } ?></p>
                                 <div class="mt-2 mb-0 p-0 hstack">
                                     <!-- change pass -->
                                     <div class="pink_btn2 mb-0 mt-3 me-2">
@@ -64,9 +268,9 @@
                         <div class="col-sm-6 p-3 user_info m-0">
                             <h6 class="border-bottom pb-2 bold_header">Delivery Address</h6>
                             <div class="m-0 py-2">
-                                <p class="pink_highlight2 bold_header mb-1 p-0">Juan Dela Cruz</p>
-                                <p class="m-0 p-0">09123456789</p>
-                                <p class="m-0 p-0">69075 Louann Turnpike, West Mariella, KY 01624</p>
+                                <p class="pink_highlight2 bold_header mb-1 p-0"><?php if (isset($_SESSION['first_name']) && ($_SESSION['last_name'])) {echo $_SESSION['first_name'] . ' ' . $_SESSION['last_name']; } ?></p>
+                                <p class="m-0 p-0"><?php if (isset($_SESSION['phone_number'])) { echo $_SESSION['phone_number']; } ?></p>
+                                <p class="m-0 p-0"><?php if (isset($_SESSION['address'])) { echo $_SESSION['address']; } ?></p>
                                 <div class="mt-2 p-0">
                                     <!-- edit address -->
                                     <div class="pink_btn2 mt-3 mb-0 me-2">

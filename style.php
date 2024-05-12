@@ -34,7 +34,7 @@
                 </div>
                 <!-- search bar -->
                 <div class="col-sm-9 p-2">
-                    <form class="d-flex m-0 border-0 search_label" role="search" method = "GET" action = catalogue_page.php>
+                    <form class="d-flex m-0 border-0 search_label" role="search" method = "GET" action = style.php>
                         <input class="form-control me-2 rounded-1 border-0 focus-ring focus-ring-light" type="search" placeholder="Browse items" aria-label="Search" name = "search_input">
                         <div class="pink_btn">
                             <button class="btn btn-dark border-0 px-3 shadow rounded-1" name = "search" type="submit"><i class="bi bi-search"></i></button>
@@ -56,38 +56,7 @@
                     <div class="gray_bg rounded-1 pt-3 px-4 pb-4">
 
                         <h6 class="bold_header m-0">SEARCH FILTERS</h6>
-                        <form method ="POST" action = "catalogue_page.php">
-                        <!-- Sizes -->
-                        <div class="border-bottom border-1 filter_title filter_content p-2">
-                            <p class="mb-1">Sizes</p>
-                            
-                            <?php $size = isset($_POST['size']) ? $_POST['size'] : array(); ?>
-
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="XS" id="small" <?php echo in_array('XS', $size) ? 'checked' : ''; ?>>
-                                <label class="form-check-label ms-1" for="small">Extra Small</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="S" id="small" <?php echo in_array('S', $size) ? 'checked' : ''; ?>>
-                                <label class="form-check-label ms-1" for="small">Small</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="M" id="medium" <?php echo in_array('M', $size) ? 'checked' : ''; ?>>
-                                <label class="form-check-label ms-1" for="small">Medium</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="L" id="large" <?php echo in_array('L', $size) ? 'checked' : ''; ?>>
-                                <label class="form-check-label ms-1" for="small">Large</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="XL" id="large" <?php echo in_array('XL', $size) ? 'checked' : ''; ?>>
-                                <label class="form-check-label ms-1" for="small">Extra Large</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name ="size[]" type="checkbox" value="Freesize" id="freesize" <?php echo in_array('Freesize', $size) ? 'checked' : ''; ?>>
-                                <label class="form-check-label ms-1" for="small">Freesize</label>
-                            </div>
-                        </div>
+                        <form method = "POST" action = "style.php">
 
                         <?php $category = isset($_POST['category']) ? $_POST['category'] : ''; ?>
 
@@ -135,8 +104,8 @@
                                 <label class="form-check-label ms-1" for="style_star_girl">Star Girl</label>
                             </div>
                         </div>
-                        
-                        <!-- Price -->
+
+                        <!-- price -->
                         <div class="border-bottom border-1 filter_title filter_content p-2">
                             <p class="my-1">Pricing</p>
                             <div class="form-check ms-3">
@@ -151,8 +120,8 @@
                         </div>
 
                         <div class="mt-3 mx-2 mb-0 px-2 pink_btn2">
-                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" name = "search_filter" href="#">FILTER</i></button>
-                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#" id = "clear_selection">CLEAR SELECTION</i></button>
+                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" name = "search_filter" href="#">FILTER</i></button> 
+                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#" id="clear_selection">CLEAR SELECTION</i></button>
                         </div>
                         </form>
                     </div>
@@ -168,7 +137,6 @@
                                 <!-- title and link to view more styles -->
                                 <div class="pink_btn2 row mt-2 p-2 view_more_link">
                                     <h5 class="col bold_header mb-0 p-0 mx-0">Choose your <span class="pink_highlight2">STYLE</span></h5>
-                                    <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="style.php">View more styles <i class="bi bi-chevron-right"></i></a>
                                 </div>
                                 
                                 <!-- Include the seach_filter_style.php file -->
@@ -187,9 +155,9 @@
                                 </div>
 
                                 <!-- Include the seach_filter_style.php file -->
-                                <?php include('server/search_filter_catalogue.php'); ?>
-
-                                <?php include('server/search_style.php')?>
+                                <?php include('server/search_filter_style.php'); ?>
+                                    
+                                <?php include('server/search_style.php') ?>
 
                                 <!-- Loop through the featured styles -->
                                 <?php while ($featured_styles && $row = $featured_styles->fetch_assoc()) { ?>
@@ -201,7 +169,7 @@
                                         <div class="card-body p-2 pink_btn2">
                                             <p class="item_name my-1 mx-1"><?php echo $row['style']; ?></p>
                                             <p class="style_info mx-1"><?php echo $row['style_description']; ?></p>
-                                            <a href="<?php echo "style_box.php?style_id=" . $row['style_id'] ?>"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
+                                            <a href="<?php echo "style_box.php?style_box_id=" . $row['style_box_id'] ?>"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -213,67 +181,19 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Featured Items -->
-                        <div class="row g-3 mb-3 px-2">
-
-                            <div class="recom_header mt-3 pt-4 mb-0">
-                                <h5 class="bold_header p-0 m-0">SINGLE LISTINGS</h5>
-                            </div>
-                            <!-- <div class="search_result mt-3 md-0 ms-2 d-none">
-                                <p>Search results for <span class="pink_highlight">item name</span></p>
-                            </div> -->
-                            
-                            <?php include('server/search_filter_item.php'); ?>
-
-                            <?php include('server/search_item.php')?>
-
-                            <!-- Loop through the featured items -->
-                            <?php while ($row = $featured_styles->fetch_assoc()) { ?>
-
-                            <!-- Item card -->
-                            <div class="col-sm-3">
-                                <a href="<?php echo "item.php?item_id=" . $row['item_id'] ?>" class="text-decoration-none">
-                                    <div class="card overflow-hidden rounded-1 card_content item_card">
-                                        <img src="resources/<?php echo $row['item_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="item">
-                                        <div class="card-body p-2">
-                                            <p class="item_name"><?php echo $row['item_name']; ?></p>
-                                            <!-- price and category -->
-                                            <div class="row p-0 d-flex justify-content-between">
-                                                <div class="col-5 m-0 text-align-left">
-                                                    <p class="card-text item_price m-0"><?php echo $row['price']; ?></p>
-                                                </div>
-                                                <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
-                                                    <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <?php } ?>
-                            
                             <!-- insert pagination -->
                         </div> <!--item close tag-->
                     
                     </div>
                 </div>
             </div>
-        </div>    
-            
-    <!-- footer -->
-    <?php include 'contact_us.php'?>
-    
+        </div>
     </div>
 </body>
 <script>
     document.getElementById('clear_selection').addEventListener('click', function() {
         var radios = document.querySelectorAll('input[type="radio"][name="category"]');
-        var checkboxes = document.querySelectorAll('input[type="checkbox"][name="size[]"]');
         var price = document.querySelectorAll('input[type="radio"][name="price"]');
-
-        for (var i = 0; i < checkboxes.length; i++)
-            checkboxes[i].checked = false;
 
         for (var i = 0; i < price.length; i++)
             price[i].checked = false;

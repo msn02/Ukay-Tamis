@@ -6,10 +6,10 @@
         $style_id = $_GET['style_id'];
 
         // Prepare the SQL query
-        $stmt = $conn -> prepare ("SELECT * FROM item WHERE style_id = ?");
+        $stmt = $conn -> prepare ("SELECT * FROM item INNER JOIN style ON item.style_id = style.style_id WHERE item.style_id = ?");
 
         // Bind the parameters
-        $stmt -> bind_param("i", $style_id);
+        $stmt -> bind_param("s", $style_id);
 
         // Execute the query
         $stmt -> execute();
