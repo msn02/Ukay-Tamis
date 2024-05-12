@@ -291,19 +291,26 @@
                                         <th scope="col">Order #</th>
                                         <th scope="col">Placed on</th>
                                         <th scope="col-1">Product</th>
+                                        <th scope="col-1">ETA</th>
                                         <th scope="col">Total</th>
+                                        <th scope="col">Payment Method</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php include ('server/get_recent_transactions.php') ?>
+                                <?php while ($row = $recent_transactions->fetch_assoc()) { ?>
                                     <tr class="product_info align-middle">
                                         <!-- product ordered -->
-                                        <td scope="row">12345</td>
-                                        <td class="text-center">05/10/24</td>
+                                        <td scope="row" class="text-center bold_header"><span><?php echo $row['order_number']; ?></span></td>
+                                        <td class="text-center"><?php echo $row['timestamp']; ?></td>
                                         <td class="item_img d-flex justify-content-center">
                                             <img src="resources/coquette.jpg" class="card m-0" alt="item">
                                         </td>
-                                        <td class="text-center bold_header"><span class="pink_highlight2 ">PHP 123</span></td>
+                                        <td class="text-center"><span class=""><?php echo date('Y-m-d', strtotime($row['delivery_date'])); ?></span></td>
+                                        <td class="text-center bold_header"><span class="pink_highlight2"><?php echo $row['total_price']; ?></span></td>
+                                        <td class="text-center "><span class=""><?php echo $row['payment_method']; ?></span></td>
                                     </tr>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
