@@ -1,11 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: May 07, 2024 at 10:01 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+  -- phpMyAdmin SQL Dump
+  -- version 5.2.1
+  -- https://www.phpmyadmin.net/
+  --
+  -- Host: 127.0.0.1
+  -- Generation Time: May 11, 2024 at 12:38 PM
+  -- Server version: 10.4.32-MariaDB
+  -- PHP Version: 8.2.12
 
   SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
   START TRANSACTION;
@@ -27,28 +27,27 @@
   -- Table structure for table `item`
   --
 
-CREATE TABLE `item` (
-  `item_id` varchar(10) NOT NULL,
-  `style_id` varchar(10) DEFAULT NULL,
-  `item_name` varchar(100) DEFAULT NULL,
-  `item_description` varchar(255) DEFAULT NULL,
-  `style` varchar(50) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
-  `size` enum('XS','S','M','L','XL','XXL') DEFAULT NULL,
-  `color` varchar(50) DEFAULT NULL,
-  `item_img_url` varchar(45) DEFAULT NULL,
-  `transaction_id` int(11) DEFAULT NULL,
-  `order_number` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CREATE TABLE `item` (
+    `item_id` varchar(10) NOT NULL,
+    `style_id` varchar(10) DEFAULT NULL,
+    `item_name` varchar(100) DEFAULT NULL,
+    `item_description` varchar(255) DEFAULT NULL,
+    `size` enum('XS','S','M','L','XL','XXL') DEFAULT NULL,
+    `color` varchar(50) DEFAULT NULL,
+    `price` decimal(10,2) DEFAULT NULL,
+    `transaction_id` varchar(10) DEFAULT NULL,
+    `item_img_url` varchar(45) DEFAULT NULL,
+    `style` varchar(50) DEFAULT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
   --
   -- Dumping data for table `item`
   --
 
-  INSERT INTO `item` (`item_id`, `style_id`, `item_name`, `item_description`, `style`, `price`, `size`, `color`, `item_img_url`, `transaction_id`, `order_number`) VALUES
-  ('item-00015', 'style-0001', 'Vintage Floral Blouse', 'Featuring delicate flower patterns and a classic silhouette, this blouse is perfect for adding a touch of nostalgia to your wardrobe.', 'Cottagecore', 229.00, 'XS', 'Brown', 'dress.jpg', 69, 'ORD-20240512-0000202'),
-  ('item-00016', 'style-0001', 'Chunky Knit Sweater', 'Stay cozy and stylish in this chunky knit sweater. Made from soft and warm yarn, this sweater features a relaxed fit and a timeless cable knit design', 'Cottagecore', 339.00, 'M', 'Green', 'dress.jpg', 70, 'ORD-20240512-0000203'),
-  ('item-00017', 'style-0002', 'Leopard Sunglasses', 'Featuring a timeless lace-up design and a durable rubber sole, these sneakers are perfect for everyday wear. ', 'Coquette', 79.00, 'L', 'Multicolor', 'dress.jpg', NULL, NULL);
+  INSERT INTO `item` (`item_id`, `style_id`, `item_name`, `item_description`, `size`, `color`, `price`, `transaction_id`, `item_img_url`, `style`) VALUES
+  ('item-00015', 'style-0001', 'Vintage Floral Blouse', 'Featuring delicate flower patterns and a classic silhouette, this blouse is perfect for adding a touch of nostalgia to your wardrobe.', 'XS', 'Brown', 229.00, NULL, 'dress.jpg', NULL),
+  ('item-00016', 'style-0001', 'Chunky Knit Sweater', 'Stay cozy and stylish in this chunky knit sweater. Made from soft and warm yarn, this sweater features a relaxed fit and a timeless cable knit design', 'M', 'Green', 339.00, NULL, 'dress.jpg', NULL),
+  ('item-00017', 'style-0002', 'Leopard Sunglasses', 'Featuring a timeless lace-up design and a durable rubber sole, these sneakers are perfect for everyday wear. ', NULL, 'Multicolor', 79.00, NULL, 'dress.jpg', NULL);
 
   --
   -- Triggers `item`
@@ -69,86 +68,6 @@ CREATE TABLE `item` (
       SET NEW.item_id = new_item_id;
   END
   $$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `update_order_number_item` BEFORE UPDATE ON `item` FOR EACH ROW BEGIN
-    DECLARE order_number_val VARCHAR(20);
-    
-    -- Get the order_number corresponding to the updated transaction_id
-    IF NEW.transaction_id IS NOT NULL THEN
-        SELECT order_number INTO order_number_val
-        FROM `transaction`
-        WHERE transaction_id = NEW.transaction_id;
-        
-        -- Update the order_number column in the item table
-        SET NEW.order_number = order_number_val;
-    END IF;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `order_product`
---
-
-CREATE TABLE `order_product` (
-  `id` int(11) NOT NULL,
-  `transaction_id` int(11) NOT NULL,
-  `item_id` varchar(10) DEFAULT NULL,
-  `item_name` varchar(45) DEFAULT NULL,
-  `item_price` int(11) DEFAULT NULL,
-  `style_box_id` varchar(10) DEFAULT NULL,
-  `style_box_name` varchar(45) DEFAULT NULL,
-  `style_box_price` int(11) DEFAULT NULL,
-  `style_box_quantity` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order_product`
---
-
-INSERT INTO `order_product` (`id`, `transaction_id`, `item_id`, `item_name`, `item_price`, `style_box_id`, `style_box_name`, `style_box_price`, `style_box_quantity`) VALUES
-(1, 47, 'item-00015', 'Vintage Floral Blouse', 229, NULL, NULL, NULL, NULL),
-(2, 49, 'item-00015', 'Vintage Floral Blouse', 229, NULL, NULL, NULL, NULL),
-(4, 49, 'item-00015', 'Vintage Floral Blouse', 229, NULL, NULL, NULL, NULL),
-(10, 49, NULL, NULL, NULL, 'box-000019', 'Cottagecore', 229, 0),
-(11, 50, NULL, NULL, NULL, 'box-000019', 'Cottagecore', 229, 1),
-(12, 51, NULL, NULL, NULL, 'box-000020', 'Coquette', 229, 3),
-(13, 51, NULL, NULL, NULL, 'box-000021', 'Gothic Lolita', 229, 3),
-(14, 52, NULL, NULL, NULL, 'box-000073', 'Mystery', 229, 3),
-(15, 53, NULL, NULL, NULL, 'box-000019', 'Cottagecore', 229, 2),
-(16, 53, NULL, NULL, NULL, 'box-000073', 'Mystery', 229, 1),
-(17, 55, NULL, NULL, NULL, 'box-000020', 'Coquette', 229, 2),
-(20, 58, NULL, NULL, NULL, 'box-000019', 'Cottagecore', 229, 1),
-(21, 59, NULL, NULL, NULL, 'box-000073', 'Mystery', 229, 3),
-(22, 60, NULL, NULL, NULL, 'box-000021', 'Gothic Lolita', 229, 1),
-(23, 61, NULL, NULL, NULL, 'box-000019', 'Cottagecore', 229, 3);
-
---
--- Triggers `order_product`
---
-DELIMITER $$
-CREATE TRIGGER `insert_and_update_order_info` AFTER INSERT ON `order_product` FOR EACH ROW BEGIN
-    DECLARE order_number_val VARCHAR(20);
-    
-    -- Get the order_number corresponding to the inserted transaction_id
-    SELECT order_number INTO order_number_val
-    FROM `transaction`
-    WHERE transaction_id = NEW.transaction_id;
-    
-    -- Insert data into style_box_transaction table
-    INSERT INTO `style_box_transaction` (`style_box_id`, `transaction_id`, `style_box_quantity`, `order_number`)
-    VALUES (NEW.style_box_id, NEW.transaction_id, NEW.style_box_quantity, order_number_val);
-    
-    -- Update the item table with the order_number and transaction_id
-    UPDATE `item`
-    SET order_number = order_number_val,
-        transaction_id = NEW.transaction_id
-    WHERE item_id = NEW.item_id;
-END
-$$
   DELIMITER ;
 
   -- --------------------------------------------------------
@@ -192,194 +111,76 @@ $$
   -- Dumping data for table `sequence`
   --
 
-INSERT INTO `sequence` (`sequence_id`) VALUES
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9),
-(10),
-(15),
-(16),
-(17),
-(19),
-(20),
-(21),
-(22),
-(23),
-(24),
-(25),
-(26),
-(27),
-(28),
-(29),
-(30),
-(31),
-(32),
-(33),
-(34),
-(35),
-(36),
-(37),
-(38),
-(39),
-(40),
-(41),
-(42),
-(43),
-(44),
-(47),
-(48),
-(49),
-(50),
-(51),
-(54),
-(55),
-(56),
-(57),
-(58),
-(59),
-(60),
-(61),
-(62),
-(63),
-(64),
-(65),
-(66),
-(67),
-(68),
-(69),
-(70),
-(71),
-(72),
-(73),
-(74),
-(75),
-(76),
-(77),
-(78),
-(79),
-(80),
-(81),
-(82),
-(83),
-(84),
-(85),
-(86),
-(87),
-(88),
-(89),
-(90),
-(91),
-(92),
-(93),
-(94),
-(95),
-(96),
-(97),
-(98),
-(99),
-(100),
-(101),
-(102),
-(103),
-(104),
-(105),
-(106),
-(107),
-(108),
-(109),
-(110),
-(111),
-(112),
-(113),
-(114),
-(115),
-(116),
-(117),
-(118),
-(119),
-(120),
-(121),
-(122),
-(123),
-(124),
-(125),
-(126),
-(127),
-(128),
-(129),
-(130),
-(131),
-(132),
-(133),
-(134),
-(135),
-(136),
-(137),
-(138),
-(139),
-(140),
-(141),
-(142),
-(143),
-(144),
-(145),
-(146),
-(147),
-(148),
-(149),
-(150),
-(151),
-(152),
-(153),
-(154),
-(155),
-(156),
-(157),
-(158),
-(159),
-(160),
-(161),
-(162),
-(163),
-(164),
-(165),
-(166),
-(169),
-(170),
-(171),
-(172),
-(173),
-(174),
-(175),
-(176),
-(177),
-(178),
-(179),
-(180),
-(186),
-(187),
-(188),
-(189),
-(190),
-(191),
-(192),
-(193),
-(194),
-(195),
-(196),
-(197),
-(198),
-(199),
-(200),
-(201),
-(202),
-(203);
+  INSERT INTO `sequence` (`sequence_id`) VALUES
+  (1),
+  (2),
+  (3),
+  (4),
+  (5),
+  (6),
+  (7),
+  (8),
+  (9),
+  (10),
+  (15),
+  (16),
+  (17),
+  (19),
+  (20),
+  (21),
+  (22),
+  (23),
+  (24),
+  (25),
+  (26),
+  (27),
+  (28),
+  (29),
+  (30),
+  (31),
+  (32),
+  (33),
+  (34),
+  (35),
+  (36),
+  (37),
+  (38),
+  (39),
+  (40),
+  (41),
+  (42),
+  (43),
+  (44),
+  (47),
+  (48),
+  (49),
+  (50),
+  (51),
+  (54),
+  (55),
+  (56),
+  (57),
+  (58),
+  (59),
+  (60),
+  (61),
+  (62),
+  (63),
+  (64),
+  (65),
+  (66),
+  (67),
+  (68),
+  (69),
+  (70),
+  (71),
+  (72),
+  (73),
+  (74),
+  (75),
+  (76),
+  (77),
+  (78);
 
   -- --------------------------------------------------------
 
@@ -398,18 +199,17 @@ INSERT INTO `sequence` (`sequence_id`) VALUES
   -- Dumping data for table `style`
   --
 
-INSERT INTO `style` (`style_id`, `style`, `style_description`, `style_img_url`) VALUES
-('style-0001', 'Cottagecore', 'Embrace countryside charm with floral prints and rustic details.', 'cottagecore.jpg'),
-('style-0002', 'Coquette', 'Channel elegance and femininity with lace and delicate fabrics.', 'coquette.jpg'),
-('style-0003', 'Gothic Lolita', ' Explore dark whimsy with Victorian-inspired dresses.', 'gothic_lolita.jpg'),
-('style-0004', 'Streetwear', 'Make a statement with bold graphics and urban designs.', 'streetwear.jpg'),
-('style-0005', 'Y2K', 'Relive early 2000s nostalgia with shimmering metallic accents and playful, retro styles.', 'dress.jpg'),
-('style-0006', 'Dark Academia', 'Dive into scholarly elegance with tweed and vintage pieces.', 'dress.jpg'),
-('style-0007', 'Old Money', 'Elevate your look with timeless sophistication and classic silhouettes.', 'dress.jpg'),
-('style-0008', 'Alt', 'Express your individuality with edgy punk and grunge influences.', 'dress.jpg'),
-('style-0009', 'Indie', 'Embrace bohemian vibes with eclectic prints and laid-back styles.', 'dress.jpg'),
-('style-0010', 'Star Girl', 'Reach for the stars with celestial prints and dreamy designs.', 'dress.jpg'),
-('style-0068', 'Mystery', 'Random box', 'mystery_box_logo.png');
+  INSERT INTO `style` (`style_id`, `style`, `style_description`, `style_img_url`) VALUES
+  ('style-0001', 'Cottagecore', 'Embrace countryside charm with floral prints and rustic details.', 'cottagecore.jpg'),
+  ('style-0002', 'Coquette', 'Channel elegance and femininity with lace and delicate fabrics.', 'coquette.jpg'),
+  ('style-0003', 'Gothic Lolita', ' Explore dark whimsy with Victorian-inspired dresses.', 'gothic_lolita.jpg'),
+  ('style-0004', 'Streetwear', 'Make a statement with bold graphics and urban designs.', 'streetwear.jpg'),
+  ('style-0005', 'Y2K', 'Relive early 2000s nostalgia with shimmering metallic accents and playful, retro styles.', NULL),
+  ('style-0006', 'Dark Academia', 'Dive into scholarly elegance with tweed and vintage pieces.', NULL),
+  ('style-0007', 'Old Money', 'Elevate your look with timeless sophistication and classic silhouettes.', NULL),
+  ('style-0008', 'Alt', 'Express your individuality with edgy punk and grunge influences.', NULL),
+  ('style-0009', 'Indie', 'Embrace bohemian vibes with eclectic prints and laid-back styles.', NULL),
+  ('style-0010', 'Star Girl', 'Reach for the stars with celestial prints and dreamy designs.', NULL);
 
   --
   -- Triggers `style`
@@ -438,30 +238,28 @@ INSERT INTO `style` (`style_id`, `style`, `style_description`, `style_img_url`) 
   -- Table structure for table `style_box`
   --
 
-CREATE TABLE `style_box` (
-  `style_box_id` varchar(10) NOT NULL,
-  `style_id` varchar(10) DEFAULT NULL,
-  `style_box_description` varchar(255) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT 229.00,
-  `reviews` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CREATE TABLE `style_box` (
+    `style_box_id` varchar(10) NOT NULL,
+    `style_id` varchar(10) DEFAULT NULL,
+    `style_box_description` varchar(255) DEFAULT NULL,
+    `price` decimal(10,2) DEFAULT 229.00
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
   --
   -- Dumping data for table `style_box`
   --
 
-INSERT INTO `style_box` (`style_box_id`, `style_id`, `style_box_description`, `price`, `reviews`) VALUES
-('box-000019', 'style-0001', 'Embrace the charm of countryside living with Cottagecore fashion. Floral prints, flowing dresses, and rustic details create a whimsical and nostalgic look inspired by nature and traditional craftsmanship.', 229.00, NULL),
-('box-000020', 'style-0002', 'Channel elegance and femininity with Coquette fashion. Lace, bows, and delicate fabrics evoke a romantic and playful aesthetic, perfect for those who embrace their flirtatious side.', 229.00, NULL),
-('box-000021', 'style-0003', 'Explore the darker side of kawaii with Gothic Lolita fashion. Victorian-inspired dresses and doll-like accessories create a striking and elegant look that\'s both gothic and cute.', 229.00, NULL),
-('box-000022', 'style-0004', 'Make a statement with Streetwear fashion. Bold graphics, casual silhouettes, and urban-inspired designs reflect the energy and creativity of city life, perfect for those who love to stand out.', 229.00, NULL),
-('box-000023', 'style-0005', 'Embrace nostalgia with Y2K fashion. Low-rise jeans, metallic accents, and futuristic designs capture the spirit of the early 2000s, offering a playful and eclectic style for the modern era.', 229.00, NULL),
-('box-000024', 'style-0006', 'Dive into the world of academia with Dark Academia fashion. Tweed blazers, turtleneck sweaters, and vintage-inspired pieces create a moody and scholarly look that\'s both intellectual and stylish.', 229.00, NULL),
-('box-000025', 'style-0007', 'Elevate your wardrobe with Old Money fashion. Tailored suits, classic accessories, and timeless silhouettes exude elegance and sophistication, perfect for those with a taste for luxury.', 229.00, NULL),
-('box-000026', 'style-0008', 'Express your individuality with Alt fashion. Punk, goth, and grunge influences combine for a non-conformist style that\'s bold, edgy, and unapologetically unique.', 229.00, NULL),
-('box-000027', 'style-0009', 'Embrace bohemian vibes with Indie fashion. Vintage finds, eclectic prints, and handmade accessories create a laid-back and carefree look that\'s effortlessly cool.', 229.00, NULL),
-('box-000028', 'style-0010', 'Reach for the stars with Star Girl fashion. Celestial prints, metallic accents, and futuristic designs capture the magic of the cosmos, offering a dreamy and ethereal style for stargazers and dreamers alike.', 229.00, NULL),
-('box-000073', 'style-0068', 'Random box for mystery stuffs', 229.00, 'Nice box, got good items out of it.');
+  INSERT INTO `style_box` (`style_box_id`, `style_id`, `style_box_description`, `price`) VALUES
+  ('box-000019', 'style-0001', 'Embrace the charm of countryside living with Cottagecore fashion. Floral prints, flowing dresses, and rustic details create a whimsical and nostalgic look inspired by nature and traditional craftsmanship.', 229.00),
+  ('box-000020', 'style-0002', 'Channel elegance and femininity with Coquette fashion. Lace, bows, and delicate fabrics evoke a romantic and playful aesthetic, perfect for those who embrace their flirtatious side.', 229.00),
+  ('box-000021', 'style-0003', 'Explore the darker side of kawaii with Gothic Lolita fashion. Victorian-inspired dresses and doll-like accessories create a striking and elegant look that\'s both gothic and cute.', 229.00),
+  ('box-000022', 'style-0004', 'Make a statement with Streetwear fashion. Bold graphics, casual silhouettes, and urban-inspired designs reflect the energy and creativity of city life, perfect for those who love to stand out.', 229.00),
+  ('box-000023', 'style-0005', 'Embrace nostalgia with Y2K fashion. Low-rise jeans, metallic accents, and futuristic designs capture the spirit of the early 2000s, offering a playful and eclectic style for the modern era.', 229.00),
+  ('box-000024', 'style-0006', 'Dive into the world of academia with Dark Academia fashion. Tweed blazers, turtleneck sweaters, and vintage-inspired pieces create a moody and scholarly look that\'s both intellectual and stylish.', 229.00),
+  ('box-000025', 'style-0007', 'Elevate your wardrobe with Old Money fashion. Tailored suits, classic accessories, and timeless silhouettes exude elegance and sophistication, perfect for those with a taste for luxury.', 229.00),
+  ('box-000026', 'style-0008', 'Express your individuality with Alt fashion. Punk, goth, and grunge influences combine for a non-conformist style that\'s bold, edgy, and unapologetically unique.', 229.00),
+  ('box-000027', 'style-0009', 'Embrace bohemian vibes with Indie fashion. Vintage finds, eclectic prints, and handmade accessories create a laid-back and carefree look that\'s effortlessly cool.', 229.00),
+  ('box-000028', 'style-0010', 'Reach for the stars with Star Girl fashion. Celestial prints, metallic accents, and futuristic designs capture the magic of the cosmos, offering a dreamy and ethereal style for stargazers and dreamers alike.', 229.00);
 
   --
   -- Triggers `style_box`
@@ -486,20 +284,19 @@ INSERT INTO `style_box` (`style_box_id`, `style_id`, `style_box_description`, `p
 
   -- --------------------------------------------------------
 
---
--- Stand-in structure for view `style_box_details`
--- (See below for the actual view)
---
-CREATE TABLE `style_box_details` (
-`style_id` varchar(10)
-,`style_box_id` varchar(10)
-,`style` varchar(50)
-,`style_description` text
-,`style_box_description` varchar(255)
-,`price` decimal(10,2)
-,`style_img_url` varchar(50)
-,`reviews` varchar(255)
-);
+  --
+  -- Stand-in structure for view `style_box_details`
+  -- (See below for the actual view)
+  --
+  CREATE TABLE `style_box_details` (
+  `style_id` varchar(10)
+  ,`style_box_id` varchar(10)
+  ,`style` varchar(50)
+  ,`style_description` text
+  ,`style_box_description` varchar(255)
+  ,`price` decimal(10,2)
+  ,`style_img_url` varchar(50)
+  );
 
   -- --------------------------------------------------------
 
@@ -507,46 +304,10 @@ CREATE TABLE `style_box_details` (
   -- Table structure for table `style_box_transaction`
   --
 
-CREATE TABLE `style_box_transaction` (
-  `style_box_id` varchar(10) NOT NULL,
-  `transaction_id` int(11) NOT NULL,
-  `order_number` varchar(20) DEFAULT NULL,
-  `style_box_quantity` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `style_box_transaction`
---
-
-INSERT INTO `style_box_transaction` (`style_box_id`, `transaction_id`, `order_number`, `style_box_quantity`) VALUES
-('box-000019', 0, 'ORD-20240512-0000191', 1),
-('box-000019', 61, 'ORD-20240512-0000194', 3),
-('box-000021', 60, 'ORD-20240512-0000193', 1),
-('box-000073', 0, 'ORD-20240512-0000192', 3),
-('box-000073', 3, 'ORD-20240511-0000084', 2),
-('box-000073', 17, NULL, 1),
-('box-000073', 30, 'ORD-20240511-0000138', 1),
-('box-000073', 66, NULL, 1),
-('box-000073', 68, NULL, 3),
-('box-000073', 70, 'ORD-20240512-0000203', 1);
-
---
--- Triggers `style_box_transaction`
---
-DELIMITER $$
-CREATE TRIGGER `set_order_number` BEFORE INSERT ON `style_box_transaction` FOR EACH ROW BEGIN
-    DECLARE order_number_val VARCHAR(20);
-    
-    -- Get the order_number corresponding to the inserted transaction_id
-    SELECT order_number INTO order_number_val
-    FROM `transaction`
-    WHERE transaction_id = NEW.transaction_id;
-    
-    -- Set the order_number column in style_box_transaction
-    SET NEW.order_number = order_number_val;
-END
-$$
-DELIMITER ;
+  CREATE TABLE `style_box_transaction` (
+    `style_box_id` varchar(10) NOT NULL,
+    `transaction_id` varchar(10) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
   -- --------------------------------------------------------
 
@@ -643,111 +404,34 @@ DELIMITER ;
   -- Table structure for table `transaction`
   --
 
-CREATE TABLE `transaction` (
-  `transaction_id` int(11) NOT NULL,
-  `order_number` varchar(20) DEFAULT NULL,
-  `timestamp` timestamp NULL DEFAULT NULL,
-  `user_id` varchar(10) DEFAULT NULL,
-  `shipping_fee` decimal(10,2) DEFAULT 100.00,
-  `total_items` int(11) DEFAULT NULL,
-  `total_price` decimal(10,2) DEFAULT NULL,
-  `payment_method` enum('Cash on Delivery','GCash') DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CREATE TABLE `transaction` (
+    `transaction_id` varchar(10) NOT NULL,
+    `user_id` varchar(10) DEFAULT NULL,
+    `transaction_date` date DEFAULT NULL,
+    `shipping_fee` decimal(10,2) DEFAULT 100.00,
+    `total_price` decimal(10,2) DEFAULT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `transaction`
---
-
-INSERT INTO `transaction` (`transaction_id`, `order_number`, `timestamp`, `user_id`, `shipping_fee`, `total_items`, `total_price`, `payment_method`) VALUES
-(1, 'ORD-20240511-0000080', '2024-05-11 11:41:38', 'user-00049', 100.00, 3, 1703.00, NULL),
-(2, 'ORD-20240511-0000082', '2024-05-11 11:41:38', 'user-00049', 100.00, 3, 1703.00, NULL),
-(3, 'ORD-20240511-0000084', '2024-05-11 11:41:38', 'user-00049', 100.00, 3, 1703.00, NULL),
-(4, 'ORD-20240511-0000086', '2024-05-11 11:41:38', 'user-00049', 100.00, 3, 1703.00, NULL),
-(5, 'ORD-20240511-0000088', '2024-05-11 11:43:32', 'user-00049', 100.00, 0, 100.00, 'Cash on Delivery'),
-(6, 'ORD-20240511-0000090', '2024-05-11 11:50:07', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(7, 'ORD-20240511-0000092', '2024-05-11 11:50:07', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(8, 'ORD-20240511-0000094', '2024-05-11 11:54:24', 'user-00049', 100.00, 1, 329.00, NULL),
-(9, 'ORD-20240511-0000096', '2024-05-11 11:54:24', 'user-00049', 100.00, 1, 329.00, NULL),
-(10, 'ORD-20240511-0000098', '2024-05-11 11:55:12', 'user-00049', 100.00, 1, 329.00, NULL),
-(11, 'ORD-20240511-0000100', '2024-05-11 11:55:12', 'user-00049', 100.00, 1, 329.00, NULL),
-(12, 'ORD-20240511-0000102', '2024-05-11 11:57:40', 'user-00049', 100.00, 1, 329.00, NULL),
-(13, 'ORD-20240511-0000104', '2024-05-11 11:57:40', 'user-00049', 100.00, 1, 329.00, NULL),
-(14, 'ORD-20240511-0000106', '2024-05-11 12:00:54', 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(15, 'ORD-20240511-0000108', '2024-05-11 12:00:54', 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(16, 'ORD-20240511-0000110', '2024-05-11 12:01:41', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(17, 'ORD-20240511-0000112', '2024-05-11 12:01:41', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(18, 'ORD-20240511-0000114', '2024-05-11 12:04:50', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(19, 'ORD-20240511-0000116', '2024-05-11 12:08:07', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(20, 'ORD-20240511-0000118', '2024-05-11 12:08:07', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(21, 'ORD-20240511-0000120', '2024-05-11 12:08:07', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(22, 'ORD-20240511-0000122', '2024-05-11 12:09:26', 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(23, 'ORD-20240511-0000124', '2024-05-11 12:09:26', 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(24, 'ORD-20240511-0000126', '2024-05-11 12:23:06', 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(25, 'ORD-20240511-0000128', '2024-05-11 12:23:06', 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(26, 'ORD-20240511-0000130', '2024-05-11 12:24:38', 'user-00049', 100.00, 1, 329.00, NULL),
-(27, 'ORD-20240511-0000132', '2024-05-11 12:24:38', 'user-00049', 100.00, 1, 329.00, NULL),
-(28, 'ORD-20240511-0000134', '2024-05-11 12:25:53', 'user-00049', 100.00, 1, 329.00, NULL),
-(29, 'ORD-20240511-0000136', '2024-05-11 12:25:53', 'user-00049', 100.00, 1, 329.00, NULL),
-(30, 'ORD-20240511-0000138', '2024-05-11 12:26:42', 'user-00049', 100.00, 1, 329.00, NULL),
-(31, 'ORD-20240511-0000140', '2024-05-11 12:26:42', 'user-00049', 100.00, 1, 329.00, NULL),
-(32, 'ORD-20240511-0000142', '2024-05-11 12:27:39', 'user-00049', 100.00, 3, 787.00, 'GCash'),
-(33, 'ORD-20240511-0000144', '2024-05-11 12:27:39', 'user-00049', 100.00, 3, 787.00, 'GCash'),
-(34, 'ORD-20240511-0000146', '2024-05-11 12:28:50', 'user-00049', 100.00, 2, 558.00, 'Cash on Delivery'),
-(35, 'ORD-20240511-0000148', '2024-05-11 12:31:00', 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(36, 'ORD-20240511-0000150', '2024-05-11 12:45:35', 'user-00049', 100.00, 2, 558.00, 'Cash on Delivery'),
-(37, 'ORD-20240511-0000152', '2024-05-11 12:47:01', 'user-00049', 100.00, 3, 787.00, 'GCash'),
-(38, 'ORD-20240511-0000154', '2024-05-11 12:49:32', 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(39, 'ORD-20240511-0000156', '2024-05-11 12:52:39', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(40, 'ORD-20240511-0000158', '2024-05-11 12:53:43', 'user-00049', 100.00, 1, 329.00, NULL),
-(41, 'ORD-20240511-0000160', '2024-05-11 12:58:26', 'user-00049', 100.00, 1, 329.00, NULL),
-(42, 'ORD-20240511-0000162', '2024-05-11 12:58:26', 'user-00049', 100.00, 1, 329.00, NULL),
-(43, 'ORD-20240511-0000164', '2024-05-11 14:51:49', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(44, 'ORD-20240511-0000166', '2024-05-11 14:53:51', 'user-00049', 100.00, 2, 558.00, 'GCash'),
-(47, 'ORD-20240511-0000170', '2024-05-11 15:50:55', 'user-00049', 100.00, 1, 229.00, 'GCash'),
-(48, 'ORD-20240511-0000172', '2024-05-11 15:51:58', 'user-00049', 100.00, 2, 558.00, 'Cash on Delivery'),
-(49, 'ORD-20240511-0000174', '2024-05-11 15:53:32', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(50, 'ORD-20240512-0000176', '2024-05-11 16:05:32', 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(51, 'ORD-20240512-0000178', '2024-05-11 16:06:16', 'user-00049', 100.00, 6, 2161.00, 'Cash on Delivery'),
-(52, 'ORD-20240512-0000180', '2024-05-11 16:07:29', 'user-00049', 100.00, 3, 787.00, 'Cash on Delivery'),
-(53, 'ORD-20240512-0000186', NULL, 'user-00049', 100.00, 3, 1245.00, 'GCash'),
-(54, 'ORD-20240512-0000187', NULL, 'user-00049', 100.00, 0, 100.00, 'GCash'),
-(55, 'ORD-20240512-0000188', NULL, 'user-00049', 100.00, 2, 558.00, 'Cash on Delivery'),
-(56, 'ORD-20240512-0000189', NULL, 'user-00049', 100.00, 3, 787.00, 'GCash'),
-(57, 'ORD-20240512-0000190', NULL, 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(58, 'ORD-20240512-0000191', NULL, 'user-00049', 100.00, 1, 329.00, 'GCash'),
-(59, 'ORD-20240512-0000192', NULL, 'user-00049', 100.00, 3, 787.00, 'GCash'),
-(60, 'ORD-20240512-0000193', NULL, 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(61, 'ORD-20240512-0000194', NULL, 'user-00049', 100.00, 3, 787.00, 'Cash on Delivery'),
-(62, 'ORD-20240512-0000195', NULL, 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(63, 'ORD-20240512-0000196', '2024-05-11 17:00:55', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(64, 'ORD-20240512-0000197', '2024-05-11 18:12:04', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(65, 'ORD-20240512-0000198', '2024-05-11 18:12:28', 'user-00049', 100.00, 1, 329.00, 'Cash on Delivery'),
-(66, 'ORD-20240512-0000199', '2024-05-11 18:18:58', 'user-00049', 100.00, 1, 329.00, NULL),
-(67, 'ORD-20240512-0000200', '2024-05-11 18:23:48', 'user-00049', 100.00, 3, 787.00, 'Cash on Delivery'),
-(68, 'ORD-20240512-0000201', '2024-05-11 18:24:01', 'user-00049', 100.00, 3, 787.00, 'Cash on Delivery'),
-(69, 'ORD-20240512-0000202', '2024-05-11 18:52:13', 'user-00049', 100.00, 1, 329.00, NULL),
-(70, 'ORD-20240512-0000203', '2024-05-11 18:53:29', 'user-00049', 100.00, 2, 897.00, 'Cash on Delivery');
-
---
--- Triggers `transaction`
---
-DELIMITER $$
-CREATE TRIGGER `generate_order_number` BEFORE INSERT ON `transaction` FOR EACH ROW BEGIN
-    DECLARE next_id INT;
-    DECLARE new_order_number VARCHAR(20);
-    
-    -- Get the next sequence value
-    INSERT INTO sequence VALUES (NULL);
-    SET next_id = LAST_INSERT_ID();
-    
-    -- Generate the alphanumeric ID
-    SET new_order_number = CONCAT('ORD-', DATE_FORMAT(NOW(), '%Y%m%d'), '-', LPAD(next_id, 7, '0'));
-    
-    -- Set the new order_number value
-    SET NEW.order_number = new_order_number, NEW.timestamp = NOW();
-END
-$$
-DELIMITER ;
+  --
+  -- Triggers `transaction`
+  --
+  DELIMITER $$
+  CREATE TRIGGER `generate_transaction_id` BEFORE INSERT ON `transaction` FOR EACH ROW BEGIN
+      DECLARE next_id INT;
+      DECLARE new_transaction_id VARCHAR(10);
+      
+      -- Get the next sequence value
+      INSERT INTO sequence VALUES (NULL);
+      SET next_id = LAST_INSERT_ID();
+      
+      -- Generate the alphanumeric ID
+      SET new_transaction_id = CONCAT('tran-', LPAD(next_id, 5, '0'));
+      
+      -- Set the new item_id value
+      SET NEW.transaction_id = new_transaction_id;
+  END
+  $$
+  DELIMITER ;
 
   -- --------------------------------------------------------
 
@@ -939,7 +623,7 @@ DELIMITER ;
   --
   DROP TABLE IF EXISTS `style_box_details`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `style_box_details`  AS SELECT `s`.`style_id` AS `style_id`, `sb`.`style_box_id` AS `style_box_id`, `s`.`style` AS `style`, `s`.`style_description` AS `style_description`, `sb`.`style_box_description` AS `style_box_description`, `sb`.`price` AS `price`, `s`.`style_img_url` AS `style_img_url` FROM (`style` `s` join `style_box` `sb` on(`s`.`style_id` = `sb`.`style_id`)) ;
+  CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `style_box_details`  AS SELECT `s`.`style_id` AS `style_id`, `sb`.`style_box_id` AS `style_box_id`, `s`.`style` AS `style`, `s`.`style_description` AS `style_description`, `sb`.`style_box_description` AS `style_box_description`, `sb`.`price` AS `price`, `s`.`style_img_url` AS `style_img_url` FROM (`style` `s` join `style_box` `sb` on(`s`.`style_id` = `sb`.`style_id`)) ;
 
   --
   -- Indexes for dumped tables
@@ -952,17 +636,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
     ADD PRIMARY KEY (`item_id`),
     ADD KEY `style_id` (`style_id`),
     ADD KEY `transaction_id` (`transaction_id`),
-    ADD KEY `style` (`style`),
-  ADD KEY `item_ibfk_3_idx` (`order_number`);
-
---
--- Indexes for table `order_product`
---
-ALTER TABLE `order_product`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_order_product_item` (`item_id`),
-  ADD KEY `fk_order_product_style_box` (`style_box_id`),
-  ADD KEY `fk_order_product_transaction` (`transaction_id`);
+    ADD KEY `style` (`style`);
 
   --
   -- Indexes for table `security_questions`
@@ -990,13 +664,12 @@ ALTER TABLE `order_product`
     ADD PRIMARY KEY (`style_box_id`),
     ADD KEY `style_id` (`style_id`);
 
---
--- Indexes for table `style_box_transaction`
---
-ALTER TABLE `style_box_transaction`
-  ADD PRIMARY KEY (`style_box_id`,`transaction_id`),
-  ADD KEY `style_box_transaction_ibfk_2_idx` (`transaction_id`),
-  ADD KEY `style_box_transaction_ibfk_2_idx1` (`order_number`);
+  --
+  -- Indexes for table `style_box_transaction`
+  --
+  ALTER TABLE `style_box_transaction`
+    ADD PRIMARY KEY (`style_box_id`,`transaction_id`),
+    ADD KEY `transaction_id` (`transaction_id`);
 
   --
   -- Indexes for table `subscription`
@@ -1012,13 +685,12 @@ ALTER TABLE `style_box_transaction`
   ALTER TABLE `subscription_plan`
     ADD PRIMARY KEY (`plan_id`);
 
---
--- Indexes for table `transaction`
---
-ALTER TABLE `transaction`
-  ADD PRIMARY KEY (`transaction_id`),
-  ADD UNIQUE KEY `order_number_UNIQUE` (`order_number`),
-  ADD KEY `user_id` (`user_id`);
+  --
+  -- Indexes for table `transaction`
+  --
+  ALTER TABLE `transaction`
+    ADD PRIMARY KEY (`transaction_id`),
+    ADD KEY `user_id` (`user_id`);
 
   --
   -- Indexes for table `user`
@@ -1053,23 +725,6 @@ ALTER TABLE `transaction`
   -- AUTO_INCREMENT for dumped tables
   --
 
---
--- AUTO_INCREMENT for table `order_product`
---
-ALTER TABLE `order_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT for table `sequence`
---
-ALTER TABLE `sequence`
-  MODIFY `sequence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
-
---
--- AUTO_INCREMENT for table `transaction`
---
-ALTER TABLE `transaction`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
   --
   -- AUTO_INCREMENT for table `security_questions`
   --
@@ -1092,21 +747,13 @@ ALTER TABLE `transaction`
   -- Constraints for dumped tables
   --
 
---
--- Constraints for table `item`
---
-ALTER TABLE `item`
-  ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`style_id`) REFERENCES `style` (`style_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `item_ibfk_2` FOREIGN KEY (`style`) REFERENCES `style` (`style`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `item_ibfk_3` FOREIGN KEY (`order_number`) REFERENCES `transaction` (`order_number`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `order_product`
---
-ALTER TABLE `order_product`
-  ADD CONSTRAINT `fk_order_product_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_order_product_style_box` FOREIGN KEY (`style_box_id`) REFERENCES `style_box` (`style_box_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_order_product_transaction` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  --
+  -- Constraints for table `item`
+  --
+  ALTER TABLE `item`
+    ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`style_id`) REFERENCES `style` (`style_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    ADD CONSTRAINT `item_ibfk_2` FOREIGN KEY (`style`) REFERENCES `style` (`style`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    ADD CONSTRAINT `item_ibfk_3` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
   --
   -- Constraints for table `style_box`
@@ -1114,12 +761,12 @@ ALTER TABLE `order_product`
   ALTER TABLE `style_box`
     ADD CONSTRAINT `style_box_ibfk_1` FOREIGN KEY (`style_id`) REFERENCES `style` (`style_id`);
 
---
--- Constraints for table `style_box_transaction`
---
-ALTER TABLE `style_box_transaction`
-  ADD CONSTRAINT `style_box_transaction_ibfk_1` FOREIGN KEY (`style_box_id`) REFERENCES `style_box` (`style_box_id`),
-  ADD CONSTRAINT `style_box_transaction_ibfk_2` FOREIGN KEY (`order_number`) REFERENCES `transaction` (`order_number`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  --
+  -- Constraints for table `style_box_transaction`
+  --
+  ALTER TABLE `style_box_transaction`
+    ADD CONSTRAINT `style_box_transaction_ibfk_1` FOREIGN KEY (`style_box_id`) REFERENCES `style_box` (`style_box_id`),
+    ADD CONSTRAINT `style_box_transaction_ibfk_2` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`);
 
   --
   -- Constraints for table `subscription`
@@ -1128,11 +775,6 @@ ALTER TABLE `style_box_transaction`
     ADD CONSTRAINT `subscription_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
     ADD CONSTRAINT `subscription_ibfk_2` FOREIGN KEY (`plan_id`) REFERENCES `subscription_plan` (`plan_id`);
 
---
--- Constraints for table `user_logs`
---
-ALTER TABLE `user_logs`
-  ADD CONSTRAINT `user_logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
   --
   -- Constraints for table `transaction`
   --
