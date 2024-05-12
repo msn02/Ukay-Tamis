@@ -1,5 +1,29 @@
 <?php
     session_start();
+
+    if (isset($_GET['item_id'])) {
+
+        include('server/connection.php');
+        $item_id = $_GET['item_id'];
+
+        // Prepare the SQL query
+        $stmt = $conn -> prepare ("SELECT * FROM item WHERE item_id = ? AND transaction_id IS NOT NULL");
+
+        // Bind the parameters
+        $stmt -> bind_param("s", $item_id);
+
+        // Execute the query
+        $stmt -> execute();
+        
+        // Get the result
+        $result = $stmt -> get_result();
+        $row = $result -> fetch_assoc();
+
+        if ($row && $row['transaction_id'] !== NULL) {
+            header('location: catalogue_page.php');
+            exit();
+        }
+    }
 ?>
 
 <?php include('server/get_item_page.php'); ?>
