@@ -261,7 +261,7 @@
                                 </label>
                             </div>
                             <div class="delete_btn2 pb-3">
-                                <button class="btn btn-dark border-0 rounded-1 w-100" type = "submit" name = "delete_all">Delete</button>
+                                <button class="btn btn-dark border-0 rounded-1 w-100" type = "submit" name = "delete_all">Delete all</button>
                             </div>
                         </form>
                     </div>
