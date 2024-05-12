@@ -22,7 +22,7 @@
                 </div>
                 <!-- subscribe -->
                 <div class="px-0 pink_btn white_border pb-1">
-                    <a href="subscribe.php" class="text-decoration-none "><button class="btn btn-dark border-0 px-4 shadow-sm rounded-1" type="button">SUBSCRIBE NOW</button></a>
+                    <a href="subscription_price.php" class="text-decoration-none "><button class="btn btn-dark border-0 px-4 shadow-sm rounded-1" type="button">SUBSCRIBE NOW</button></a>
                 </div>
                 <!-- view catalogue -->
                 <div class="white_btn2 pb-3 mt-2 ms-2">
