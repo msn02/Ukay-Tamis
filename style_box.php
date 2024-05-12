@@ -81,7 +81,9 @@
                             <input type = "hidden" name = "product" value = "<?php echo $row['style']; ?>"> </input>
                             <input type = "hidden" name = "product_price" value = "<?php echo $row['price']; ?>"> </input>
                             <input type = "hidden" name = "product_quantity" value = "1"> </input>
+                            <input type = "hidden" name = "product_type" value = "item"> </input>
                             <input type = "hidden" name = "style_box" value = "<?php echo $row['style_box_id']; ?>"> </input>
+                            
                             <div class="px-3 pt-0 m-0">
                                 <div class="d-inline add_cart">
                                     <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit" name ="add_to_cart"><i class="bi bi-cart-plus me-1"></i></button>

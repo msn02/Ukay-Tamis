@@ -89,8 +89,9 @@
                 $product_img_url = $_POST['product_img_url'];
                 $product = $_POST['product'];
                 $product_price = $_POST['product_price'];
-                $product_quantity = $_POST['product_quantity'];           
-                
+                $product_quantity = $_POST['product_quantity'];      
+                $product_type = $_POST['product_type'];
+
                 $product_array = array(
                     'product_id' => $product_id,
                     'product_img_url' => $product_img_url,
