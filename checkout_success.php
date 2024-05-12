@@ -1,21 +1,9 @@
 <?php
-
+    // include the connection.php file
     include ('server/connection.php');
 
+    // start the session
     session_start();
-
-    if (isset ($_SESSION['logged_in'])) {
-
-        if (isset($_POST['checkout'])) {
-
-        }
-
-    }
-    else {
-        header("Location: log_in.php");
-        exit();
-    }
-
 
 ?>
 
@@ -48,7 +36,7 @@
             <div class="row m-2 p-0 d-flex justify-content-center">
                 <!-- checkout -->
                 <div class="col-sm-8 gray_bg rounded-2 px-4 py-2 m-2">
-                    <h3 class="bold_header mb-3 pb-3 border-bottom mt-3">Checkout</h3>
+                    <h3 class="bold_header mb-3 pb-3 border-bottom mt-3">Order Details</h3>
                     <table class="table">
                         <thead>
                             <tr class="thead_style">
@@ -64,12 +52,12 @@
                             <tr class="product_info align-middle">
                                 <!-- product ordered -->
                                 <th scope="row" class="item_img d-flex justify-content-center">
-                                    <img src="resources/<?php echo $value['style_img_url']; ?>" class="card m-0" alt="item">
+                                    <img src="resources/<?php echo $value['product_img_url']; ?>" class="card m-0" alt="item">
                                 </th>
-                                <td><?php echo $value['style']; ?></td>
-                                <td class="text-center"><?php echo $value['style_price']; ?></td>
-                                <td class="text-center"><?php echo $value['style_quantity']?></td>
-                                <td class="text-center bold_header"><span class="pink_highlight2 "><?php echo 'PHP ' . $value['style_price'] * $value['style_quantity']; ?></span></td>
+                                <td><?php echo $value['product']; ?></td>
+                                <td class="text-center"><?php echo $value['product_price']; ?></td>
+                                <td class="text-center"><?php echo $value['product_quantity']?></td>
+                                <td class="text-center bold_header"><span class="pink_highlight2 "><?php echo 'PHP ' . $value['product_price'] * $value['product_quantity']; ?></span></td>
                             </tr>
                             <?php } ?>
 
@@ -89,18 +77,23 @@
                                 <p class="m-0 p-0"><?php echo $_SESSION['address']?></p>
                             </div>
                         </div>
-                        <div class="gray_btn mt-2">
-                            <a href="account.php"><button class="btn btn-dark border-0 rounded-1 w-100">Change Delivery Address</button></a>
-                        </div>
                     </div>
                     <!-- cart info -->
                     <div class="row mt-3 p-0 mb-0 cart_info">
                         <div class="col-6">
+                            <p>Order Date</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p><?php echo date('Y-m-d H:i:s'); ?></p>
+                        </div>
+
+                        <div class="col-6">
                             <p>Order ID</p>
                         </div>
                         <div class="col-6 text-end">
-                            <p>12345</p>
+                            <p><?php echo 'ORD-' . date('Ymd') . '-000017'; ?></p>
                         </div>
+
                     </div>
                     <div class="row p-0 mb-0 cart_info">
                         <div class="col-6">
@@ -110,33 +103,21 @@
                             <p><?php echo $_SESSION['total_items']?></p>
                         </div>
                     </div>
+                    <div class="row p-0 mb-0 cart_info">
+                        <div class="col-6">
+                            <p class="bold_header">SHIPPING FEE</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="bold_header">100</p>
+                        </div>
+                    </div>
                     <div class="row p-0 mb-2 cart_info border-bottom">
                         <div class="col-6">
                             <p class="bold_header">TOTAL</p>
                         </div>
                         <div class="col-6 text-end">
-                            <p class="pink_highlight bold_header"><?php echo 'PHP ' . $_SESSION['total']?></p>
+                            <p class="pink_highlight bold_header"><?php echo 'PHP ' . $_SESSION['grand_total']?></p>
                         </div>
-                    </div>
-                    <!-- <div class="row pt-2 m-0">
-                        <div class="payment_details filter_content px-0">
-                            <h6 class="bold_header">Select your Payment Method</h6>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name="payment_method" type="radio" value="" id="Cash">
-                                <label class="form-check-label ms-1" for="small">Cash</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name="payment_method" type="radio" value="" id="Credit Card">
-                                <label class="form-check-label ms-1" for="small">Credit Card</label>
-                            </div>
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" name="payment_method" type="radio" value="" id="GCash">
-                                <label class="form-check-label ms-1" for="small">GCash</label>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="pink_btn2 mt-3 pb-2">
-                        <a href="#"><button class="btn btn-dark border-0 rounded-1 w-100">PLACE ORDER</button></a>
                     </div>
                 </div>
             </div>
@@ -144,21 +125,3 @@
     </div>
 </body>
 </html>
-
-<!-- counter script -->
-<script>
-    const counterInput = document.getElementById('counter_input');
-    const addButton = document.getElementById('add_btn');
-    const minusButton = document.getElementById('minus_btn');
-
-    addButton.addEventListener('click', function() {
-        counterInput.value = parseInt(counterInput.value) + 1;
-    });
-
-    minusButton.addEventListener('click', function() {
-        const currentValue = parseInt(counterInput.value);
-        if (currentValue > 1) {
-            counterInput.value = currentValue - 1;
-        }
-    });
-</script>

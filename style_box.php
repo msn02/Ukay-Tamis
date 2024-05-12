@@ -3,7 +3,6 @@
 ?>
 
 
-<?php include('server/get_style_page.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +30,8 @@
                 <a class="border-0 p-2 rounded-1 justify-content-start text-decoration-none w-25" id="go_back" href="javascript:void(0)"><i class="bi bi-chevron-left me-2"></i>Back</a>
             </div>
 
+            <?php include('server/get_style_page.php'); ?>
+            
             <!-- style box details -->
             <?php while ($row = $style->fetch_assoc()) { ?>
                 <div class="row shadow rounded-2 m-3 gray_bg">
@@ -75,11 +76,12 @@
                         <!-- add to card and buy now button -->
 
                         <form method = "POST" action = "view_cart.php">
-                            <input type = "hidden" name = "style_id" value = "<?php echo $row['style_id']; ?>"> </input>
-                            <input type = "hidden" name = "style_img_url" value = "<?php echo $row['style_img_url']; ?>"> </input>
-                            <input type = "hidden" name = "style" value = "<?php echo $row['style']; ?>"> </input>
-                            <input type = "hidden" name = "style_price" value = "<?php echo $row['price']; ?>"> </input>
-                            <input type = "hidden" name = "style_quantity" value = "1"> </input>
+                            <input type = "hidden" name = "product_id" value = "<?php echo $row['style_box_id']; ?>"> </input>
+                            <input type = "hidden" name = "product_img_url" value = "<?php echo $row['style_img_url']; ?>"> </input>
+                            <input type = "hidden" name = "product" value = "<?php echo $row['style']; ?>"> </input>
+                            <input type = "hidden" name = "product_price" value = "<?php echo $row['price']; ?>"> </input>
+                            <input type = "hidden" name = "product_quantity" value = "1"> </input>
+                            <input type = "hidden" name = "style_box" value = "<?php echo $row['style_box_id']; ?>"> </input>
                             <div class="px-3 pt-0 m-0">
                                 <div class="d-inline add_cart">
                                     <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit" name ="add_to_cart"><i class="bi bi-cart-plus me-1"></i></button>
