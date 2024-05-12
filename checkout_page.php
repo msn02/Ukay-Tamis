@@ -36,23 +36,28 @@
             if ($stmt -> execute()) {
 
                 $transaction_id = $conn -> insert_id;
+                $_SESSION['transaction_id'] = $transaction_id;
 
                 foreach ($_SESSION['cart'] as $key => $value) {
-                    // If the transaction was inserted successfully, insert the order_product
-                    echo 'type: ' . $value['product_type'];
 
                     if ($value['product_type'] == 'item') {
 
                         $stmt = $conn -> prepare ("UPDATE item SET transaction_id = ? WHERE item_id = ? AND item_name = ?");
                         $stmt -> bind_param("sss", $transaction_id, $value['product_id'], $value['product']);
+
+                        $stmt1 = $conn->prepare("INSERT INTO order_product (transaction_id, item_id, item_name, item_price) VALUES (?, ?, ?, ?)");
+                        $stmt1->bind_param("ssss", $transaction_id, $value['product_id'], $value['product'], $value['product_price']);
                     
                     } else if ($value['product_type'] == 'style box') {
                         
                         $stmt = $conn -> prepare ("INSERT INTO style_box_transaction (transaction_id, style_box_id, style_box_quantity) VALUES (?, ?, ?)");
                         $stmt -> bind_param("sss", $transaction_id, $value['product_id'], $value['product_quantity']);
+
+                        $stmt1 = $conn -> prepare ("INSERT INTO order_product (transaction_id, style_box_id, style_box_name, style_box_price, style_box_quantity) VALUES (?, ?, ?, ?, ?)");
+                        $stmt1 -> bind_param("sssss", $transaction_id, $value['product_id'], $value['product'], $value['product_price'], $value['product_quantity']);
                     }
                 
-                    if ($stmt -> execute()) {
+                    if ($stmt -> execute() && $stmt1 -> execute()) {
                         echo '<script>console.log("Order item added successfully")</script>';
                     } else {
                         echo '<script>console.log("Failed to add order item")</script>';
@@ -70,7 +75,8 @@
     
             // redirect to the checkout success page
             echo '<script>alert("Order successful")</script>';
-            header("Location: catalogue_page.php");
+            $_SESSION['order'] = 'success';
+            header("Location: account.php?order=success");
         } 
     }
     else {
@@ -201,6 +207,7 @@
                         </div>
                     </div>
                     <div class="pink_btn2 mt-3 pb-2">
+                        <input type="hidden" name="transaction_id" value="<?php echo isset($_SESSION['transaction_id']) ? $_SESSION['transaction_id'] : '' ?>"/>
                         <button class="btn btn-dark border-0 rounded-1 w-100" type="submit" name="place_order" >PLACE ORDER</button>
                     </div>
                     </form>
