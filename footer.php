@@ -2,12 +2,12 @@
     <div class="container m-2 p-2">
        <div class="row mb-2 mx-0 p-0 border-bottom border-1 d-flex justify-content-between">
             <div class="m-0 p-0 col-sm-3">
-                <a href="landing_page.php" class="text-decoration-none"><h5 class="m-0 pb-2 bold_header pink_highlight2">UKAY <span class="white_text">TAMIS</span></h5></a>
+                <h5 class="m-0 pb-2 bold_header pink_highlight2">UKAY <span class="white_text">TAMIS</span></h5>
             </div>
             <div class="m-0 p-0 col-sm-6 center_align">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="text-decoration-none mx-3" href="about_page.php">About Us</a>
+                        <a class="text-decoration-none mx-3" href="about_us.php">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="text-decoration-none mx-3" href="catalogue_page.php">Catalogue</a>
@@ -16,7 +16,7 @@
                         <a class="text-decoration-none mx-3" href="mystery_box.php">Mystery Box</a>
                     </li>
                     <li class="nav-item">
-                        <a class="text-decoration-none mx-3" href="subscription_price.php">Pricing</a>
+                        <a class="text-decoration-none mx-3" href="subscription.php">Pricing</a>
                     </li>
                 </ul>
             </div>
