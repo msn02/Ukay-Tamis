@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 <div class="col-sm-12 p-0 pink_btn pb-3 mb-3 btn_text">
-                    <a href="month_theme_page.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">LEARN MORE</button></a>
+                    <a href="monthly_theme_page.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">LEARN MORE</button></a>
                 </div>
             </div>
         </div>
@@ -232,7 +232,7 @@
         </div>
     </div>
 
-    <!-- contact us -->
+    <!-- contact_us -->
     <?php include 'contact_us.php'?>
 
 </body>

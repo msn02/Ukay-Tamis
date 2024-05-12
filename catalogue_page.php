@@ -259,7 +259,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>    
+            
+    <!-- footer -->
+    <?php include 'contact_us.php'?>
+    
     </div>
 </body>
 <script>
