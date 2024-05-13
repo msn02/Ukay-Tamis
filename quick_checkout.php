@@ -1,85 +1,71 @@
+
 <?php
-    // Include connection and start session
+    // include connection and start session
     include ('server/connection.php');
     session_start();
 
-    // Redirect if not logged in
+    // redirect if not logged in
     if (!isset($_SESSION['logged_in'])) {
         header("Location: log_in.php");
         exit();
     }
-    
-    if (isset($_GET['style_box_id']) || isset($_GET['item_id'])) {
-        // set the total items in the cart
-        $_SESSION['grand_total'] = $_POST['product_price'] + 100;
-        $_SESSION['total_items'] = $_POST['product_quantity'];
+    // Set the grand total
+    $_SESSION['grand_total'] = $_POST['product_price'] + 100;
 
-        if (isset($_POST['buy_now'])) {
-            // Retrieve product details
-            $product_id = $_POST['product_id'];
-            $product_name = $_POST['product'];
-            $product_price = $_POST['product_price'];
-            $product_type = $_POST['product_type'];
-            $quantity = $_POST['product_quantity'];
+     // check if form submitted
+    if (isset($_POST['quick_order'])) {
+        // Retrieve product details
+        $product_id = $_POST['product_id'];
+        $product = $_POST['product_name'];
+        $product_price = $_POST['product_price'];
+        $product_type = $_POST['product_type'];
+        $product_quantity = $_POST['quantity'];
+ 
+        // if payment method is not selected
+        if (empty($_POST['payment_method'] && !isset($_POST['payment_method']))) {
+            echo '<script>alert("Please select a payment method")</script>';
         }
-        
-        echo $product_type;
-        // Check if form submitted
-        if (isset($_POST['place_order'])) {
-    
-            if(empty($_POST['payment_method'])) {
-                echo '<script>alert("Please select a payment method")</script>';
+        // get the payment method
+        $payment_method = $_POST['payment_method'];
+        // insert the transaction details to the database
+        $stmt = $conn -> prepare ("INSERT INTO transaction (user_id, total_items, total_price, payment_method) VALUES (?, ?, ?, ?)");
+        // bind the parameters
+        $stmt -> bind_param("ssss", $_SESSION['user_id'], $_SESSION['total_items'], $_POST['grand_total'], $payment_method);
+        // insert the order items to the order_items table
+        if ($stmt -> execute()) {
+            // get the transaction id
+            $transaction_id = $conn -> insert_id;
+            // if the product is an item
+            if ($product_type == 'item') {
+                // update the item table
+                $stmt = $conn -> prepare ("UPDATE item SET transaction_id = ? WHERE item_id = ? AND item_name = ?");
+                $stmt -> bind_param("sss", $transaction_id, $product_id, $product);
+                // insert the order item to the order_product table
+                $stmt1 = $conn->prepare("INSERT INTO order_product (transaction_id, item_id, item_name, item_price) VALUES (?, ?, ?, ?)");
+                $stmt1->bind_param("ssss", $transaction_id, $product_id, $product, $product_price);
+            // if the product is a style box
+            } else if ($product_type == 'style box') {
+                // add the style box to the style_box_transaction table
+                $stmt = $conn -> prepare ("INSERT INTO style_box_transaction (transaction_id, style_box_id, style_box_quantity) VALUES (?, ?, ?)");
+                $stmt -> bind_param("sss", $transaction_id, $product_id, $product_quantity);
+                // insert the order item to the order_product table
+                $stmt1 = $conn -> prepare ("INSERT INTO order_product (transaction_id, style_box_id, style_box_name, style_box_price, style_box_quantity) VALUES (?, ?, ?, ?, ?)");
+                $stmt1 -> bind_param("sssss", $transaction_id, $product_id, $product, $product_price, $product_quantity);
             }
-            
-            $payment_method = $_POST['payment_method'];
-    
-            // insert the transaction details to the database
-            $stmt = $conn -> prepare ("INSERT INTO transaction (user_id, total_items, total_price, payment_method) VALUES (?, ?, ?, ?)");
-            $stmt -> bind_param("ssss", $_SESSION['user_id'], $quantity, $_SESSION['grand_total'], $payment_method);
-            
-            // insert the order items to the order_items table
-            if ($stmt -> execute()) {
-    
-                $transaction_id = $conn -> insert_id;
-                $_SESSION['transaction_id'] = $transaction_id;
-    
-                if ($product_type == 'item') {
-
-                    $stmt = $conn -> prepare ("UPDATE item SET transaction_id = ? WHERE item_id = ? AND item_name = ?");
-                    $stmt -> bind_param("sss", $transaction_id, $product_id, $product_name);
-
-                    $stmt1 = $conn->prepare("INSERT INTO order_product (transaction_id, item_id, item_name, item_price) VALUES (?, ?, ?, ?)");
-                    $stmt1->bind_param("ssss", $transaction_id, $product_id, $product_name, $product_price);
-                
-                } else if ($product_type == 'style box') {
-                    
-                    $stmt = $conn -> prepare ("INSERT INTO style_box_transaction (transaction_id, style_box_id, style_box_quantity) VALUES (?, ?, ?)");
-                    $stmt -> bind_param("sss", $transaction_id, $product_id, $quantity);
-
-                    $stmt1 = $conn -> prepare ("INSERT INTO order_product (transaction_id, style_box_id, style_box_name, style_box_price, style_box_quantity) VALUES (?, ?, ?, ?, ?)");
-                    $stmt1 -> bind_param("sssss", $transaction_id, $product_id, $product_name, $product_price, $quantity);
-                }
-            
-                if ($stmt -> execute() && $stmt1 -> execute()) {
-                    echo '<script>console.log("Order item added successfully")</script>';
-                } else {
-                    echo '<script>console.log("Failed to add order item")</script>';
-                }
+            // execute the queries
+            if ($stmt -> execute() && $stmt1 -> execute()) {
+                echo '<script>console.log("Order item added successfully")</script>';
             } else {
-                echo '<script>console.log("Failed to add transaction")</script>';
+                echo '<script>console.log("Failed to add order item")</script>';
             }
-
-         // redirect to the checkout success page
-         echo '<script>alert("Order successful")</script>';
-         $_SESSION['order'] = 'success';
-         header("Location: account.php?order=success");
-     }
-
-    } else {
-        header('location: catalogue_page.php');
+        } else {
+            echo '<script>console.log("Failed to add transaction")</script>';
+        }
+        // redirect to the checkout success page
+        echo '<script>alert("Order successful")</script>';
+        header("Location: account.php?order=success");
     }
 
-     
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +78,7 @@
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
-    <?php include ("checkout_nav_bar.php") ?>
+    <?php include ('checkout_nav_bar.php')?>
 
     <div class="container-fluid gradient_pink px-3 pt-1">
         <div class="container px-5 py-3 mt-0">
@@ -181,7 +167,7 @@
                     </div>
                     <div class="row pt-2 m-0">
                         <div class="payment_details filter_content px-0">
-                            <form method = "POST" action = "checkout_page.php">
+                        <form method = "POST" action = "quick_checkout.php">
                             <h6 class="bold_header">Select your Payment Method</h6>
                             <div class="form-check ms-3">
                                 <input class="form-check-input" name="payment_method" type="radio" value="Cash on Delivery" id="Cash">
@@ -195,7 +181,14 @@
                     </div>
                     <div class="pink_btn2 mt-3 pb-2">
                         <input type="hidden" name="transaction_id" value="<?php echo isset($_SESSION['transaction_id']) ? $_SESSION['transaction_id'] : '' ?>"/>
-                        <button class="btn btn-dark border-0 rounded-1 w-100" type="submit" name="place_order" >PLACE ORDER</button>
+                        <input type="hidden" name="product_id" value="<?php echo $_POST['product_id'] ?>"/>
+                        <input type="hidden" name="product_name" value="<?php echo $_POST['product'] ?>"/>
+                        <input type="hidden" name="product_price" value="<?php echo $_POST['product_price'] ?>"/>
+                        <input type="hidden" name="product_type" value="<?php echo $_POST['product_type'] ?>"/>
+                        <input type="hidden" name="quantity" value="<?php echo $_POST['product_quantity'] ?>"/>
+                        <input type="hidden" name="grand_total" value="<?php echo $_SESSION['grand_total'] ?>"/>
+                        <input type="hidden" name="product_img_url" value="<?php echo $_POST['product_img_url'] ?>"/>
+                        <button class="btn btn-dark border-0 rounded-1 w-100" type="submit" name="quick_order">CONFIRM ORDER</button>
                     </div>
                     </form>
                 </div>
