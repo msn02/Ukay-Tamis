@@ -1,50 +1,59 @@
 <?php
-    // include connection.php
-    include ('server/connection.php');
+session_start(); // Start the session
 
-    // start the session
-    session_start();
+// Include connection.php
+include ('server/connection.php');
 
-    // if no form has been submitted, set the selected tier to the default value
-    if (!isset($_SESSION["selected_tier"])) {
-        $_SESSION["selected_tier"] = "Starter Pack";
-    }
-    if (!isset($_SESSION["plan_duration"])) {
-        $_SESSION["plan_duration"] = "6 months";
+if (!isset($_POST['tier']) && empty($_POST['tier'])) {
+    $_SESSION['selected_tier'] = 'Starter Pack';
+}
+
+if (!isset($_SESSION['plan_duration']) || empty($_SESSION['plan_duration'])) {
+    $_SESSION['plan_duration'] = '6 Months';
+}
+
+if (!isset($_SESSION['plan_tier_description']) || empty($_SESSION['plan_tier_description'])) {
+    $_SESSION['plan_tier_description'] = 'Receive 2 curated tops and 1 curated bottom per month.';
+}
+
+// Include get_sub_tier_details.php
+include ('server/get_sub_tier_details.php');
+
+// Handle form submission
+if (isset($_POST["tier"])) {
+    $_SESSION["selected_tier"] = $_POST["tier"];
+
+    // Loop through the tiers to find the selected tier description
+    foreach ($sub_tier_details as $detail) {
+        if ($detail['plan_tier'] === $_POST['tier']) {
+            $_SESSION['plan_tier_description'] = $detail['plan_tier_description'];
+            break; // Stop the loop once the description is found
+        }
     }
 
-    // if form has been submitted, update the session variables
-    if (isset($_POST["tier"])) {
-        $_SESSION["selected_tier"] = $_POST["tier"];
-    }
-    if (isset($_POST["monthly_price"])) {
-        $_SESSION["monthly_price"] = $_POST["monthly_price"];
-    }
+    // Update the selected plan duration if needed
     if (isset($_POST["plan_duration"])) {
         $_SESSION["plan_duration"] = $_POST["plan_duration"];
     }
-    if (isset($_POST["total_price"])) {
-        $_SESSION["total_price"] = $_POST["total_price"];
+}
+
+// Include get_sub_price.php
+include ('server/get_sub_price.php');
+
+while ($row = $result -> fetch_assoc()) {
+    $key = $_SESSION['selected_tier'] . '_' . $row['plan_duration'];
+    $sub_price[$key] = array(
+        'plan_duration' => $row['plan_duration'],
+        'price' => $row['price'],
+        'monthly_price' => $row['monthly_price']
+    );
+
+    // if the plan_tier of the current row matches the selected tier, add the details to the selected_tier_details array
+    if ($row["plan_tier"] == $_SESSION['selected_tier']) {
+        $selected_tier_details[] = $sub_price[$key];
     }
-
-    // include get_sub_price.php
-    include ('server/get_sub_price.php');
-
-    while ($row = $result -> fetch_assoc()) {
-        $key = $_SESSION['selected_tier'] . '_' . $row['plan_duration'];
-        $sub_price[$key] = array(
-            'plan_duration' => $row['plan_duration'],
-            'price' => $row['price'],
-            'monthly_price' => $row['monthly_price']
-        );
-
-        // if the plan_tier of the current row matches the selected tier, add the details to the selected_tier_details array
-        if ($row["plan_tier"] == $_SESSION['selected_tier']) {
-            $selected_tier_details[] = $sub_price[$key];
-        }
-    }
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,37 +186,41 @@
     <!-- include scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        document.querySelectorAll('input[name="tier"]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                if (this.checked) {
-                    document.getElementById('tierForm').submit(); // Submit the form when a tier is selected
-                }
-            });
-        });
+    document.querySelectorAll('input[name="tier"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        if (this.checked) {
+            // Submit the form when a tier is selected
+            document.getElementById('tierForm').submit();
+        }
+    });
+});
 
-        document.querySelectorAll('input[name="price"]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                if (this.checked) {
-                    var priceElement = this.parentElement.parentElement.querySelector('.bold_header');
-                    var monthly_price = priceElement.getAttribute('data-price');
-                    var plan_duration = priceElement.nextElementSibling.textContent;
-                    var total_price_element = priceElement.parentElement.querySelector('.total_price');
-                    var total_price = total_price_element ? total_price_element.textContent : '0';
+document.querySelectorAll('input[name="price"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        if (this.checked) {
+            var priceElement = this.parentElement.parentElement.querySelector('.bold_header');
+            var monthly_price = priceElement.getAttribute('data-price');
+            var plan_duration = priceElement.nextElementSibling.textContent;
+            var total_price_element = priceElement.parentElement.querySelector('.total_price');
+            var total_price = total_price_element ? total_price_element.textContent : '0';
 
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'server/store_sub_details.php', true);
-                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    xhr.onload = function() {
-                        if (this.status == 200) {
-                            var response = JSON.parse(this.responseText); // Parse JSON response
-                            // Update total price
-                            document.querySelector('.cart_info .pink_highlight').textContent = response.total_price;
-                        }
-                    };
-                    xhr.send('monthly_price=' + encodeURIComponent(monthly_price) + '&plan_duration=' + encodeURIComponent(plan_duration) + '&total_price=' + encodeURIComponent(total_price));
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'server/store_sub_details.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    var response = JSON.parse(this.responseText); // Parse JSON response
+                    // Update total price
+                    document.querySelector('.cart_info .pink_highlight').textContent = response.total_price;
                 }
-            });
-        });
+            };
+            xhr.send('monthly_price=' + encodeURIComponent(monthly_price) + '&plan_duration=' + encodeURIComponent(plan_duration) + '&total_price=' + encodeURIComponent(total_price));
+            
+            // Update subscription duration in the page
+            document.querySelector('.bold_header.mb-2').textContent = plan_duration;
+        }
+    });
+});
     </script>
 </body>
 </html>
