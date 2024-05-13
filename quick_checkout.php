@@ -19,7 +19,7 @@
         $product = $_POST['product_name'];
         $product_price = $_POST['product_price'];
         $product_type = $_POST['product_type'];
-        $product_quantity = $_POST['quantity'];
+        $product_quantity = $_POST['product_quantity'];
  
         // if payment method is not selected
         if (empty($_POST['payment_method'] && !isset($_POST['payment_method']))) {
@@ -30,7 +30,7 @@
         // insert the transaction details to the database
         $stmt = $conn -> prepare ("INSERT INTO transaction (user_id, total_items, total_price, payment_method) VALUES (?, ?, ?, ?)");
         // bind the parameters
-        $stmt -> bind_param("ssss", $_SESSION['user_id'], $_SESSION['total_items'], $_POST['grand_total'], $payment_method);
+        $stmt -> bind_param("ssss", $_SESSION['user_id'], $product_quantity, $_POST['grand_total'], $payment_method);
         // insert the order items to the order_items table
         if ($stmt -> execute()) {
             // get the transaction id
@@ -61,9 +61,14 @@
         } else {
             echo '<script>console.log("Failed to add transaction")</script>';
         }
+
+        // store data from the form
+        $_SESSION['form_data'] = $_POST;
+
         // redirect to the checkout success page
         echo '<script>alert("Order successful")</script>';
         header("Location: account.php?order=success");
+        exit();
     }
 
 ?>
@@ -185,9 +190,10 @@
                         <input type="hidden" name="product_name" value="<?php echo $_POST['product'] ?>"/>
                         <input type="hidden" name="product_price" value="<?php echo $_POST['product_price'] ?>"/>
                         <input type="hidden" name="product_type" value="<?php echo $_POST['product_type'] ?>"/>
-                        <input type="hidden" name="quantity" value="<?php echo $_POST['product_quantity'] ?>"/>
+                        <input type="hidden" name="product_quantity" value="<?php echo $_POST['product_quantity'] ?>"/>
                         <input type="hidden" name="grand_total" value="<?php echo $_SESSION['grand_total'] ?>"/>
                         <input type="hidden" name="product_img_url" value="<?php echo $_POST['product_img_url'] ?>"/>
+                        <input type="hidden" name="checkout_type" value="quick"/>
                         <button class="btn btn-dark border-0 rounded-1 w-100" type="submit" name="quick_order">CONFIRM ORDER</button>
                     </div>
                     </form>

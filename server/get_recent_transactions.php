@@ -3,7 +3,9 @@
     include('connection.php');
 
     // Prepare the SQL query
-    $stmt = $conn -> prepare ("SELECT * FROM transaction 
+    $stmt = $conn -> prepare ("SELECT transaction.*, order_product.* 
+                               FROM transaction 
+                               INNER JOIN order_product ON transaction.transaction_id = order_product.transaction_id
                                WHERE transaction.user_id = ?
                                ORDER BY transaction.transaction_id DESC LIMIT 3");
 
