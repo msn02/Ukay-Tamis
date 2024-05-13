@@ -12,40 +12,93 @@
     <?php include 'nav_bar.php'?>
 
     <!-- Monthly Theme -->
-    <div class="container-fluid m-0 p-0 gradient_blue_orange_red1">
-        <div class="container container-custom-height">
-            <div class="row center_align pt-3 center_text">
-                <!-- image -->
-                <img src="resources/theme_logo.png" class="card-img-top img-fluid" alt="theme" style="width: 900px; height: 400px;">                 
+    <div class="container-fluid m-0 p-0 pt-1 gradient_blue_orange_red1">
+        <div class="container px-5 py-3 mt-0">
+            <!-- back button -->
+            <div class="back_link ps-3 py-2 m-0">
+                <a class="border-0 rounded-1 justify-content-start text-decoration-none w-25" id="go_back" href="javascript:void(0)"><i class="bi bi-chevron-left me-2"></i>Back</a>
             </div>
-            <div class="row center_align pt-3 center_text">
-                <div class="col-sm-8 px-4 pt-4">
-                    <h2 class="bold_header 2 pb-4 blue_text"><strong>Get ready to make SPLASH with our SUMMER FEST- THEMED attire and embrace the sunny vibes in style</strong></h2>
-                    <h5 class="bold_header blue_text">This month, we're thrilled to present our Summer Fest theme! Embrace the carefree spirit of summer with our vibrant and trendy collection. From breezy sundresses to chic beachwear, we've curated pieces that capture the essence of summer festivals, making you stand out with effortless style wherever you go.</h5><br>
-                    <h5 class="bold_header blue_text">Explore our Summer Fest collection and let your wardrobe radiate the warmth and joy of the season. Whether you're soaking up the sun at a music festival or enjoying a leisurely day at the beach, our curated pieces are designed to elevate your summer fashion game.</h5><br>
+            <div class="row m-2 p-0 d-flex justify-content-center">
+                <!-- img logos -->
+                <div class="col-10 m-0 p-0 center_align">
+                    <span class="img_logo"><img src="resources/theme_logo.png" class="d-none d-sm-block" alt="img"></span>
+                    <span class="img_logo2"><img src="resources/theme_logo.png" class="d-sm-none d-block" alt="img"></span>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid m-0 p-0 gradient_blue_orange_red2 pt-5">
-        <div class="container container-custom-height-50 pt-5">
-            <div class="row center_align pt-5 center_text">
-                <div class="col-sm-12 p-0 pink_btn pt-15 pb-3 pt-5"> 
-                    <a href="subscription_price.php" class="text-decoration-none">
-                        <button class="btn btn-dark border-0 px-5 py-3 shadow rounded-lg" type="button" style="font-size: 18px;">SUBSCRIBE NOW</button>
-                    </a>
-                </div>                      
+                <div class="col-10 m-0 p-0">
+                    <div class="card rounded-2 border-0 shadow gray_bg overflow-hidden">
+                        <!-- title -->
+                        <div class="header_style text-center p-4">
+                            <h2 class="px-5 py-2 m-0 bold_header2 lh-1">Get ready to make <b>SPLASH</b> with our <b>SUMMER FEST-themed</b> attire and embrace the sunny vibes in style!</h2>
+                        </div>
+
+                        <div class="mx-4 mt-4 p-3">
+                            <div class="row sub_text">
+                                <div class="col-sm-4 d-flex align-items-stretch">
+                                    <div class="card border-0 shadow p-4 m-0">
+                                        <p class="text-start">This month, we're thrilled to present our <span class="red_highlight">Summer Fest</span> theme! Embrace the carefree spirit of summer with our vibrant and trendy collection.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 d-flex align-items-stretch">
+                                    <div class="card border-0 shadow p-4 m-0">
+                                        <p class="text-start">From breezy sundresses to chic beachwear, we've curated pieces that capture the essence of summer festivals, making you stand out with effortless style wherever you go.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 d-flex align-items-stretch">
+                                    <div class="card border-0 shadow p-4 m-0">
+                                        <p class="text-start">Whether you're soaking up the sun at a music festival or enjoying a leisurely day at the beach, our curated pieces are designed to elevate your summer fashion game.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 p-4 mt-5 center_align rounded-2 orange_border2 mx-0 vstack">
+                                <h4 class="fw-bold text-center mt-2 mb-3">Check out what's <span class="orange_highlight">inside this month's BOX!</span></h4>
+                                <!-- contents -->
+                                <div class="row mt-3 px-2">
+                                    <div class="col-4 text-center">
+                                        <div class="card border-0 mb-3 overflow-hidden">
+                                            <img src="resources/cottagecore.jpg" class="img-fluid" alt="img">
+                                        </div>
+                                        <h4><span class="orange_highlight title1 m-0">title</span></h4>
+                                        <p class="mb-4 black_text lh-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <div class="card border-0 mb-3 overflow-hidden">
+                                            <img src="resources/cottagecore.jpg" class="img-fluid" alt="img">
+                                        </div>
+                                        <h4><span class="orange_highlight title1 m-0">title</span></h4>
+                                        <p class="mb-4 black_text lh-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <div class="card border-0 mb-3 overflow-hidden">
+                                            <img src="resources/cottagecore.jpg" class="img-fluid" alt="img">
+                                        </div>
+                                        <h4><span class="orange_highlight title1 m-0">title</span></h4>
+                                        <p class="mb-4 black_text lh-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+                            <!-- subscription button -->
+                            <div class="col-sm-12 pink_btn pb-3 pt-4"> 
+                                <a href="subscription_price.php" class="text-decoration-none center_align">
+                                    <button class="btn btn-dark border-0 px-4 py-2 shadow rounded-1" type="button">SUBSCRIBE NOW</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
 
     <div class="container-fluid m-0 p-0">
         <!-- customer reviews -->
-        <div class="container-fluid pb-2 pt-2 px-4 d-flex justify-content-center">
-            <div class="container mt-0">
-                <div class="p-4 m-5 rounded-2 card border-0 rounded-2">
-                    <div class="green_border row p-4 m-3 rounded-2">
-                    <h4 class="text-center bold_header mb-4">What our Subscribers Say</h4>
+        <div class="container pb-2 mt-0 px-2">
+            <div class="container px-5 d-flex justify-content-center">
+                <div class="px-3 py-4 mx-5 col-sm-10 card border-0 rounded-2">
+                    <div class="orange_border row p-4 m-3 rounded-2">
+                        <h4 class="text-center bold_header mb-4">What our Subscribers Say</h4>
                         <!-- card -->
                         <div class="col-sm-4 mb-3 mt-0 mx-0">
                             <div class="card border-0 p-3">
@@ -63,7 +116,7 @@
                                     <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
                                     <span class="bold_header review_name">JUAN DELA CRUZ</span>
                                     <div class="row mt-2 justify-content-start">
-                                        <div class="col-2"><div class="card border-0 gray_sq overflow-hidden">
+                                        <div class="col-4"><div class="card border-0 gray_sq overflow-hidden">
                                             <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
                                         </div></div>
                                     </div>
@@ -87,7 +140,7 @@
                                     <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
                                     <span class="bold_header review_name">JUAN DELA CRUZ</span>
                                     <div class="row mt-2 justify-content-start">
-                                        <div class="col-2"><div class="card border-0 gray_sq overflow-hidden">
+                                        <div class="col-4"><div class="card border-0 gray_sq overflow-hidden">
                                             <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
                                         </div></div>
                                     </div>
@@ -111,7 +164,7 @@
                                     <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
                                     <span class="bold_header review_name">JUAN DELA CRUZ</span>
                                     <div class="row mt-2 justify-content-start">
-                                        <div class="col-2"><div class="card border-0 gray_sq overflow-hidden">
+                                        <div class="col-4"><div class="card border-0 gray_sq overflow-hidden">
                                             <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
                                         </div></div>
                                     </div>
@@ -130,7 +183,7 @@
     </div>
 
     <!-- timer -->
-    <div class="container-fluid m-0 p-0 bg-light py-5 bg-dark text-light">
+    <!-- <div class="container-fluid m-0 p-0 bg-light py-5 bg-dark text-light">
         <div class="container text-center">
             <div class="timer">
                 <div class="timer-item">
@@ -169,9 +222,10 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- TO DO: footer -->
+    <!-- contact_us -->
+    <?php include 'contact_us.php'?>
 </body>
 
 <script>
