@@ -25,6 +25,14 @@
     font-weight: bold;
 }
 
+.gray_btn button, .gray_btn button:hover {
+    font-family: 'Inter', sans-serif;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 12px;
+}
+
 .item_card {
     border: 1px solid #ccc;
     transition: border-color 0.3s, box-shadow 0.3s;
