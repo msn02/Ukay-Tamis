@@ -1,52 +1,59 @@
 <?php
-    // Include connection.php
-    include ('server/connection.php');
+session_start(); // Start the session
 
-    // Start the session
-    session_start();
+// Include connection.php
+include ('server/connection.php');
 
-    // Set default total price to 0
-    $_SESSION['total_price'] = 0;
+if (!isset($_POST['tier']) && empty($_POST['tier'])) {
+    $_SESSION['selected_tier'] = 'Starter Pack';
+}
 
-    // Include get_sub_tier_details.php
-    include ('server/get_sub_tier_details.php');
+if (!isset($_SESSION['plan_duration']) || empty($_SESSION['plan_duration'])) {
+    $_SESSION['plan_duration'] = '6 Months';
+}
 
-    // Handle form submission
-    if (isset($_POST["tier"])) {
-        $_SESSION["selected_tier"] = $_POST["tier"];
+if (!isset($_SESSION['plan_tier_description']) || empty($_SESSION['plan_tier_description'])) {
+    $_SESSION['plan_tier_description'] = 'Receive 2 curated tops and 1 curated bottom per month.';
+}
 
-        // Loop through the tiers to find the selected tier description
-        foreach ($sub_tier_details as $detail) {
-            if ($detail['plan_tier'] === $_POST['tier']) {
-                $_SESSION['plan_tier_description'] = $detail['plan_tier_description'];
-                break; // Stop the loop once the description is found
-            }
-        }
+// Include get_sub_tier_details.php
+include ('server/get_sub_tier_details.php');
 
-        // Update the selected plan duration if needed
-        if (isset($_POST["plan_duration"])) {
-            $_SESSION["plan_duration"] = $_POST["plan_duration"];
-        }
-    }
+// Handle form submission
+if (isset($_POST["tier"])) {
+    $_SESSION["selected_tier"] = $_POST["tier"];
 
-    // Include get_sub_price.php
-    include ('server/get_sub_price.php');
-
-    while ($row = $result -> fetch_assoc()) {
-        $key = $_SESSION['selected_tier'] . '_' . $row['plan_duration'];
-        $sub_price[$key] = array(
-            'plan_duration' => $row['plan_duration'],
-            'price' => $row['price'],
-            'monthly_price' => $row['monthly_price']
-        );
-
-        // if the plan_tier of the current row matches the selected tier, add the details to the selected_tier_details array
-        if ($row["plan_tier"] == $_SESSION['selected_tier']) {
-            $selected_tier_details[] = $sub_price[$key];
+    // Loop through the tiers to find the selected tier description
+    foreach ($sub_tier_details as $detail) {
+        if ($detail['plan_tier'] === $_POST['tier']) {
+            $_SESSION['plan_tier_description'] = $detail['plan_tier_description'];
+            break; // Stop the loop once the description is found
         }
     }
+
+    // Update the selected plan duration if needed
+    if (isset($_POST["plan_duration"])) {
+        $_SESSION["plan_duration"] = $_POST["plan_duration"];
+    }
+}
+
+// Include get_sub_price.php
+include ('server/get_sub_price.php');
+
+while ($row = $result -> fetch_assoc()) {
+    $key = $_SESSION['selected_tier'] . '_' . $row['plan_duration'];
+    $sub_price[$key] = array(
+        'plan_duration' => $row['plan_duration'],
+        'price' => $row['price'],
+        'monthly_price' => $row['monthly_price']
+    );
+
+    // if the plan_tier of the current row matches the selected tier, add the details to the selected_tier_details array
+    if ($row["plan_tier"] == $_SESSION['selected_tier']) {
+        $selected_tier_details[] = $sub_price[$key];
+    }
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -179,7 +186,7 @@
     <!-- include scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        document.querySelectorAll('input[name="tier"]').forEach(function(radio) {
+    document.querySelectorAll('input[name="tier"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
         if (this.checked) {
             // Submit the form when a tier is selected
@@ -214,9 +221,6 @@ document.querySelectorAll('input[name="price"]').forEach(function(radio) {
         }
     });
 });
-
-
-
     </script>
 </body>
 </html>
