@@ -208,7 +208,7 @@
                                                 <!-- edit quantity -->
                                                 <input type="hidden" name="product_id" value="<?php echo $value['product_id']; ?>">
                                                 <?php if (isset($_SESSION['item']) && $_SESSION['item'] == $value['product_id']) { ?>
-                                                    <td class="text-center"><?php echo $value['product_quantity']; ?></td>
+                                                    <?php echo $value['product_quantity']; ?>
                                                 <?php } else { ?>
                                                     <div class="input-group input-group-sm gray_btn m-auto p-0 center_align">
                                                     <input type="number" class="form-control m-0 p-auto" name="product_quantity" value="<?php echo $value['product_quantity'] ?>" id="counter_input" min="1" max="3">

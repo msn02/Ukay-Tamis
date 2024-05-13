@@ -1,12 +1,13 @@
 /* CSS Selectors arranged alphabetically */
 
 .card_content {
-    background-color: #3F5520;
-    color: white;
+    background-color: #ffffff;
 }
 
 .card-text {
     font-size: 14px;
+    color: #3F5520;
+    font-weight: bold;
     font-style: italic;
 }
 
@@ -36,7 +37,7 @@
 }
 
 .gradient_green {
-    background-image: linear-gradient(180deg, #3F5520, #96DA39, #EEEEEE);
+    background-image: linear-gradient(180deg, #3F5520, #96DA39, #96DA39, #EEEEEE);
 }
 
 .green_border {
@@ -59,6 +60,11 @@
 
 .landing_details h1, p {
     color: white;
+}
+
+.mystery_img img {
+    width: auto;
+    height: 200px;
 }
 
 .review_content p {
