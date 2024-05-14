@@ -301,33 +301,49 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php $form_data = $_SESSION['form_data'];?>
+                                <?php
+                                if (isset($_SESSION['form_data']) && !empty($_SESSION['form_data'])) {
+                                    $form_data = $_SESSION['form_data'];
+                                } else {
+                                    $form_data = array(); // Default value if there's no form data
+                                }
+                                ?>
                                 <?php include ('server/get_recent_transactions.php') ?>
-                                <?php while ($row = $recent_transactions->fetch_assoc()) { ?>
-                                    <tr class="product_info align-middle">
-                                        <!-- product ordered -->
-                                        <td scope="row" class="text-center bold_header"><span><?php echo $row['order_number']; ?></span></td>
-                                        <td class="text-center"><?php echo $row['timestamp']; ?></td>
-                                        
-                                        <?php if ( ($form_data['checkout_type'] == 'quick' && $form_data['product_type'] == 'style box') && $row['style_box_id'] == $form_data['product_id'] ) { ?>
-                                            <td class="item_img d-flex justify-content-center">
-                                                <img src="resources/<?php echo $form_data['product_img_url'] ?>" class="card m-0" alt="item">
-                                            </td>
-                                        <?php }
-                                        else if ( ($form_data['checkout_type'] == 'quick' && $form_data['product_type'] == 'item') && $row['item_id'] == $form_data['product_id'] ) { ?>
-                                            <td class="item_img d-flex justify-content-center">
-                                                <img src="resources/<?php echo $form_data['product_img_url'] ?>" class="card m-0" alt="item">
-                                            </td>
-                                        <?php }
-                                        else { ?>
-                                            <td class="item_img d-flex justify-content-center">
-                                                <img src="resources/coquette.jpg" class="card m-0" alt="item">
-                                            </td>
-                                        <?php } ?>
-                                        
-                                        <td class="text-center"><span class=""><?php echo date('Y-m-d', strtotime($row['delivery_date'])); ?></span></td>
-                                        <td class="text-center bold_header"><span class="pink_highlight2"><?php echo $row['total_price']; ?></span></td>
-                                        <td class="text-center "><span class=""><?php echo $row['payment_method']; ?></span></td>
+                                
+                                <?php 
+                                if ($recent_transactions->num_rows > 0) {
+                                    while ($row = $recent_transactions->fetch_assoc()) { ?>
+                                        <tr class="product_info align-middle">
+                                            <!-- product ordered -->
+                                            <td scope="row" class="text-center bold_header"><span><?php echo $row['order_number']; ?></span></td>
+                                            <td class="text-center"><?php echo $row['timestamp']; ?></td>
+                                            
+                                            <?php 
+                                            if (isset($form_data['checkout_type']) && isset($form_data['product_type']) && isset($form_data['product_id'])) {
+                                                if ( ($form_data['checkout_type'] == 'quick' && $form_data['product_type'] == 'style box') && $row['style_box_id'] == $form_data['product_id'] ) { ?>
+                                                    <td class="item_img d-flex justify-content-center">
+                                                        <img src="resources/<?php echo $form_data['product_img_url'] ?>" class="card m-0" alt="item">
+                                                    </td>
+                                                <?php }
+                                                else if ( ($form_data['checkout_type'] == 'quick' && $form_data['product_type'] == 'item') && $row['item_id'] == $form_data['product_id'] ) { ?>
+                                                    <td class="item_img d-flex justify-content-center">
+                                                        <img src="resources/<?php echo $form_data['product_img_url'] ?>" class="card m-0" alt="item">
+                                                    </td>
+                                                <?php }
+                                            } else { ?>
+                                                <td class="item_img d-flex justify-content-center">
+                                                    <img src="resources/coquette.jpg" class="card m-0" alt="item">
+                                                </td>
+                                            <?php } ?>
+                                            
+                                            <td class="text-center"><span class=""><?php echo date('Y-m-d', strtotime($row['delivery_date'])); ?></span></td>
+                                            <td class="text-center bold_header"><span class="pink_highlight2"><?php echo $row['total_price']; ?></span></td>
+                                            <td class="text-center "><span class=""><?php echo $row['payment_method']; ?></span></td>
+                                        </tr>
+                                    <?php } 
+                                } else { ?>
+                                    <tr>
+                                        <td colspan="7" class="text-center">No transactions available</td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
