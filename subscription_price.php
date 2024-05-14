@@ -1,59 +1,75 @@
 <?php
-session_start(); // Start the session
+    session_start(); // Start the session
 
-// Include connection.php
-include ('server/connection.php');
+    // Include connection.php
+    include ('server/connection.php');
 
-if (!isset($_POST['tier']) && empty($_POST['tier'])) {
-    $_SESSION['selected_tier'] = 'Starter Pack';
-}
+    if (!isset($_POST['tier']) && empty($_POST['tier'])) {
+        $_SESSION['selected_tier'] = 'Starter Pack';
+    }
 
-if (!isset($_SESSION['plan_duration']) || empty($_SESSION['plan_duration'])) {
-    $_SESSION['plan_duration'] = '6 Months';
-}
+    if (!isset($_SESSION['plan_duration']) || empty($_SESSION['plan_duration'])) {
+        $_SESSION['plan_duration'] = '6 Months';
+    }
 
-if (!isset($_SESSION['plan_tier_description']) || empty($_SESSION['plan_tier_description'])) {
-    $_SESSION['plan_tier_description'] = 'Receive 2 curated tops and 1 curated bottom per month.';
-}
+    if (!isset($_SESSION['plan_tier_description']) || empty($_SESSION['plan_tier_description'])) {
+        $_SESSION['plan_tier_description'] = 'Receive 2 curated tops and 1 curated bottom per month.';
+    }
 
-// Include get_sub_tier_details.php
-include ('server/get_sub_tier_details.php');
+    if (isset($_POST['monthly_price'])) {
+        $_SESSION['monthly_price'] = $_POST['monthly_price'];
+    }
+    
+    if (isset($_POST['plan_duration'])) {
+        $_SESSION['plan_duration'] = $_POST['plan_duration'];
+    }
+    
+    if (isset($_POST['total_price'])) {
+        $_SESSION['total_price'] = $_POST['total_price'];
+    }
 
-// Handle form submission
-if (isset($_POST["tier"])) {
-    $_SESSION["selected_tier"] = $_POST["tier"];
+    // Include get_sub_tier_details.php
+    include ('server/get_sub_tier_details.php');
 
-    // Loop through the tiers to find the selected tier description
-    foreach ($sub_tier_details as $detail) {
-        if ($detail['plan_tier'] === $_POST['tier']) {
-            $_SESSION['plan_tier_description'] = $detail['plan_tier_description'];
-            break; // Stop the loop once the description is found
+    // Handle form submission
+    if (isset($_POST["tier"])) {
+        $_SESSION["selected_tier"] = $_POST["tier"];
+
+        // Loop through the tiers to find the selected tier description
+        foreach ($sub_tier_details as $detail) {
+            if ($detail['plan_tier'] === $_POST['tier']) {
+                $_SESSION['plan_tier_description'] = $detail['plan_tier_description'];
+                break; // Stop the loop once the description is found
+            }
+        }
+
+        // Update the selected plan duration if needed
+        if (isset($_POST["plan_duration"])) {
+            $_SESSION["plan_duration"] = $_POST["plan_duration"];
         }
     }
 
-    // Update the selected plan duration if needed
-    if (isset($_POST["plan_duration"])) {
-        $_SESSION["plan_duration"] = $_POST["plan_duration"];
+    // Include get_sub_price.php
+    include ('server/get_sub_price.php');
+
+    while ($row = $result -> fetch_assoc()) {
+        $key = $_SESSION['selected_tier'] . '_' . $row['plan_duration'];
+        $sub_price[$key] = array(
+            'plan_duration' => $row['plan_duration'],
+            'price' => $row['price'],
+            'monthly_price' => $row['monthly_price']
+        );
+
+        // if the plan_tier of the current row matches the selected tier, add the details to the selected_tier_details array
+        if ($row["plan_tier"] == $_SESSION['selected_tier']) {
+            $selected_tier_details[] = $sub_price[$key];
+        }
     }
-}
 
-// Include get_sub_price.php
-include ('server/get_sub_price.php');
 
-while ($row = $result -> fetch_assoc()) {
-    $key = $_SESSION['selected_tier'] . '_' . $row['plan_duration'];
-    $sub_price[$key] = array(
-        'plan_duration' => $row['plan_duration'],
-        'price' => $row['price'],
-        'monthly_price' => $row['monthly_price']
-    );
 
-    // if the plan_tier of the current row matches the selected tier, add the details to the selected_tier_details array
-    if ($row["plan_tier"] == $_SESSION['selected_tier']) {
-        $selected_tier_details[] = $sub_price[$key];
-    }
-}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,9 +190,19 @@ while ($row = $result -> fetch_assoc()) {
                                     <p class="pink_highlight bold_header"><?php echo isset($_SESSION['total_price']) ? $_SESSION['total_price'] : '0'; ?></p>
                                 </div>
                             </div>
+                            <?php
+                                include ('server/store_in_session.php');
+                                echo 'total_price: ' . (isset($_SESSION['total_price']) ? $_SESSION['total_price'] : '0');
+                                echo 'plan_duration: ' . $_SESSION['plan_duration'];
+                                echo 'monthly_price: ' . $_SESSION['monthly_price'];
+                                echo 'selected_tier: ' . $_SESSION['selected_tier'];
+                                echo 'plan_tier_description: ' . $_SESSION['plan_tier_description'];
+                            ?>
+                            <form method = "POST" action = "subscription_price.php">
                             <div class="pink_btn2 pb-3">
-                                <a href="checkout_page.php"><button class="btn btn-secondary border-0 rounded-1 w-100">CHECKOUT</button></a>
+                                <button href = "subscription_checkout.php" class="btn btn-secondary border-0 rounded-1 w-100">CHECKOUT</button></a>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -212,6 +238,12 @@ document.querySelectorAll('input[name="price"]').forEach(function(radio) {
                     var response = JSON.parse(this.responseText); // Parse JSON response
                     // Update total price
                     document.querySelector('.cart_info .pink_highlight').textContent = response.total_price;
+            
+                    // Send response data to another PHP file to store them in a session
+                    var xhr2 = new XMLHttpRequest();
+                    xhr2.open('POST', 'server/store_in_session.php', true);
+                    xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr2.send('monthly_price=' + encodeURIComponent(response.monthly_price) + '&plan_duration=' + encodeURIComponent(response.plan_duration) + '&total_price=' + encodeURIComponent(response.total_price));
                 }
             };
             xhr.send('monthly_price=' + encodeURIComponent(monthly_price) + '&plan_duration=' + encodeURIComponent(plan_duration) + '&total_price=' + encodeURIComponent(total_price));

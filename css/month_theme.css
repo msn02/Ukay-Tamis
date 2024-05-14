@@ -10,8 +10,14 @@
   font-style: italic;
 }
 
-.blue_text {
-  color: rgb(3, 94, 150);
+.back_link a {
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.header_style {
+  background: linear-gradient(180deg, #ff1d0d, #ffaa33);
+  color: white;
 }
 
 .gradient_yellow {
@@ -19,16 +25,39 @@
 }
 
 .gradient_blue_orange_red1 {
-  background: linear-gradient(180deg, #ff1d0d, #ffaa33, #eeeeee, #0dcfff);
+  background: linear-gradient(180deg, #ff1d0d, #ffaa33, #eeeeee, #0dcfff, #eeeeee);
 }
 
-.green_border {
-  border: 2px solid #ffaa33;
-  background: #ffd69d;
+.img_logo img {
+  width: auto;
+  height: 350px;
+}
+
+.img_logo2 img {
+  width: auto;
+  height: 150px;
 }
 
 .landing_details h1, p {
   color: white;
+}
+
+.orange_border {
+  border: 2px solid #ffaa33;
+  background: #ffd69d;
+}
+
+.orange_border2 {
+  background: #FFEECC;
+}
+
+.orange_highlight {
+  color: #F57A11;
+}
+
+.red_highlight {
+  color: #ff1d0d;
+  font-weight: bold;
 }
 
 .review_content p {
@@ -47,22 +76,24 @@
   color: #ffc700;
 }
 
+.sub_text p {
+  color: black;
+  line-height: normal;
+  text-align: center;
+  font-size: 14px;
+}
+
+.theme_logo img {
+  width: 80%;
+  height: auto;
+}
+
 .title1 {
   font-size: 15px;
   font-weight: bold;
 }
 
-.container-custom-height {
-  height: 100vh;
-}
-
-.container-custom-height-50 {
-  height: 50vh;
-}
-
-.gradient_blue_orange_red2 {
-  background: linear-gradient(180deg, #0dcfff, #eeeeee);
-}
+/* JOSEPH */
 
 .timer {
   display: flex;
