@@ -104,14 +104,46 @@
             case 'changeAddress':
                 // Handle change address AJAX request
                 $address = $_POST['address'];
-                // Process address change
-                echo "Address changed successfully!";
+                $user_id = $_SESSION['user_id'];
+                
+                $stmt = $conn->prepare("UPDATE user SET address = ? WHERE user_id = ?");
+                $stmt->bind_param("ss", $address, $user_id);
+                if ($stmt->execute()) {
+                    echo true;
+                } else {
+                    echo false;
+                }
                 break;
-    
             case 'changeMeasurements':
                 // Handle change measurements AJAX request
+                // Variables to receive post
                 $height = $_POST['height'];
                 $weight = $_POST['weight'];
+                $bust = $_POST['bust'];
+                $hip = $_POST['hip'];
+                $shoe = $_POST['shoe'];
+                $clothing = $_POST['clothing'];
+                $user_id = $_SESSION['user_id'];
+
+                // Check if a record exists in user_preferences for the specified user_id
+                $stmt = $conn->prepare("SELECT * FROM user_preference WHERE user_id = ?");
+                $stmt->bind_param('s', $user_id);
+                $stmt->execute();
+                $stmt->store_result();
+
+                if ($stmt->num_rows > 0) {
+                    // If record exists, update the measurements for the user_id
+                    $stmt = $conn->prepare("UPDATE user_preference SET height = ?, weight = ?, bust_size = ?, hip_size = ?, shoe_size = ?, clothing_size = ? WHERE user_id = ?");
+                    $stmt->bind_param("sssssss", $height, $weight, $bust, $hip, $shoe, $clothing, $user_id);
+                    $stmt->execute();
+                    echo true;
+                } else {
+                    // If no record exists, insert a new record with user_id and measurements
+                    $stmt = $conn->prepare("INSERT INTO user_preference (user_id, height, weight, bust_size, hip_size, shoe_size, clothing_size) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("sssssss", $user_id, $height, $weight, $bust, $hip, $shoe, $clothing);
+                    $stmt->execute();
+                    echo true;
+                }
                 // Process measurements change
                 echo "Measurements changed successfully!";
                 break;
@@ -187,15 +219,8 @@
                 <!-- alert modal(s) -->
                     <!--Success-->
                     <div class="px-2 mt-1 mb-0 alert_btn">
-                        <div class="d-none w-100 m-0 alert alert-success alert-dismissible fade show" id="alert-success-password" role="alert">
+                        <div class="d-none w-100 m-0 alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
                             Password succesfully updated!
-                            <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
-
-                    <div class="px-2 mt-1 mb-0 alert_btn">
-                        <div class="d-none w-100 m-0 alert alert-success alert-dismissible fade show" id="securityQ_set" role="alert">
-                            Security questions set!
                             <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
@@ -246,7 +271,7 @@
                             <div class="m-0 py-2">
                                 <p class="pink_highlight2 bold_header mb-1 p-0"><?php if (isset($_SESSION['first_name']) && ($_SESSION['last_name'])) {echo $_SESSION['first_name'] . ' ' . $_SESSION['last_name']; } ?></p>
                                 <p class="m-0 p-0"><?php if (isset($_SESSION['phone_number'])) { echo $_SESSION['phone_number']; } ?></p>
-                                <p class="m-0 p-0"><?php if (isset($_SESSION['address'])) { echo $_SESSION['address']; } ?></p>
+                                <p class="m-0 p-0" id="add-loc"><?php if (isset($_SESSION['address'])) { echo $_SESSION['address']; } ?></p>
                                 <div class="mt-2 p-0">
                                     <!-- edit address -->
                                     <div class="pink_btn2 mt-3 mb-0 me-2">
@@ -295,27 +320,27 @@
                             <div class="m-0 py-2">
                                 <div class="col d-flex justify-content-between">
                                     <p>Height</p>
-                                    <p class="bold_header">123</p>
+                                    <p id='h-display' class="bold_header">123</p>
                                 </div>
                                 <div class="col d-flex justify-content-between">
                                     <p>Weight</p>
-                                    <p class="bold_header">123</p>
+                                    <p id='w-display' class="bold_header">123</p>
                                 </div>
                                 <div class="col d-flex justify-content-between">
                                     <p>Bust Size</p>
-                                    <p class="bold_header">123</p>
+                                    <p id='b-display' class="bold_header">123</p>
                                 </div>
                                 <div class="col d-flex justify-content-between">
                                     <p>Hip Size</p>
-                                    <p class="bold_header">123</p>
+                                    <p id='hip-display' class="bold_header">123</p>
                                 </div>
                                 <div class="col d-flex justify-content-between">
                                     <p>Shoe Size (EU)</p>
-                                    <p class="bold_header">123</p>
+                                    <p id='s-display' class="bold_header">123</p>
                                 </div>
                                 <div class="col d-flex justify-content-between">
                                     <p>Clothing Size</p>
-                                    <p class="bold_header">123</p>
+                                    <p id='c-display' class="bold_header">123</p>
                                 </div>
                                 
                                 <!-- edit button -->
@@ -477,13 +502,6 @@
                     </div>
                     <div class="modal-body">
                         <form class="form_style p-3 m-0" id="#change_address_form">
-                            <!-- alert success -->
-                            <div class="px-0 mb-3 alert_btn d-none">
-                                <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
-                                    Delivery Address updated successfully!
-                                    <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                            </div>
                             <!-- form -->
                             <div class="mb-3">
                                 <label for="input_add1" class="form-label ms-1">House Unit/Floor No./Building Name/Block or Lot</label>
@@ -503,15 +521,16 @@
                                     <input type="text" class="form-control" id="input_prov" placeholder="">
                                 </div>
                             </div>
+
+                            <div class="modal-footer">
+                                <div class="gray_btn">
+                                    <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                                <div class="pink_btn2">
+                                    <button type="button" class="btn btn-dark rounded-1 border-0" id="save_address"  data-bs-dismiss="modal">Save Changes</button>
+                                </div>
+                            </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="gray_btn">
-                            <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                        <div class="pink_btn2">
-                            <button type="button" class="btn btn-dark rounded-1 border-0">Save Changes</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -575,15 +594,16 @@
                                     </select> 
                                 </div>
                             </div>
+
+                            <div class="modal-footer">
+                                <div class="gray_btn">
+                                    <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                                <div class="pink_btn2">
+                                    <button type="button" id='save-measurements' class="btn btn-dark rounded-1 border-0" data-bs-dismiss="modal">Save Changes</button>
+                                </div>
+                            </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="gray_btn">
-                            <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                        <div class="pink_btn2">
-                            <button type="button" class="btn btn-dark rounded-1 border-0">Save Changes</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -620,10 +640,10 @@
                         
                         if (response.charAt(0) == true) {
                             $('#failed_modal').addClass('d-none');
-                            $('#alert-success-password').removeClass('d-none');
+                            $('#alert-success').removeClass('d-none').text('Password Successfully Updated');
                         } else {
                             $('#failed_modal').removeClass('d-none');
-                            $('#alert-success-password').addClass('d-none');
+                            $('#alert-success').addClass('d-none');
                         }
                         },
                         error: function(xhr, status, error) {
@@ -651,8 +671,10 @@
                     },
                     success: function(response) {
                         if(response.charAt(0) == true){
-                            $('#securityQ_set').removeClass('d-none');
+                            $('#alert-success').text('Security Questions Set!').removeClass('d-none');
                             $('#failed_modal').addClass('d-none');
+                            $('#sec_ques').val('');
+                            $('#input_ans').val('');
                         }
                         else{
                             $('#failed_modal').removeClass('d-none');
@@ -662,19 +684,93 @@
                 });
             });
 
+            $('#save_address').click(function(e){
+                var houseUnit = $('#input_add1').val();
+                var barangay = $('#input_brgy').val();
+                var city = $('#input_city').val();
+                var province = $('#input_prov').val();
+                
+                var address = houseUnit + ', ' + barangay + ', ' + city + ', ' + province;
+            // Generate AJAX request to send address data to account.php for further processing
+            $.ajax({
+                type: 'POST',
+                url: 'account.php',
+                data: {
+                    action: 'changeAddress',
+                    address: address
+                },
+                success: function(response) {
+                    // Handle the response from the server
+                    console.log(response);
+                    if(response.charAt(0)==true){
+                        $('#failed_modal').addClass('d-none');
+                        $('#alert-success').removeClass('d-none').text('Address Changed Successfully');
+                        $('#add-loc').text(address);
+                        //clear fields
+                        $('#input_add1').val('');
+                        $('#input_brgy').val('');
+                        $('#input_city').val('');
+                        $('#input_prov').val('');
+                    }
+                    else{
+                        console.log("no");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error sending address data');
+                }
+            });
+        });
+
             // Change Measurements Form
-            $('#change_measurements_form').submit(function(e){
+            $('#save-measurements').click(function(e){
                 e.preventDefault();
+
+                var height = $('#input_height').val();
+                var weight = $('#input_weight').val();
+                var bust   = $('#input_bust').val();
+                var hip    = $('#input_hip').val();
+                var shoe   = $('#input_shoe').val();
+                var clothing = $('#input_clothing').val();
+                var selectedClothingSize = $('#input_clothing option:selected').text();
+
+            $.ajax({
+                type: 'POST',
+                url: 'account.php',
+                data: {
+                    action: 'changeMeasurements', 
+                    height: height,
+                    weight: weight,
+                    bust: bust,
+                    hip: hip,
+                    shoe: shoe,
+                    clothing: clothing
+                },
+                success: function(response) {
+                    if(response.charAt(0)==true){
+                        console.log(response);
+                        $('#alert-success').removeClass('d-none').text('Measurements Updated Successfully');
+                        $('#h-display').text(height);
+                        $('#w-display').text(weight);
+                        $('#b-display').text(bust);
+                        $('#hip-display').text(hip);
+                        $('#s-display').text(shoe);
+                        $('#c-display').text(selectedClothingSize);
+                    }else{
+                        console.log(response);
+                    }
+                   
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error changing measurements');
+                }
             });
 
-            // Change Address Form
-            $('#change_address_form').submit(function(e){
-
             });
-            $(document).ready(function(){
+
     
         // Verify Button Click Event
-                $('#verify_btn').click(function(e){
+            $('#verify_btn').click(function(e){
                     e.preventDefault();
 
                     var password = $('#old_pass1').val();
@@ -703,8 +799,6 @@
                     });
                 });
             });
-
-        });
         
     </script>
 </body>
