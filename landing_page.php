@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,39 +69,45 @@
         <div class="container">
             <div class="row center_align pt-3 center_text white_text">
                 <div class="col-sm-5 px-4 pt-4 pb-0">
-                    <h3 class="bold_header">Dont Miss the Chance to Buy Limited MONTHLY THEMED Items!</h3>
+                    <h3 class="bold_header mb-3">Dont Miss the Chance to Buy Limited MONTHLY THEMED Items!</h3>
                 </div>
-                <div class="row center_align px-5 pb-0">
+                <div class="row center_align pt-3 px-5 pb-0 gx-3">
                     <!-- image -->        
                     <div class="col-sm-5 mb-3 mt-0 mx-0">               
-                        <a href="monthly_theme_page.php" class="text-decoration-none"><img src="resources/theme_logo.png" class="card-img-top img-fluid" alt="theme"></a>                  
+                        <img src="resources/theme_logo.png" class="card-img-top img-fluid" alt="theme">                  
+                        </div>
                     </div>
-                </div>
-                <!-- subscribe button -->
                 <div class="col-sm-12 p-0 pink_btn pb-3 mb-3 btn_text">
                     <a href="monthly_theme_page.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">LEARN MORE</button></a>
                 </div>
             </div>
         </div>
     </div>
-    
+
+    <!-- Style Quiz -->
+    <div class="container-fluid m-0 p-4 bg-dark">
+        <div class="container">       
+            <div class="row center_align pt-3 center_text white_text">
+                <h2 class="bold_header mb-3">Discover your UNIQUE STYLE with our <span class="bold_header" style="color: yellow;">INTERACTIVE QUIZ</span>!</h2>
+                <div class="col-sm-5 px-3 pt-2 pb-0">
+                    <!-- Include the style quiz to find your perfect fashion match -->
+                    <?php include 'quiz_style.php'; ?>                   
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- mystery box -->
     <div class="container-fluid m-0 p-4 gradient_green">
         <div class="container">
             <div class="row center_align pt-3 center_text white_text">
                 <div class="col-sm-8 px-4 pt-4 mb-3 subtitle">
-                    <h2 class="bold_header mb-3">Haul <span class="green_highlight">RARE</span> items with our</h2>
-                    <!-- <span class="green_highlight">MYSTERY BOX</span>! -->
-                    <div class="mystery_img mb-4">
-                        <a href="mystery_box.php" class="text-decoration-none"><img src="resources/mystery_box_logo.png" alt=""></a>
-                    </div>
-                    <div class="">
-                        <p class="black_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
-                        <p class="black_text">Id velit ut tortor pretium viverra suspendisse potenti.</p>
-                    </div>
+                    <h2 class="bold_header mb-3">Haul RARE items with our <span class="green_highlight">MYSTERY BOX</span>!</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
+                    <p>Id velit ut tortor pretium viverra suspendisse potenti.</p>
                 </div>
                 <div class="row center_align py-3 px-5 gx-3">
-                    <!-- images -->
+                    <!-- image -->
                     <div class="col-sm-3 mb-4">
                         <div class="card border-0 overflow-hidden card_content">
                             <img src="resources/shirts.jpg" class="card-img-top img-fluid" alt="Subscribe">
@@ -131,8 +141,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- subscribe button -->
-                <div class="col-sm-12 p-0 green_btn mt-2 mb-0 btn_text">
+                <div class="col-sm-12 p-0 green_btn mt-2 mb-3 btn_text">
                     <a href="mystery_box.php" class="text-decoration-none"><button class="btn btn-dark border-0 px-4 shadow rounded-1" type="button">GET A MYSTERY BOX</button></a>
                 </div>
             </div>
@@ -141,7 +150,7 @@
 
     <div class="container-fluid m-0 p-0">
         <!-- customer reviews -->
-        <div class="container-fluid px-4 d-flex justify-content-center">
+        <div class="container-fluid pb-2 pt-2 px-4 d-flex justify-content-center">
             <div class="container mt-0">
                 <div class="p-4 m-5 rounded-2 card border-0 rounded-2">
                     <div class="green_border row p-4 m-3 rounded-2">
