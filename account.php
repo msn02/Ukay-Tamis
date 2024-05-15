@@ -67,24 +67,48 @@
 
         // Close the statement
         $stmt->close();
+    } else {
+        
     }
 
 
     function verifyPassword($input_password, $db_password)
     {
-        // Hash the input password
-        $hashed_input_password = md5($input_password);
+        // Hash the input password using sha256
+        $hashed_input_password = hash('sha256', $input_password);
     
         // Compare the hashed input password with the hashed password from the database
         return $hashed_input_password === $db_password;
     }
-    
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['action'])) {
         $action = $_POST['action'];
     
         // Process AJAX request based on action
         switch ($action) {
+            case 'getUserMeasurements':
+                $user_id = $_SESSION['user_id'];
+    
+                $stmt = $conn->prepare("SELECT height, weight, bust_size, hip_size, shoe_size, clothing_size FROM user_preference WHERE user_id = ?");
+                $stmt->bind_param('s', $user_id);
+                $stmt->execute();
+                $stmt->bind_result($height, $weight, $bust_size, $hip_size, $shoe_size, $clothing_size);
+                $stmt->fetch();
+            
+                $measurements = array(
+                    'height' => $height,
+                    'weight' => $weight,
+                    'bust_size' => $bust_size,
+                    'hip_size' => $hip_size,
+                    'shoe_size' => $shoe_size,
+                    'clothing_size' => $clothing_size,
+                );
+            
+                echo implode((','),$measurements);
+                die();
+                
+
             case 'changePassword':
 
                 // Handle change password AJAX request
@@ -100,9 +124,9 @@
                     $stmt->bind_result($db_password);
                     $stmt->fetch();
                     
-                    if($db_password==md5($oldPassword)){
+                    if($db_password==hash('sha256', $oldPassword)){
                         $stmt = $conn->prepare("UPDATE user SET password = ? WHERE user_id = ?");
-                        $newHashedPassword=md5($newPassword);
+                        $newHashedPassword=hash('sha256', $newPassword);
                         $stmt->bind_param("ss", $newHashedPassword, $user_id);
                         $stmt->execute();
                         echo true;
@@ -155,6 +179,31 @@
                     echo false;
                 }
                 break;
+
+            case 'checkMeasurements':
+                // Handle check measurements AJAX request
+                $user_id = $_SESSION['user_id'];
+
+                // Check if a record exists in user_preference for the specified user_id
+                $stmt = $conn->prepare("SELECT * FROM user_preference WHERE user_id = ?");
+                $stmt->bind_param('s', $user_id);
+                $stmt->execute();
+                $stmt->store_result();
+
+                if ($stmt->num_rows > 0) {
+                    // If record exists, return the measurements for the user_id
+                    $stmt = $conn->prepare("SELECT height, weight, bust_size, hip_size, shoe_size, clothing_size FROM user_preference WHERE user_id = ?");
+                    $stmt->bind_param('s', $user_id);
+                    $stmt->execute();
+                    $stmt->bind_result($height, $weight, $bust_size, $hip_size, $shoe_size, $clothing_size);
+                    $stmt->fetch();
+                    echo json_encode(array('height' => $height, 'weight' => $weight, 'bust_size' => $bust_size, 'hip_size' => $hip_size, 'shoe_size' => $shoe_size, 'clothing_size' => $clothing_size));
+                } else {
+                    // If no record exists, return a message indicating no measurements found
+                    echo "No measurements found for the user.";
+                }
+                break;
+
             case 'changeMeasurements':
                 // Handle change measurements AJAX request
                 // Variables to receive post
@@ -202,7 +251,7 @@
                         $stmt->bind_result($db_password);
                         $stmt->fetch();
                         
-                        if(md5($password) === $db_password){
+                        if(hash('sha256', $password) === $db_password){
                             
                             echo true;
                         } else {
@@ -223,12 +272,21 @@
                 // set action to null if no action is specified
                 $action = null;
                 break;
-        }
-        } else {
-            $action = null;
+                
         }
     } else {
+        // set action to null if no action is specified
+        $action = null;
     }
+function reload_measurements($conn) {
+    $user_id = $_SESSION['user_id'];
+    
+    $stmt = $conn->prepare("SELECT height, weight, bust_size, hip_size, shoe_size, clothing_size FROM user_preference WHERE user_id = ?");
+    $stmt->bind_param('s', $user_id);
+    $stmt->execute();
+    $stmt->store_result();
+    $action = null;
+}
 ?>
 
 <!DOCTYPE html>
@@ -278,16 +336,10 @@
                             <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
-                    
-                    <div class="px-2 mt-1 mb-0 alert_btn">
-                        <div class="d-none w-100 m-0 alert alert-warning alert-dismissible fade show" role="alert">
-                            Please fill out all fields.
-                            <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
-                    <!--Secuity Questions-->
                 </div>
 
+
+                
                 <!-- user profile, address, subscription, transactions -->
                 <div class="col-sm-8 py-3 px-2 m-0">
                     <div class="row mb-2 mx-0 p-3 d-flex align-items-stretch justify-content-between card rounded-2 border-0 hstack">
@@ -434,9 +486,9 @@
                                 
                                 <!-- edit button -->
                                 <div class="mt-2 p-0">
-                                    <!-- <div class="pink_btn2 mt-2 me-2">
+                                    <div class="pink_btn2 mt-2 me-2">
                                         <button class="btn btn-dark border-0 rounded-1">Edit Profile</button>
-                                    </div> -->
+                                    </div> 
                                     <div class="gray_btn mb-0 mt-3">
                                         <button class="btn btn-dark border-0 rounded-1 w-100" data-bs-toggle="modal" data-bs-target="#measurements">Update Measurements</button>
                                     </div>
@@ -519,8 +571,11 @@
                         <h3 class="modal-title fs-5 bold_header" id="sec_question_lbl">Set your Security Question</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
                     <div class="modal-body">
+                         <!-- form -->
                         <form class="form_style p-3 m-0" id="#set_security_questions_form" method="POST">
+
                             <!-- alert success -->
                             <div class="px-0 mb-3 alert_btn d-none">
                                 <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
@@ -536,20 +591,23 @@
                                 </div>
                             </div>
 
-                            <!-- form -->
+                           
                             <div class="px-2 mt-1 mb-0 alert_btn">
                                 <div class="d-none w-100 m-0 alert alert-success alert-dismissible fade show" id="verify_success_modal" role="alert">
                                     Password Verified!
                                     <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             </div>
+
                             <div class="mb-3">
                                 <label for="old_pass" class="form-label ms-1">Password</label>
                                 <input type="text" class="form-control" id="old_pass1" placeholder="Enter your password">
                             </div>
+
                             <div class="pink_btn2 center_align">
                                 <button id="verify_btn" type="submit" class="btn btn-dark rounded-1 border-0">Verify</button>
                             </div>
+
                             <div class="mb-3">
                                 <label for="sec_ques" class="form-label ms-1">Security Question</label>
                                 <select id="sec_ques" class="form-control" required disabled>
@@ -563,15 +621,19 @@
                                     ?>
                                 </select>
                             </div>
+
                             <div class="mb-3">
                                 <label for="input_ans" class="form-label ms-1">Answer</label>
                                 <input type="text" class="form-control" id="input_ans" placeholder="Enter your answer" disabled>
                             </div>
 
+                            <!-- Buttons For Submission -->
                             <div class="modal-footer">
+
                             <div class="gray_btn">
                                 <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
                             </div>
+
                             <div class="pink_btn2">
                                 <button type="button" class="btn btn-dark rounded-1 border-0" id="save_question" data-bs-dismiss="modal">Save Changes</button>
                             </div>
@@ -590,6 +652,7 @@
                         <h3 class="modal-title fs-5 bold_header" id="address_lbl">Edit Delivery Address</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
                     <div class="modal-body">
                         <form class="form_style p-3 m-0" id="#change_address_form">
                             <!-- form -->
@@ -597,28 +660,36 @@
                                 <label for="input_add1" class="form-label ms-1">House Unit/Floor No./Building Name/Block or Lot</label>
                                 <input type="text" class="form-control" id="input_add1" placeholder="">
                             </div>
+
                             <div class="mb-3">
                                 <label for="input_brgy" class="form-label ms-1">Barangay</label>
                                 <input type="text" class="form-control" id="input_brgy" placeholder="">
                             </div>
+
                             <div class="row mb-3">
+
                                 <div class="col-sm-6">
                                     <label for="input_city" class="form-label ms-1">City/Municipality</label>
                                     <input type="text" class="form-control" id="input_city" placeholder="">
                                 </div>
+
                                 <div class="col-sm-6">
                                     <label for="input_prov" class="form-label ms-1">Province</label>
                                     <input type="text" class="form-control" id="input_prov" placeholder="">
                                 </div>
+
                             </div>
 
                             <div class="modal-footer">
+
                                 <div class="gray_btn">
                                     <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
                                 </div>
+
                                 <div class="pink_btn2">
                                     <button type="button" class="btn btn-dark rounded-1 border-0" id="save_address"  data-bs-dismiss="modal">Save Changes</button>
                                 </div>
+
                             </div>
                         </form>
                     </div>
@@ -634,46 +705,61 @@
                         <h3 class="modal-title fs-5 bold_header" id="measurements_lbl">Update Measurements</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
                     <div class="modal-body">
+                        <!-- form -->
                         <form class="form_style p-3 m-0" id="#change_measurements_form">
                             <!-- alert success -->
+
                             <div class="px-0 mb-3 alert_btn d-none">
                                 <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
                                     Measurements updated successfully!
                                     <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
+
                             </div>
-                            <!-- form -->
+                            
+
                             <!-- height and weight -->
                             <div class="row mb-3">
+
                                 <div class="col-sm-6">
                                     <label for="input_height" class="form-label ms-1">Height (cm)</label>
                                     <input type="text" class="form-control" id="input_height" placeholder="">
                                 </div>
+
                                 <div class="col-sm-6">
                                     <label for="input_weight" class="form-label ms-1">Weight (kg)</label>
                                     <input type="text" class="form-control" id="input_weight" placeholder="">
                                 </div>
+
                             </div>
+
                             <!-- bust and hip size -->
                             <div class="row mb-3">
+                            
                                 <div class="col-sm-6">
                                     <label for="input_bust" class="form-label ms-1">Bust Size (cm)</label>
                                     <input type="text" class="form-control" id="input_bust" placeholder="">
                                 </div>
+                                
                                 <div class="col-sm-6">
-                                    <label for="input_hip" class="form-label ms-1">Hip Size (kg)</label>
+                                    <label for="input_hip" class="form-label ms-1">Waist Size (cm)</label>
                                     <input type="text" class="form-control" id="input_hip" placeholder="">
                                 </div>
+                            
                             </div>
+
                             <!-- shoe and clothing size -->
                             <div class="row mb-3">
+
                                 <div class="col-sm-6">
                                     <label for="input_shoe" class="form-label ms-1">Shoe Size (EU)</label>
                                     <input type="text" class="form-control" id="input_shoe" placeholder="">
                                 </div>
+
                                 <div class="col-sm-6 form_option">
-                                    <label for="input_clothing" class="form-label ms-1">Clothing Size (kg)</label>
+                                    <label for="input_clothing" class="form-label ms-1">Preffered Clothing Size</label>
                                     <select id="input_clothing" class="form-select" aria-label="Default select example">
                                         <option selected>Select your size</option>
                                         <option value="1">Small</option>
@@ -683,12 +769,15 @@
                                         <option value="5">XXL</option>
                                     </select> 
                                 </div>
+
                             </div>
 
                             <div class="modal-footer">
+                                <!--Cancel-->
                                 <div class="gray_btn">
                                     <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
                                 </div>
+                                <!--Submit-->
                                 <div class="pink_btn2">
                                     <button type="button" id='save-measurements' class="btn btn-dark rounded-1 border-0" data-bs-dismiss="modal">Save Changes</button>
                                 </div>
@@ -828,8 +917,8 @@
         </div>
 
         
-        <!-- footer -->
-        <?php include 'contact_us.php'?>
+    <!-- footer -->
+    <?php include 'contact_us.php'?>
     </div>
 <script>
     $(document).ready(function($) {
@@ -852,6 +941,35 @@
 
 <script>
     $(document).ready(function(){
+            //get basic data
+            $.ajax({
+                type: 'POST',
+                url: 'account.php',
+                data: {
+                    action: 'getUserMeasurements'
+                },
+                success: function(response) {
+                    var measurements = response.split(','); 
+                    var height = measurements[0];
+                    var weight = measurements[1];
+                    var bust_size = measurements[2];
+                    var hip_size = measurements[3];
+                    var shoe_size = measurements[4];
+                    var clothing_size = measurements[5];
+                    // Use the measurements data as needed
+                    $('#h-display').text(height);
+                    $('#w-display').text(weight);
+                    $('#b-display').text(bust_size);
+                    $('#hip-display').text(hip_size);
+                    $('#s-display').text(shoe_size);
+                    $('#c-display').text(clothing_size);
+
+                    console.log('Measurements:'+ clothing_size);
+                },
+                error: function(xhr, status, error) {
+                    console.log(response);
+                }
+            });
     // Change Password Form
     $('#change_password_form').submit(function(e){
         e.preventDefault();
@@ -922,113 +1040,122 @@
         });
     });
 
-    $('#save_address').click(function(e){
-        var houseUnit = $('#input_add1').val();
-        var barangay = $('#input_brgy').val();
-        var city = $('#input_city').val();
-        var province = $('#input_prov').val();
-        
-        var address = houseUnit + ', ' + barangay + ', ' + city + ', ' + province;
-        // Generate AJAX request to send address data to account.php for further processing
-        $.ajax({
-            type: 'POST',
-            url: 'account.php',
-            data: {
-                action: 'changeAddress',
-                address: address
-            },
-            success: function(response) {
-                // Handle the response from the server
-                console.log(response);
-                if(response.charAt(0)==true){
-                    $('#failed_modal').addClass('d-none');
-                    $('#alert-success').removeClass('d-none').text('Address Changed Successfully');
-                    $('#add-loc').text(address);
-                    //clear fields
-                    $('#input_add1').val('');
-                    $('#input_brgy').val('');
-                    $('#input_city').val('');
-                    $('#input_prov').val('');
-                }
-                else{
-                    console.log("no");
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log('Error sending address data');
-            }
-        });
-    });
-        // Change Measurements Form
-        $('#save-measurements').click(function(e){
-            e.preventDefault();
-            var height = $('#input_height').val();
-            var weight = $('#input_weight').val();
-            var bust   = $('#input_bust').val();
-            var hip    = $('#input_hip').val();
-            var shoe   = $('#input_shoe').val();
-            var clothing = $('#input_clothing').val();
-            var selectedClothingSize = $('#input_clothing option:selected').text();
-        $.ajax({
-            type: 'POST',
-            url: 'account.php',
-            data: {
-                action: 'changeMeasurements', 
-                height: height,
-                weight: weight,
-                bust: bust,
-                hip: hip,
-                shoe: shoe,
-                clothing: clothing
-            },
-            success: function(response) {
-                if(response.charAt(0)==true){
-                    console.log(response);
-                    $('#alert-success').removeClass('d-none').text('Measurements Updated Successfully');
-                    $('#h-display').text(height);
-                    $('#w-display').text(weight);
-                    $('#b-display').text(bust);
-                    $('#hip-display').text(hip);
-                    $('#s-display').text(shoe);
-                    $('#c-display').text(selectedClothingSize);
-                }else{
-                    console.log(response);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log('Error changing measurements');
-            }
-        });
-    });
-
-
-    // Verify Button Click Event
-        $('#verify_btn').click(function(e){
-                e.preventDefault();
-                var password = $('#old_pass1').val();
+            //save address
+            $('#save_address').click(function(e){
+                var houseUnit = $('#input_add1').val();
+                var barangay = $('#input_brgy').val();
+                var city = $('#input_city').val();
+                var province = $('#input_prov').val();
+                
+                var address = houseUnit + ', ' + barangay + ', ' + city + ', ' + province;
+                // Generate AJAX request to send address data to account.php for further processing
                 $.ajax({
                     type: 'POST',
                     url: 'account.php',
                     data: {
-                        action: 'verifyPassword', 
-                        password: password
+                        action: 'changeAddress',
+                        address: address
                     },
                     success: function(response) {
-                        if (response.charAt(0) == true) {
-                            //modal edit
-                            $('#verify_btn').prop('disabled', true);
-                            $('#verify_success_modal').removeClass('d-none');
-                            $('#try_again').addClass('d-none');
-                            //enable  fields
-                            $('#sec_ques').prop('disabled', false);
-                            $('#input_ans').prop('disabled', false);
-                        } else {
-                            $('#try_again').removeClass('d-none');
+                        // Handle the response from the server
+                        console.log(response);
+                        if(response.charAt(0)==true){
+                            $('#failed_modal').addClass('d-none');
+                            $('#alert-success').removeClass('d-none').text('Address Changed Successfully');
+                            $('#add-loc').text(address);
+                            //clear fields
+                            $('#input_add1').val('');
+                            $('#input_brgy').val('');
+                            $('#input_city').val('');
+                            $('#input_prov').val('');
                         }
+                        else{
+                            console.log("no");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error sending address data');
                     }
                 });
             });
-        });
-</script>
+
+            // Change Measurements Form
+            $('#save-measurements').click(function(e){
+                e.preventDefault();
+
+                var height = $('#input_height').val();
+                var weight = $('#input_weight').val();
+                var bust   = $('#input_bust').val();
+                var hip    = $('#input_hip').val();
+                var shoe   = $('#input_shoe').val();
+                var clothing = $('#input_clothing').val();
+                var selectedClothingSize = $('#input_clothing option:selected').text();
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'account.php',
+                    data: {
+                        action: 'changeMeasurements', 
+                        height: height,
+                        weight: weight,
+                        bust: bust,
+                        hip: hip,
+                        shoe: shoe,
+                        clothing: clothing
+                    },
+                    success: function(response) {
+                        if(response.charAt(0)==true){
+                            console.log(response);
+                            $('#alert-success').removeClass('d-none').text('Measurements Updated Successfully');
+                            $('#h-display').text(height);
+                            $('#w-display').text(weight);
+                            $('#b-display').text(bust);
+                            $('#hip-display').text(hip);
+                            $('#s-display').text(shoe);
+                            $('#c-display').text(selectedClothingSize);
+                        }else{
+                            console.log(response);
+                        }
+                    
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error changing measurements');
+                    }
+                });
+            });
+
+            // Verify Button Click Event
+            $('#verify_btn').click(function(e){
+                e.preventDefault();
+
+                var password = $('#old_pass1').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'account.php',
+                    data:{
+                        action:'verifyPassword', 
+                        password: password
+                        },
+                        success: function(response) {
+
+                            if (response.charAt(0) == true) {
+                                //modal edit
+                                $('#verify_btn').prop('disabled', true);
+                                $('#verify_success_modal').removeClass('d-none');
+                                $('#try_again').addClass('d-none');
+                                //enable  fields
+                                $('#sec_ques').prop('disabled', false);
+                                $('#input_ans').prop('disabled', false);
+
+                            }else {
+                                $('#try_again').removeClass('d-none');
+                            }
+                        }
+                    });
+                });
+            });
+        
+    </script>
 </body>
 </html>
