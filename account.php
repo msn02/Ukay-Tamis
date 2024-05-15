@@ -195,6 +195,8 @@
     <title>My Account</title>
     <?php include 'head_resource.php';?>
     <link rel="stylesheet" href="css/account.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 </head>
 <body class="gray_bg2">
     <!-- navigation bar -->
@@ -240,8 +242,6 @@
                         </div>
                     </div>
                     <!--Secuity Questions-->
-
-
                 </div>
 
                 <!-- user profile, address, subscription, transactions -->
@@ -289,7 +289,6 @@
                                     <h6 class="col bold_header mb-0 p-0 mx-0">Recent Transactions</span></h6>
                                     <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="#">View more<i class="bi bi-chevron-right"></i></a>
                             </div>
-                                
                             <table class="table">
                                 <thead class="text-center">
                                     <tr class="thead_style">
@@ -314,10 +313,14 @@
                                 <?php 
                                 if ($recent_transactions->num_rows > 0) {
                                     while ($row = $recent_transactions->fetch_assoc()) { ?>
-                                        <tr class="product_info align-middle">
+                                        <tr class="product_info align-middle" data-bs-toggle="modal" data-bs-target="#transaction" data-id="<?php echo $row['transaction_id']; ?>" style="cursor: pointer;">
                                             <!-- product ordered -->
                                             <td scope="row" class="text-center bold_header"><span><?php echo $row['order_number']; ?></span></td>
-                                            <td class="text-center"><?php echo $row['timestamp']; ?></td>
+                                            <td class="text-center">
+                                                <span><?php echo date('Y-m-d', strtotime($row['timestamp'])); ?></span>
+                                                <br>
+                                                <span><?php echo date('H:i:s', strtotime($row['timestamp'])); ?></span>
+                                            </td>
                                             
                                             <?php 
                                             if (isset($form_data['checkout_type']) && isset($form_data['product_type']) && isset($form_data['product_id'])) {
@@ -463,6 +466,7 @@
                 </div>
             </div>
         </div>
+
         <!-- security questions -->
         <div class="modal fade" id="sec_question" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="sec_question_lbl" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -651,197 +655,321 @@
             </div>
         </div>
         
+        <!-- order details -->
+        <div class="modal fade" id="transaction" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="measurements_lbl" aria-hidden="true">
+        <?php include ('server/get_transaction.php') ?>
+        <?php while ($row = $transaction->fetch_assoc()) { ?>
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header modal_btn">
+                        <h3 class="modal-title fs-5 bold_header" id="measurements_lbl">Viewing Order</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form_style p-3 m-0" id="#change_measurements_form">
+                            <!-- alert success -->
+                            <div class="px-0 mb-3 alert_btn d-none">
+                                <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
+                                    Review posted successfully!
+                                    <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            </div>
+
+                            <!-- transaction details -->
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <label for="input_order" class="form-label ms-1">Order Number</label>
+                                    <input type="text" class="form-control" id="input_order" value="<?php echo $row['order_number']; ?>" disabled>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="input_date" class="form-label ms-1">Order Date</label>
+                                    <input type="text" class="form-control" id="input_date" value="<?php echo date('Y-m-d', strtotime($row['timestamp'])); ?>" disabled>
+                                </div>
+                                <!-- add total price and items-->
+                                <div class="col-sm-2">
+                                    <label for="input_total" class="form-label ms-1">Total Price</label>
+                                    <input type="text" class="form-control" id="input_total" value="<?php echo $row['total_price']; ?>" disabled>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="input_items" class="form-label ms-1">Total Items</label>
+                                    <input type="text" class="form-control" id="input_items" value="<?php echo $row['total_items']; ?>" disabled>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <label for="input_eta" class="form-label ms-1">Estimated Delivery Date</label>
+                                    <input type="text" class="form-control" id="input_eta" value="<?php echo date('Y-m-d', strtotime($row['delivery_date'])); ?>" disabled>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="input_payment" class="form-label ms-1">Payment Method</label>
+                                    <input type="text" class="form-control" id="input_payment" value="<?php echo $row['payment_method']; ?>" disabled>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="input_payment" class="form-label ms-1">Status</label>
+                                    <input type="text" class="form-control" id="input_payment" value="<?php echo $row['status']; ?>" disabled>
+                                </div>
+                            </div>
+                            <!-- table for product order -->
+                            <table class="table">
+                                <thead class="text-center">
+                                    <tr class="thead_style">
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="product_info align-middle no_border_bottom mb-3">
+                                        <td class="item_img d-flex justify-content-center">
+                                            <img src="resources/<?php echo $form_data['product_img_url'] ?>" class="card m-0" alt="item">
+                                        </td>
+                                        <td class="col-sm-4 text-center align-middle">
+                                            <span><?php echo $row['item_name']; ?></span>
+                                        </td>
+                                        <td class="col-sm-4 form_option text-center align-middle">
+                                            <select id="input_rating" class="form-select star_icon" aria-label="Default select example">
+                                                <option value="1"><i class="bi bi-star-fill ">★</i></option>
+                                                <option value="2"><i class="bi bi-star-fill">★★</i></option>
+                                                <option value="3"><i class="bi bi-star-fill">★★★</i></option>
+                                                <option value="4"><i class="bi bi-star-fill">★★★★</i></option>
+                                                <option selected value="5"><i class="bi bi-star-fill">★★★★★</i></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="align-middle">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-sm-6 align-middle">
+                                                    <h6 class="bold_header mb-3">Title</h6>
+                                                    <textarea class="form-control mb-3" id="review" rows="2" placeholder="Write your title here"></textarea>
+                                                    
+                                                    <h6 class="bold_header">Upload Image</h6>
+                                                    <input type="file" class="form-control" id="imageUpload">
+                                                </div>
+                                                <div class="col-sm-6 align-middle">
+                                                    <h6 class="bold_header">Write a Detailed Review</h6>
+                                                    <textarea class="form-control" id="review" rows="5" placeholder="Write your detailed review here"></textarea></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                            </table> 
+                            <div class="modal-footer">
+                                <div class="gray_btn">
+                                    <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                                <div class="pink_btn2">
+                                    <button type="button" id='save-measurements' class="btn btn-dark rounded-1 border-0" data-bs-dismiss="modal">Post Review</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
+
+        
         <!-- footer -->
         <?php include 'contact_us.php'?>
     </div>
-    <script>
-        $(document).ready(function(){
-            // Change Password Form
-            $('#change_password_form').submit(function(e){
-                e.preventDefault();
+<script>
+    $(document).ready(function($) {
+        $(".product_info").click(function() {
+            var transactionId = $(this).data("id");
 
-                var newPassword = $('#new_pass').val();
-                var confirmNewPassword = $('#confirm_new_password').val();
-                var oldPassword = $('#old_pass').val();
-
-                if (newPassword !==confirmNewPassword){
-                    alert("New Passwords Dont Match!")
-                }
-                else if (newPassword === oldPassword) {
-                    alert("New Password cannot be the same as the Old Password!");
-                }else {
-                    $.ajax({
-                        type: 'POST',
-                        url: 'account.php',
-                        data: {
-                            action: 'changePassword', 
-                            old_password: oldPassword,
-                            new_password: newPassword
-                        },
-                        success: function(response) {
-                        
-                        if (response.charAt(0) == true) {
-                            $('#failed_modal').addClass('d-none');
-                            $('#alert-success').removeClass('d-none').text('Password Successfully Updated');
-                        } else {
-                            $('#failed_modal').removeClass('d-none');
-                            $('#alert-success').addClass('d-none');
-                        }
-                        },
-                        error: function(xhr, status, error) {
-                            console.log("error");
-                            
-                        }
-                    });
+            $.ajax({
+                url: 'server/set_transaction_id.php',
+                type: 'post',
+                data: {transaction_id: transactionId},
+                success: function(response) {
+                    $('#transaction').modal('show');
                 }
             });
-            // Set Security Questions Form
-            $('#save_question').click(function(e){
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function(){
+    // Change Password Form
+    $('#change_password_form').submit(function(e){
+        e.preventDefault();
+
+        var newPassword = $('#new_pass').val();
+        var confirmNewPassword = $('#confirm_new_password').val();
+        var oldPassword = $('#old_pass').val();
+
+        if (newPassword !==confirmNewPassword){
+            alert("New Passwords Dont Match!")
+        }
+        else if (newPassword === oldPassword) {
+            alert("New Password cannot be the same as the Old Password!");
+        }else {
+            $.ajax({
+                type: 'POST',
+                url: 'account.php',
+                data: {
+                    action: 'changePassword', 
+                    old_password: oldPassword,
+                    new_password: newPassword
+                },
+                success: function(response) {
+                
+                if (response.charAt(0) == true) {
+                    $('#failed_modal').addClass('d-none');
+                    $('#alert-success').removeClass('d-none').text('Password Successfully Updated');
+                } else {
+                    $('#failed_modal').removeClass('d-none');
+                    $('#alert-success').addClass('d-none');
+                }
+                },
+                error: function(xhr, status, error) {
+                    console.log("error");
+                    
+                }
+            });
+        }
+    });
+    // Set Security Questions Form
+    $('#save_question').click(function(e){
+        e.preventDefault();
+
+        var action = 'setSecurityQuestions';
+        var question_id = $('#sec_ques').val();
+        var answer = $('#input_ans').val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'account.php',
+            data: {
+                action: action, 
+                question_id: question_id,
+                answer: answer
+            },
+            success: function(response) {
+                if(response.charAt(0) == true){
+                    $('#alert-success').text('Security Questions Set!').removeClass('d-none');
+                    $('#failed_modal').addClass('d-none');
+                    $('#sec_ques').val('');
+                    $('#input_ans').val('');
+                }
+                else{
+                    $('#failed_modal').removeClass('d-none');
+                    $('#securityQ_set').addClass('d-none');
+                }
+            }
+        });
+    });
+
+    $('#save_address').click(function(e){
+        var houseUnit = $('#input_add1').val();
+        var barangay = $('#input_brgy').val();
+        var city = $('#input_city').val();
+        var province = $('#input_prov').val();
+        
+        var address = houseUnit + ', ' + barangay + ', ' + city + ', ' + province;
+        // Generate AJAX request to send address data to account.php for further processing
+        $.ajax({
+            type: 'POST',
+            url: 'account.php',
+            data: {
+                action: 'changeAddress',
+                address: address
+            },
+            success: function(response) {
+                // Handle the response from the server
+                console.log(response);
+                if(response.charAt(0)==true){
+                    $('#failed_modal').addClass('d-none');
+                    $('#alert-success').removeClass('d-none').text('Address Changed Successfully');
+                    $('#add-loc').text(address);
+                    //clear fields
+                    $('#input_add1').val('');
+                    $('#input_brgy').val('');
+                    $('#input_city').val('');
+                    $('#input_prov').val('');
+                }
+                else{
+                    console.log("no");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('Error sending address data');
+            }
+        });
+    });
+        // Change Measurements Form
+        $('#save-measurements').click(function(e){
+            e.preventDefault();
+            var height = $('#input_height').val();
+            var weight = $('#input_weight').val();
+            var bust   = $('#input_bust').val();
+            var hip    = $('#input_hip').val();
+            var shoe   = $('#input_shoe').val();
+            var clothing = $('#input_clothing').val();
+            var selectedClothingSize = $('#input_clothing option:selected').text();
+        $.ajax({
+            type: 'POST',
+            url: 'account.php',
+            data: {
+                action: 'changeMeasurements', 
+                height: height,
+                weight: weight,
+                bust: bust,
+                hip: hip,
+                shoe: shoe,
+                clothing: clothing
+            },
+            success: function(response) {
+                if(response.charAt(0)==true){
+                    console.log(response);
+                    $('#alert-success').removeClass('d-none').text('Measurements Updated Successfully');
+                    $('#h-display').text(height);
+                    $('#w-display').text(weight);
+                    $('#b-display').text(bust);
+                    $('#hip-display').text(hip);
+                    $('#s-display').text(shoe);
+                    $('#c-display').text(selectedClothingSize);
+                }else{
+                    console.log(response);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('Error changing measurements');
+            }
+        });
+    });
+
+
+    // Verify Button Click Event
+        $('#verify_btn').click(function(e){
                 e.preventDefault();
-
-                var action = 'setSecurityQuestions';
-                var question_id = $('#sec_ques').val();
-                var answer = $('#input_ans').val();
-
+                var password = $('#old_pass1').val();
                 $.ajax({
                     type: 'POST',
                     url: 'account.php',
                     data: {
-                        action: action, 
-                        question_id: question_id,
-                        answer: answer
+                        action: 'verifyPassword', 
+                        password: password
                     },
                     success: function(response) {
-                        if(response.charAt(0) == true){
-                            $('#alert-success').text('Security Questions Set!').removeClass('d-none');
-                            $('#failed_modal').addClass('d-none');
-                            $('#sec_ques').val('');
-                            $('#input_ans').val('');
-                        }
-                        else{
-                            $('#failed_modal').removeClass('d-none');
-                            $('#securityQ_set').addClass('d-none');
+                        if (response.charAt(0) == true) {
+                            //modal edit
+                            $('#verify_btn').prop('disabled', true);
+                            $('#verify_success_modal').removeClass('d-none');
+                            $('#try_again').addClass('d-none');
+                            //enable  fields
+                            $('#sec_ques').prop('disabled', false);
+                            $('#input_ans').prop('disabled', false);
+                        } else {
+                            $('#try_again').removeClass('d-none');
                         }
                     }
                 });
-            });
-
-            $('#save_address').click(function(e){
-                var houseUnit = $('#input_add1').val();
-                var barangay = $('#input_brgy').val();
-                var city = $('#input_city').val();
-                var province = $('#input_prov').val();
-                
-                var address = houseUnit + ', ' + barangay + ', ' + city + ', ' + province;
-            // Generate AJAX request to send address data to account.php for further processing
-            $.ajax({
-                type: 'POST',
-                url: 'account.php',
-                data: {
-                    action: 'changeAddress',
-                    address: address
-                },
-                success: function(response) {
-                    // Handle the response from the server
-                    console.log(response);
-                    if(response.charAt(0)==true){
-                        $('#failed_modal').addClass('d-none');
-                        $('#alert-success').removeClass('d-none').text('Address Changed Successfully');
-                        $('#add-loc').text(address);
-                        //clear fields
-                        $('#input_add1').val('');
-                        $('#input_brgy').val('');
-                        $('#input_city').val('');
-                        $('#input_prov').val('');
-                    }
-                    else{
-                        console.log("no");
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log('Error sending address data');
-                }
             });
         });
-
-            // Change Measurements Form
-            $('#save-measurements').click(function(e){
-                e.preventDefault();
-
-                var height = $('#input_height').val();
-                var weight = $('#input_weight').val();
-                var bust   = $('#input_bust').val();
-                var hip    = $('#input_hip').val();
-                var shoe   = $('#input_shoe').val();
-                var clothing = $('#input_clothing').val();
-                var selectedClothingSize = $('#input_clothing option:selected').text();
-
-            $.ajax({
-                type: 'POST',
-                url: 'account.php',
-                data: {
-                    action: 'changeMeasurements', 
-                    height: height,
-                    weight: weight,
-                    bust: bust,
-                    hip: hip,
-                    shoe: shoe,
-                    clothing: clothing
-                },
-                success: function(response) {
-                    if(response.charAt(0)==true){
-                        console.log(response);
-                        $('#alert-success').removeClass('d-none').text('Measurements Updated Successfully');
-                        $('#h-display').text(height);
-                        $('#w-display').text(weight);
-                        $('#b-display').text(bust);
-                        $('#hip-display').text(hip);
-                        $('#s-display').text(shoe);
-                        $('#c-display').text(selectedClothingSize);
-                    }else{
-                        console.log(response);
-                    }
-                   
-                },
-                error: function(xhr, status, error) {
-                    console.log('Error changing measurements');
-                }
-            });
-
-            });
-
-    
-        // Verify Button Click Event
-            $('#verify_btn').click(function(e){
-                    e.preventDefault();
-
-                    var password = $('#old_pass1').val();
-
-                    $.ajax({
-                        type: 'POST',
-                        url: 'account.php',
-                        data: {
-                            action: 'verifyPassword', 
-                            password: password
-                        },
-                        success: function(response) {
-                            
-                            if (response.charAt(0) == true) {
-                                //modal edit
-                                $('#verify_btn').prop('disabled', true);
-                                $('#verify_success_modal').removeClass('d-none');
-                                $('#try_again').addClass('d-none');
-                                //enable  fields
-                                $('#sec_ques').prop('disabled', false);
-                                $('#input_ans').prop('disabled', false);
-                            } else {
-                                $('#try_again').removeClass('d-none');
-                            }
-                        }
-                    });
-                });
-            });
-        
-    </script>
+</script>
 </body>
 </html>

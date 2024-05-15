@@ -48,6 +48,10 @@
     margin-bottom: 13px;
 }
 
+.no_border_bottom td {
+    border-bottom: none !important;
+}
+
 .package_info h6, p {
     line-height: normal;
 }
@@ -63,6 +67,11 @@
 .product_info td {
     font-size: 13px;
 
+}
+
+.star_icon {
+    font-size: 1rem; 
+    color: #FFC700;
 }
 
 .user_info p, h3 {
