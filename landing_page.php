@@ -176,54 +176,21 @@ session_start();
                     <h1 class="fw-bold">Choose your STYLE!</h1>
                     <p class="lh-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum voluptas maxime suscipit sunt provident voluptatem fuga nisi inventore itaque explicabo tempora accusantium mollitia quisquam sequi ab, labore id voluptatum perspiciatis!</p>
                 </div>
+                <?php include('server/get_featured_style.php')?>
+                <?php while ($featured_styles && $row = $featured_styles->fetch_assoc()) { ?>
                 <div class="col-sm-3 d-flex align-items-stretch">
                     <div class="card h-100 overflow-hidden item_card style_card_info mb-0 shadow-sm">
-                        <img src="resources/more.jpg" class="img-fluid card-img-top rounded-top-1" alt="">
+                        <img src="resources/<?php echo $row['style_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="">
                         <div class="card-body p-2">
-                            <p class="item_name my-1 mx-1">Title</p>
-                            <p class="style_info mx-1">Description</p>
+                            <p class="item_name my-1 mx-1"><?php echo $row['style']; ?></p>
+                            <p class="style_info mx-1"><?php echo $row['style_description']; ?></p>
                         </div>
                         <div class="pink_btn2 m-2">
                             <a href="" class="text-decoration-none"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 d-flex align-items-stretch">
-                    <div class="card h-100 overflow-hidden item_card style_card_info mb-0 shadow-sm">
-                        <img src="resources/more.jpg" class="img-fluid card-img-top rounded-top-1" alt="">
-                        <div class="card-body p-2">
-                            <p class="item_name my-1 mx-1">Title</p>
-                            <p class="style_info mx-1">Description</p>
-                        </div>
-                        <div class="pink_btn2 m-2">
-                            <a href="" class="text-decoration-none"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 d-flex align-items-stretch">
-                    <div class="card h-100 overflow-hidden item_card style_card_info mb-0 shadow-sm">
-                        <img src="resources/more.jpg" class="img-fluid card-img-top rounded-top-1" alt="">
-                        <div class="card-body p-2">
-                            <p class="item_name my-1 mx-1">Title</p>
-                            <p class="style_info mx-1">Description</p>
-                        </div>
-                        <div class="pink_btn2 m-2">
-                            <a href="" class="text-decoration-none"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 d-flex align-items-stretch">
-                    <div class="card h-100 overflow-hidden item_card style_card_info mb-0 shadow-sm">
-                        <img src="resources/more.jpg" class="img-fluid card-img-top rounded-top-1" alt="">
-                        <div class="card-body p-2">
-                            <p class="item_name my-1 mx-1">Title</p>
-                            <p class="style_info mx-1">Description</p>
-                        </div>
-                        <div class="pink_btn2 m-2">
-                            <a href="" class="text-decoration-none"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
