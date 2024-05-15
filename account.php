@@ -30,6 +30,46 @@
             exit();
         }
     }
+
+    if (isset($_POST['post_review'])){
+        // Get the values from the form
+        $rating = $_POST["rating"];
+        $review_title = $_POST["review_title"];
+        $review = $_POST["review"];
+        $transaction_id = $_SESSION["transaction_id"];
+        $user_id = $_SESSION["user_id"];
+        $product_id = $_POST["product_id"];
+
+        // Handle the image upload
+        $image = $_FILES['image']['name'];
+        $target_dir = "resources/";
+        $target_file = $target_dir . basename($image);
+
+        move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
+        
+
+        // Store the values in session
+        $_SESSION["rating"] = $rating;
+        $_SESSION["review_title"] = $review_title;
+        $_SESSION["review"] = $review;
+        $_SESSION["transaction_id"] = $transaction_id;
+        $_SESSION["user_id"] = $user_id;
+        $_SESSION["image"] = $image;
+        $_SESSION["product_id"] = $product_id;
+
+
+       // Prepare and bind
+        $stmt = $conn->prepare("INSERT INTO reviews (rating, title, review, img_review, user_id, style_box_id) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("isssss", $rating, $review_title, $review, $image, $user_id, $product_id);
+
+        // Execute the statement
+        $stmt->execute();
+
+        // Close the statement
+        $stmt->close();
+    }
+
+
     function verifyPassword($input_password, $db_password)
     {
         // Hash the input password
@@ -40,6 +80,7 @@
     }
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['action'])) {
         $action = $_POST['action'];
     
         // Process AJAX request based on action
@@ -179,11 +220,14 @@
                 break;
     
             default:
-                echo "Invalid action";
+                // set action to null if no action is specified
+                $action = null;
                 break;
         }
+        } else {
+            $action = null;
+        }
     } else {
-        
     }
 ?>
 
@@ -666,7 +710,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="form_style p-3 m-0" id="#change_measurements_form">
+                        <form class="form_style p-3 m-0" id="#change_measurements_form" method = "POST" action = "account.php" enctype="multipart/form-data">
                             <!-- alert success -->
                             <div class="px-0 mb-3 alert_btn d-none">
                                 <div class="w-100 m-0 alert alert-success alert-dismissible fade show" role="alert">
@@ -709,25 +753,34 @@
                                     <input type="text" class="form-control" id="input_payment" value="<?php echo $row['status']; ?>" disabled>
                                 </div>
                             </div>
+                <?php } ?>
+
+                        <?php include ('server/get_order_products.php') ?>
+                        <?php while ($row = $order_products->fetch_assoc()) { ?>
                             <!-- table for product order -->
                             <table class="table">
                                 <thead class="text-center">
                                     <tr class="thead_style">
                                         <th scope="col">Image</th>
                                         <th scope="col">Product Name</th>
+                                        <th scope="col">Product Details</th>
                                         <th scope="col">Rating</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr class="product_info align-middle no_border_bottom mb-3">
                                         <td class="item_img d-flex justify-content-center">
-                                            <img src="resources/<?php echo $form_data['product_img_url'] ?>" class="card m-0" alt="item">
+                                            <img src="resources/<?php echo $row['style_img_url'] ?>" class="card m-0" alt="item">
                                         </td>
+                                        <td class="col-sm-2 text-center align-middle">
+                                            <span><?php echo $row['style'] . ' Box'; ?></span>
+                                        </td>
+                                        <!-- add product quantity -->
                                         <td class="col-sm-4 text-center align-middle">
-                                            <span><?php echo $row['item_name']; ?></span>
+                                            <span><?php echo substr($row['style_box_description'], 0, 50) . '...'; ?></span>
                                         </td>
-                                        <td class="col-sm-4 form_option text-center align-middle">
-                                            <select id="input_rating" class="form-select star_icon" aria-label="Default select example">
+                                        <td class="col-sm-3 form_option text-center align-middle">
+                                            <select id="input_rating" name = "rating" class="form-select star_icon" aria-label="Default select example">
                                                 <option value="1"><i class="bi bi-star-fill ">★</i></option>
                                                 <option value="2"><i class="bi bi-star-fill">★★</i></option>
                                                 <option value="3"><i class="bi bi-star-fill">★★★</i></option>
@@ -737,37 +790,42 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="align-middle">
+                                        <td colspan="4" class="align-middle">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col-sm-6 align-middle">
-                                                    <h6 class="bold_header mb-3">Title</h6>
-                                                    <textarea class="form-control mb-3" id="review" rows="2" placeholder="Write your title here"></textarea>
+                                                    <h6 class="bold_header mb-3">Review Title</h6>
+                                                    <input type="text" name="review_title" class="form-control mb-3" id="title_review">
                                                     
-                                                    <h6 class="bold_header">Upload Image</h6>
-                                                    <input type="file" class="form-control" id="imageUpload">
+                                                    <h6 class="bold_header mb-3">Upload Image</h6>
+                                                    <input class="form-control" name="image" type="file" id="formFile">
                                                 </div>
                                                 <div class="col-sm-6 align-middle">
                                                     <h6 class="bold_header">Write a Detailed Review</h6>
-                                                    <textarea class="form-control" id="review" rows="5" placeholder="Write your detailed review here"></textarea></div>
+                                                    <textarea name="review" class="form-control" id="review" style="height: 150px;"></textarea>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                            </table> 
+                            </table>
+                        
                             <div class="modal-footer">
                                 <div class="gray_btn">
                                     <button type="button" class="btn btn-secondary rounded-1 border-0" data-bs-dismiss="modal">Cancel</button>
                                 </div>
                                 <div class="pink_btn2">
-                                    <button type="button" id='save-measurements' class="btn btn-dark rounded-1 border-0" data-bs-dismiss="modal">Post Review</button>
+                                    <input type="hidden" name = "transaction_id" value = "<?php echo $_SESSION['transaction_id']; ?>">
+                                    <input type="hidden" name = "user_id" value = "<?php echo $_SESSION['user_id']; ?>">
+                                    <input type="hidden" name = "product_id" value = "<?php echo $row['style_box_id']; ?>">
+                                    <input type="hidden" name = "product_type" value = "style box">
+                                    <button type="submit" name = "post_review" id='save-measurements' class="btn btn-dark rounded-1 border-0" data-bs-dismiss="modal">Post Review</button>
                                 </div>
                             </div>
+                        <?php } ?>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <?php } ?>
 
         
         <!-- footer -->
@@ -777,13 +835,14 @@
     $(document).ready(function($) {
         $(".product_info").click(function() {
             var transactionId = $(this).data("id");
-
+    
             $.ajax({
                 url: 'server/set_transaction_id.php',
                 type: 'post',
                 data: {transaction_id: transactionId},
                 success: function(response) {
-                    $('#transaction').modal('show');
+                    // The session variable has been updated on the server side
+                    // You can now do something with the response if needed
                 }
             });
         });
