@@ -77,3 +77,8 @@
     font-size: 11px;
     line-height: normal;
 }
+
+.star_icon {
+    font-size: 1rem; 
+    color: #FFC700;
+}
