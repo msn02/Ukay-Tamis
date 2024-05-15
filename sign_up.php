@@ -77,7 +77,7 @@
                         // insert user into database if no errors
                         $stmt = $conn -> prepare ("INSERT INTO user (username, email, password, first_name, last_name, phone_number, address) 
                                                    VALUES (?, ?, ?, ?, ?, ?, ?)");
-                        $hashed_password = md5($password);
+                        $hashed_password = hash('sha256', $password);
                         $stmt -> bind_param("sssssss", $username, $email, $hashed_password, $first_name, $last_name, $phone_number, $address);
         
                         if ($stmt -> execute()) {

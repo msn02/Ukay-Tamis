@@ -150,9 +150,9 @@
                             </div>
                         </div>
 
-                        <div class="mt-3 mx-2 mb-0 px-2 pink_btn2">
-                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" name = "search_filter" href="#">FILTER</i></button>
-                            <button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" href="#" id = "clear_selection">CLEAR SELECTION</i></button>
+                        <div class="mt-3 mx-2 mb-0 px-2">
+                            <span class="pink_btn2"><button class="btn w-100 border-0 p-2 rounded-1 text-decoration-none" name = "search_filter" href="#">FILTER</button></span>
+                            <span class="gray_btn"><button class="btn btn-secondary my-2 w-100 border-0 p-2 rounded-1 text-decoration-none" href="#" id = "clear_selection">CLEAR SELECTION</button></span>
                         </div>
                         </form>
                     </div>
@@ -164,7 +164,7 @@
                         
                         <!-- Featured Styles -->
                         <div class="rounded-2 pt-3 px-3 style_con">
-                            <div class="row g-3 mb-3 center_align">
+                            <div class="row g-3 mb-3 d-flex justify-content-center">
                                 <!-- title and link to view more styles -->
                                 <div class="pink_btn2 row mt-2 p-2 view_more_link">
                                     <h5 class="col bold_header mb-0 p-0 mx-0">Choose your <span class="pink_highlight2">STYLE</span></h5>
@@ -175,12 +175,14 @@
                                 <?php include('server/get_mystery_box.php'); ?>
 
                                 <!-- Style card -->
-                                    <div class="col-sm-3">
+                                <div class="col-sm-3 d-flex align-items-stretch">
                                     <div class="card overflow-hidden item_card style_card_info mb-0">
                                         <img src="resources/<?php echo $row['style_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="<?php echo $row['style_img_url']; ?>">
                                         <div class="card-body p-2 pink_btn2">
                                             <p class="item_name my-1 mx-1"><?php echo $row['style']; ?></p>
                                             <p class="style_info mx-1"><?php echo $row['style_description']; ?></p>
+                                        </div>
+                                        <div class="pink_btn2 m-2">
                                             <a href="mystery_box.php"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS BOX <i class="bi bi-chevron-right"></i></button></a>
                                         </div>
                                     </div>
@@ -195,13 +197,15 @@
                                 <?php while ($featured_styles && $row = $featured_styles->fetch_assoc()) { ?>
                                 
                                 <!-- Style card -->
-                                <div class="col-sm-3">
-                                    <div class="card overflow-hidden item_card style_card_info mb-0">
+                                <div class="col-sm-3 d-flex align-items-stretch">
+                                    <div class="card h-100 overflow-hidden item_card style_card_info mb-0">
                                         <img src="resources/<?php echo $row['style_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="<?php echo $row['style_img_url']; ?>">
-                                        <div class="card-body p-2 pink_btn2">
+                                        <div class="card-body p-2">
                                             <p class="item_name my-1 mx-1"><?php echo $row['style']; ?></p>
                                             <p class="style_info mx-1"><?php echo $row['style_description']; ?></p>
-                                            <a href="<?php echo "style_box.php?style_id=" . $row['style_id'] ?>"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
+                                        </div>
+                                        <div class="pink_btn2 m-2">
+                                            <a href="<?php echo "style_box.php?style_id=" . $row['style_id'] ?>" class="text-decoration-none"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +248,7 @@
                                                     <p class="card-text item_price m-0"><?php echo $row['price']; ?></p>
                                                 </div>
                                                 <div class="col-6 m-0 bold_header center_text center_align justify-content-end">
-                                                    <p class="rounded-1 tag_green m-0 px-2 py-1">FEATURED</p>
+                                                    <p class="rounded-1 tag_pink m-0 px-2 py-1"><?php echo $row['style']; ?></p>
                                                 </div>
                                             </div>
                                         </div>

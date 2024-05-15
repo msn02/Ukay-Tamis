@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +83,20 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- Style Quiz -->
+    <div class="container-fluid m-0 p-4 bg-dark">
+        <div class="container">       
+            <div class="row center_align pt-3 center_text white_text">
+                <h2 class="bold_header mb-3">Discover your UNIQUE STYLE with our <span class="bold_header" style="color: yellow;">INTERACTIVE QUIZ</span>!</h2>
+                <div class="col-sm-5 px-3 pt-2 pb-0">
+                    <!-- Include the style quiz to find your perfect fashion match -->
+                    <?php include 'quiz_style.php'; ?>                   
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- mystery box -->
     <div class="container-fluid m-0 p-4 gradient_green">
         <div class="container">
@@ -220,9 +237,7 @@
             </div>
         </div>
     </div>
-
     <!-- contact_us -->
     <?php include 'contact_us.php'?>
-
 </body>
 </html>

@@ -20,7 +20,7 @@
         $style_id = $row['style_id'];
 
         // Prepare the SQL query to get the related items
-        $stmt = $conn -> prepare ("SELECT * FROM item INNER JOIN style ON item.style_id = style.style_id WHERE item.style_id = ? AND item.item_id <> ?");
+        $stmt = $conn -> prepare ("SELECT * FROM item INNER JOIN style ON item.style_id = style.style_id WHERE (item.style_id = ? AND item.item_id <> ?) AND item.transaction_id IS NULL");
 
         // Bind the parameters
         $stmt -> bind_param("ss", $style_id, $item_id);

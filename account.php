@@ -333,26 +333,68 @@ function reload_measurements($conn) {
                     <div class="row mb-2 mt-3 mx-0 p-3 d-flex align-items-stretch justify-content-between card  rounded-2 border-0 hstack">
                         <!-- recent transactions -->
                         <div class="col-sm-12 p-3 user_info m-0">
-                            <h6 class="border-bottom pb-2 bold_header">Recent Transactions</h6>
+                            <div class="pink_btn2 row mt-2 p-2 view_more_link">
+                                    <h6 class="col bold_header mb-0 p-0 mx-0">Recent Transactions</span></h6>
+                                    <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="#">View more<i class="bi bi-chevron-right"></i></a>
+                            </div>
+                                
                             <table class="table">
                                 <thead class="text-center">
                                     <tr class="thead_style">
                                         <th scope="col">Order #</th>
                                         <th scope="col">Placed on</th>
                                         <th scope="col-1">Product</th>
+                                        <th scope="col-1">ETA</th>
                                         <th scope="col">Total</th>
+                                        <th scope="col">Payment Method</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="product_info align-middle">
-                                        <!-- product ordered -->
-                                        <td scope="row">12345</td>
-                                        <td class="text-center">05/10/24</td>
-                                        <td class="item_img d-flex justify-content-center">
-                                            <img src="resources/coquette.jpg" class="card m-0" alt="item">
-                                        </td>
-                                        <td class="text-center bold_header"><span class="pink_highlight2 ">PHP 123</span></td>
+                                <?php
+                                if (isset($_SESSION['form_data']) && !empty($_SESSION['form_data'])) {
+                                    $form_data = $_SESSION['form_data'];
+                                } else {
+                                    $form_data = array(); // Default value if there's no form data
+                                }
+                                ?>
+                                <?php include ('server/get_recent_transactions.php') ?>
+                                
+                                <?php 
+                                if ($recent_transactions->num_rows > 0) {
+                                    while ($row = $recent_transactions->fetch_assoc()) { ?>
+                                        <tr class="product_info align-middle">
+                                            <!-- product ordered -->
+                                            <td scope="row" class="text-center bold_header"><span><?php echo $row['order_number']; ?></span></td>
+                                            <td class="text-center"><?php echo $row['timestamp']; ?></td>
+                                            
+                                            <?php 
+                                            if (isset($form_data['checkout_type']) && isset($form_data['product_type']) && isset($form_data['product_id'])) {
+                                                if ( ($form_data['checkout_type'] == 'quick' && $form_data['product_type'] == 'style box') && $row['style_box_id'] == $form_data['product_id'] ) { ?>
+                                                    <td class="item_img d-flex justify-content-center">
+                                                        <img src="resources/<?php echo $form_data['product_img_url'] ?>" class="card m-0" alt="item">
+                                                    </td>
+                                                <?php }
+                                                else if ( ($form_data['checkout_type'] == 'quick' && $form_data['product_type'] == 'item') && $row['item_id'] == $form_data['product_id'] ) { ?>
+                                                    <td class="item_img d-flex justify-content-center">
+                                                        <img src="resources/<?php echo $form_data['product_img_url'] ?>" class="card m-0" alt="item">
+                                                    </td>
+                                                <?php }
+                                            } else { ?>
+                                                <td class="item_img d-flex justify-content-center">
+                                                    <img src="resources/coquette.jpg" class="card m-0" alt="item">
+                                                </td>
+                                            <?php } ?>
+                                            
+                                            <td class="text-center"><span class=""><?php echo date('Y-m-d', strtotime($row['delivery_date'])); ?></span></td>
+                                            <td class="text-center bold_header"><span class="pink_highlight2"><?php echo $row['total_price']; ?></span></td>
+                                            <td class="text-center "><span class=""><?php echo $row['payment_method']; ?></span></td>
+                                        </tr>
+                                    <?php } 
+                                } else { ?>
+                                    <tr>
+                                        <td colspan="7" class="text-center">No transactions available</td>
                                     </tr>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>

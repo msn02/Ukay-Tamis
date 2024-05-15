@@ -10,7 +10,7 @@
         $types = "";
 
         if (isset($_POST['category'])) {
-            $query .= " WHERE style = ?";
+            $query .= " WHERE style = ? AND transaction_id IS NULL";
             $params[] = $_POST['category'];
             $types .= "s";
         }

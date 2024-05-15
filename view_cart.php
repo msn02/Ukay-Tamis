@@ -89,8 +89,9 @@
                 $product_img_url = $_POST['product_img_url'];
                 $product = $_POST['product'];
                 $product_price = $_POST['product_price'];
-                $product_quantity = $_POST['product_quantity'];           
-                
+                $product_quantity = $_POST['product_quantity'];      
+                $product_type = $_POST['product_type'];
+
                 $product_array = array(
                     'product_id' => $product_id,
                     'product_img_url' => $product_img_url,
@@ -207,7 +208,7 @@
                                                 <!-- edit quantity -->
                                                 <input type="hidden" name="product_id" value="<?php echo $value['product_id']; ?>">
                                                 <?php if (isset($_SESSION['item']) && $_SESSION['item'] == $value['product_id']) { ?>
-                                                    <td class="text-center"><?php echo $value['product_quantity']; ?></td>
+                                                    <?php echo $value['product_quantity']; ?>
                                                 <?php } else { ?>
                                                     <div class="input-group input-group-sm gray_btn m-auto p-0 center_align">
                                                     <input type="number" class="form-control m-0 p-auto" name="product_quantity" value="<?php echo $value['product_quantity'] ?>" id="counter_input" min="1" max="3">
@@ -260,7 +261,7 @@
                                 </label>
                             </div>
                             <div class="delete_btn2 pb-3">
-                                <button class="btn btn-dark border-0 rounded-1 w-100" type = "submit" name = "delete_all">Delete</button>
+                                <button class="btn btn-dark border-0 rounded-1 w-100" type = "submit" name = "delete_all">Delete all</button>
                             </div>
                         </form>
                     </div>
