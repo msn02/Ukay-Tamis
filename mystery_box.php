@@ -128,77 +128,46 @@
                         <div class="m-4 p-3 center_align">
                             <div class="row p-4 border-2 green_border rounded-2">
                                 <h4 class="text-center bold_header green_highlight2 mb-4">See what others received from our <span class="green_highlight">MYSTERY BOXES</span> !</h4>
-                                <div class="col-sm-4 mb-3 mt-0 mx-0">
-                                    <div class="card border-1 p-3">
-                                        <div class="review_content">
-                                            <div class="row">
-                                                <div class="col star_icon mb-2">
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                </div>
-                                            </div>
-                                            <h6 class="bold_header">Items gets better and BETTER!</h6>
-                                            <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
-                                            <span class="bold_header review_name">JUAN DELA CRUZ</span>
-                                            <div class="row mt-2 justify-content-start">
-                                                <div class="col-4"><div class="card border-0 gray_sq overflow-hidden">
-                                                    <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
-                                                </div></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                                <?php 
+                                    include('server/get_mystery_box_review.php'); 
 
-                                <div class="col-sm-4 mb-3 mt-0 mx-0">
-                                    <div class="card border-1 p-3">
-                                        <div class="review_content">
-                                            <div class="row">
-                                                <div class="col star_icon mb-2">
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                </div>
-                                            </div>
-                                            <h6 class="bold_header">New STYLES to try</h6>
-                                            <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
-                                            <span class="bold_header review_name">JUAN DELA CRUZ</span>
-                                            <div class="row mt-2 justify-content-start">
-                                                <div class="col-4"><div class="card border-0 gray_sq overflow-hidden">
-                                                    <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
-                                                </div></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    // Check if there are any reviews
+                                    if ($reviews->num_rows > 0) {
+                                        // Output each review
+                                        while ($row = $reviews->fetch_assoc()) { 
+                                    ?>
+                                    <div class="col-sm-4 mb-3 mt-0 mx-0">
+                                        <div class="card border-1 p-3">
+                                            <div class="review_content ">
+                                                <div class="row">
+                                                    <div class="col star_icon mb-2">
+                                                        <?php
+                                                        // Assume $row['rating'] contains the rating value
+                                                        $rating = $row['rating'];
 
-                                <div class="col-sm-4 mb-3 mt-0 mx-0">
-                                    <div class="card border-1 p-3">
-                                        <div class="review_content">
-                                            <div class="row">
-                                                <div class="col star_icon mb-2">
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
+                                                        for ($i = 0; $i < $rating; $i++) {
+                                                            echo '<i class="bi bi-star-fill"></i>';
+                                                        }
+                                                        ?>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <h6 class="bold_header">LOVE THE SKIRTS</h6>
-                                            <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
-                                            <span class="bold_header review_name">JUAN DELA CRUZ</span>
-                                            <div class="row mt-2 justify-content-start">
-                                                <div class="col-4"><div class="card border-0 gray_sq overflow-hidden">
-                                                    <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
-                                                </div></div>
+                                                <h6 class="bold_header"><?php echo $row['title']; ?></h6>
+                                                <p class="mb-1"><?php echo $row['review']; ?></p>
+                                                <span class="bold_header review_name"><?php echo strtoupper($row['first_name'] . ' ' . $row['last_name']); ?></span>
+                                                <div class="row mt-2 justify-content-start">
+                                                    <div class="col-4"><div class="card border-0 gray_sq overflow-hidden">
+                                                        <img src="resources/<?php echo $row['img_review']; ?>" class="img-fluid" alt="Subscribe">
+                                                    </div></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php } 
+                                    } else {
+                                        echo '<h6 class="text-center">Be the first one to try out the style box. Buy now!</h6>';
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>

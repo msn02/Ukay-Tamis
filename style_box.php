@@ -163,7 +163,6 @@
                     <h6 class="mb-0">RELATED SINGLE ITEMS</h6>
                 </div>
                 <div class="row mt-0 mx-1 p-2 gx-3">
-                    
                 <?php 
                     include('server/get_related_item_style.php'); 
 
@@ -198,7 +197,7 @@
                             // No related items found, output a message
                             echo '<h6 class="text-center">No related single items right now. Check back soon!</h6>';
                         }
-                        ?>
+                    ?>
                 </div>
             </div>
         </div>
