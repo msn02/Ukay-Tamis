@@ -1,37 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Style Quiz</title>
-</head>
-<body>
-
 <style>
-    .card-color {
-        background-color: #212529;
-        color: #ffffff; 
-        border: none;
-    }
     .result-style {
         display: none; 
     }
-
-    .btn{
-        background-color: yellow;
-        color: black; 
-    }
-   
 </style>
 
 <div class="container">
-    <form id="styleQuizForm">
-        <div id="quizContainer">
+    <form id="styleQuizForm" class="d-flex justify-content-center">
+        <div id="quizContainer" class="col-6">
             <!-- Question 1 -->
             <div class="card question-card card-color">
-                <div class="card-body ">
-                    <h5 class="card-title">Which environment appeals to you most?</h5>
-                    <select class="form-control" name="q1" required>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-2">Which environment appeals to you most?</h5>
+                    <select class="form-control mt-3" name="q1" required>
                         <option value="">Select</option>
                         <option value="a">Rustic countryside</option>
                         <option value="b">Urban streets</option>
@@ -39,14 +19,14 @@
                         <option value="d">Retro-futuristic aesthetics</option>
                         <option value="e">Academic libraries and old buildings</option>
                     </select>
-                    <button type="button" class="btn mt-2 next-question">Next</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 next-question">Next</button>
                 </div>
             </div>
             <!-- Question 2 -->
             <div class="card question-card card-color" style="display: none;">
-                <div class="card-body">
-                    <h5 class="card-title">What colors do you prefer in your wardrobe?</h5>
-                    <select class="form-control" name="q2" required>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-2">What colors do you prefer in your wardrobe?</h5>
+                    <select class="form-control mt-3" name="q2" required>
                         <option value="">Select</option>
                         <option value="a">Earthy tones and floral prints</option>
                         <option value="b">Bold and edgy hues</option>
@@ -54,14 +34,14 @@
                         <option value="d">Bright and pastel colors</option>
                         <option value="e">Classic and neutral palettes</option>
                     </select>
-                    <button type="button" class="btn mt-2 next-question">Next</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 next-question">Next</button>
                 </div>
             </div>
             <!-- Question 3 -->
             <div class="card question-card card-color" style="display: none;">
-                <div class="card-body">
-                    <h5 class="card-title">How would you describe your fashion vibe?</h5>
-                    <select class="form-control" name="q3" required>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-2">How would you describe your fashion vibe?</h5>
+                    <select class="form-control mt-3" name="q3" required>
                         <option value="">Select</option>
                         <option value="a">Whimsical and nature-inspired</option>
                         <option value="b">Confident and alluring</option>
@@ -69,14 +49,14 @@
                         <option value="d">Trendy and nostalgic</option>
                         <option value="e">Intellectual and refined</option>
                     </select>
-                    <button type="button" class="btn mt-2 next-question">Next</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 next-question">Next</button>
                 </div>
             </div>
             <!-- Question 4 -->
             <div class="card question-card card-color" style="display: none;">
-                <div class="card-body">
-                    <h5 class="card-title">Which accessories do you gravitate towards?</h5>
-                    <select class="form-control" name="q4" required>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-2">Which accessories do you gravitate towards?</h5>
+                    <select class="form-control mt-3" name="q4" required>
                         <option value="">Select</option>
                         <option value="a">Flower crowns and vintage jewelry</option>
                         <option value="b">Chokers and statement pieces</option>
@@ -84,14 +64,14 @@
                         <option value="d">Mini backpacks and chunky sneakers</option>
                         <option value="e">Vintage glasses and leather bags</option>
                     </select>
-                    <button type="button" class="btn mt-2 next-question">Next</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 next-question">Next</button>
                 </div>
             </div>
             <!-- Question 5 -->
             <div class="card question-card card-color" style="display: none;">
-                <div class="card-body">
-                    <h5 class="card-title">What cultural influences resonate with you?</h5>
-                    <select class="form-control" name="q5" required>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-2">What cultural influences resonate with you?</h5>
+                    <select class="form-control mt-3" name="q5" required>
                         <option value="">Select</option>
                         <option value="a">Rural and folk traditions</option>
                         <option value="b">Urban and street culture</option>
@@ -99,14 +79,14 @@
                         <option value="d">2000s pop culture</option>
                         <option value="e">Classical literature and art</option>
                     </select>
-                    <button type="button" class="btn mt-2 next-question">Next</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 next-question">Next</button>
                 </div>
             </div>
             <!-- Question 6 -->
             <div class="card question-card card-color" style="display: none;">
-                <div class="card-body">
-                    <h5 class="card-title">What type of patterns do you enjoy wearing?</h5>
-                    <select class="form-control" name="q6" required>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-2">What type of patterns do you enjoy wearing?</h5>
+                    <select class="form-control mt-3" name="q6" required>
                         <option value="">Select</option>
                         <option value="a">Gingham and floral prints</option>
                         <option value="b">Leopard print and plaid</option>
@@ -114,14 +94,14 @@
                         <option value="d">Tie-dye and graffiti motifs</option>
                         <option value="e">Houndstooth and tweed</option>
                     </select>
-                    <button type="button" class="btn mt-2 next-question">Next</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 next-question">Next</button>
                 </div>
             </div>
             <!-- Question 7 -->
             <div class="card question-card card-color" style="display: none;">
-                <div class="card-body">
-                    <h5 class="card-title">Which era's fashion resonates most with you?</h5>
-                    <select class="form-control" name="q7" required>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-2">Which era's fashion resonates most with you?</h5>
+                    <select class="form-control mt-3" name="q7" required>
                         <option value="">Select</option>
                         <option value="a">Victorian and Edwardian eras</option>
                         <option value="b">1990s and early 2000s</option>
@@ -129,14 +109,14 @@
                         <option value="d">1980s and 1990s</option>
                         <option value="e">Renaissance and medieval times</option>
                     </select>
-                    <button type="button" class="btn mt-2 next-question">Next</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 next-question">Next</button>
                 </div>
             </div>
             <!-- Question 8 -->
             <div class="card question-card card-color" style="display: none;">
-                <div class="card-body">
-                    <h5 class="card-title">Describe your ideal outfit silhouette</h5>
-                    <select class="form-control" name="q8" required>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-2">Describe your ideal outfit silhouette</h5>
+                    <select class="form-control mt-3" name="q8" required>
                         <option value="">Select</option>
                         <option value="a">Flowy and romantic</option>
                         <option value="b">Form-fitting and daring</option>
@@ -144,14 +124,14 @@
                         <option value="d">Oversized and casual</option>
                         <option value="e">Structured and tailored</option>
                     </select>
-                    <button type="button" class="btn mt-2 next-question">Next</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 next-question">Next</button>
                 </div>
             </div>
             <!-- Question 9 -->
             <div class="card question-card card-color" style="display: none;">
-                <div class="card-body">
-                    <h5 class="card-title">Which footwear do you prefer?</h5>
-                    <select class="form-control" name="q9" required>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-2">Which footwear do you prefer?</h5>
+                    <select class="form-control mt-3" name="q9" required>
                         <option value="">Select</option>
                         <option value="a">Vintage-inspired boots and Mary Janes</option>
                         <option value="b">Stiletto heels and platform sneakers</option>
@@ -159,14 +139,14 @@
                         <option value="d">Chunky sneakers and combat boots</option>
                         <option value="e">Oxfords and loafers</option>
                     </select>
-                    <button type="button" class="btn mt-2 next-question">Next</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 next-question">Next</button>
                 </div>
             </div>
             <!-- Question 10 -->
             <div class="card question-card card-color" style="display: none;">
-                <div class="card-body">
-                    <h5 class="card-title">What do you enjoy doing in your free time?</h5>
-                    <select class="form-control" name="q10" required>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-2">What do you enjoy doing in your free time?</h5>
+                    <select class="form-control mt-3" name="q10" required>
                         <option value="">Select</option>
                         <option value="a">Gardening and baking</option>
                         <option value="b">Going to parties and social events</option>
@@ -174,23 +154,20 @@
                         <option value="d">Exploring urban areas and attending concerts</option>
                         <option value="e">Visiting museums and attending lectures</option>
                     </select>
-                    <button type="button" class="btn mt-2 show-result">Show My Style</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 show-result">Show My Style</button>
                 </div>
             </div>
         </div>
         <!-- Result section -->
         <div class= "question-card"id="resultContainer">
             <div class="card card-color">
-                <div class="card-body ">
-                    <h5 class="card-title">Your style is:</h5>
+                <div class="card-body white_btn2 text-center">
+                    <h5 class="card-title mb-3">Your style is:</h5>
                     <h6 class="card-subtitle mb-2 text-white" id="styleResult" style="font-size: 1.5rem;"></h6>
-                    <button type="button" class="btn mt-2 restart-quiz">Restart Quiz</button>
+                    <button type="button" class="btn btn-secondary border-0 rounded-1 mt-3 px-3 ms-auto restart-quiz">Restart Quiz</button>
                 </div>
             </div>
         </div>
-
-</div>
-
     </form>
 </div>
 
@@ -320,7 +297,3 @@
     showQuestion(currentQuestionIndex);
 })();
 </script>
-
-
-</body>
-</html>

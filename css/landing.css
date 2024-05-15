@@ -1,43 +1,40 @@
 /* CSS Selectors arranged alphabetically */
 
-.card_content {
-    background-color: #ffffff;
+.accordion-item button:focus {
+    outline: none;
+    box-shadow: none;
 }
 
-.card-text {
+.accordion {
+    --bs-accordion-active-bg: none;
+}
+
+.card select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.card select {
+    border-radius: 3px;
     font-size: 14px;
-    color: #3F5520;
-    font-weight: bold;
-    font-style: italic;
-}
-
-.gray_sq {
-    background-color: #D9D9D9;
-    width: 60px;
-    height: 60px;
-}
-
-.how_app_work {
-    text-align: center;
-    color: #FF6A97;
-}
-
-.how_app_work p {
-    font-size: 12px;
-    color: black;
-    line-height: normal;
-}
-
-.gradient_blue_orange_red {
-    background: linear-gradient(to bottom, #ff1d0d, #ffaa33, #EEEEEE, #0099cc);
-}
-
-.gradient_pink2 {
-    background-image: linear-gradient(180deg, #760024, #FF6A97, #EEEEEE, #EEEEEE);
 }
 
 .gradient_green {
-    background-image: linear-gradient(180deg, #3F5520, #96DA39, #96DA39, #EEEEEE);
+    background: linear-gradient(45deg, white 0%, #96DA39 50%, #618332 100%);
+
+}
+
+.gradient_pink2 {
+    background: radial-gradient(circle, white 0%, #FF6A97 50%, #FF3A75 100%);
+}
+
+.gradient_yellow {
+    background: linear-gradient(45deg, white 0%, #ffe97a 50%, #FF9A00 100%);
+}
+
+.gradient_yellow2 {
+    /* background: linear-gradient(0deg, white 0%, #ffe97a 50%, #FF9A00 100%); */
+    background: radial-gradient(circle, white 0%, #ffe97a 50%, #FF9A00 100%);
 }
 
 .green_border {
@@ -45,21 +42,32 @@
     background: #e9ffcb;
 }
 
-.green_btn button, .green_btn button:hover {
-    background: #8ac834;
-    font-family: 'Inter', sans-serif;
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
-    font-size: 18px;
-}
-
 .green_highlight {
     color: #96DA39;
 }
 
-.landing_details h1, p {
+.green_btn button, .orange_btn button:hover {
+    background: #3F5520;
     color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.item_card {
+    border: 1px solid #ccc;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.item_card:hover {
+    border: 1px solid #ff3a75;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item_name {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    line-height: normal;
 }
 
 .mystery_img img {
@@ -67,23 +75,36 @@
     height: 200px;
 }
 
-.review_content p {
-    color: black;
+.logo_img img {
+    width: 250px;
+    height: auto;
+}
+
+.orange_bg {
+    background: orange;
+}
+
+.orange_btn button, .orange_btn button:hover {
+    background: #ff8000;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.question-card, .card-color {
+    background: none;
+    border: none;
+}
+
+.question-card h5 {
+    color: white;
+}
+
+.style_info {
     line-height: normal;
-    font-size: 11px;
 }
 
-.review_name {
-    font-size: 10px;
-    color: rgb(54, 54, 54);
-}
-
-.star_icon {
-    font-size: 1rem; 
-    color: #FFC700;
-}
-
-.subtitle p {
+.subtitle p, .subtitle li {
     font-size: 14px;
     line-height: normal;
 }
