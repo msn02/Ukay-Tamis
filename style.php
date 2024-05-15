@@ -173,7 +173,7 @@
                                             <p class="style_info mx-1"><?php echo $row['style_description']; ?></p>
                                         </div>
                                         <div class="pink_btn2 m-2">
-                                            <a href="<?php echo "style_box.php?style_box_id=" . $row['style_box_id'] ?>"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
+                                            <a href="<?php echo "style_box.php?style_id=" . $row['style_id'] ?>"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                                         </div>
                                     </div>
                                 </div>
