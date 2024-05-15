@@ -272,21 +272,22 @@
                 // set action to null if no action is specified
                 $action = null;
                 break;
-                
+            }
         }
     } else {
         // set action to null if no action is specified
         $action = null;
     }
-function reload_measurements($conn) {
-    $user_id = $_SESSION['user_id'];
-    
-    $stmt = $conn->prepare("SELECT height, weight, bust_size, hip_size, shoe_size, clothing_size FROM user_preference WHERE user_id = ?");
-    $stmt->bind_param('s', $user_id);
-    $stmt->execute();
-    $stmt->store_result();
-    $action = null;
-}
+
+    function reload_measurements($conn) {
+        $user_id = $_SESSION['user_id'];
+        
+        $stmt = $conn->prepare("SELECT height, weight, bust_size, hip_size, shoe_size, clothing_size FROM user_preference WHERE user_id = ?");
+        $stmt->bind_param('s', $user_id);
+        $stmt->execute();
+        $stmt->store_result();
+        $action = null;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -930,8 +931,6 @@ function reload_measurements($conn) {
                 type: 'post',
                 data: {transaction_id: transactionId},
                 success: function(response) {
-                    // The session variable has been updated on the server side
-                    // You can now do something with the response if needed
                 }
             });
         });
