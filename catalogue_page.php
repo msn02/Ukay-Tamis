@@ -175,7 +175,7 @@
                                 <?php include('server/get_mystery_box.php'); ?>
 
                                 <!-- Style card -->
-                                <div class="col-sm-3 d-flex align-items-stretch">
+                                <div class="col-sm-3 d-flex align-items-stretch justify-content-start">
                                     <div class="card overflow-hidden item_card style_card_info mb-0">
                                         <img src="resources/<?php echo $row['style_img_url']; ?>" class="img-fluid card-img-top rounded-top-1" alt="<?php echo $row['style_img_url']; ?>">
                                         <div class="card-body p-2 pink_btn2">
