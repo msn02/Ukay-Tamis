@@ -83,7 +83,13 @@
                         if ($stmt -> execute()) {
                     
                             unset($_SESSION['form_data']);
-
+                            $stmt3 = $conn -> prepare ("SELECT user_id FROM user WHERE username = ?");
+                            $stmt3 -> bind_param("s", $username);
+                            $stmt3 -> execute();
+                            $stmt3 -> store_result();
+                            $stmt3 -> bind_result($user_id);
+                            $stmt3 -> fetch();
+                            $_SESSION['user_id'] = $user_id;
                             $_SESSION['email'] = $email;
                             $_SESSION['username'] = $username;
                             $_SESSION['first_name'] = $first_name;

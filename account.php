@@ -33,8 +33,8 @@
 
     function verifyPassword($input_password, $db_password)
     {
-        // Hash the input password
-        $hashed_input_password = md5($input_password);
+        // Hash the input password using sha256
+        $hashed_input_password = hash('sha256', $input_password);
     
         // Compare the hashed input password with the hashed password from the database
         return $hashed_input_password === $db_password;
@@ -82,9 +82,9 @@
                     $stmt->bind_result($db_password);
                     $stmt->fetch();
                     
-                    if($db_password==md5($oldPassword)){
+                    if($db_password==hash('sha256', $oldPassword)){
                         $stmt = $conn->prepare("UPDATE user SET password = ? WHERE user_id = ?");
-                        $newHashedPassword=md5($newPassword);
+                        $newHashedPassword=hash('sha256', $newPassword);
                         $stmt->bind_param("ss", $newHashedPassword, $user_id);
                         $stmt->execute();
                         echo true;
@@ -209,7 +209,7 @@
                         $stmt->bind_result($db_password);
                         $stmt->fetch();
                         
-                        if(md5($password) === $db_password){
+                        if(hash('sha256', $password) === $db_password){
                             
                             echo true;
                         } else {
