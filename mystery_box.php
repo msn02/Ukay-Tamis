@@ -92,7 +92,7 @@
                                                 </div>
                                                 <div class="col-sm-10 card_content pl-3 d-flex align-items-center">
                                                     <div class="m-0 p-0">
-                                                        <h6 class="mb-1 p-0 bold_header">Experiment</h6>
+                                                        <h6 class="mb-1 p-0 bold_header">Experiment Styles</h6>
                                                         <p class="m-0 p-0">Explore your thrifted treasures and experiment with fresh styles. It's like a fashion adventure!</p>
                                                     </div>
                                                 </div>
@@ -126,7 +126,7 @@
                     <div class="card rounded-2 border-0 shadow-sm gray_bg overflow-hidden">
                         <!-- customer reviews (static) -->
                         <div class="m-4 p-3 center_align">
-                            <div class="row p-4 border-2 green_border rounded-2">
+                            <div class="row p-4 border-2 green_border rounded-2 d-flex align-items-stretch">
                                 <h4 class="text-center bold_header green_highlight2 mb-4">See what others received from our <span class="green_highlight">MYSTERY BOXES</span> !</h4>
                                 
                                 <?php 
@@ -138,7 +138,7 @@
                                         while ($row = $reviews->fetch_assoc()) { 
                                     ?>
                                     <div class="col-sm-4 mb-3 mt-0 mx-0">
-                                        <div class="card border-0 shadow-sm p-3">
+                                        <div class="card h-100 border-0 shadow-sm p-3">
                                             <div class="review_content ">
                                                 <div class="row">
                                                     <div class="col star_icon mb-2">
