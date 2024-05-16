@@ -362,13 +362,16 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- delivery address -->
+                        <!-- include get_user_details.php -->
+                        <?php include ('server/get_user_details.php') ?>
+
+                        <!-- delivery address -->   
                         <div class="col-sm-6 p-3 user_info m-0">
                             <h6 class="border-bottom pb-2 bold_header">Delivery Address</h6>
                             <div class="m-0 py-2">
                                 <p class="pink_highlight2 bold_header mb-1 p-0"><?php if (isset($_SESSION['first_name']) && ($_SESSION['last_name'])) {echo $_SESSION['first_name'] . ' ' . $_SESSION['last_name']; } ?></p>
-                                <p class="m-0 p-0"><?php if (isset($_SESSION['phone_number'])) { echo $_SESSION['phone_number']; } ?></p>
-                                <p class="m-0 p-0" id="add-loc"><?php if (isset($_SESSION['address'])) { echo $_SESSION['address']; } ?></p>
+                                <p class="m-0 p-0"><?php echo $row['phone_number'] ?></p>
+                                <p class="m-0 p-0" id="add-loc"><?php echo $row['address'] ?></p>
                                 <div class="mt-2 p-0">
                                     <!-- edit address -->
                                     <div class="pink_btn2 mt-3 mb-0 me-2">
@@ -462,27 +465,27 @@
                             <div class="m-0 py-2">
                                 <div class="col d-flex justify-content-between">
                                     <p>Height</p>
-                                    <p id='h-display' class="bold_header">123</p>
+                                    <p id='h-display' class="bold_header"><?php echo $row['height'] ?></p>
                                 </div>
                                 <div class="col d-flex justify-content-between">
                                     <p>Weight</p>
-                                    <p id='w-display' class="bold_header">123</p>
+                                    <p id='w-display' class="bold_header"><?php echo $row['weight'] ?></p>
                                 </div>
                                 <div class="col d-flex justify-content-between">
                                     <p>Bust Size</p>
-                                    <p id='b-display' class="bold_header">123</p>
+                                    <p id='b-display' class="bold_header"><?php echo $row['bust_size'] ?></p>
                                 </div>
                                 <div class="col d-flex justify-content-between">
                                     <p>Hip Size</p>
-                                    <p id='hip-display' class="bold_header">123</p>
+                                    <p id='hip-display' class="bold_header"><?php echo $row['hip_size'] ?></p>
                                 </div>
                                 <div class="col d-flex justify-content-between">
                                     <p>Shoe Size (EU)</p>
-                                    <p id='s-display' class="bold_header">123</p>
+                                    <p id='s-display' class="bold_header"><?php echo $row['shoe_size'] ?></p>
                                 </div>
                                 <div class="col d-flex justify-content-between">
                                     <p>Clothing Size</p>
-                                    <p id='c-display' class="bold_header">123</p>
+                                    <p id='c-display' class="bold_header"><?php echo $row['clothing_size'] ?></p>
                                 </div>
                                 
                                 <!-- edit button -->
