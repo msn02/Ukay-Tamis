@@ -99,10 +99,10 @@ session_start();
             <div class="row p-0 mt-0 d-flex justify-content-center">
                 <div class="col-sm-10 px-5 z-1 mx-5 footer_bg rounded-3">
                     <div class="white_text text-center">
-                        <div class="row py-5 m-0">
+                        <div class="row py-5 m-0 d-flex align-items-stretch">
                             <h2 class="bold-header mb-4">What's inside the box?</h2>
-                            <div class="col-sm-3">
-                                <div class="card overflow-hidden border-0 rounded-1 card_img">
+                            <div class="col-sm-3 d-flex align-items-stretch">
+                                <div class="card h-100 overflow-hidden border-0 rounded-1 card_img">
                                     <img src="resources/dress.jpg" alt="">
                                     <div class="card-body text-start">
                                     <h5 class="card-title fw-bold">Elegant Vintage Dress</h5>
@@ -110,8 +110,8 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="card overflow-hidden border-0 rounded-1 card_img">
+                            <div class="col-sm-3 d-flex align-items-stretch">
+                                <div class="card h-100 overflow-hidden border-0 rounded-1 card_img">
                                     <img src="resources/pants.jpg" alt="">
                                     <div class="card-body text-start">
                                     <h5 class="card-title fw-bold">Classic High-Waisted Pants</h5>
@@ -119,8 +119,8 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="card overflow-hidden border-0 rounded-1 card_img">
+                            <div class="col-sm-3 d-flex align-items-stretch">
+                                <div class="card h-100 overflow-hidden border-0 rounded-1 card_img">
                                     <img src="resources/more.jpg" alt="">
                                     <div class="card-body text-start">
                                     <h5 class="card-title fw-bold">Vintage Button-Up Shirt</h5>
@@ -128,8 +128,8 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="card overflow-hidden border-0 rounded-1 card_img">
+                            <div class="col-sm-3 d-flex align-items-stretch">
+                                <div class="card h-100 overflow-hidden border-0 rounded-1 card_img">
                                     <img src="resources/more.jpg" alt="">
                                     <div class="card-body text-start">
                                     <h5 class="card-title fw-bold">Boho Accessories Set</h5>
