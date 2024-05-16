@@ -44,11 +44,11 @@
                         
                         <div class="m-4 p-3 center_align">
                             <!-- how the feature works -->
-                            <div class="row p-4 border-o center_align rounded-2 yellow_bg">
+                            <div class="row p-4 border-0 center_align rounded-2 yellow_bg d-flex align-items-stretch">
                                 <h5 class="bold_header2 mb-4 text-center pink_highlight2">How MYSTERY boxes work</h5>
                                 <!-- 1 -->
                                 <div class="col-sm-4">
-                                    <div class="card border-0 overflow-hidden rounded-2 mb-2">
+                                    <div class="card h-100 border-0 overflow-hidden rounded-2 mb-2">
                                         <div class="card-body">
                                             <div class="card-title row p-1">
                                                 <div class="col-sm-1 center_align px-3 py-0">
@@ -56,7 +56,7 @@
                                                 </div>
                                                 <div class="col-sm-10 card_content pl-3 d-flex align-items-center">
                                                     <div class="m-0 p-0">
-                                                        <h6 class="m-0 p-0 bold_header">Add to Cart</h6>
+                                                        <h6 class="mb-1 p-0 bold_header">Add to Cart</h6>
                                                         <p class="m-0 p-0">Select your desired Mystery Box and add it to your cart. Choose from different themes and sizes.</p>
                                                     </div>
                                                 </div>
@@ -66,7 +66,7 @@
                                 </div>
                                 <!-- 2 -->
                                 <div class="col-sm-4">
-                                    <div class="card border-0 overflow-hidden rounded-2 mb-2">
+                                    <div class="card h-100 border-0 overflow-hidden rounded-2 mb-2">
                                         <div class="card-body">
                                             <div class="card-title row p-1">
                                                 <div class="col-sm-1 center_align px-3 py-0">
@@ -74,7 +74,7 @@
                                                 </div>
                                                 <div class="col-sm-10 card_content pl-3 d-flex align-items-center">
                                                     <div class="m-0 p-0">
-                                                        <h6 class="m-0 p-0 bold_header">Insert Title</h6>
+                                                        <h6 class="mb-1 p-0 bold_header">Receive</h6>
                                                         <p class="m-0 p-0">Receive your Mystery Box filled with handpicked thrifted items. Each box contains unique surprises!</p>
                                                     </div>
                                                 </div>
@@ -84,7 +84,7 @@
                                 </div>
                                 <!-- 3 -->
                                 <div class="col-sm-4">
-                                    <div class="card border-0 overflow-hidden rounded-2 mb-2">
+                                    <div class="card h-100 border-0 overflow-hidden rounded-2 mb-2">
                                         <div class="card-body">
                                             <div class="card-title row p-1">
                                                 <div class="col-sm-1 center_align px-3 py-0">
@@ -92,7 +92,7 @@
                                                 </div>
                                                 <div class="col-sm-10 card_content pl-3 d-flex align-items-center">
                                                     <div class="m-0 p-0">
-                                                        <h6 class="m-0 p-0 bold_header">Insert Title</h6>
+                                                        <h6 class="mb-1 p-0 bold_header">Experiment</h6>
                                                         <p class="m-0 p-0">Explore your thrifted treasures and experiment with fresh styles. It's like a fashion adventure!</p>
                                                     </div>
                                                 </div>
@@ -138,7 +138,7 @@
                                         while ($row = $reviews->fetch_assoc()) { 
                                     ?>
                                     <div class="col-sm-4 mb-3 mt-0 mx-0">
-                                        <div class="card border-1 p-3">
+                                        <div class="card border-0 shadow-sm p-3">
                                             <div class="review_content ">
                                                 <div class="row">
                                                     <div class="col star_icon mb-2">
