@@ -496,20 +496,25 @@
                                 </div>
                             </div>
                         </div>
-
+                        
+                        <?php include ('server/get_subscription_account.php') ?>
                         <!-- subscriptions -->
                         <div class="col-12 p-3 subscription_info m-0">
                             <h6 class="border-bottom pb-2 bold_header">My Subscription</h6>
                             <!-- subscription details -->
                             <div class="row my-3 center_align m-0 p-0">
+                            <?php if ($row): ?>
                                 <div class="card border-0 price_badge p-3 m-0 package_info">
-                                    <h6 class="bold_header mb-1">PREMIUM Tier</h6>
-                                    <p class="bold_header mb-2">6 Months</p>
-                                    <p class="card-text mb-0">Ends on <span class="bold_header">November 10, 2024</span></p>
+                                    <h6 class="bold_header mb-1"><?php echo $row['plan_tier']?></h6>
+                                    <p class="bold_header mb-2"><?php echo $row['plan_duration']?></p>
+                                    <p class="card-text mb-0">Ends on <span class="bold_header"><?php echo $row['sub_end_date'] . '2024'?></span></p>
                                 </div>
                                 <div class="gray_btn mt-3 mb-0 p-0">
                                     <button class="btn btn-dark border-0 rounded-1 w-100" disabled>Cancel Subscription</button>
                                 </div>
+                            <?php else: ?>
+                                <p class="text-center">No ongoing subscriptions</p>
+                            <?php endif; ?>
                             </div>
                         </div>
 

@@ -78,8 +78,6 @@
                     
                     <?php include ('server/get_sub_plan_details.php') ?>
 
-                    
-                    
                     <table class="table">
                         <thead>
                             <tr class="thead_style">
