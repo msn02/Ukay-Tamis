@@ -96,12 +96,28 @@
                                     <!-- size -->
                                     <div class="col-sm-4">
                                         <h6 class="bold_header">Size</h6>
-                                        <p class="box_desc m-0 p-0">Freesize</p>
+                                        <p class="box_desc m-0 p-0">
+                                            <?php 
+                                                if ($row['size'] == 'L') {
+                                                    echo 'Large';
+                                                } elseif ($row['size'] == 'M') {
+                                                    echo 'Medium';
+                                                } elseif ($row['size'] == 'S') {
+                                                    echo 'Small';
+                                                } elseif ($row['size'] == 'XL') {
+                                                    echo 'Extra Large';
+                                                } elseif ($row['size'] == 'XS') {
+                                                    echo 'Extra Small';
+                                                } else {
+                                                    echo 'freesize'; // Default case if size is not L, M, S, XL, or XS
+                                                }
+                                            ?>
+                                        </p>
                                     </div>
                                     <!-- color -->
                                     <div class="col-sm-4">
                                         <h6 class="bold_header">Color</h6>
-                                        <p class="box_desc m-0 p-0">Brown</p>
+                                        <p class="box_desc m-0 p-0"><?php echo $row['color']; ?></p>
                                     </div>
                                 </div>
                             </div>
