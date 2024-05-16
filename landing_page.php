@@ -13,7 +13,13 @@ session_start();
 </head>
 <body class="gray_bg2 m-0 p-0 vstack">
     <!-- navigation bar -->
-    <?php include 'nav_bar.php'?>
+    <?php 
+        if (isset($_SESSION['logged_in'])) {
+            include 'auth_nav_bar.php';
+        } else {
+            include 'nav_bar.php';
+        }
+    ?>
 
     <div class="container-fluid m-0 p-0 gradient_pink">
         <!-- title and intro -->
@@ -31,7 +37,7 @@ session_start();
                 <div class="col-sm-8 px-4 pt-5 pb-3 mx-3">
                     <!-- subscribe -->
                     <div class="pink_btn white_border">
-                        <a href="subscription_price.php" class="text-decoration-none "><button class="btn btn-dark border-0 px-4 shadow-sm rounded-1" type="button">SUBSCRIBE NOW</button></a>
+                        <a href="monthly_theme_page.php" class="text-decoration-none "><button class="btn btn-dark border-0 px-4 shadow-sm rounded-1" type="button">SUBSCRIBE NOW</button></a>
                     </div>
                     <!-- view catalogue -->
                     <div class="white_btn2 mt-2">
@@ -185,7 +191,7 @@ session_start();
                             <p class="style_info mx-1"><?php echo $row['style_description']; ?></p>
                         </div>
                         <div class="pink_btn2 m-2">
-                            <a href="" class="text-decoration-none"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
+                            <a href="<?php echo "style_box.php?style_id=" . $row['style_id'] ?>" class="text-decoration-none"><button class="check_style_btn btn btn-dark border-0 px-3 shadow rounded-1 w-100" type="submit">CHECK THIS STYLE <i class="bi bi-chevron-right"></i></button></a>
                         </div>
                     </div>
                 </div>

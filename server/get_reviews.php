@@ -7,9 +7,11 @@
 
         // Prepare the SQL query
         $stmt = $conn -> prepare ("SELECT reviews.*, user.* 
-                                    FROM reviews 
-                                    INNER JOIN user ON reviews.user_id = user.user_id 
-                                    WHERE reviews.style_id = ? LIMIT 3");
+                                            FROM reviews 
+                                            INNER JOIN user ON reviews.user_id = user.user_id 
+                                            WHERE reviews.style_id = ? 
+                                            ORDER BY reviews.review_id DESC 
+                                            LIMIT 3");
 
         // Bind the parameters
         $stmt -> bind_param("s", $style_id);

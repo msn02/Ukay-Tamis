@@ -1,4 +1,5 @@
 <?php
+    // include connection
     session_start();
 
     if (isset($_GET['item_id'])) {
@@ -19,6 +20,7 @@
         $result = $stmt -> get_result();
         $row = $result -> fetch_assoc();
 
+        // Redirect if the item has already been purchased
         if ($row && $row['transaction_id'] !== NULL) {
             header('location: catalogue_page.php');
             exit();
@@ -53,10 +55,8 @@
             <div class="back_link p-2">
                 <a class="border-0 p-2 rounded-1 justify-content-start text-decoration-none w-25" id="go_back" href="javascript:void(0)"><i class="bi bi-chevron-left me-2"></i>Back</a>
             </div>
-
             <!-- style box details -->
             <?php while ($row = $item->fetch_assoc()) { ?>
-                
                 <div class="row shadow rounded-2 m-3 gray_bg">
                     <!-- product image -->
                     <div class="col-sm-5 m-0 p-4">
@@ -117,8 +117,8 @@
                                     <button class="btn btn-dark border-0 px-3 py-2 mb-1 rounded-1" type="submit" name = "buy_now">Buy Now</button>
                                 </div>
                             </form>
-                            </div>
                         </div>
+                    </div>
                 </div>
             <?php } ?>
 
@@ -128,11 +128,12 @@
                     <h6 class="mb-0">RELATED SINGLE ITEMS</h6>
                 </div>
                 <div class="row mt-0 mx-1 p-2 gx-3">
-                    
+                    <!-- include the get_related_item_item.php file -->
                     <?php include('server/get_related_item_item.php'); ?>
                 
-                    <!-- Loop through the related items -->
-                    <?php if ($related_items !== null) { while ($row = $related_items->fetch_assoc()) { ?>
+                    <!-- loop through the related items -->
+                    <?php if ($related_items->num_rows > 0) { 
+                        while ($row = $related_items->fetch_assoc()) { ?>
                     
                         <!-- card -->
                         <div class="col-sm-3 p-2">
@@ -154,7 +155,11 @@
                                 </div>
                             </a>
                         </div>
-                    <?php } } ?>
+                    <?php 
+                    } 
+                } else { 
+                    echo '<h6 class="text-center">No related single items right now. Check back soon!</h6>';
+                    } ?>
                 </div>
             </div>
         </div>

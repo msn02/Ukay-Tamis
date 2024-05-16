@@ -51,31 +51,30 @@
                             </div>
                             <div class="col-12 p-4 mt-5 center_align rounded-2 orange_border2 mx-0 vstack">
                                 <h4 class="fw-bold text-center mt-2 mb-3">Check out what's <span class="orange_highlight">inside this month's BOX!</span></h4>
-                                <!-- contents -->
+                                <!-- Contents -->
                                 <div class="row mt-3 px-2">
                                     <div class="col-4 text-center">
                                         <div class="card border-0 mb-3 overflow-hidden">
-                                            <img src="resources/cottagecore.jpg" class="img-fluid" alt="img">
+                                            <img src="resources/cottagecore.jpg" class="img-fluid" alt="Cottagecore Dress">
                                         </div>
-                                        <h4><span class="orange_highlight title1 m-0">title</span></h4>
-                                        <p class="mb-4 black_text lh-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <h4><span class="orange_highlight title1 m-0">Cottagecore Dress</span></h4>
+                                        <p class="mb-4 black_text lh-sm">Embrace the whimsical charm of summer with this vintage-inspired cottagecore dress. Perfect for picnics and sunny days!</p>
                                     </div>
                                     <div class="col-4 text-center">
                                         <div class="card border-0 mb-3 overflow-hidden">
-                                            <img src="resources/cottagecore.jpg" class="img-fluid" alt="img">
+                                            <img src="resources/dress.jpg" class="img-fluid" alt="Sunglasses">
                                         </div>
-                                        <h4><span class="orange_highlight title1 m-0">title</span></h4>
-                                        <p class="mb-4 black_text lh-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <h4><span class="orange_highlight title1 m-0">Retro Sunglasses</span></h4>
+                                        <p class="mb-4 black_text lh-sm">Protect your eyes in style with these chic retro sunglasses. Whether you're at the beach or strolling through the park, these shades are a must-have.</p>
                                     </div>
                                     <div class="col-4 text-center">
                                         <div class="card border-0 mb-3 overflow-hidden">
-                                            <img src="resources/cottagecore.jpg" class="img-fluid" alt="img">
+                                            <img src="resources/pants.jpg" class="img-fluid" alt="Straw Hat">
                                         </div>
-                                        <h4><span class="orange_highlight title1 m-0">title</span></h4>
-                                        <p class="mb-4 black_text lh-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <h4><span class="orange_highlight title1 m-0">Wide-Brim Straw Hat</span></h4>
+                                        <p class="mb-4 black_text lh-sm">Stay cool and fashionable with this wide-brim straw hat. It's the perfect accessory for your summer adventures!</p>
                                     </div>
                                 </div>
-                            
                             </div>
 
                             <!-- subscription button -->
@@ -113,8 +112,7 @@
                                         </div>
                                     </div>
                                     <h6 class="bold_header">Worth the price!</h6>
-                                    <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
-                                    <span class="bold_header review_name">JUAN DELA CRUZ</span>
+                                    <p class="mb-1">I’ve been a subscriber for a few months now, and I can confidently say that the monthly subscription is worth every penny. The curated items are unique, and the quality is impressive. <span class="bold_header review_name">JUAN DELA CRUZ</span>
                                     <div class="row mt-2 justify-content-start">
                                         <div class="col-4"><div class="card border-0 gray_sq overflow-hidden">
                                             <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
@@ -136,9 +134,8 @@
                                             <i class="bi bi-star-fill"></i>
                                         </div>
                                     </div>
-                                    <h6 class="bold_header">My go-to shop for clothes!</h6>
-                                    <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
-                                    <span class="bold_header review_name">JUAN DELA CRUZ</span>
+                                    <h6 class="bold_header">Fashion-forward and Fun!</h6>
+                                    <p class="mb-1">The monthly subscription has been a delightful surprise every time. The variety of items keeps me excited, and I’ve discovered pieces I wouldn’t have picked out myself. Definitely worth it! <span class="bold_header review_name">JUAN DELA CRUZ</span>
                                     <div class="row mt-2 justify-content-start">
                                         <div class="col-4"><div class="card border-0 gray_sq overflow-hidden">
                                             <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">
@@ -160,9 +157,8 @@
                                             <i class="bi bi-star-fill"></i>
                                         </div>
                                     </div>
-                                    <h6 class="bold_header">LOVE THE TOPS!</h6>
-                                    <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
-                                    <span class="bold_header review_name">JUAN DELA CRUZ</span>
+                                    <h6 class="bold_header">Thrifting Made Easy</h6>
+                                    <p class="mb-1">LAs someone with a busy schedule, I appreciate the convenience of the subscription. The curated items are always on-trend, and the quality is impressive. Highly recommend! <span class="bold_header review_name">JUAN DELA CRUZ</span>
                                     <div class="row mt-2 justify-content-start">
                                         <div class="col-4"><div class="card border-0 gray_sq overflow-hidden">
                                             <img src="resources/2.jpg" class="img-fluid" alt="Subscribe">

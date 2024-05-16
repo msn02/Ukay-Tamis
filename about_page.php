@@ -25,8 +25,8 @@
         <div class="container p-4">
             <div class="row center_align p-3 center_text white_text">
                 <div class="col-sm-8 px-4 py-3 subtitle">
-                    <h1 class="bold_header m-3">Insert Title</h1>
-                    <p class="m-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
+                    <h1 class="bold_header m-3">Ukay Tamis</h1>
+                    <p class="m-3">Our platform is named after a romantic song called Ukay Tamis. "Ukay" resonates with the vibrant world of thrifted fashion, while "Tamis" adds a touch of sweetness—a flavor that lingers long after the initial discovery.  This playful twist on the phrase 'O 'kay tamis,' which means 'Oh so sweet' in English, embodies our mission to infuse joy and sweetness into the thrifting experience.</p>
                 </div>
             </div>
         </div>
@@ -58,12 +58,12 @@
                     <div class="col-sm-4 p-4 rounded-3 shadow-sm green_border">
                         <h4 class="bold_header mb-1">Guirald Malone Escober</h4>
                         <h6 class="mb-2 p-0">Project Manager</h6>
-                        <p class="m-0 p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p class="m-0 p-0">Guirald's diverse skill set makes him a valuable asset in project management, with strong problem-solving abilities to swiftly address challenges and keep projects on track.</p>
                     </div>
                     <div class="col-sm-4 p-4 rounded-3 shadow-sm green_border">
                         <h4 class="bold_header mb-1">Daniela Cantillo</h4>
                         <h6 class="mb-2 p-0">Lead Programmer</h6>
-                        <p class="m-0 p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p class="m-0 p-0">Daniela's knowledge extends across various back-end languages and developmental frameworks, providing a solid foundation for building the core functionality of the Ukay Tamis platform.</p>
                     </div>
                 </div>
 
@@ -71,12 +71,12 @@
                     <div class="col-sm-4 p-4 rounded-3 shadow-sm green_border">
                         <h4 class="bold_header mb-1">Misty Shaine Niones</h4>
                         <h6 class="mb-2 p-0">Lead UI/UX Designer</h6>
-                        <p class="m-0 p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p class="m-0 p-0">Misty excels in integrating UI/UX development guidelines to ensure our platform offers users an optimal and user-friendly experience. With Misty's expertise as our lead designer, we are confident in delivering results that surpass expectations.</p>
                     </div>
                     <div class="col-sm-4 p-4 rounded-3 shadow-sm green_border">
                         <h4 class="bold_header mb-1">Joseph Riosa</h4>
                         <h6 class="mb-2 p-0">Database Manager</h6>
-                        <p class="m-0 p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p class="m-0 p-0">With a proven track record of overseeing operations and optimizing workflows, Joseph is well-equipped to excel in database management. Proficient in various database management systems including Oracle, MySQL, SQL Server, and MongoDB. </p>
                     </div>
                 </div>
             </div>
