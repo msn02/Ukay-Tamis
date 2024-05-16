@@ -83,3 +83,9 @@
 .user_info p {
     font-size: 14px;
 }
+
+.view_more_link a {
+    font-size: 12px;
+    color: #ff3a75;
+    font-style: italic;
+}

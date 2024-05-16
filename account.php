@@ -338,8 +338,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 
                 <!-- user profile, address, subscription, transactions -->
                 <div class="col-sm-8 py-3 px-2 m-0">
@@ -382,12 +380,12 @@
                         </div>
                     </div>
 
-                    <div class="row mb-2 mt-3 mx-0 p-3 d-flex align-items-stretch justify-content-between card  rounded-2 border-0 hstack">
+                    <div class="row mb-2 mt-3 mx-0 p-3 d-flex align-items-stretch justify-content-between card rounded-2 border-0 hstack">
                         <!-- recent transactions -->
                         <div class="col-sm-12 p-3 user_info m-0">
-                            <div class="pink_btn2 row mt-2 p-2 view_more_link">
-                                    <h6 class="col bold_header mb-0 p-0 mx-0">Recent Transactions</span></h6>
-                                    <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="#">View more<i class="bi bi-chevron-right"></i></a>
+                            <div class="pink_btn2 row pb-3 px-3 view_more_link">
+                                <h6 class="col bold_header mb-0 p-0 mx-0">Recent Transactions</span></h6>
+                                <a class="col-sm-3 border-0 p-0 rounded-1 justify-content-end text-decoration-none text-end d-none d-sm-block" href="#">View more<i class="bi bi-chevron-right"></i></a>
                             </div>
                             <table class="table">
                                 <thead class="text-center">
