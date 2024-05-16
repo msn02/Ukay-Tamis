@@ -57,7 +57,7 @@
                                                 <div class="col-sm-10 card_content pl-3 d-flex align-items-center">
                                                     <div class="m-0 p-0">
                                                         <h6 class="m-0 p-0 bold_header">Add to Cart</h6>
-                                                        <p class="m-0 p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <p class="m-0 p-0">Select your desired Mystery Box and add it to your cart. Choose from different themes and sizes.</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -75,7 +75,7 @@
                                                 <div class="col-sm-10 card_content pl-3 d-flex align-items-center">
                                                     <div class="m-0 p-0">
                                                         <h6 class="m-0 p-0 bold_header">Insert Title</h6>
-                                                        <p class="m-0 p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <p class="m-0 p-0">Receive your Mystery Box filled with handpicked thrifted items. Each box contains unique surprises!</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,7 +93,7 @@
                                                 <div class="col-sm-10 card_content pl-3 d-flex align-items-center">
                                                     <div class="m-0 p-0">
                                                         <h6 class="m-0 p-0 bold_header">Insert Title</h6>
-                                                        <p class="m-0 p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <p class="m-0 p-0">Explore your thrifted treasures and experiment with fresh styles. It's like a fashion adventure!</p>
                                                     </div>
                                                 </div>
                                             </div>

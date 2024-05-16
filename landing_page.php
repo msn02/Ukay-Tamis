@@ -21,13 +21,12 @@ session_start();
             <div class="row p-3 white_text hstack">
                 <div class="col-sm-8 px-4 py-3 subtitle">
                     <h1 class="bold_header m-3">Thrifted Fashion, Curated for You!</h1>
-                    <p class="m-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
+                    <p class="m-3">Experience the thrill of thrifted fashion, handpicked just for you by our style experts. At Ukay Tamis, we curate a collection of trendy and sustainable clothing items, giving you access to one-of-a-kind pieces that reflect your individuality.</p>
                     <ul class="ms-3">
-                        <li>Id velit ut tortor pretium viverra suspendisse potenti.</li>
-                        <li>Id velit ut tortor pretium viverra suspendisse potenti.</li>
-                        <li>Id velit ut tortor pretium viverra suspendisse potenti.</li>
+                        <li>Explore a diverse range of styles, from vintage classics to modern trends.</li>
+                        <li>Shop with confidence knowing that each item is carefully selected for quality and style.</li>
+                        <li>Join our community of fashion enthusiasts and share your unique finds.</li>
                     </ul>
-                
                 </div>
                 <div class="col-sm-8 px-4 pt-5 pb-3 mx-3">
                     <!-- subscribe -->
@@ -50,7 +49,7 @@ session_start();
                     <h4 class="p-2 pink_highlight"><i class="bi bi-clipboard2-fill me-3"></i></h4>
                     <div class="lh-1 white_btn2">
                         <h4 class="bold_header">Take Style Quiz</h4>
-                        <p class="opacity-75">Id velit ut tortor pretium viverra suspendisse potenti.</p>
+                        <p class="opacity-75">Discover your unique fashion preferences with our interactive style quiz.</p>
                         <a href="#style_quiz"><button class="btn btn-dark border-0 px-4 shadow-sm rounded-1">Take the Quiz</button></a>
                     </div>
                 </div>
@@ -58,14 +57,14 @@ session_start();
                     <h4 class="p-2 pink_highlight"><i class="bi bi-box2-fill me-3"></i></h4>
                     <div class="lh-1">
                         <h4 class="bold_header">Choose your Style</h4>
-                        <p class="opacity-75">Id velit ut tortor pretium viverra suspendisse potenti.</p>
+                        <p class="opacity-75">Browse our curated collections and find the perfect pieces to elevate your wardrobe.</p>
                     </div>
                 </div>
                 <div class="col px-4 py-3 mx-1 subtitle hstack white_text d-flex align-items-start">
                     <h4 class="p-2 pink_highlight"><i class="bi bi-check-circle-fill me-3"></i></h4>
                     <div class="lh-1">
                         <h4 class="bold_header">Try it on!</h4>
-                        <p class="opacity-75">Id velit ut tortor pretium viverra suspendisse potenti.</p>
+                        <p class="opacity-75">Shop with confidence knowing that each item is carefully selected for quality and style.</p>
                     </div>
                 </div>
             </div>
@@ -85,8 +84,8 @@ session_start();
                 </div>
                 <div class="col-sm-8 z-1 px-4 pt-2 subtitle">
                     <div class="white_bg rounded-2 ms-3 p-4 vstack shadow">
-                        <h1 class="bold_header mx-3 mt-3 text-center">Subscription Tagline</h1>
-                        <p class="m-3 black_text text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bibendum est ultricies integer quis auctor elit sed. Nec dui nunc mattis enim ut tellus elementum sagittis vitae. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.</p>
+                        <h1 class="bold_header mx-3 mt-3 text-center">Discover Thrifted Treasures with Our Monthly Subscription</h1>
+                        <p class="m-3 black_text text-center">Experience curated second-hand fashion delivered straight to your doorstep. Each month, our themed subscription boxes feature quality thrifted items aligned with the season’s trend. Whether you’re drawn to whimsical cottagecore, elegant coquette, or mysterious gothic styles, our platform caters to diverse tastes. Explore sustainable fashion without breaking the bank!</p>
                     </div>
                 </div>
             </div>
@@ -100,8 +99,8 @@ session_start();
                                 <div class="card overflow-hidden border-0 rounded-1 card_img">
                                     <img src="resources/dress.jpg" alt="">
                                     <div class="card-body text-start">
-                                        <h5 class="card-title fw-bold"> Title </h5>
-                                        <p class="card-text lh-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <h5 class="card-title fw-bold">Elegant Vintage Dress</h5>
+                                    <p class="card-text lh-sm">Step out in style with this timeless vintage dress. Its delicate lace details and flattering silhouette make it a must-have for any fashion enthusiast.</p>
                                     </div>
                                 </div>
                             </div>
@@ -109,8 +108,8 @@ session_start();
                                 <div class="card overflow-hidden border-0 rounded-1 card_img">
                                     <img src="resources/pants.jpg" alt="">
                                     <div class="card-body text-start">
-                                        <h5 class="card-title fw-bold"> Title </h5>
-                                        <p class="card-text lh-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <h5 class="card-title fw-bold">Classic High-Waisted Pants</h5>
+                                    <p class="card-text lh-sm">Upgrade your wardrobe with these high-waisted pants. Versatile and comfortable, they pair perfectly with any top for a chic look.</p>
                                     </div>
                                 </div>
                             </div>
@@ -118,8 +117,8 @@ session_start();
                                 <div class="card overflow-hidden border-0 rounded-1 card_img">
                                     <img src="resources/more.jpg" alt="">
                                     <div class="card-body text-start">
-                                        <h5 class="card-title fw-bold"> Title </h5>
-                                        <p class="card-text lh-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <h5 class="card-title fw-bold">Vintage Button-Up Shirt</h5>
+                                    <p class="card-text lh-sm">Add a touch of retro charm with this button-up shirt. Whether you tuck it in or wear it loose, it's a versatile piece for any occasion.</p>
                                     </div>
                                 </div>
                             </div>
@@ -127,8 +126,8 @@ session_start();
                                 <div class="card overflow-hidden border-0 rounded-1 card_img">
                                     <img src="resources/more.jpg" alt="">
                                     <div class="card-body text-start">
-                                        <h5 class="card-title fw-bold"> Title </h5>
-                                        <p class="card-text lh-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <h5 class="card-title fw-bold">Boho Accessories Set</h5>
+                                    <p class="card-text lh-sm">Complete your outfit with this boho accessories set. From layered necklaces to statement earrings, embrace the free-spirited vibe.</p>
                                     </div>
                                 </div>
                             </div>
@@ -154,11 +153,11 @@ session_start();
     </div>
 
     <!-- quiz -->
-    <div class="container-fluid mx-0 mt-4 p-0 footer_bg">
+    <div class="container-fluid mx-0 mt-4 p-0 footer_bg" id="style_quiz">
         <div class="container p-4">
             <div class="p-4 gap-2">
                 <div class="white_text text-center">
-                    <h3 class="fw-bold" id="style_quiz"><span class="pink_highlight"><i class="bi bi-clipboard2-fill me-3"></i></span>
+                    <h3 class="fw-bold" ><span class="pink_highlight"><i class="bi bi-clipboard2-fill me-3"></i></span>
                         Discover your <span class="pink_highlight">STYLE</span> with our interactive quiz!
                     </h3>
                 </div>
@@ -173,8 +172,8 @@ session_start();
         <div class="container p-4 white_bg rounded-2 shadow">
             <div class="row d-flex justify-content-center m-4">
                 <div class="col-sm-10 text-center subtitle mb-4">
-                    <h1 class="fw-bold">Choose your STYLE!</h1>
-                    <p class="lh-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum voluptas maxime suscipit sunt provident voluptatem fuga nisi inventore itaque explicabo tempora accusantium mollitia quisquam sequi ab, labore id voluptatum perspiciatis!</p>
+                    <h1 class="fw-bold">Choose Your Style!</h1>
+                    <p class="lh-base">Explore our diverse range of second-hand fashion items. Whether you're into elegant vintage dresses, classic high-waisted pants, or unique accessories, we've got something for every style. Start your thrifting journey today!</p>
                 </div>
                 <?php include('server/get_featured_style.php')?>
                 <?php while ($featured_styles && $row = $featured_styles->fetch_assoc()) { ?>
@@ -205,7 +204,7 @@ session_start();
                     </div>
                     <div class="col-sm-8 p-3 align-middle vstack lh-1">
                         <h3 class="fw-bolder">Haul rare items with our Mystery Box!</h3>
-                        <h5 class="bold_header">Subtitle</h5>
+                        <h5 class="bold_header">Unbox surprises and explore new styles.</h5>
                         <div class="mt-2 green_btn">
                             <a href="mystery_box.php"><button class="btn btn-dark border-0 px-4 shadow-sm rounded-1">Get a Box<i class="bi bi-chevron-right ms-2"></i></button></a>
                         </div>
@@ -224,36 +223,60 @@ session_start();
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                Question
+                            How does the monthly subscription work
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFAQS">
                             <div class="accordion-body subtitle">
-                                <p class="lh-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia fuga autem illo quia sunt, explicabo quasi maiores a est, similique natus! Quas quisquam distinctio natus excepturi vitae, suscipit consequatur itaque.</p>
+                                <p class="lh-base">Our monthly subscription delivers themed boxes of thrifted treasures straight to your doorstep. Each month, subscribers can expect a carefully curated selection of quality second-hand fashion items aligned with the theme of the month.</p>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Question #2
+                            Can I customize my subscription preferences?
                         </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFAQS">
                             <div class="accordion-body subtitle">
-                                <p class="lh-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem officiis debitis nihil velit assumenda, delectus odio ex quam placeat sed perspiciatis rem numquam vel hic distinctio? Officia consequatur non incidunt.</p>
+                                <p class="lh-base">Absolutely! We offer a style quiz to help you discover your preferences. Whether you’re drawn to whimsical cottagecore, elegant coquette, or mysterious gothic styles, our platform caters to diverse tastes.</p>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Question #3
+                            What if I prefer a more hands-on approach
                             </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFAQS">
                             <div class="accordion-body subtitle">
-                                <p class="lh-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo quos eveniet facilis est tempora eum consequatur odio! Accusamus voluptas ipsa nisi voluptatum inventore deleniti qui, nostrum ex unde maiores eveniet.</p>
+                                <p class="lh-base">No worries! Our platform features an extensive catalog of thrifted fashion pieces. You can explore and choose individual items that resonate with your style.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Are the subscription prices reasonable?
+                        </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFAQS">
+                            <div class="accordion-body subtitle">
+                                <p class="lh-base">Yes! We’re committed to making sustainable fashion accessible to everyone. Our prices are reasonable, ensuring that quality thrifted fashion items won’t break the bank.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            What’s the story behind the name “Ukay Tamis”?
+                        </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFAQS">
+                            <div class="accordion-body subtitle">
+                                <p class="lh-base">“Ukay” resonates with the vibrant world of thrifted fashion, while “Tamis” adds a touch of sweetness—a flavor that lingers long after the initial discovery. It embodies our mission to infuse joy and sweetness into the thrifting experience.</p>
                             </div>
                         </div>
                     </div>
