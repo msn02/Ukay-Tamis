@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <!-- product details -->
-                    <div class="col-sm-7 m-0 py-4 px-3">
+                    <div class="col-sm-7 m-0 py-4 px-3 vstack d-flex align-items-stretch">
                         <!-- tag and title -->
                         <div class="row m-0 p-3 pb-0 justify-content-between g-3">
                             <div class="col-sm-10 m-0 p-0">
@@ -83,15 +83,32 @@
                             </div>
                         </div>
                         <!-- item description -->
-                        <div class="pt-3 px-3 pb-5 mb-0">
+                        <div class="pt-3 px-3 mb-0">
                             <div class="border-top pt-3 pb-0 m-0">
                                 <h6 class="bold_header">What's in the box?</h6>
                                 <p class="box_desc m-0 p-0"><?php echo $row['item_description']; ?></p>
                             </div>
                         </div>
+                        <!-- size and color -->
+                        <div class="pt-3 px-3 mb-0">
+                            <div class="border-top pt-3 pb-0 m-0">
+                                <div class="row">
+                                    <!-- size -->
+                                    <div class="col-sm-4">
+                                        <h6 class="bold_header">Size</h6>
+                                        <p class="box_desc m-0 p-0">Freesize</p>
+                                    </div>
+                                    <!-- color -->
+                                    <div class="col-sm-4">
+                                        <h6 class="bold_header">Color</h6>
+                                        <p class="box_desc m-0 p-0">Brown</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- add to cart and buy now button -->
-                        <div class="px-3 pt-0 m-0">
+                        <div class="px-3 pt-0 mt-auto hstack gap-2">
                             <form method = "POST" action = "view_cart.php">
                                 <input type = "hidden" name = "product_id" value = "<?php echo $row['item_id']; ?>"> </input>
                                 <input type = "hidden" name = "product_img_url" value = "<?php echo $row['item_img_url']; ?>"> </input>
