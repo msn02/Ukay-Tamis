@@ -158,7 +158,7 @@
             <!-- Related  Single Items -->
             <div class="row rounded-2 m-3 p-2 gray_bg">
                 <div class="mt-3 mb-0 ms-2 single_items">
-                    <h6 class="mb-0">RELATED SINGLE ITEMS</h6>
+                    <h6 class="mb-0">You might also like</h6>
                 </div>
                 <div class="row mt-0 mx-1 p-2 gx-3">
                     <!-- include the get_related_item_item.php file -->
@@ -191,7 +191,7 @@
                     <?php 
                     } 
                 } else { 
-                    echo '<h6 class="text-center">No related single items right now. Check back soon!</h6>';
+                    echo '<h6 class="text-center">No other available items right now. Check back soon!</h6>';
                     } ?>
                 </div>
             </div>
