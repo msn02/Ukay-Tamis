@@ -65,9 +65,6 @@
             $selected_tier_details[] = $sub_price[$key];
         }
     }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -168,16 +165,19 @@
                             </div>
                         </div>
                         </form>
+                    
+
                         <!-- package details container -->
                         <div class="col-sm-3 gray_bg rounded-2 px-4 py-3 m-2">
                             <div class="row mt-3 border-bottom">
                                 <h6 class="border-bottom pb-2 bold_header mb-3">Package Details</h6>
                                 <!-- package details -->
+                            <form class = "checkout" method = "POST" action = "subscription_checkout.php">
                                 <div class="row mb-3 center_align m-0 p-0">
                                     <div class="card price_badge p-3 m-0 package_info">
-                                        <h6 class="bold_header mb-1"><?php echo $_SESSION['selected_tier'] ?></h6>
-                                        <p class="bold_header mb-2"><?php echo $_SESSION['plan_duration'] ?></p>
-                                        <p class="card-text mb-0"><?php echo $_SESSION['plan_tier_description'] ?></p>
+                                        <h6 id = "sub_tier" class="bold_header mb-1"><?php echo $_SESSION['selected_tier'] ?></h6>
+                                        <p id = "sub_duration" class="bold_header mb-2"><?php echo $_SESSION['plan_duration'] ?></p>
+                                        <p id = "tier_description" class="card-text mb-0"><?php echo $_SESSION['plan_tier_description'] ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -187,22 +187,15 @@
                                     <p class="bold_header">TOTAL</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p class="pink_highlight bold_header"><?php echo isset($_SESSION['total_price']) ? $_SESSION['total_price'] : '0'; ?></p>
+                                    <p id = "total_sub_price" class="pink_highlight bold_header"><?php echo isset($_SESSION['total_price']) ? $_SESSION['total_price'] : '0'; ?></p>
                                 </div>
                             </div>
-                            <?php
-                                include ('server/store_in_session.php');
-                                echo 'total_price: ' . (isset($_SESSION['total_price']) ? $_SESSION['total_price'] : '0');
-                                echo 'plan_duration: ' . $_SESSION['plan_duration'];
-                                echo 'monthly_price: ' . $_SESSION['monthly_price'];
-                                echo 'selected_tier: ' . $_SESSION['selected_tier'];
-                                echo 'plan_tier_description: ' . $_SESSION['plan_tier_description'];
-                            ?>
-                            <form method = "POST" action = "subscription_price.php">
                             <div class="pink_btn2 pb-3">
-                                <button href = "subscription_checkout.php" class="btn btn-secondary border-0 rounded-1 w-100">CHECKOUT</button></a>
+                                <input type = "hidden" name = "total_price" value = "">
+                                <input type = "hidden" name = "plan_duration" value = "">
+                                <button type = "submit" name = "sub_checkout" class="btn btn-secondary border-0 rounded-1 w-100">CHECKOUT</button></a>
                             </div>
-                            </form>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -211,6 +204,42 @@
     </div>
     <!-- include scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Wait for the DOM to fully load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select the paragraphs and the input tags
+            var totalSubPriceParagraph = document.querySelector('#total_sub_price');
+            var totalSubPriceInput = document.querySelector('input[name="total_price"]');
+            var subDurationParagraph = document.querySelector('#sub_duration');
+            var subDurationInput = document.querySelector('input[name="plan_duration"]');
+        
+            // Create a new MutationObserver
+            var observer = new MutationObserver(function(mutations) {
+                // For each mutation
+                mutations.forEach(function(mutation) {
+                    // If the mutation type is 'characterData' or the 'childList' (which includes text nodes)
+                    if (mutation.type === 'characterData' || mutation.type === 'childList') {
+                        // Check if the mutation target is the totalSubPriceParagraph
+                        if (mutation.target === totalSubPriceParagraph) {
+                            // Set the totalSubPriceInput value to the totalSubPriceParagraph's text content
+                            totalSubPriceInput.value = totalSubPriceParagraph.textContent;
+                        }
+                        // Check if the mutation target is the subDurationParagraph
+                        else if (mutation.target === subDurationParagraph) {
+                            // Set the subDurationInput value to the subDurationParagraph's text content
+                            subDurationInput.value = subDurationParagraph.textContent;
+                        }
+                    }
+                });
+            });
+        
+            // Start observing the paragraphs for changes to their text content
+            observer.observe(totalSubPriceParagraph, { childList: true, characterData: true, subtree: true });
+            observer.observe(subDurationParagraph, { childList: true, characterData: true, subtree: true });
+        });
+    </script>
+
+
     <script>
     document.querySelectorAll('input[name="tier"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
@@ -254,5 +283,8 @@ document.querySelectorAll('input[name="price"]').forEach(function(radio) {
     });
 });
     </script>
+
+
+
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 <?php
     // include connection and start session
     include ('server/connection.php');
@@ -9,24 +8,35 @@
         header("Location: log_in.php");
         exit();
     }
-    // Set the grand total
-    $_SESSION['grand_total'] = $_POST['product_price'] + 100;
-
+    
      // check if form submitted
-    if (isset($_POST['quick_order'])) {
-        // Retrieve product details
-        $product_id = $_POST['product_id'];
-        $product = $_POST['product_name'];
-        $product_price = $_POST['product_price'];
-        $product_type = $_POST['product_type'];
-        $product_quantity = $_POST['product_quantity'];
- 
+    if (isset($_POST['subscribe'])) {
+        // retrieve subscription details
+        $sub_tier = $_SESSION['selected_tier'];
+        $sub_tier_desc = $_SESSION['plan_tier_description'];
+        $sub_duration = $_POST['plan_duration'];
+        $sub_price = $_POST['total_price'];
+        $user_id = $_SESSION['user_id'];
+
+
         // if payment method is not selected
         if (empty($_POST['payment_method'] && !isset($_POST['payment_method']))) {
             echo '<script>alert("Please select a payment method")</script>';
         }
         // get the payment method
         $payment_method = $_POST['payment_method'];
+
+
+        $stmt = $conn -> prepare("SELECT plan_id FROM subscription_plan WHERE plan_tier = ? AND plan_duration = ?");
+        $stmt -> bind_param("ss", $sub_tier, $sub_duration);
+        $stmt -> execute();
+        $result = $stmt -> get_result();
+        $row = $result -> fetch_assoc();
+        $plan_id = $row['plan_id'];
+
+        echo '<script>console.log("'.$plan_id.'")</script>';
+
+
         // insert the transaction details to the database
         $stmt = $conn -> prepare ("INSERT INTO transaction (user_id, total_items, total_price, payment_method) VALUES (?, ?, ?, ?)");
         // bind the parameters
@@ -172,7 +182,7 @@
                     </div>
                     <div class="row pt-2 m-0">
                         <div class="payment_details filter_content px-0">
-                        <form method = "POST" action = "quick_checkout.php">
+                        <form method = "POST" action = "subscription_checkout.php">
                             <h6 class="bold_header">Select your Payment Method</h6>
                             <div class="form-check ms-3">
                                 <input class="form-check-input" name="payment_method" type="radio" value="Cash on Delivery" id="Cash">
