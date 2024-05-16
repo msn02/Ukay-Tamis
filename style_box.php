@@ -121,7 +121,7 @@
                                         while ($row = $reviews->fetch_assoc()) { 
                                     ?>
                                     <div class="col-sm-4 mb-3 mt-0 mx-0">
-                                        <div class="card h-100 border-0 shadow">
+                                        <div class="card h-100 border-0 shadow p-3">
                                             <div class="review_content ">
                                                 <div class="row">
                                                     <div class="col star_icon mb-2">
@@ -160,7 +160,7 @@
             <!-- Related  Single Items -->
             <div class="row rounded-2 m-3 p-2 gray_bg">
                 <div class="mt-3 mb-0 ms-2 single_items">
-                    <h6 class="mb-0">You might also like</h6>
+                    <h6 class="mb-0">RELATED SINGLE ITEMS</h6>
                 </div>
                 <div class="row mt-0 mx-1 p-2 gx-3">
                 <?php 
@@ -195,7 +195,7 @@
                             } 
                         } else {
                             // No related items found, output a message
-                            echo '<h6 class="text-center">No other related items right now. Check back soon!</h6>';
+                            echo '<h6 class="text-center">No related single items right now. Check back soon!</h6>';
                         }
                     ?>
                 </div>
