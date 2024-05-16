@@ -24,6 +24,11 @@
   background-image: linear-gradient(180deg, #ffedac, #ffdb59);
 }
 
+.gradient_yellow2 {
+  background: linear-gradient(0deg, #eeeeee 0%, #ffe97a 50%, #FF9A00 100%);
+  /* background: radial-gradient(circle, white 0%, #ffe97a 50%, #FF9A00 100%); */
+}
+
 .gradient_blue_orange_red1 {
   background: linear-gradient(180deg, #ff1d0d, #ffaa33, #eeeeee, #0dcfff, #eeeeee);
 }

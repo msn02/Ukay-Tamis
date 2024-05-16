@@ -12,7 +12,7 @@
     <?php include 'nav_bar.php'?>
 
     <!-- Monthly Theme -->
-    <div class="container-fluid m-0 p-0 pt-1 gradient_blue_orange_red1">
+    <div class="container-fluid m-0 p-0 pt-1 gradient_yellow2">
         <div class="container px-5 py-3 mt-0">
             <!-- back button -->
             <div class="back_link ps-3 py-2 m-0">
