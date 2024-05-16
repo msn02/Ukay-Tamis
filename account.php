@@ -507,7 +507,7 @@
                                 <div class="card border-0 price_badge p-3 m-0 package_info">
                                     <h6 class="bold_header mb-1"><?php echo $row['plan_tier']?></h6>
                                     <p class="bold_header mb-2"><?php echo $row['plan_duration']?></p>
-                                    <p class="card-text mb-0">Ends on <span class="bold_header"><?php echo $row['sub_end_date'] . '2024'?></span></p>
+                                    <p class="card-text mb-0">Subscribed on <span class="bold_header"><?php echo $row['sub_start_date'] . '2024'?></span></p>
                                 </div>
                                 <div class="gray_btn mt-3 mb-0 p-0">
                                     <button class="btn btn-dark border-0 rounded-1 w-100" disabled>Cancel Subscription</button>
