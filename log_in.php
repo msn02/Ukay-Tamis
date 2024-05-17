@@ -12,41 +12,57 @@
         
         if (isset($_POST['login_btn'])) {
             $username = $_POST['username'];
-            $password = hash('sha256', $_POST['password']);
-    
-            $stmt = $conn -> prepare ("SELECT user_id, username, email, first_name, last_name, phone_number, address FROM user WHERE username = ? AND password = ? LIMIT 1");
-    
-            $stmt -> bind_param("ss", $username, $password);
-    
-            if ($stmt -> execute()) {
-                $stmt -> bind_result($user_id, $username, $email, $first_name, $last_name, $phone_number, $address);
-                $stmt -> store_result();
-    
-                if ($stmt -> num_rows == 1) {
-                    $stmt -> fetch();
-    
-                    $_SESSION['user_id'] = $user_id;
-                    $_SESSION['username'] = $username;
-                    $_SESSION['email'] = $email;
-                    $_SESSION['first_name'] = $first_name;
-                    $_SESSION['last_name'] = $last_name;
-                    $_SESSION['phone_number'] = $phone_number;
-                    $_SESSION['address'] = $address;
+            $password = $_POST['password'];
 
-                    $_SESSION['logged_in'] = true;
+            // Retrieve the salt for the given username
+            $stmt_salt = $conn->prepare("SELECT salt FROM user WHERE username = ?");
+            $stmt_salt->bind_param("s", $username);
+            $stmt_salt->execute();
+            $stmt_salt->store_result();
 
-                    // insert record to user_logs
-                    $action = 'login'; 
-                    $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
-                    $stmt1 -> bind_param("ss", $user_id, $action);
-                    $stmt1 -> execute();
-                    
-                    header('location: account.php?message=Login successful. Welcome back, ' . $username . ' !');
+            if ($stmt_salt->num_rows == 1) {
+                $stmt_salt->bind_result($salt);
+                $stmt_salt->fetch();
+
+                // Append salt to the password and hash it
+                $hashed_password = hash('sha256', $password . $salt);
+
+                $stmt = $conn -> prepare ("SELECT user_id, username, email, first_name, last_name, phone_number, address FROM user WHERE username = ? AND password = ? LIMIT 1");
+        
+                $stmt -> bind_param("ss", $username, $hashed_password);
+        
+                if ($stmt -> execute()) {
+                    $stmt -> bind_result($user_id, $username, $email, $first_name, $last_name, $phone_number, $address);
+                    $stmt -> store_result();
+        
+                    if ($stmt -> num_rows == 1) {
+                        $stmt -> fetch();
+        
+                        $_SESSION['user_id'] = $user_id;
+                        $_SESSION['username'] = $username;
+                        $_SESSION['email'] = $email;
+                        $_SESSION['first_name'] = $first_name;
+                        $_SESSION['last_name'] = $last_name;
+                        $_SESSION['phone_number'] = $phone_number;
+                        $_SESSION['address'] = $address;
+        
+                        $_SESSION['logged_in'] = true;
+        
+                        // insert record to user_logs
+                        $action = 'login'; 
+                        $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+                        $stmt1 -> bind_param("ss", $user_id, $action);
+                        $stmt1 -> execute();
+                        
+                        header('location: account.php?message=Login successful. Welcome back, ' . $username . ' !');
+                    } else {
+                        header('location: log_in.php?error=Could not verify your account. Please try again.');
+                    }
                 } else {
-                    header('location: log_in.php?error=Could not verify your account. Please try again.');
+                    header('location: log_in.php?error=Something went wrong. Please try again.');
                 }
             } else {
-                header('location: log_in.php?error=Something went wrong. Please try again.');
+                header('location: log_in.php?error=Username not found.');
             }
         } else {
             echo ('Login button not clicked.');
