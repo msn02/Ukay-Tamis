@@ -847,6 +847,7 @@
                                 <div class="col-sm-4">
                                     <label for="input_payment" class="form-label ms-1">Status</label>
                                     <input type="text" class="form-control" id="input_payment" value="<?php echo $row['status']; ?>" disabled>
+                                    <?php $_SESSION['status'] = $row['status']; ?>
                                 </div>
                             </div>
                 <?php } ?>
@@ -876,7 +877,7 @@
                                             <span><?php echo substr($row['style_box_description'], 0, 50) . '...'; ?></span>
                                         </td>
                                         <td class="col-sm-3 form_option text-center align-middle">
-                                            <select id="input_rating" name = "rating" class="form-select star_icon" aria-label="Default select example">
+                                            <select id="input_rating" name = "rating" class="form-select star_icon" aria-label="Default select example" <?php echo ($_SESSION['status'] != 'Delivered') ? 'disabled' : ''; ?>>
                                                 <option value="1"><i class="bi bi-star-fill ">★</i></option>
                                                 <option value="2"><i class="bi bi-star-fill">★★</i></option>
                                                 <option value="3"><i class="bi bi-star-fill">★★★</i></option>
@@ -890,14 +891,14 @@
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col-sm-6 align-middle">
                                                     <h6 class="bold_header mb-3">Review Title</h6>
-                                                    <input type="text" name="review_title" class="form-control mb-3" id="title_review">
+                                                    <input type="text" name="review_title" class="form-control mb-3" id="title_review" <?php echo ($_SESSION['status'] != 'Delivered') ? 'disabled' : ''; ?>>
                                                     
                                                     <h6 class="bold_header mb-3">Upload Image</h6>
-                                                    <input class="form-control" name="image" type="file" id="formFile">
+                                                    <input class="form-control" name="image" type="file" id="formFile" <?php echo ($_SESSION['status'] != 'Delivered') ? 'disabled' : ''; ?>>
                                                 </div>
                                                 <div class="col-sm-6 align-middle">
                                                     <h6 class="bold_header">Write a Detailed Review</h6>
-                                                    <textarea name="review" class="form-control" id="review" style="height: 150px;"></textarea>
+                                                    <textarea name="review" class="form-control" id="review" style="height: 150px;" <?php echo ($_SESSION['status'] != 'Delivered') ? 'disabled' : ''; ?>></textarea>
                                                 </div>
                                             </div>
                                         </td>
@@ -913,7 +914,7 @@
                                     <input type="hidden" name = "user_id" value = "<?php echo $_SESSION['user_id']; ?>">
                                     <input type="hidden" name = "product_id" value = "<?php echo $row['style_box_id']; ?>">
                                     <input type="hidden" name = "product_type" value = "style box">
-                                    <button type="submit" name = "post_review" id='save-measurements' class="btn btn-dark rounded-1 border-0" data-bs-dismiss="modal">Post Review</button>
+                                    <button type="submit" name = "post_review" id='save-measurements' class="btn btn-dark rounded-1 border-0" data-bs-dismiss="modal" <?php echo ($_SESSION['status'] != 'Delivered') ? 'disabled' : ''; ?> >Post Review</button>
                                 </div>
                             </div>
                         <?php } ?>
