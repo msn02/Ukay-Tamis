@@ -67,6 +67,14 @@
 
         // Close the statement
         $stmt->close();
+
+        $user_id = $_SESSION['user_id'];
+        $action = 'posted review'; 
+
+        // insert record to user_logs
+        $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+        $stmt1 -> bind_param("ss", $user_id, $action);
+        $stmt1 -> execute();
     } else {
         
     }
@@ -130,11 +138,19 @@
                         $stmt->bind_param("ss", $newHashedPassword, $user_id);
                         $stmt->execute();
                         echo true;
+
+                        $user_id = $_SESSION['user_id'];
+                        $action = 'change password'; 
+        
+                        // insert record to user_logs
+                        $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+                        $stmt1 -> bind_param("ss", $user_id, $action);
+                        $stmt1 -> execute();
+                        break;
                     } else {
                         echo false;
                     }
-                }    
-                break;
+                }
     
             case 'setSecurityQuestions':
                 
@@ -156,6 +172,14 @@
                     $stmt->execute();
                     echo true;
 
+                    $user_id = $_SESSION['user_id'];
+                    $action = 'set up security questions'; 
+    
+                    // insert record to user_logs
+                    $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+                    $stmt1 -> bind_param("ss", $user_id, $action);
+                    $stmt1 -> execute();
+
                 } else {
                     // If no record exists, insert a new record with user_id, questionID, and answer
                     $stmt = $conn->prepare("INSERT INTO user_security_questions (user_id, question_id, answer) VALUES (?, ?, ?)");
@@ -175,6 +199,14 @@
                 $stmt->bind_param("ss", $address, $user_id);
                 if ($stmt->execute()) {
                     echo true;
+
+                    $user_id = $_SESSION['user_id'];
+                    $action = 'change address'; 
+    
+                    // insert record to user_logs
+                    $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+                    $stmt1 -> bind_param("ss", $user_id, $action);
+                    $stmt1 -> execute();
                 } else {
                     echo false;
                 }
@@ -227,6 +259,14 @@
                     $stmt->bind_param("sssssss", $height, $weight, $bust, $hip, $shoe, $clothing, $user_id);
                     $stmt->execute();
                     echo true;
+
+                    $user_id = $_SESSION['user_id'];
+                    $action = 'change measurements'; 
+    
+                    // insert record to user_logs
+                    $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+                    $stmt1 -> bind_param("ss", $user_id, $action);
+                    $stmt1 -> execute();
                 } else {
                     // If no record exists, insert a new record with user_id and measurements
                     $stmt = $conn->prepare("INSERT INTO user_preference (user_id, height, weight, bust_size, hip_size, shoe_size, clothing_size) VALUES (?, ?, ?, ?, ?, ?, ?)");
