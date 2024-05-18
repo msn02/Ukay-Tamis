@@ -35,6 +35,9 @@
 
                     $_SESSION['logged_in'] = true;
 
+                    // reset failed login attempts
+                    $_SESSION['failed_login_attempts'] = 0;
+
                     // insert record to user_logs
                     $action = 'login'; 
                     $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
@@ -43,7 +46,18 @@
                     
                     header('location: account.php?message=Login successful. Welcome back, ' . $username . ' !');
                 } else {
-                    header('location: log_in.php?error=Could not verify your account. Please try again.');
+                    // increment failed login attempts
+                    $_SESSION['failed_login_attempts'] = isset($_SESSION['failed_login_attempts']) ? $_SESSION['failed_login_attempts'] + 1 : 1;
+                    // record the time of the last failed attempt
+                    $_SESSION['last_failed_login'] = time();
+
+                    if ($_SESSION['failed_login_attempts'] > 5 && (time() - $_SESSION['last_failed_login']) < 300) {
+                        $remaining_time = 300 - (time() - $_SESSION['last_failed_login']);
+                        echo "<input type='hidden' id='remaining_time' value='$remaining_time'>";
+                        header('location: log_in.php?error=Too many failed attempts. Please wait for 5 minutes before trying again.');
+                    } else {
+                        header('location: log_in.php?error=Could not verify your account. Please try again.');
+                    }
                 }
             } else {
                 header('location: log_in.php?error=Something went wrong. Please try again.');
@@ -84,6 +98,7 @@
                 <div class="col-md-4 rounded-3 gray_bg shadow mt-3 p-0">
                     <div class="header_style px-4 pt-4 mb-2 rounded-top-3 overflow-hidden">
                         <h2 class="bold_header center_text ">LOG IN</h2>
+                        <p id="timer"></p>
                     </div>
 
                     <form class="form_style p-4 m-0" method="POST" action="log_in.php">
@@ -116,4 +131,17 @@
         </div>
     </div>
 </body>
+<script>
+    var remaining_time = document.getElementById('remaining_time').value;
+    var countdown = setInterval(function() {
+        remaining_time--;
+        var minutes = Math.floor(remaining_time / 60);
+        var seconds = remaining_time % 60;
+        document.getElementById('timer').innerHTML = "Please wait " + minutes + " minutes and " + seconds + " seconds before trying again.";
+        if (remaining_time <= 0) {
+            clearInterval(countdown);
+            document.getElementById('timer').innerHTML = "You can now try to log in again.";
+        }
+    }, 1000);
+</script>
 </html>
