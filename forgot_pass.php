@@ -1,3 +1,5 @@
+<?php include 'server/connection.php';?>
+<?php include 'server/verify_email.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +19,22 @@
             <div class="back_link p-0 mt-2">
                 <a class="border-0 ps-2 pb-0 rounded-1 justify-content-start text-decoration-none w-25 mb-4" id="go_back" href="javascript:void(0)"><i class="bi bi-chevron-left me-2"></i>Back</a>
             </div>
-            
+
+            <!-- modals -->
+            <div class="px-2 mt-1 mb-0 alert_btn">
+                <div class="d-none w-100 m-0 alert alert-success alert-dismissible fade show" id="verify_success_modal" role="alert">
+                    Password Verified!
+                    <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div class="px-2 mt-1 mb-0 alert_btn">
+                        <div class="d-none w-100 m-0 alert alert-danger alert-dismissible fade show" id="failed_modal" role="alert">
+                            Invalid input! Try again.
+                            <button type="button" class="btn-close m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+            </div>
+
             <div class="row center_align pt-0 px-5 pb-5 mt-3">
                 <div class="col-md-4 rounded-3 gray_bg shadow mt-3 p-0">
                     <div class="header_style px-4 pt-4 mb-2 rounded-top-3 overflow-hidden">
@@ -35,12 +52,12 @@
                         
                         <!-- TO DO: Error warning (if email is incorrect/not found) -->
                         <div class="log_sign_btn mt-4 center_align">
-                            <button class="btn btn-dark border-0 rounded-1 px-4 py-1 mb-3" onclick="">Verify</button>
+                            <button id="verify_email_btn" class="btn btn-dark border-0 rounded-1 px-4 py-1 mb-3" type="button" onclick="verify_email()">Verify</button>
                         </div>
                         
                         <!-- security question -->
                         <div class="my-2 sec_question text-center yellow_bg rounded-1">
-                            <p class="p-3">Your security question will be shown here</p>
+                            <p class="p-3" id="sec_question_text">Your security question will be shown here</p>
                         </div>
 
                         <div class="my-3">
@@ -51,7 +68,8 @@
                         <!-- TO DO: Error warning (if answer is incorrect) -->
                         <!-- submit -->
                         <div class="log_sign_btn mt-4 center_align">
-                            <a href="change_pass.php" class="text-decoration-none"><button class="btn btn-dark border-0 rounded-1 px-4 py-1" onclick="">Submit</button></a>
+                            <!--<a href="change_pass.php" class="text-decoration-none">-->
+                                <button id="sec_question" type="button" class="btn btn-dark border-0 rounded-1 px-4 py-1" onclick="answer_check()" disabled>Submit</button></a>
                         </div>
 
                         <!-- create account -->
