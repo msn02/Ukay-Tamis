@@ -74,14 +74,18 @@
                         $stmt2 -> close();
                         $conn -> close();
                     } else {
+                        // Generate a random salt
+                        $salt = bin2hex(random_bytes(16));
+
+                        // Append the salt to the password and hash it
+                        $hashed_password = hash('sha256', $password . $salt);
+                        
                         // insert user into database if no errors
-                        $stmt = $conn -> prepare ("INSERT INTO user (username, email, password, first_name, last_name, phone_number, address) 
-                                                   VALUES (?, ?, ?, ?, ?, ?, ?)");
-                        $hashed_password = hash('sha256', $password);
-                        $stmt -> bind_param("sssssss", $username, $email, $hashed_password, $first_name, $last_name, $phone_number, $address);
+                        $stmt = $conn -> prepare ("INSERT INTO user (username, email, password, salt, first_name, last_name, phone_number, address) 
+                                                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                        $stmt -> bind_param("ssssssss", $username, $email, $hashed_password, $salt, $first_name, $last_name, $phone_number, $address);
         
                         if ($stmt -> execute()) {
-                    
                             unset($_SESSION['form_data']);
                             $stmt3 = $conn -> prepare ("SELECT user_id FROM user WHERE username = ?");
                             $stmt3 -> bind_param("s", $username);
