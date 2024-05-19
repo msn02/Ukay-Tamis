@@ -273,6 +273,14 @@
                     $stmt->bind_param("sssssss", $user_id, $height, $weight, $bust, $hip, $shoe, $clothing);
                     $stmt->execute();
                     echo true;
+
+                    $user_id = $_SESSION['user_id'];
+                    $action = 'add measurements'; 
+    
+                    // insert record to user_logs
+                    $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+                    $stmt1 -> bind_param("ss", $user_id, $action);
+                    $stmt1 -> execute();
                 }
                 // Process measurements change
                 echo "Measurements changed successfully!";
