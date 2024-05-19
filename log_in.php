@@ -19,7 +19,9 @@
     if (isset($_SESSION['logged_in'])) {
         header('location: account.php');
         exit();
-    } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    } 
+    
+    else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         if (isset($_POST['login_btn'])) {
             $username = $_POST['username'];
@@ -59,9 +61,9 @@
         
                         $_SESSION['logged_in'] = true;
 
-                    // reset failed login attempts
-                    $_SESSION['failed_login_attempts'] = 0;
-        
+                        // reset failed login attempts
+                        $_SESSION['failed_login_attempts'] = 0;
+            
                         // insert record to user_logs
                         $action = 'login'; 
                         $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
@@ -70,36 +72,40 @@
                         
                         header('location: account.php?message=Login successful. Welcome back, ' . $username . ' !');
                     } else {
-                    // increment failed login attempts
-                    $_SESSION['failed_login_attempts'] = isset($_SESSION['failed_login_attempts']) ? $_SESSION['failed_login_attempts'] + 1 : 1;
-                    // record the time of the last failed attempt
-                    $_SESSION['last_failed_login'] = time();
+                        header('location: log_in.php?error=Incorrect Password or Username. Please try again.');
+                        // increment failed login attempts
+                        $_SESSION['failed_login_attempts'] = isset($_SESSION['failed_login_attempts']) ? $_SESSION['failed_login_attempts'] + 1 : 1;
+                        // record the time of the last failed attempt
+                        $_SESSION['last_failed_login'] = time();
 
-                    if (isset($_SESSION['failed_login_attempts']) && $_SESSION['failed_login_attempts'] > 5 && 
-                        isset($_SESSION['last_failed_login']) && (time() - $_SESSION['last_failed_login']) < 300) {
-                        $remaining_time = 300 - (time() - $_SESSION['last_failed_login']);
-                        echo "<input type='hidden' id='remaining_time' value='$remaining_time'>";
-                        echo "<script>var remaining_time = $remaining_time;</script>";
-                        // echo in the console the time remaining
-                        $current_time = time();
-                        echo "<script>console.log('Time remaining: $current_time seconds');</script>";
-                        header('location: log_in.php?error=Too many failed attempts. Please wait for 5 minutes before trying again.');
-                    } else {
-                        // If more than 5 minutes have passed since the last failed login, unset the session variables
-                        if (isset($_SESSION['last_failed_login'])) {
-                            $time_since_last_failed_login = time() - $_SESSION['last_failed_login'];
-                            if ($time_since_last_failed_login >= 300) {
-                                unset($_SESSION['failed_login_attempts']);
-                                unset($_SESSION['last_failed_login']);
-                            }
+                        if (isset($_SESSION['failed_login_attempts']) && $_SESSION['failed_login_attempts'] > 5 && 
+                            isset($_SESSION['last_failed_login']) && (time() - $_SESSION['last_failed_login']) < 10) {
+                            $remaining_time = 10 - (time() - $_SESSION['last_failed_login']);
+                            echo "<input type='hidden' id='remaining_time' value='$remaining_time'>";
+                            echo "<script>var remaining_time = $remaining_time;</script>";
+                            // echo in the console the time remaining
+                            $current_time = time();
+                            echo "<script>console.log('Time remaining: $current_time seconds');</script>";
+                            
+
                         } else {
-                            echo "last_failed_login session variable is not set.<br>";
+                            // If more than 5 minutes have passed since the last failed login, unset the session variables
+                            if (isset($_SESSION['last_failed_login'])) {
+                                $time_since_last_failed_login = time() - $_SESSION['last_failed_login'];
+                                if ($time_since_last_failed_login >= 300) {
+                                    unset($_SESSION['failed_login_attempts']);
+                                    unset($_SESSION['last_failed_login']);
+                                }
+                            } else {
+                                echo "last_failed_login session variable is not set.<br>";
+                            }
+                            header('location: log_in.php?error=Incorrect Password or Username. Please try again.');
                         }
-                            header('location: log_in.php?error=Incorrect Password. Please try again.');
+                        header('location: log_in.php?error=Incorrect Password or Username. Please try again.');
                     }
+
                 } else {
                     header('location: log_in.php?error=Something went wrong. Please try again.');
-                    }
                 }
             } else {
                 header('location: log_in.php?error=Username not found.');
@@ -192,7 +198,7 @@
                 console.log('Time remaining: ' + remaining_time + ' seconds');
             } else {
                 clearInterval(countdown);
-                document.getElementById('timer').innerHTML = "You can now try to log in again.";
+                document.getElementById('timer').innerHTML = "You can try to log in again.";
                 submitButton.disabled = false;
             }
         }, 1000);
