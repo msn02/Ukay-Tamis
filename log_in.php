@@ -56,7 +56,7 @@
                         
                         header('location: account.php?message=Login successful. Welcome back, ' . $username . ' !');
                     } else {
-                        header('location: log_in.php?error=Could not verify your account. Please try again.');
+                        header('location: log_in.php?error=Incorrect Password. Please try again.');
                     }
                 } else {
                     header('location: log_in.php?error=Something went wrong. Please try again.');
