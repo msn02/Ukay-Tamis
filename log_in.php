@@ -5,6 +5,17 @@
     // start session
     session_start();
 
+    // define remaining_time and give it a default value
+    echo "<script>var remaining_time = 0;</script>";
+
+    // check if the user has tried to log in more than 5 times in the last 5 minutes
+    if (isset($_SESSION['failed_login_attempts']) && $_SESSION['failed_login_attempts'] > 5 && 
+        isset($_SESSION['last_failed_login']) && (time() - $_SESSION['last_failed_login']) < 300) {
+        $remaining_time = 300 - (time() - $_SESSION['last_failed_login']);
+        echo "<script>remaining_time = $remaining_time;</script>";
+        $_SESSION['error'] = 'Too many failed attempts. Please wait for 5 minutes before trying again.';
+    }
+
     if (isset($_SESSION['logged_in'])) {
         header('location: account.php');
         exit();
@@ -51,11 +62,26 @@
                     // record the time of the last failed attempt
                     $_SESSION['last_failed_login'] = time();
 
-                    if ($_SESSION['failed_login_attempts'] > 5 && (time() - $_SESSION['last_failed_login']) < 300) {
+                    if (isset($_SESSION['failed_login_attempts']) && $_SESSION['failed_login_attempts'] > 5 && 
+                        isset($_SESSION['last_failed_login']) && (time() - $_SESSION['last_failed_login']) < 300) {
                         $remaining_time = 300 - (time() - $_SESSION['last_failed_login']);
                         echo "<input type='hidden' id='remaining_time' value='$remaining_time'>";
+                        echo "<script>var remaining_time = $remaining_time;</script>";
+                        // echo in the console the time remaining
+                        $current_time = time();
+                        echo "<script>console.log('Time remaining: $current_time seconds');</script>";
                         header('location: log_in.php?error=Too many failed attempts. Please wait for 5 minutes before trying again.');
                     } else {
+                        // If more than 5 minutes have passed since the last failed login, unset the session variables
+                        if (isset($_SESSION['last_failed_login'])) {
+                            $time_since_last_failed_login = time() - $_SESSION['last_failed_login'];
+                            if ($time_since_last_failed_login >= 300) {
+                                unset($_SESSION['failed_login_attempts']);
+                                unset($_SESSION['last_failed_login']);
+                            }
+                        } else {
+                            echo "last_failed_login session variable is not set.<br>";
+                        }
                         header('location: log_in.php?error=Could not verify your account. Please try again.');
                     }
                 }
@@ -98,13 +124,16 @@
                 <div class="col-md-4 rounded-3 gray_bg shadow mt-3 p-0">
                     <div class="header_style px-4 pt-4 mb-2 rounded-top-3 overflow-hidden">
                         <h2 class="bold_header center_text ">LOG IN</h2>
-                        <p id="timer"></p>
                     </div>
 
                     <form class="form_style p-4 m-0" method="POST" action="log_in.php">
                         <!-- error message -->
-                        <p><?php if(isset($_GET['error'])){ echo $_GET['error']; } ?></p>
-
+                        <p id="timer" ><?php
+                        if (isset($_SESSION['error'])) {
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']); // remove the error message after displaying it
+                        }
+                        ?></p>
                         <div class="mb-3">
                             <label for="input_uname" class="form-label ms-1">Username</label>
                             <input type="text" class="form-control" id="input_uname" name = "username" placeholder="Enter your username" required>
@@ -132,16 +161,25 @@
     </div>
 </body>
 <script>
-    var remaining_time = document.getElementById('remaining_time').value;
-    var countdown = setInterval(function() {
-        remaining_time--;
-        var minutes = Math.floor(remaining_time / 60);
-        var seconds = remaining_time % 60;
-        document.getElementById('timer').innerHTML = "Please wait " + minutes + " minutes and " + seconds + " seconds before trying again.";
-        if (remaining_time <= 0) {
-            clearInterval(countdown);
-            document.getElementById('timer').innerHTML = "You can now try to log in again.";
-        }
-    }, 1000);
+    window.onload = function() {
+        var submitButton = document.querySelector('button[name="login_btn"]');
+        var countdown = setInterval(function() {
+            if (remaining_time > 0) {
+                submitButton.disabled = true;
+                remaining_time--;
+                var minutes = Math.floor(remaining_time / 60);
+                var seconds = remaining_time % 60;
+                document.getElementById('timer').innerHTML = "Too many failed attempts. Please wait " + minutes + " minutes and " + seconds + " seconds before trying again.";
+                submitButton.disabled = true;
+
+                // console.log the remaining time
+                console.log('Time remaining: ' + remaining_time + ' seconds');
+            } else {
+                clearInterval(countdown);
+                document.getElementById('timer').innerHTML = "You can now try to log in again.";
+                submitButton.disabled = false;
+            }
+        }, 1000);
+    }
 </script>
 </html>
