@@ -5,48 +5,110 @@
     // start session
     session_start();
 
+    // define remaining_time and give it a default value
+    echo "<script>var remaining_time = 0;</script>";
+
+    // check if the user has tried to log in more than 5 times in the last 5 minutes
+    if (isset($_SESSION['failed_login_attempts']) && $_SESSION['failed_login_attempts'] > 5 && 
+        isset($_SESSION['last_failed_login']) && (time() - $_SESSION['last_failed_login']) < 300) {
+        $remaining_time = 300 - (time() - $_SESSION['last_failed_login']);
+        echo "<script>remaining_time = $remaining_time;</script>";
+        $_SESSION['error'] = 'Too many failed attempts. Please wait for 5 minutes before trying again.';
+    }
+
     if (isset($_SESSION['logged_in'])) {
         header('location: account.php');
         exit();
-    } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    } 
+    
+    else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         if (isset($_POST['login_btn'])) {
             $username = $_POST['username'];
-            $password = hash('sha256', $_POST['password']);
-    
-            $stmt = $conn -> prepare ("SELECT user_id, username, email, first_name, last_name, phone_number, address FROM user WHERE username = ? AND password = ? LIMIT 1");
-    
-            $stmt -> bind_param("ss", $username, $password);
-    
-            if ($stmt -> execute()) {
-                $stmt -> bind_result($user_id, $username, $email, $first_name, $last_name, $phone_number, $address);
-                $stmt -> store_result();
-    
-                if ($stmt -> num_rows == 1) {
-                    $stmt -> fetch();
-    
-                    $_SESSION['user_id'] = $user_id;
-                    $_SESSION['username'] = $username;
-                    $_SESSION['email'] = $email;
-                    $_SESSION['first_name'] = $first_name;
-                    $_SESSION['last_name'] = $last_name;
-                    $_SESSION['phone_number'] = $phone_number;
-                    $_SESSION['address'] = $address;
+            $password = $_POST['password'];
 
-                    $_SESSION['logged_in'] = true;
+            // Retrieve the salt for the given username
+            $stmt_salt = $conn->prepare("SELECT salt FROM user WHERE username = ?");
+            $stmt_salt->bind_param("s", $username);
+            $stmt_salt->execute();
+            $stmt_salt->store_result();
 
-                    // insert record to user_logs
-                    $action = 'login'; 
-                    $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
-                    $stmt1 -> bind_param("ss", $user_id, $action);
-                    $stmt1 -> execute();
-                    
-                    header('location: account.php?message=Login successful. Welcome back, ' . $username . ' !');
+            if ($stmt_salt->num_rows == 1) {
+                $stmt_salt->bind_result($salt);
+                $stmt_salt->fetch();
+
+                // Append salt to the password and hash it
+                $hashed_password = hash('sha256', $password . $salt);
+
+                $stmt = $conn -> prepare ("SELECT user_id, username, email, first_name, last_name, phone_number, address FROM user WHERE username = ? AND password = ? LIMIT 1");
+        
+                $stmt -> bind_param("ss", $username, $hashed_password);
+        
+                if ($stmt -> execute()) {
+                    $stmt -> bind_result($user_id, $username, $email, $first_name, $last_name, $phone_number, $address);
+                    $stmt -> store_result();
+        
+                    if ($stmt -> num_rows == 1) {
+                        $stmt -> fetch();
+        
+                        $_SESSION['user_id'] = $user_id;
+                        $_SESSION['username'] = $username;
+                        $_SESSION['email'] = $email;
+                        $_SESSION['first_name'] = $first_name;
+                        $_SESSION['last_name'] = $last_name;
+                        $_SESSION['phone_number'] = $phone_number;
+                        $_SESSION['address'] = $address;
+        
+                        $_SESSION['logged_in'] = true;
+
+                        // reset failed login attempts
+                        $_SESSION['failed_login_attempts'] = 0;
+            
+                        // insert record to user_logs
+                        $action = 'login'; 
+                        $stmt1 = $conn -> prepare ("INSERT INTO user_logs (user_id, action) VALUES (?, ?)");
+                        $stmt1 -> bind_param("ss", $user_id, $action);
+                        $stmt1 -> execute();
+                        
+                        header('location: account.php?message=Login successful. Welcome back, ' . $username . ' !');
+                    } else {
+                        header('location: log_in.php?error=Incorrect Password or Username. Please try again.');
+                        // increment failed login attempts
+                        $_SESSION['failed_login_attempts'] = isset($_SESSION['failed_login_attempts']) ? $_SESSION['failed_login_attempts'] + 1 : 1;
+                        // record the time of the last failed attempt
+                        $_SESSION['last_failed_login'] = time();
+
+                        if (isset($_SESSION['failed_login_attempts']) && $_SESSION['failed_login_attempts'] > 5 && 
+                            isset($_SESSION['last_failed_login']) && (time() - $_SESSION['last_failed_login']) < 10) {
+                            $remaining_time = 10 - (time() - $_SESSION['last_failed_login']);
+                            echo "<input type='hidden' id='remaining_time' value='$remaining_time'>";
+                            echo "<script>var remaining_time = $remaining_time;</script>";
+                            // echo in the console the time remaining
+                            $current_time = time();
+                            echo "<script>console.log('Time remaining: $current_time seconds');</script>";
+                            
+
+                        } else {
+                            // If more than 5 minutes have passed since the last failed login, unset the session variables
+                            if (isset($_SESSION['last_failed_login'])) {
+                                $time_since_last_failed_login = time() - $_SESSION['last_failed_login'];
+                                if ($time_since_last_failed_login >= 300) {
+                                    unset($_SESSION['failed_login_attempts']);
+                                    unset($_SESSION['last_failed_login']);
+                                }
+                            } else {
+                                echo "last_failed_login session variable is not set.<br>";
+                            }
+                            header('location: log_in.php?error=Incorrect Password or Username. Please try again.');
+                        }
+                        header('location: log_in.php?error=Incorrect Password or Username. Please try again.');
+                    }
+
                 } else {
-                    header('location: log_in.php?error=Could not verify your account. Please try again.');
+                    header('location: log_in.php?error=Something went wrong. Please try again.');
                 }
             } else {
-                header('location: log_in.php?error=Something went wrong. Please try again.');
+                header('location: log_in.php?error=Username not found.');
             }
         } else {
             echo ('Login button not clicked.');
@@ -88,8 +150,12 @@
 
                     <form class="form_style p-4 m-0" method="POST" action="log_in.php">
                         <!-- error message -->
-                        <p><?php if(isset($_GET['error'])){ echo $_GET['error']; } ?></p>
-
+                        <p id="timer" ><?php
+                        if (isset($_SESSION['error'])) {
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']); // remove the error message after displaying it
+                        }
+                        ?></p>
                         <div class="mb-3">
                             <label for="input_uname" class="form-label ms-1">Username</label>
                             <input type="text" class="form-control" id="input_uname" name = "username" placeholder="Enter your username" required>
@@ -116,4 +182,26 @@
         </div>
     </div>
 </body>
+<script>
+    window.onload = function() {
+        var submitButton = document.querySelector('button[name="login_btn"]');
+        var countdown = setInterval(function() {
+            if (remaining_time > 0) {
+                submitButton.disabled = true;
+                remaining_time--;
+                var minutes = Math.floor(remaining_time / 60);
+                var seconds = remaining_time % 60;
+                document.getElementById('timer').innerHTML = "Too many failed attempts. Please wait " + minutes + " minutes and " + seconds + " seconds before trying again.";
+                submitButton.disabled = true;
+
+                // console.log the remaining time
+                console.log('Time remaining: ' + remaining_time + ' seconds');
+            } else {
+                clearInterval(countdown);
+                document.getElementById('timer').innerHTML = "You can try to log in again.";
+                submitButton.disabled = false;
+            }
+        }, 1000);
+    }
+</script>
 </html>
